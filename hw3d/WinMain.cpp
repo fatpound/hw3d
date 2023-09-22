@@ -6,7 +6,7 @@ int CALLBACK WinMain(
     LPSTR     lpCmdLine,
     int       nCmdShow)
 {
-    Window wnd( 640, 480, L"hw3dfat" );
+    Window wnd( 640, 480, "hw3dfat" );
 
     MSG msg;
     BOOL gResult;

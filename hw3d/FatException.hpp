@@ -18,9 +18,10 @@ public:
     FatException( int line_num, const char* file_name ) noexcept;
 
     std::string GetOriginString() const noexcept;
+    std::string GetFileName() const noexcept;
 
-    const char* what() const noexcept override;
     virtual const char* GetType() const noexcept;
+    const char* what() const noexcept override;
 
-    int GetLine() const noexcept;
+    int GetLineNum() const noexcept;
 };

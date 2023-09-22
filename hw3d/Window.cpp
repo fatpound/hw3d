@@ -1,4 +1,5 @@
 #include "Window.hpp"
+#include <sstream>
 
 // WindowClass
 
@@ -30,7 +31,7 @@ Window::WindowClass::~WindowClass()
     UnregisterClass( wndClassName, GetInstance() );
 }
 
-const wchar_t* Window::WindowClass::GetName() noexcept
+const char* Window::WindowClass::GetName() noexcept
 {
     return wndClassName;
 }
@@ -42,7 +43,7 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 
 // Window
 
-Window::Window( int width, int height, const wchar_t* name ) noexcept
+Window::Window( int width, int height, const char* name ) noexcept
 {
     RECT wr;
     wr.left = 100;
@@ -109,4 +110,69 @@ LRESULT Window::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) n
     }
 
     return DefWindowProc( hWnd, msg, wParam, lParam );
+}
+
+// Exception
+
+Window::Exception::Exception( int line_num, const char* file_name, HRESULT hr ) noexcept
+    :
+    FatException( line_num, file_name ),
+    hr(hr)
+{}
+
+HRESULT Window::Exception::GetErrorCode() const noexcept
+{
+    return hr;
+}
+
+std::string Window::Exception::GetErrorString() const noexcept
+{
+    return TranslateErrorCode( hr );
+}
+std::string Window::Exception::TranslateErrorCode( HRESULT hr ) noexcept
+{
+    char* pMsgBuf = nullptr;
+    DWORD nMsgLen = FormatMessage
+    (
+        FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+        nullptr,
+        hr,
+        MAKELANGID
+        (
+            LANG_NEUTRAL,
+            SUBLANG_DEFAULT
+        ),
+        reinterpret_cast<LPSTR>( &pMsgBuf ),
+        0,
+        nullptr
+    );
+
+    if ( nMsgLen == 0 )
+    {
+        return "Unidentified error code";
+    }
+
+    std::string errorString = pMsgBuf;
+
+    LocalFree( pMsgBuf );
+
+    return errorString;
+}
+
+const char* Window::Exception::GetType() const noexcept
+{
+    return "Fat Window Exception";
+}
+const char* Window::Exception::what() const noexcept
+{
+    std::ostringstream oss;
+
+    oss << GetType() << '\n'
+        << "[Error Code] : " << GetErrorCode() << '\n'
+        << "[Description] : " << GetErrorString() << '\n'
+        << GetOriginString();
+
+    whatBuffer = oss.str();
+
+    return whatBuffer.c_str();
 }

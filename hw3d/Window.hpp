@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FatWin.hpp"
+#include "FatException.hpp"
 
 class Window
 {
@@ -13,21 +14,21 @@ private:
         WindowClass( const WindowClass& src ) = delete;
         WindowClass& operator = ( const WindowClass& src ) = delete;
 
-        static constexpr const wchar_t* wndClassName = L"Fat Direct3D Engine Window";
+        static constexpr const char* wndClassName = "Fat Direct3D Engine Window";
         static WindowClass wndClass;
         HINSTANCE hInst;
 
     protected:
 
     public:
-        static const wchar_t* GetName() noexcept;
+        static const char* GetName() noexcept;
         static HINSTANCE GetInstance() noexcept;
     };
 
 
     HWND hWnd;
-    int width;
-    int height;
+    int width = 0;
+    int height = 0;
 
 
     static LRESULT CALLBACK HandleMsgSetup( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept;
@@ -39,8 +40,29 @@ protected:
 
 
 public:
-    Window( int width, int height, const wchar_t* name ) noexcept;
+    class Exception : public FatException
+    {
+    private:
+        HRESULT hr;
+
+    protected:
+
+    public:
+        Exception( int line_num, const char* file_name, HRESULT hr ) noexcept;
+
+        HRESULT GetErrorCode() const noexcept;
+
+        static std::string TranslateErrorCode( HRESULT hr ) noexcept;
+        std::string GetErrorString() const noexcept;
+
+        virtual const char* GetType() const noexcept override;
+        const char* what() const noexcept override;
+    };
+
+    Window( int width, int height, const char* name ) noexcept;
     ~Window();
     Window( const Window& src ) = delete;
     Window& operator = ( const Window& src ) = delete;
 };
+
+#define FHWND_EXCEPT( hr ) Window::Exception( __LINE__, __FILE__, hr )

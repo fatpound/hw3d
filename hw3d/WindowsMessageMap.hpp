@@ -16,5 +16,5 @@ private:
 public:
     WindowsMessageMap() noexcept;
 
-    std::wstring operator () ( DWORD msg, WPARAM wp, LPARAM lp ) const noexcept;
+    std::string operator () ( DWORD msg, WPARAM wp, LPARAM lp ) const noexcept;
 };

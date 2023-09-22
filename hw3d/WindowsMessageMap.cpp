@@ -187,7 +187,7 @@ WindowsMessageMap::WindowsMessageMap() noexcept
         })
 {}
 
-std::wstring WindowsMessageMap::operator () ( DWORD msg, WPARAM wp, LPARAM lp ) const noexcept
+std::string WindowsMessageMap::operator () ( DWORD msg, WPARAM wp, LPARAM lp ) const noexcept
 {
     constexpr int firstColWidth = 25;
     const auto i = map.find( msg );
@@ -209,12 +209,5 @@ std::wstring WindowsMessageMap::operator () ( DWORD msg, WPARAM wp, LPARAM lp ) 
     oss << "   WP: 0x" << std::hex << std::setfill('0') << std::setw(8) << wp;
     oss << "   LP: 0x" << std::hex << std::setfill('0') << std::setw(8) << lp << std::endl;
 
-    std::wstring ws;
-
-    for ( auto& c : oss.str() )
-    {
-        ws += wchar_t(c);
-    }
-
-    return ws;
+    return oss.str();
 }
