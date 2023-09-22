@@ -59,10 +59,11 @@ public:
         const char* what() const noexcept override;
     };
 
-    Window( int width, int height, const char* name ) noexcept;
+    Window( int width, int height, const char* name );
     ~Window();
     Window( const Window& src ) = delete;
     Window& operator = ( const Window& src ) = delete;
 };
 
 #define FHWND_EXCEPT( hr ) Window::Exception( __LINE__, __FILE__, hr )
+#define FHWND_LAST_EXCEPT  Window::Exception( __LINE__, __FILE__, GetLastError() )
