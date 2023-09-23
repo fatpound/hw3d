@@ -1,10 +1,10 @@
 #include "Window.hpp"
 
 int CALLBACK WinMain(
-    HINSTANCE hInstance,
-    HINSTANCE hPrevInstance,
-    LPSTR     lpCmdLine,
-    int       nCmdShow)
+    _In_     HINSTANCE hInstance,
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_     LPSTR     lpCmdLine,
+    _In_     int       nShowCmd)
 {
     try
     {
@@ -17,7 +17,7 @@ int CALLBACK WinMain(
             TranslateMessage( &msg );
             DispatchMessage ( &msg );
         }
-
+        
         if ( gResult == -1 )
         {
             return -1;
@@ -31,7 +31,7 @@ int CALLBACK WinMain(
     }
     catch ( const std::exception& e )
     {
-        MessageBox( nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONERROR);
+        MessageBox( nullptr, e.what(), "STD Exception", MB_OK | MB_ICONERROR);
     }
     catch ( ... )
     {
