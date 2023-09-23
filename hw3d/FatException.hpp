@@ -5,15 +5,6 @@
 
 class FatException : public std::exception
 {
-private:
-    int linenum;
-    std::string filename;
-
-
-protected:
-    mutable std::string whatBuffer;
-
-
 public:
     FatException( int line_num, const char* file_name ) noexcept;
 
@@ -24,4 +15,11 @@ public:
     const char* what() const noexcept override;
 
     int GetLineNum() const noexcept;
+
+protected:
+    mutable std::string whatBuffer;
+
+private:
+    int linenum;
+    std::string filename;
 };
