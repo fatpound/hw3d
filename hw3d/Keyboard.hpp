@@ -7,26 +7,6 @@ class Keyboard
 {
     friend class Window;
 
-private:
-    template <typename T>
-    static void TrimBuffer(std::queue<T>& buffer) noexcept;
-
-    void OnKeyPressed( unsigned char keycode ) noexcept;
-    void OnKeyReleased( unsigned char keycode ) noexcept;
-    void OnChar( char character ) noexcept;
-    void ClearState() noexcept;
-
-    static constexpr unsigned int nKeys = 256u;
-    static constexpr unsigned int bufferSize = 16u;
-
-    std::bitset<nKeys> keystates;
-
-    bool autoRepeatEnabled = false;
-
-
-protected:
-
-
 public:
     class Event
     {
@@ -38,43 +18,89 @@ public:
             Invalid
         };
 
-        Event()
+        Event() noexcept
             :
-            type( Type::Invalid ),
+            type( Event::Type::Invalid ),
             code( 0u )
         {}
-        Event( Type type, unsigned char code ) noexcept
+        Event( Event::Type type, unsigned char code ) noexcept
             :
             type( type ),
-            code( code)
+            code( code )
+        {}
+
+        bool IsPress() const noexcept
         {
-
+            return type == Event::Type::Press;
         }
-
-    private:
-        Type type;
-        unsigned char code;
+        bool IsRelease() const noexcept
+        {
+            return type == Event::Type::Release;
+        }
+        bool IsInvalid() const noexcept
+        {
+            return type == Event::Type::Invalid;
+        }
+        unsigned char GetCode() const noexcept
+        {
+            return code;
+        }
 
     protected:
 
-    
+    private:
+        Event::Type type;
+        unsigned char code;
     };
 
     Keyboard() = default;
     Keyboard( const Keyboard& src ) = delete;
     Keyboard& operator = ( const Keyboard& src ) = delete;
 
-    Event ReadKey() noexcept;
-    bool KeyIsEmpty() const noexcept;
+    Event ReadKeyFromBuffer() noexcept;
+    bool KeyBufferIsEmpty() const noexcept;
     bool KeyIsPressed( unsigned char keycode ) const noexcept;
-    void FlushKey() noexcept;
+    void FlushKeyBuffer() noexcept;
 
-    char ReadChar() noexcept;
-    bool CharIsEmpty() const noexcept;
-    void FlushChar() noexcept;
-    void Flush() noexcept;
-    
+    char ReadCharFromBuffer() noexcept;
+    bool CharBufferIsEmpty() const noexcept;
+    void FlushCharBuffer() noexcept;
+
+    void FlushBuffers() noexcept;
+
     bool AutoRepeatIsEnabled() const noexcept;
     void EnableAutoRepeat() noexcept;
     void DisableAutoRepeat() noexcept;
+
+
+protected:
+
+
+private:
+    template <typename T>
+    static void TrimBuffer(std::queue<T>& buffer) noexcept;
+
+    void OnKeyPressed( unsigned char keycode ) noexcept;
+    void OnKeyReleased( unsigned char keycode ) noexcept;
+    void OnChar( char character ) noexcept;
+    void ClearKeyStateBitset() noexcept;
+
+    static constexpr unsigned int nKeys = 256u;
+    static constexpr unsigned int bufferSize = 16u;
+
+    std::bitset<nKeys> keystates;
+
+    std::queue<Event> keybuffer;
+    std::queue<char> charbuffer;
+
+    bool autoRepeatEnabled = false;
 };
+
+template<typename T>
+void Keyboard::TrimBuffer( std::queue<T>& buffer ) noexcept
+{
+    while ( buffer.size() > bufferSize )
+    {
+        buffer.pop();
+    }
+}
