@@ -16,6 +16,11 @@ int CALLBACK WinMain(
         {
             TranslateMessage( &msg );
             DispatchMessage ( &msg );
+
+            if ( wnd.kbd.KeyIsPressed( VK_SPACE ) )
+            {
+                MessageBox( nullptr, "Some ting!", "SPACE X", 0);
+            }
         }
         
         if ( gResult == -1 )
