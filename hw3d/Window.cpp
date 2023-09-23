@@ -181,8 +181,11 @@ LRESULT Window::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) n
         PostQuitMessage( 0 );
         return 0;
 
-        /******** KEYBOARD MESSAGES ********/
+    case WM_KILLFOCUS:
+        kbd.ClearKeyStateBitset();
+        break;
 
+        /******** KEYBOARD MESSAGES ********/
     case WM_KEYDOWN:
         kbd.OnKeyPressed( static_cast<unsigned char>( wParam ) );
         break;
@@ -194,7 +197,6 @@ LRESULT Window::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) n
     case WM_CHAR:
         kbd.OnChar( static_cast<unsigned char>(wParam) );
         break;
-
         /****** END KEYBOARD MESSAGES ******/
 
     default:
