@@ -16,8 +16,10 @@ public:
 
     int GetLineNum() const noexcept;
 
+
 protected:
     mutable std::string whatBuffer;
+
 
 private:
     int linenum;

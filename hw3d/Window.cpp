@@ -15,10 +15,6 @@ HRESULT Window::Exception::GetErrorCode() const noexcept
     return hr;
 }
 
-std::string Window::Exception::GetErrorString() const noexcept
-{
-    return TranslateErrorCode( hr );
-}
 std::string Window::Exception::TranslateErrorCode( HRESULT hr ) noexcept
 {
     char* pMsgBuf = nullptr;
@@ -47,6 +43,10 @@ std::string Window::Exception::TranslateErrorCode( HRESULT hr ) noexcept
     LocalFree( pMsgBuf );
 
     return errorString;
+}
+std::string Window::Exception::GetErrorString() const noexcept
+{
+    return TranslateErrorCode( hr );
 }
 
 const char* Window::Exception::GetType() const noexcept
@@ -190,13 +190,13 @@ LRESULT Window::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) n
     case WM_SYSKEYDOWN:
         if ( ! ( lParam & 0x40000000 ) || kbd.AutoRepeatIsEnabled() ) 
         {
-            kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
+            kbd.OnKeyPressed( static_cast<unsigned char>( wParam ) );
         }
         break;
 
     case WM_KEYUP:
     case WM_SYSKEYUP:
-        kbd.OnKeyReleased( static_cast<unsigned char>(wParam) );
+        kbd.OnKeyReleased( static_cast<unsigned char>( wParam ) );
         break;
 
     case WM_CHAR:
