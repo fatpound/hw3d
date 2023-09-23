@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FatException.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowsMessageMap.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="FatException.hpp" />
     <ClInclude Include="FatWin.hpp" />
+    <ClInclude Include="Keyboard.hpp" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Window.hpp" />
     <ClInclude Include="WindowsMessageMap.hpp" />
