@@ -1,4 +1,5 @@
 #include "Window.hpp"
+#include <sstream>
 
 int CALLBACK WinMain(
     _In_     HINSTANCE hInstance,
@@ -17,9 +18,18 @@ int CALLBACK WinMain(
             TranslateMessage( &msg );
             DispatchMessage ( &msg );
 
-            if ( wnd.kbd.KeyIsPressed( VK_MENU ) )
+            while ( ! wnd.mouse.BufferIsEmpty() )
             {
-                MessageBox( nullptr, "Some ting!", "SPACE X", 0);
+                const Mouse::Event e = wnd.mouse.ReadFromBuffer();
+
+                if ( e.GetType() == Mouse::Event::Type::Move )
+                {
+                    std::ostringstream oss;
+
+                    oss << "Mouse Position : (" << e.GetPosX() << "," << e.GetPosY() << ")";
+
+                    wnd.SetTitle( oss.str() );
+                }
             }
         }
         

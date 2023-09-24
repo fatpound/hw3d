@@ -9,10 +9,8 @@ Keyboard::Event Keyboard::ReadKeyFromBuffer() noexcept
 
         return e;
     }
-    else
-    {
-        return Keyboard::Event();
-    }
+    
+    return Keyboard::Event();
 }
 bool Keyboard::KeyBufferIsEmpty() const noexcept
 {

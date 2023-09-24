@@ -23,7 +23,7 @@ public:
             type( Event::Type::Invalid ),
             code( 0u )
         {}
-        Event( Event::Type type, unsigned char code ) noexcept
+        Event( Type type, unsigned char code ) noexcept
             :
             type( type ),
             code( code )
@@ -49,7 +49,7 @@ public:
     protected:
 
     private:
-        Event::Type type;
+        Type type;
         unsigned char code;
     };
 
@@ -78,7 +78,13 @@ protected:
 
 private:
     template <typename T>
-    static void TrimBuffer(std::queue<T>& buffer) noexcept;
+    static void TrimBuffer(std::queue<T>& buffer) noexcept
+    {
+        while (buffer.size() > bufferSize)
+        {
+            buffer.pop();
+        }
+    }
 
     void OnKeyPressed( unsigned char keycode ) noexcept;
     void OnKeyReleased( unsigned char keycode ) noexcept;
@@ -95,12 +101,3 @@ private:
 
     bool autoRepeatEnabled = false;
 };
-
-template<typename T>
-void Keyboard::TrimBuffer( std::queue<T>& buffer ) noexcept
-{
-    while ( buffer.size() > bufferSize )
-    {
-        buffer.pop();
-    }
-}
