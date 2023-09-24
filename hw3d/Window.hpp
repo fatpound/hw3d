@@ -3,6 +3,7 @@
 #include "FatWin.hpp"
 #include "FatException.hpp"
 #include "Keyboard.hpp"
+#include "Mouse.hpp"
 
 class Window
 {
@@ -31,7 +32,10 @@ public:
     Window( const Window& src ) = delete;
     Window& operator = ( const Window& src ) = delete;
 
+    void SetTitle( const std::string& title );
+
     Keyboard kbd;
+    Mouse mouse;
 
 
 protected:
@@ -66,5 +70,5 @@ private:
     LRESULT HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept;
 };
 
-#define FHWND_EXCEPT( hr ) Window::Exception( __LINE__, __FILE__, hr )
-#define FHWND_LAST_EXCEPT  Window::Exception( __LINE__, __FILE__, GetLastError() )
+#define FHWND_EXCEPT( hr )  Window::Exception( __LINE__, __FILE__, hr )
+#define FHWND_LAST_EXCEPT() Window::Exception( __LINE__, __FILE__, GetLastError() )

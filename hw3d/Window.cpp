@@ -2,6 +2,8 @@
 #include <sstream>
 #include "resource.h"
 
+// #include "WindowsMessageMap.hpp"
+
 // Exception
 
 Window::Exception::Exception( int line_num, const char* file_name, HRESULT hr ) noexcept
@@ -117,9 +119,9 @@ Window::Window( int width, int height, const char* name )
     wr.top = 100;
     wr.bottom = height + wr.top;
 
-    if ( FAILED( AdjustWindowRect( &wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE ) ) )
+    if ( AdjustWindowRect( &wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE ) == 0 )
     {
-        throw FHWND_LAST_EXCEPT;
+        throw FHWND_LAST_EXCEPT();
     }
 
     hWnd = CreateWindow
@@ -139,7 +141,7 @@ Window::Window( int width, int height, const char* name )
     
     if ( hWnd == nullptr )
     {
-        throw FHWND_LAST_EXCEPT;
+        throw FHWND_LAST_EXCEPT();
     }
     else
     {
@@ -149,6 +151,14 @@ Window::Window( int width, int height, const char* name )
 Window::~Window()
 {
     DestroyWindow( hWnd );
+}
+
+void Window::SetTitle(const std::string& title)
+{
+    if ( SetWindowText( hWnd, title.c_str() ) == 0 )
+    {
+        throw FHWND_LAST_EXCEPT();
+    }
 }
 
 LRESULT CALLBACK Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
@@ -175,6 +185,9 @@ LRESULT CALLBACK Window::HandleMsgThunk( HWND hWnd, UINT msg, WPARAM wParam, LPA
 
 LRESULT Window::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) noexcept
 {
+    // static WindowsMessageMap map;
+    // OutputDebugString( map( msg, wParam, lParam ).c_str() );
+
     switch ( msg )
     {
     case WM_CLOSE:
@@ -203,6 +216,54 @@ LRESULT Window::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) n
         kbd.OnChar( static_cast<unsigned char>(wParam) );
         break;
         /****** END KEYBOARD MESSAGES ******/
+
+        /********* MOUSE  MESSAGES *********/
+    case WM_MOUSEMOVE:
+        {
+            POINTS pt = MAKEPOINTS( lParam );
+            mouse.OnMouseMove( pt.x, pt.y );
+        }
+        break;
+
+    case WM_LBUTTONDOWN:
+        mouse.OnLeftPressed();
+        break;
+
+    case WM_LBUTTONUP:
+        mouse.OnLeftReleased();
+        break;
+
+    case WM_RBUTTONDOWN:
+        mouse.OnRightPressed();
+        break;
+
+    case WM_RBUTTONUP:
+        mouse.OnRightReleased();
+        break;
+
+    case WM_MBUTTONDOWN:
+        mouse.OnWheelPressed();
+        break;
+
+    case WM_MBUTTONUP:
+        mouse.OnWheelReleased();
+        break;
+
+    case WM_MOUSEWHEEL:
+        {
+            const POINTS pt = MAKEPOINTS( lParam );
+
+            if ( GET_WHEEL_DELTA_WPARAM( wParam ) > 0)
+            {
+                mouse.OnWheelUp();
+            }
+            else if ( GET_WHEEL_DELTA_WPARAM(wParam) < 0)
+            {
+                mouse.OnWheelDown();
+            }
+        }
+        break;
+        /******* END. MOUSE MESSAGES *******/
 
     default:
         break;
