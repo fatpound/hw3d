@@ -1,5 +1,4 @@
 #include "Window.hpp"
-#include <sstream>
 
 int CALLBACK WinMain(
     _In_     HINSTANCE hInstance,
