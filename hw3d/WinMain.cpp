@@ -17,28 +17,6 @@ int CALLBACK WinMain(
         {
             TranslateMessage( &msg );
             DispatchMessage ( &msg );
-
-            while ( ! wnd.mouse.BufferIsEmpty() )
-            {
-                const Mouse::Event e = wnd.mouse.ReadFromBuffer();
-
-                switch ( e.GetType() )
-                {
-                case Mouse::Event::Type::Leave:
-                    wnd.SetTitle( "Mouse is OUTSIDE of the Client Region!" );
-                    break;
-
-                case Mouse::Event::Type::Move:
-                {
-                    std::ostringstream oss;
-
-                    oss << "Mouse moved to (" << wnd.mouse.GetPosX() << "," << wnd.mouse.GetPosY() << ")";
-
-                    wnd.SetTitle( oss.str() );
-                }
-                break;
-                }
-            }
         }
         
         if ( gResult == -1 )
