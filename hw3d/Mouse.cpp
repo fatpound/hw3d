@@ -1,4 +1,5 @@
 #include "Mouse.hpp"
+#include "FatWin.hpp"
 
 std::pair<int, int> Mouse::GetPos() const noexcept
 {
@@ -125,6 +126,22 @@ void Mouse::OnWheelDown() noexcept
 {
     buffer.push( Mouse::Event( Mouse::Event::Type::WheelDown, *this ) );
     TrimBuffer();
+}
+void Mouse::OnWheelDelta( int delta ) noexcept
+{
+    wheelDeltaCarry += delta;
+
+    while (wheelDeltaCarry >= WHEEL_DELTA)
+    {
+        wheelDeltaCarry -= WHEEL_DELTA;
+        OnWheelUp();
+    }
+
+    while (wheelDeltaCarry <= -WHEEL_DELTA)
+    {
+        wheelDeltaCarry += WHEEL_DELTA;
+        OnWheelDown();
+    }
 }
 
 void Mouse::TrimBuffer() noexcept

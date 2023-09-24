@@ -122,6 +122,7 @@ private:
     void OnWheelReleased() noexcept;
     void OnWheelUp() noexcept;
     void OnWheelDown() noexcept;
+    void OnWheelDelta( int delta ) noexcept;
 
     void TrimBuffer() noexcept;
 
@@ -129,6 +130,7 @@ private:
     std::queue<Event> buffer;
     int x = 0;
     int y = 0;
+    int wheelDeltaCarry = 0;
     bool isInWindow = false;
     bool leftIsPressed = false;
     bool rightIsPressed = false;
