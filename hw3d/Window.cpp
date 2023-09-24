@@ -276,11 +276,7 @@ LRESULT Window::HandleMsg( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam ) n
         break;
 
     case WM_MOUSEWHEEL:
-        {
-            const int delta = GET_WHEEL_DELTA_WPARAM( wParam );
-
-            mouse.OnWheelDelta( delta );
-        }
+        mouse.OnWheelDelta( GET_WHEEL_DELTA_WPARAM( wParam ) );
         break;
         /******* END. MOUSE MESSAGES *******/
 
