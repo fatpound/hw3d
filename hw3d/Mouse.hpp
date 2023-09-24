@@ -122,8 +122,8 @@ private:
 
     static constexpr unsigned int bufferSize = 16u;
     std::queue<Event> buffer;
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
     bool leftIsPressed = false;
     bool rightIsPressed = false;
     bool wheelIsPressed = false;
