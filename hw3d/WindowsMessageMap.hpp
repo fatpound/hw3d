@@ -3,8 +3,6 @@
 #include "FatWin.hpp"
 
 #include <string>
-#include <sstream>
-#include <iomanip>
 #include <unordered_map>
 
 class WindowsMessageMap
@@ -12,7 +10,9 @@ class WindowsMessageMap
 public:
     WindowsMessageMap() noexcept;
 
-    std::string operator () ( DWORD msg, WPARAM wp, LPARAM lp ) const noexcept;
+    
+public:
+    std::string operator () (DWORD msg, WPARAM wp, LPARAM lp) const noexcept;
 
 
 protected:
