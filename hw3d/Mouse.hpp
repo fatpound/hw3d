@@ -7,6 +7,15 @@ class Mouse
     friend class Window;
 
 public:
+    Mouse() = default;
+    ~Mouse() = default;
+    Mouse(const Mouse& src) = delete;
+    Mouse(Mouse&& src) = delete;
+    Mouse& operator = (const Mouse& src) = delete;
+    Mouse& operator = (Mouse&& src) = delete;
+
+
+public:
     class Event
     {
     public:
@@ -20,89 +29,57 @@ public:
             WheelRelease,
             WheelUp,
             WheelDown,
-            Move,
             Enter,
+            Move,
             Leave,
             Invalid
         };
 
-        Event() noexcept
-            :
-            type ( Type::Invalid ),
-            leftIsPressed( false ),
-            rightIsPressed( false ),
-            wheelIsPressed( false ),
-            x( 0 ),
-            y( 0 )
-        {}
-        Event( Type type, const Mouse& parent ) noexcept
-            :
-            type( type ),
-            leftIsPressed( parent.leftIsPressed ),
-            rightIsPressed( parent.rightIsPressed ),
-            wheelIsPressed( parent.wheelIsPressed ),
-            x( parent.x ),
-            y( parent.y )
-        {}
+    public:
+        Event() noexcept;
 
-        std::pair<int, int> GetPos() const noexcept
-        {
-            return { x, y };
-        }
-        Type GetType() const noexcept
-        {
-            return type;
-        }
-        int GetPosX() const noexcept
-        {
-            return x;
-        }
-        int GetPosY() const noexcept
-        {
-            return y;
-        }
-        bool IsValid() const noexcept
-        {
-            return type != Event::Type::Invalid;
-        }
-        bool LeftIsPressed() const noexcept
-        {
-            return leftIsPressed;
-        }
-        bool RightIsPressed() const noexcept
-        {
-            return rightIsPressed;
-        }
-        bool WheelIsPressed() const
-        {
-            return wheelIsPressed;
-        }
+        Event(Type type, const Mouse& parent) noexcept;
+
+    public:
+        std::pair<int, int> GetPos() const noexcept;
+
+        Type GetType() const noexcept;
+
+        int GetPosX() const noexcept;
+        int GetPosY() const noexcept;
+
+        bool IsValid() const noexcept;
+        bool LeftIsPressed() const noexcept;
+        bool RightIsPressed() const noexcept;
+        bool WheelIsPressed() const noexcept;
 
     protected:
 
     private:
         Type type;
+
         int x;
         int y;
+
         bool leftIsPressed;
         bool rightIsPressed;
         bool wheelIsPressed;
     };
 
-    Mouse() = default;
-    Mouse( const Mouse& src) = delete;
-    Mouse& operator = ( const Mouse& src ) = delete;
 
+public:
     std::pair<int, int> GetPos() const noexcept;
+
     Event ReadFromBuffer() noexcept;
+
     int GetPosX() const noexcept;
     int GetPosY() const noexcept;
-    bool IsInWindow() const noexcept;
 
-    bool BufferIsEmpty() const noexcept;
+    bool IsInWindow() const noexcept;
     bool LeftIsPressed() const noexcept;
     bool RightIsPressed() const noexcept;
     bool WheelIsPressed() const noexcept;
+    bool BufferIsEmpty() const noexcept;
 
     void FlushBuffer() noexcept;
 
@@ -111,7 +88,7 @@ protected:
 
 
 private:
-    void OnMouseMove( int newx, int newy ) noexcept;
+    void OnMouseMove(int newx, int newy) noexcept;
     void OnMouseEnter() noexcept;
     void OnMouseLeave() noexcept;
     void OnLeftPressed() noexcept;
@@ -122,15 +99,20 @@ private:
     void OnWheelReleased() noexcept;
     void OnWheelUp() noexcept;
     void OnWheelDown() noexcept;
-    void OnWheelDelta( int delta ) noexcept;
+    void OnWheelDelta(int delta) noexcept;
 
     void TrimBuffer() noexcept;
 
+
+private:
     static constexpr unsigned int bufferSize = 16u;
+
     std::queue<Event> buffer;
+
     int x = 0;
     int y = 0;
     int wheelDeltaCarry = 0;
+
     bool isInWindow = false;
     bool leftIsPressed = false;
     bool rightIsPressed = false;

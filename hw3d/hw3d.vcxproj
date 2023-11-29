@@ -82,6 +82,8 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <CallingConvention>FastCall</CallingConvention>
+      <AssemblerOutput>All</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -102,6 +104,8 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <CallingConvention>FastCall</CallingConvention>
+      <AssemblerOutput>All</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -122,6 +126,8 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <CallingConvention>FastCall</CallingConvention>
+      <AssemblerOutput>All</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,6 +148,8 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <FloatingPointModel>Fast</FloatingPointModel>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <CallingConvention>FastCall</CallingConvention>
+      <AssemblerOutput>All</AssemblerOutput>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

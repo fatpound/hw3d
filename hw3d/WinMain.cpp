@@ -1,39 +1,38 @@
 #include "Window.hpp"
 
-int CALLBACK WinMain(
-    _In_     HINSTANCE hInstance,
-    _In_opt_ HINSTANCE hPrevInstance,
-    _In_     LPSTR     lpCmdLine,
-    _In_     int       nShowCmd)
+int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
     try
     {
-        Window wnd(640, 480, "hw3dfat");
+        Window wnd(640, 480, "Fat Win32 API Window");
 
         MSG msg;
-        BOOL gResult;
-        while ( ( gResult = GetMessage( &msg, nullptr, 0, 0 ) ) > 0)
+        BOOL gResult = GetMessage(&msg, nullptr, 0, 0);
+
+        while (gResult > 0)
         {
-            TranslateMessage( &msg );
-            DispatchMessage ( &msg );
+            TranslateMessage(&msg);
+             DispatchMessage(&msg);
+
+            gResult = GetMessage(&msg, nullptr, 0, 0);
         }
         
-        if ( gResult == -1 )
+        if (gResult == -1)
         {
             return -1;
         }
 
         return msg.wParam;
     }
-    catch ( const FatException& e )
+    catch (const FatException& e)
     {
-        MessageBox( nullptr, e.what(), e.GetType(), MB_OK | MB_ICONERROR);
+        MessageBox(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONERROR);
     }
-    catch ( const std::exception& e )
+    catch (const std::exception& e)
     {
         MessageBox( nullptr, e.what(), "STD Exception", MB_OK | MB_ICONERROR);
     }
-    catch ( ... )
+    catch (...)
     {
         MessageBox( nullptr, "No Details Available", "Standard Exception", MB_OK | MB_ICONERROR);
     }

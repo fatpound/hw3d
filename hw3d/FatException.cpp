@@ -5,7 +5,9 @@ FatException::FatException(int line_num, const char* file_name) noexcept
     :
     linenum(line_num),
     filename(file_name)
-{}
+{
+
+}
 
 std::string FatException::GetOriginString() const noexcept
 {

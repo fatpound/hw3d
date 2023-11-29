@@ -8,6 +8,8 @@ class FatException : public std::exception
 public:
     FatException( int line_num, const char* file_name ) noexcept;
 
+
+public:
     std::string GetOriginString() const noexcept;
     std::string GetFileName() const noexcept;
 
@@ -22,6 +24,7 @@ protected:
 
 
 private:
-    int linenum;
     std::string filename;
+
+    int linenum;
 };
