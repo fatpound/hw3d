@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="FatException.cpp" />
+    <ClCompile Include="FatTimer.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -188,6 +189,7 @@
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="FatException.hpp" />
+    <ClInclude Include="FatTimer.hpp" />
     <ClInclude Include="FatWin.hpp" />
     <ClInclude Include="Keyboard.hpp" />
     <ClInclude Include="Mouse.hpp" />
