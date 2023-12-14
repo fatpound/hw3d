@@ -1,8 +1,5 @@
 #include "App.hpp"
 
-#include <sstream>
-#include <iomanip>
-
 App::App()
 	:
 	wnd(800, 600, "The FatBox")
@@ -27,8 +24,5 @@ int App::Go()
 
 void App::DoFrame()
 {
-	const float time = timer.Peek();
-	std::ostringstream oss;
-	oss << "Time elapsed : " << std::setprecision(1) << std::fixed << time << "s";
-	wnd.SetTitle(oss.str());
+	
 }
