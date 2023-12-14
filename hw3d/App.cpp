@@ -12,25 +12,17 @@ App::App()
 
 int App::Go()
 {
-	MSG msg;
-	BOOL gResult = GetMessage(&msg, nullptr, 0, 0);
+	std::optional<int> errorCode;
 
-	while (gResult > 0)
+	while (true)
 	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-
-		gResult = GetMessage(&msg, nullptr, 0, 0);
+		if (errorCode = Window::ProcessMessages())
+		{
+			return *errorCode;
+		}
 
 		DoFrame();
 	}
-
-	if (gResult == -1)
-	{
-		throw FHWND_LAST_EXCEPT();
-	}
-
-	return msg.wParam;
 }
 
 void App::DoFrame()

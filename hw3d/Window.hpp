@@ -5,6 +5,8 @@
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
 
+#include <optional>
+
 class Window
 {
 public:
@@ -40,7 +42,9 @@ public:
 
 
 public:
-    void SetTitle(const std::string& title);
+	static std::optional<int> ProcessMessages();
+
+	void SetTitle(const std::string& title);
 
 
 public:
