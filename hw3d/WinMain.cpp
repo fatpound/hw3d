@@ -12,7 +12,7 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         while (gResult > 0)
         {
             TranslateMessage(&msg);
-             DispatchMessage(&msg);
+            DispatchMessage(&msg);
 
             gResult = GetMessage(&msg, nullptr, 0, 0);
         }

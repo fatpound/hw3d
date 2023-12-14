@@ -30,7 +30,7 @@ public:
         HRESULT GetErrorCode() const noexcept;
 
         virtual const char* GetType() const noexcept override;
-        const char* what() const noexcept override;
+        virtual const char* what() const noexcept override;
 
     protected:
 
@@ -89,5 +89,5 @@ private:
     int height = 0;
 };
 
-#define FHWND_EXCEPT(hresult)    Window::Exception(__LINE__, __FILE__, hresult)
-#define FHWND_LAST_EXCEPT() Window::Exception(__LINE__, __FILE__, GetLastError())
+#define FHWND_EXCEPT(hresult) Window::Exception(__LINE__, __FILE__, hresult)
+#define FHWND_LAST_EXCEPT()   Window::Exception(__LINE__, __FILE__, GetLastError())
