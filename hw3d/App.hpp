@@ -1,6 +1,9 @@
 #pragma once
 
 #include "Window.hpp"
+#include "FatTimer.hpp"
+
+using namespace fatpound::time;
 
 class App
 {
@@ -18,4 +21,5 @@ private:
 
 private:
 	Window wnd;
+	FatTimer timer;
 };
