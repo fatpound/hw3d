@@ -50,24 +50,31 @@ Window::Window(int in_width, int in_height, const char* in_name)
     {
         ShowWindow(hWnd, /*SW_SHOW*/ SW_SHOWDEFAULT);
     }
+
+    pGfx = std::make_unique<Graphics>(hWnd);
 }
 
 std::optional<int> Window::ProcessMessages()
 {
-	MSG msg;
+    MSG msg;
 
-	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
-	{
-		if (msg.message == WM_QUIT)
-		{
-			return msg.wParam;
-		}
-		
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
+    while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+    {
+        if (msg.message == WM_QUIT)
+        {
+            return msg.wParam;
+        }
+        
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
 
-	return {};
+    return {};
+}
+
+Graphics& Window::Gfx()
+{
+    return *pGfx;
 }
 
 void Window::SetTitle(const std::string& title)

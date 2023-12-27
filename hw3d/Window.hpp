@@ -4,8 +4,10 @@
 #include "FatException.hpp"
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
+#include "Graphics.hpp"
 
 #include <optional>
+#include <memory>
 
 class Window
 {
@@ -42,9 +44,11 @@ public:
 
 
 public:
-	static std::optional<int> ProcessMessages();
+    static std::optional<int> ProcessMessages();
 
-	void SetTitle(const std::string& title);
+    Graphics& Gfx();
+
+    void SetTitle(const std::string& title);
 
 
 public:
@@ -88,6 +92,7 @@ private:
 
 private:
     HWND hWnd;
+    std::unique_ptr<Graphics> pGfx;
 
     int width = 0;
     int height = 0;
