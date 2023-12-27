@@ -15,6 +15,10 @@ public:
     Graphics& operator = (Graphics&& src) = delete;
 
 
+public:
+    void EndFrame();
+
+
 private:
     ID3D11Device* pDevice = nullptr;
     IDXGISwapChain* pSwapChain = nullptr;

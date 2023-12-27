@@ -55,3 +55,8 @@ Graphics::~Graphics()
         pDeviceContext->Release();
     }
 }
+
+void Graphics::EndFrame()
+{
+    pSwapChain->Present(1u, 0u);
+}
