@@ -6,7 +6,7 @@ namespace fatpound::time
 {
     FatTimer::FatTimer()
     {
-		last = steady_clock::now();
+        last = steady_clock::now();
     }
 
     float FatTimer::Mark() noexcept
@@ -18,8 +18,8 @@ namespace fatpound::time
 
         return frameTime.count();
     }
-	float FatTimer::Peek() const noexcept
-	{
-		return duration<float>(steady_clock::now() - last).count();
-	}
+    float FatTimer::Peek() const noexcept
+    {
+        return duration<float>(steady_clock::now() - last).count();
+    }
 }

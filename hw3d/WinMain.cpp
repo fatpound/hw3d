@@ -4,7 +4,7 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 {
     try
     {
-		return App{}.Go();
+        return App{}.Go();
     }
     catch (const FatException& e)
     {
@@ -19,5 +19,5 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
         MessageBox( nullptr, "No Details Available", "Standard Exception", MB_OK | MB_ICONERROR);
     }
 
-	return -1;
+    return -1;
 }

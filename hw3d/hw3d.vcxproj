@@ -180,6 +180,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="FatException.cpp" />
     <ClCompile Include="FatTimer.cpp" />
+    <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Window.cpp" />
@@ -191,9 +192,9 @@
     <ClInclude Include="FatException.hpp" />
     <ClInclude Include="FatTimer.hpp" />
     <ClInclude Include="FatWin.hpp" />
+    <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="Keyboard.hpp" />
     <ClInclude Include="Mouse.hpp" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Window.hpp" />
     <ClInclude Include="WindowsMessageMap.hpp" />
   </ItemGroup>
