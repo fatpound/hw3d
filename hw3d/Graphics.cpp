@@ -1,5 +1,7 @@
 #include "Graphics.hpp"
 
+#include <array>
+
 #pragma comment(lib, "d3d11")
 
 Graphics::Graphics(HWND hWnd)
@@ -34,12 +36,33 @@ Graphics::Graphics(HWND hWnd)
         &pSwapChain,
         &pDevice,
         nullptr,
-        &pDeviceContext
+        &pContext
     );
+
+    ID3D11Resource* pBackBuffer = nullptr;
+    // 0 means the backbuffer
+    pSwapChain->GetBuffer(
+        0,
+        __uuidof(ID3D11Resource),
+        reinterpret_cast<void**>(&pBackBuffer)
+    );
+
+    pDevice->CreateRenderTargetView(
+        pBackBuffer,
+        nullptr,
+        &pTarget
+    );
+
+    pBackBuffer->Release();
 }
 
 Graphics::~Graphics()
 {
+    if (pTarget != nullptr)
+    {
+        pTarget->Release();
+    }
+
     if (pDevice != nullptr)
     {
         pDevice->Release();
@@ -50,13 +73,25 @@ Graphics::~Graphics()
         pSwapChain->Release();
     }
 
-    if (pDeviceContext != nullptr)
+    if (pContext != nullptr)
     {
-        pDeviceContext->Release();
+        pContext->Release();
     }
 }
 
 void Graphics::EndFrame()
 {
     pSwapChain->Present(1u, 0u);
+}
+
+void Graphics::ClearBuffer(float red, float green, float blue) noexcept
+{
+    const std::array<float, 4> colors = {
+        red,
+        green,
+        blue,
+        1.0f
+    };
+
+    pContext->ClearRenderTargetView(pTarget, colors.data());
 }

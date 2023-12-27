@@ -1,5 +1,7 @@
 #include "App.hpp"
 
+#include <cmath>
+
 App::App()
     :
     wnd(800, 600, "The FatBox")
@@ -24,5 +26,8 @@ int App::Go()
 
 void App::DoFrame()
 {
+    const float color = std::sin(timer.Peek());
+
+    wnd.Gfx().ClearBuffer(color, color, 1.0f);
     wnd.Gfx().EndFrame();
 }
