@@ -140,11 +140,12 @@ std::string Graphics::HrException::GetErrorString() const noexcept
 
 std::string Graphics::HrException::GetErrorDescription() const noexcept
 {
-    char buf[512];
+    std::string buffer;
+    buffer.reserve(512);
 
-    DXGetErrorDescription(hresult, buf, sizeof(buf));
+    DXGetErrorDescription(hresult, buffer.data(), sizeof(buffer));
 
-    return buf;
+    return buffer;
 }
 
 const char* Graphics::HrException::what() const noexcept
