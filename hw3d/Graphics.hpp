@@ -5,6 +5,7 @@
 #include "DxgiInfoManager.hpp"
 
 #include <d3d11.h>
+#include <wrl.h> // for the ComPtr
 
 #include <vector>
 
@@ -12,7 +13,7 @@ class Graphics
 {
 public:
     Graphics() = delete;
-    ~Graphics();
+    ~Graphics() = default;
     Graphics(const Graphics& src) = delete;
     Graphics(Graphics&& src) = delete;
     Graphics& operator = (const Graphics& src) = delete;
@@ -72,8 +73,8 @@ private:
     DxgiInfoManager infoManager;
 #endif
 
-    ID3D11Device* pDevice = nullptr;
-    IDXGISwapChain* pSwapChain = nullptr;
-    ID3D11DeviceContext* pContext = nullptr;
-    ID3D11RenderTargetView* pTarget = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11Device> pDevice = nullptr;
+    Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget = nullptr;
 };

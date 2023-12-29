@@ -2,6 +2,9 @@
 
 #include "FatWin.hpp"
 
+#include <dxgidebug.h>
+#include <wrl.h>
+
 #include <vector>
 #include <string>
 
@@ -9,7 +12,7 @@ class DxgiInfoManager
 {
 public:
     DxgiInfoManager();
-    ~DxgiInfoManager();
+    ~DxgiInfoManager() = default;
     DxgiInfoManager(const DxgiInfoManager&) = delete;
     DxgiInfoManager(DxgiInfoManager&&) = delete;
     DxgiInfoManager& operator = (const DxgiInfoManager&) = delete;
@@ -23,7 +26,7 @@ public:
 
 
 private:
-    struct IDXGIInfoQueue* pDxgiInfoQueue = nullptr;
+    Microsoft::WRL::ComPtr<IDXGIInfoQueue> pDxgiInfoQueue = nullptr;
 
     unsigned long long nextIndex = 0u;
 };

@@ -24,6 +24,8 @@
 
 #endif
 
+namespace wrl = Microsoft::WRL;
+
 // Graphics
 
 Graphics::Graphics(HWND hWnd)
@@ -66,67 +68,42 @@ Graphics::Graphics(HWND hWnd)
         &pSwapChain,
         &pDevice,
         nullptr,
-        &pContext
-    ));
+        &pContext)
+    );
 
-    ID3D11Resource* pBackBuffer = nullptr;
+    wrl::ComPtr<ID3D11Resource> pBackBuffer = nullptr;
     
     GFX_THROW_INFO(pSwapChain->GetBuffer(
         0, // means the backbuffer
         __uuidof(ID3D11Resource),
-        reinterpret_cast<void**>(&pBackBuffer)
-    ));
+        &pBackBuffer)
+    );
 
     GFX_THROW_INFO(pDevice->CreateRenderTargetView(
-        pBackBuffer,
+        pBackBuffer.Get(),
         nullptr,
-        &pTarget
-    ));
-
-    pBackBuffer->Release();
-}
-
-Graphics::~Graphics()
-{
-    if (pTarget != nullptr)
-    {
-        pTarget->Release();
-    }
-
-    if (pDevice != nullptr)
-    {
-        pDevice->Release();
-    }
-
-    if (pSwapChain != nullptr)
-    {
-        pSwapChain->Release();
-    }
-
-    if (pContext != nullptr)
-    {
-        pContext->Release();
-    }
+        &pTarget)
+    );
 }
 
 
 void Graphics::EndFrame()
 {
-    HRESULT hresult;
+    HRESULT hr;
 
 #ifndef NDEBUG
     infoManager.Set();
 #endif
 
-    if (FAILED(hresult = pSwapChain->Present(1u, 0u)))
+    if (FAILED(hr = pSwapChain->Present(1u, 0u)))
     {
-        if (hresult == DXGI_ERROR_DEVICE_REMOVED)
+        if (hr == DXGI_ERROR_DEVICE_REMOVED)
         {
             throw GFX_DEVICE_REMOVED_EXCEPT(pDevice->GetDeviceRemovedReason());
         }
         else
         {
-            GFX_EXCEPT(hresult);
+            GFX_EXCEPT(hr);
         }
     }
 }
@@ -140,7 +117,7 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
         1.0f
     };
 
-    pContext->ClearRenderTargetView(pTarget, colors.data());
+    pContext->ClearRenderTargetView(pTarget.Get(), colors.data());
 }
 
 
@@ -194,15 +171,15 @@ const char* Graphics::HrException::what() const noexcept
 {
     std::ostringstream oss;
 
-    oss << GetType() << std::endl
+    oss << GetType() << '\n'
         << "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
-        << std::dec << " (" << (unsigned long)GetErrorCode() << ")" << std::endl
-        << "[Error String] " << GetErrorString() << std::endl
+        << std::dec << " (" << (unsigned long)GetErrorCode() << ")" << '\n'
+        << "[Error String] " << GetErrorString() << '\n'
         << "[Description] " << GetErrorDescription() << std::endl;
 
     if ( ! info.empty() )
     {
-        oss << "\n[Error Info]\n" << GetErrorInfo() << std::endl << std::endl;
+        oss << "\n[Error Info]\n" << GetErrorInfo() << '\n' << std::endl;
     }
 
     oss << GetOriginString();

@@ -2,7 +2,6 @@
 #include "Window.hpp"
 #include "Graphics.hpp"
 
-#include <dxgidebug.h>
 #include <memory>
 
 #pragma comment(lib, "dxguid")
@@ -35,16 +34,9 @@ DxgiInfoManager::DxgiInfoManager()
 
     HRESULT hr;
 
-    GFX_THROW_NOINFO(DxgiGetDebugInterface(__uuidof(IDXGIInfoQueue), reinterpret_cast<void**>(&pDxgiInfoQueue)));
+    GFX_THROW_NOINFO(DxgiGetDebugInterface(__uuidof(IDXGIInfoQueue), &pDxgiInfoQueue));
 }
 
-DxgiInfoManager::~DxgiInfoManager()
-{
-    if (pDxgiInfoQueue != nullptr)
-    {
-        pDxgiInfoQueue->Release();
-    }
-}
 
 void DxgiInfoManager::Set() noexcept
 {
