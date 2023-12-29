@@ -179,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="dxerr.cpp" />
+    <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="FatException.cpp" />
     <ClCompile Include="FatTimer.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -191,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="dxerr.h" />
+    <ClInclude Include="DxgiInfoManager.hpp" />
     <ClInclude Include="FatException.hpp" />
     <ClInclude Include="FatTimer.hpp" />
     <ClInclude Include="FatWin.hpp" />

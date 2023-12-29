@@ -7,14 +7,30 @@
 
 #pragma comment(lib, "d3d11")
 
-#define GFX_THROW_FAILED(hrcall) if( FAILED( hresult = (hrcall) ) ) throw Graphics::HrException( __LINE__, __FILE__, hresult )
-#define GFX_DEVICE_REMOVED_EXCEPT(hresult) Graphics::DeviceRemovedException( __LINE__, __FILE__, (hresult) )
+#define GFX_EXCEPT_NOINFO(hr) Graphics::HrException( __LINE__, __FILE__, (hr) )
+#define GFX_THROW_NOINFO(hrcall) if (FAILED( hr = (hrcall) )) throw Graphics::HrException( __LINE__, __FILE__, (hr) )
+
+#ifndef NDEBUG
+
+#define GFX_EXCEPT(hr) Graphics::HrException( __LINE__, __FILE__, (hr), infoManager.GetMessages() )
+#define GFX_THROW_INFO(hrcall) infoManager.Set(); if (FAILED( hr = (hrcall) )) throw GFX_EXCEPT(hr)
+#define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__, __FILE__, (hr), infoManager.GetMessages() )
+
+#else
+
+#define GFX_EXCEPT(hr) Graphics::HrException( __LINE__, __FILE__, (hr) )
+#define GFX_THROW_INFO(hrcall) GFX_THROW_NOINFO(hrcall)
+#define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__, __FILE__, (hr) )
+
+#endif
+
+// Graphics
 
 Graphics::Graphics(HWND hWnd)
 {
     DXGI_SWAP_CHAIN_DESC scd = {};
 
-    scd.BufferDesc.Width = 0; // these two means go find out yourself from the hWnd
+    scd.BufferDesc.Width = 0; // these two zeroes go find out yourself from the hWnd
     scd.BufferDesc.Height = 0;
     scd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
     scd.BufferDesc.RefreshRate.Numerator = 0;
@@ -30,13 +46,19 @@ Graphics::Graphics(HWND hWnd)
     scd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
     scd.Flags = 0;
 
-    HRESULT hresult;
+    UINT swapCreateFlags = 0u;
 
-    GFX_THROW_FAILED(D3D11CreateDeviceAndSwapChain(
+#ifndef NDEBUG
+    swapCreateFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+
+    HRESULT hr;
+
+    GFX_THROW_INFO(D3D11CreateDeviceAndSwapChain(
         nullptr,
         D3D_DRIVER_TYPE_HARDWARE,
         nullptr,
-        D3D11_CREATE_DEVICE_DEBUG,
+        swapCreateFlags,
         nullptr,
         0,
         D3D11_SDK_VERSION,
@@ -48,14 +70,14 @@ Graphics::Graphics(HWND hWnd)
     ));
 
     ID3D11Resource* pBackBuffer = nullptr;
-    // 0 means the backbuffer
-    GFX_THROW_FAILED(pSwapChain->GetBuffer(
-        0,
-        __uuidof(ID3D11Texture2D),
+    
+    GFX_THROW_INFO(pSwapChain->GetBuffer(
+        0, // means the backbuffer
+        __uuidof(ID3D11Resource),
         reinterpret_cast<void**>(&pBackBuffer)
     ));
 
-    GFX_THROW_FAILED(pDevice->CreateRenderTargetView(
+    GFX_THROW_INFO(pDevice->CreateRenderTargetView(
         pBackBuffer,
         nullptr,
         &pTarget
@@ -87,9 +109,14 @@ Graphics::~Graphics()
     }
 }
 
+
 void Graphics::EndFrame()
 {
     HRESULT hresult;
+
+#ifndef NDEBUG
+    infoManager.Set();
+#endif
 
     if (FAILED(hresult = pSwapChain->Present(1u, 0u)))
     {
@@ -99,7 +126,7 @@ void Graphics::EndFrame()
         }
         else
         {
-            GFX_THROW_FAILED(hresult);
+            GFX_EXCEPT(hresult);
         }
     }
 }
@@ -117,14 +144,25 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 }
 
 
-// Graphics exception
+// HrException
 
-Graphics::HrException::HrException(int line, const char* file, HRESULT hr) noexcept
+Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
     :
     Exception(line, file),
     hresult(hr)
 {
+    // join all info messages with newlines into single string
+    for (const auto& m : infoMsgs)
+    {
+        info += m;
+        info.push_back('\n');
+    }
 
+    // remove final newline if exists
+    if ( ! info.empty() )
+    {
+        info.pop_back();
+    }
 }
 
 
@@ -147,16 +185,27 @@ std::string Graphics::HrException::GetErrorDescription() const noexcept
     return buffer.data();
 }
 
+std::string Graphics::HrException::GetErrorInfo() const noexcept
+{
+    return info;
+}
+
 const char* Graphics::HrException::what() const noexcept
 {
     std::ostringstream oss;
 
     oss << GetType() << std::endl
         << "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
-        << std::dec << " (" << static_cast<unsigned long>(GetErrorCode()) << ")" << std::endl
+        << std::dec << " (" << (unsigned long)GetErrorCode() << ")" << std::endl
         << "[Error String] " << GetErrorString() << std::endl
-        << "[Description] " << GetErrorDescription() << std::endl
-        << GetOriginString();
+        << "[Description] " << GetErrorDescription() << std::endl;
+
+    if ( ! info.empty() )
+    {
+        oss << "\n[Error Info]\n" << GetErrorInfo() << std::endl << std::endl;
+    }
+
+    oss << GetOriginString();
 
     whatBuffer = oss.str();
 
@@ -167,6 +216,9 @@ const char* Graphics::HrException::GetType() const noexcept
 {
     return "Fat Graphics Exception";
 }
+
+
+// DeviceRemovedException
 
 const char* Graphics::DeviceRemovedException::GetType() const noexcept
 {
