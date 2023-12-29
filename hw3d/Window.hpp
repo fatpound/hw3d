@@ -24,27 +24,38 @@ public:
 public:
     class Exception : public FatException
     {
-    public:
-        Exception(int line_num, const char* file_name, HRESULT in_hresult) noexcept;
+        using FatException::FatException;
 
     public:
         static std::string TranslateErrorCode(HRESULT hresult) noexcept;
-        std::string GetErrorString() const noexcept;
+    };
+    class HrException : public Exception
+    {
+    public:
+        HrException(int line, const char* file, HRESULT hr) noexcept;
 
+    public:
         HRESULT GetErrorCode() const noexcept;
 
-        virtual const char* GetType() const noexcept override;
-        virtual const char* what() const noexcept override;
+        std::string GetErrorDescription() const noexcept;
 
-    protected:
+        const char* what() const noexcept override;
+        const char* GetType() const noexcept override;
 
     private:
         HRESULT hresult;
     };
+    class NoGfxException : public Exception
+    {
+        using Exception::Exception;
+
+    public:
+        const char* GetType() const noexcept override;
+    };
 
 
 public:
-    static std::optional<int> ProcessMessages();
+    static std::optional<int> ProcessMessages() noexcept;
 
     Graphics& Gfx();
 
@@ -98,5 +109,6 @@ private:
     int height = 0;
 };
 
-#define FHWND_EXCEPT(hresult) Window::Exception(__LINE__, __FILE__, hresult)
-#define FHWND_LAST_EXCEPT()   Window::Exception(__LINE__, __FILE__, GetLastError())
+#define FHWND_EXCEPT(hresult) Window::HrException(__LINE__, __FILE__, hresult)
+#define FHWND_LAST_EXCEPT()   Window::HrException(__LINE__, __FILE__, GetLastError())
+#define FHWND_NOGFX_EXCEPT()  Window::NoGfxException( __LINE__,__FILE__ )

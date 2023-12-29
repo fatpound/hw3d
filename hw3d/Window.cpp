@@ -54,7 +54,8 @@ Window::Window(int in_width, int in_height, const char* in_name)
     pGfx = std::make_unique<Graphics>(hWnd);
 }
 
-std::optional<int> Window::ProcessMessages()
+
+std::optional<int> Window::ProcessMessages() noexcept
 {
     MSG msg;
 
@@ -74,6 +75,11 @@ std::optional<int> Window::ProcessMessages()
 
 Graphics& Window::Gfx()
 {
+    if ( pGfx == nullptr)
+    {
+        throw FHWND_NOGFX_EXCEPT();
+    }
+
     return *pGfx;
 }
 
@@ -211,24 +217,11 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 
 // Exception
 
-Window::Exception::Exception(int line_num, const char* file_name, HRESULT in_hresult) noexcept
-    :
-    FatException(line_num, file_name),
-    hresult(in_hresult)
-{
-
-}
-
-HRESULT Window::Exception::GetErrorCode() const noexcept
-{
-    return hresult;
-}
-
 std::string Window::Exception::TranslateErrorCode(HRESULT hresult) noexcept
 {
     char* pMsgBuf = nullptr;
 
-    DWORD nMsgLen = FormatMessage(
+    const DWORD nMsgLen = FormatMessage(
         FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
         nullptr,
         hresult,
@@ -252,27 +245,53 @@ std::string Window::Exception::TranslateErrorCode(HRESULT hresult) noexcept
 
     return errorString;
 }
-std::string Window::Exception::GetErrorString() const noexcept
+
+// HrException
+
+Window::HrException::HrException(int line, const char* file, HRESULT hr) noexcept
+    :
+    Exception(line, file),
+    hresult(hr)
 {
-    return TranslateErrorCode(hresult);
+
 }
 
-const char* Window::Exception::GetType() const noexcept
+
+HRESULT Window::HrException::GetErrorCode() const noexcept
 {
-    return "Fat Window Exception";
+    return hresult;
 }
-const char* Window::Exception::what() const noexcept
+
+std::string Window::HrException::GetErrorDescription() const noexcept
+{
+    return Exception::TranslateErrorCode(hresult);
+}
+
+const char* Window::HrException::what() const noexcept
 {
     std::ostringstream oss;
 
-    oss << GetType() << '\n'
-        << "[Error Code] : " << GetErrorCode() << '\n'
-        << "[Description] : " << GetErrorString() << '\n'
+    oss << GetType() << std::endl
+        << "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
+        << std::dec << " (" << (unsigned long)GetErrorCode() << ")" << std::endl
+        << "[Description] " << GetErrorDescription() << std::endl
         << GetOriginString();
 
     whatBuffer = oss.str();
 
     return whatBuffer.c_str();
+}
+
+const char* Window::HrException::GetType() const noexcept
+{
+    return "Fat Window Exception";
+}
+
+// NoGfxException
+
+const char* Window::NoGfxException::GetType() const noexcept
+{
+    return "Fat Window Exception [No Graphics]";
 }
 
 // WindowClass
@@ -304,6 +323,7 @@ Window::WindowClass::~WindowClass()
 {
     UnregisterClass(wndClassName, GetInstance());
 }
+
 
 const char* Window::WindowClass::GetName() noexcept
 {
