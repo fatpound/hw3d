@@ -215,6 +215,7 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
     return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
+
 // Exception
 
 std::string Window::Exception::TranslateErrorCode(HRESULT hresult) noexcept
@@ -245,6 +246,7 @@ std::string Window::Exception::TranslateErrorCode(HRESULT hresult) noexcept
 
     return errorString;
 }
+
 
 // HrException
 
@@ -287,12 +289,14 @@ const char* Window::HrException::GetType() const noexcept
     return "Fat Window Exception";
 }
 
+
 // NoGfxException
 
 const char* Window::NoGfxException::GetType() const noexcept
 {
     return "Fat Window Exception [No Graphics]";
 }
+
 
 // WindowClass
 

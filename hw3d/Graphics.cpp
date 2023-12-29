@@ -13,7 +13,7 @@
 #ifndef NDEBUG
 
 #define GFX_EXCEPT(hr) Graphics::HrException( __LINE__, __FILE__, (hr), infoManager.GetMessages() )
-#define GFX_THROW_INFO(hrcall) infoManager.Set(); if (FAILED( hr = (hrcall) )) throw GFX_EXCEPT(hr)
+#define GFX_THROW_INFO(hrcall) infoManager.SetNextIndex(); if (FAILED( hr = (hrcall) )) throw GFX_EXCEPT(hr)
 #define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__, __FILE__, (hr), infoManager.GetMessages() )
 
 #else
@@ -92,7 +92,7 @@ void Graphics::EndFrame()
     HRESULT hr;
 
 #ifndef NDEBUG
-    infoManager.Set();
+    infoManager.SetNextIndex();
 #endif
 
     if (FAILED(hr = pSwapChain->Present(1u, 0u)))
@@ -103,7 +103,7 @@ void Graphics::EndFrame()
         }
         else
         {
-            GFX_EXCEPT(hr);
+            throw GFX_EXCEPT(hr);
         }
     }
 }
@@ -128,17 +128,15 @@ Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::
     Exception(line, file),
     hresult(hr)
 {
-    // join all info messages with newlines into single string
     for (const auto& m : infoMsgs)
     {
         info += m;
         info.push_back('\n');
     }
 
-    // remove final newline if exists
     if ( ! info.empty() )
     {
-        info.pop_back();
+        info.pop_back(); // '\n'
     }
 }
 
@@ -173,7 +171,7 @@ const char* Graphics::HrException::what() const noexcept
 
     oss << GetType() << '\n'
         << "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
-        << std::dec << " (" << (unsigned long)GetErrorCode() << ")" << '\n'
+        << std::dec << " (" << static_cast<unsigned long>(GetErrorCode()) << ")" << '\n'
         << "[Error String] " << GetErrorString() << '\n'
         << "[Description] " << GetErrorDescription() << std::endl;
 

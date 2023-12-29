@@ -103,6 +103,7 @@ private:
 
 private:
     HWND hWnd;
+
     std::unique_ptr<Graphics> pGfx;
 
     int width = 0;

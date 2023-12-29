@@ -5,7 +5,7 @@
 #include "DxgiInfoManager.hpp"
 
 #include <d3d11.h>
-#include <wrl.h> // for the ComPtr
+#include <wrl.h>
 
 #include <vector>
 

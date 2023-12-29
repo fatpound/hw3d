@@ -22,11 +22,11 @@ public:
 public:
     std::vector<std::string> GetMessages() const;
 
-    void Set() noexcept;
+    void SetNextIndex() noexcept;
 
 
 private:
     Microsoft::WRL::ComPtr<IDXGIInfoQueue> pDxgiInfoQueue = nullptr;
 
-    unsigned long long nextIndex = 0u;
+    unsigned long long next_error_index_ = 0u;
 };
