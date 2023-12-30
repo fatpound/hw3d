@@ -15,12 +15,13 @@
 #define GFX_EXCEPT(hr) Graphics::HrException( __LINE__, __FILE__, (hr), infoManager.GetMessages() )
 #define GFX_THROW_INFO(hrcall) infoManager.SetNextIndex(); if (FAILED( hr = (hrcall) )) throw GFX_EXCEPT(hr)
 #define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__, __FILE__, (hr), infoManager.GetMessages() )
-
+#define GFX_THROW_INFO_ONLY(call) infoManager.SetNextIndex(); (call); {auto v = infoManager.GetMessages(); if(!v.empty()) {throw Graphics::InfoException( __LINE__,__FILE__,v);}}
 #else
 
 #define GFX_EXCEPT(hr) Graphics::HrException( __LINE__, __FILE__, (hr) )
 #define GFX_THROW_INFO(hrcall) GFX_THROW_NOINFO(hrcall)
 #define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__, __FILE__, (hr) )
+#define GFX_THROW_INFO_ONLY(call) (call)
 
 #endif
 
@@ -110,12 +111,7 @@ void Graphics::EndFrame()
 
 void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 {
-    const std::array<float, 4> colors = {
-        red,
-        green,
-        blue,
-        1.0f
-    };
+    const std::array<float, 4> colors = { red, green, blue, 1.0f };
 
     pContext->ClearRenderTargetView(pTarget.Get(), colors.data());
 }
@@ -157,7 +153,8 @@ void Graphics::DrawTestTriangle()
     const UINT offset = 0u;
 
     pContext->IASetVertexBuffers(0u, 1u, &pVertexBuffer, &stride, &offset);
-    pContext->Draw(3u, 0u);
+
+    GFX_THROW_INFO_ONLY(pContext->Draw(3u, 0u));
 }
 
 
@@ -230,6 +227,50 @@ const char* Graphics::HrException::what() const noexcept
 const char* Graphics::HrException::GetType() const noexcept
 {
     return "Fat Graphics Exception";
+}
+
+
+// InfoException
+
+Graphics::InfoException::InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept
+    :
+    Exception(line, file)
+{
+    for (const auto& m : infoMsgs)
+    {
+        info += m;
+        info.push_back('\n');
+    }
+
+    if ( ! info.empty() )
+    {
+        info.pop_back();
+    }
+}
+
+
+const char* Graphics::InfoException::what() const noexcept
+{
+    std::ostringstream oss;
+
+    oss << GetType() << std::endl
+        << "\n[Error Info]\n" << GetErrorInfo() << std::endl << std::endl;
+
+    oss << GetOriginString();
+
+    whatBuffer = oss.str();
+
+    return whatBuffer.c_str();
+}
+
+const char* Graphics::InfoException::GetType() const noexcept
+{
+    return "Fat Graphics Info Exception";
+}
+
+std::string Graphics::InfoException::GetErrorInfo() const noexcept
+{
+    return info;
 }
 
 

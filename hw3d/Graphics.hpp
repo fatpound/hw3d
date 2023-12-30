@@ -48,6 +48,20 @@ public:
 
         std::string info;
     };
+    class InfoException : public Exception
+    {
+    public:
+        InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept;
+
+    public:
+        std::string GetErrorInfo() const noexcept;
+
+        const char* what() const noexcept override;
+        const char* GetType() const noexcept override;
+
+    private:
+        std::string info;
+    };
     class DeviceRemovedException : public HrException
     {
         using HrException::HrException;
