@@ -8,6 +8,7 @@
 #include <wrl.h>
 
 #include <vector>
+#include <array>
 
 class Graphics
 {
@@ -62,6 +63,8 @@ public:
 public:
     void EndFrame();
     void ClearBuffer(float red, float green, float blue) noexcept;
+
+    void DrawTestTriangle();
 
 
 protected:
