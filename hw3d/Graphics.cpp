@@ -2,10 +2,13 @@
 
 #include "dxerr.h"
 
+#include <d3dcompiler.h>
+
 #include <array>
 #include <sstream>
 
 #pragma comment(lib, "d3d11")
+#pragma comment(lib, "D3DCompiler")
 
 #define GFX_EXCEPT_NOINFO(hr) Graphics::HrException( __LINE__, __FILE__, (hr) )
 #define GFX_THROW_NOINFO(hrcall) if (FAILED( hr = (hrcall) )) throw Graphics::HrException( __LINE__, __FILE__, (hr) )
@@ -154,7 +157,15 @@ void Graphics::DrawTestTriangle()
 
     pContext->IASetVertexBuffers(0u, 1u, &pVertexBuffer, &stride, &offset);
 
-    GFX_THROW_INFO_ONLY(pContext->Draw(3u, 0u));
+    wrl::ComPtr<ID3D11VertexShader> pVertexShader;
+    wrl::ComPtr<ID3DBlob> pBlob;
+
+    GFX_THROW_INFO(D3DReadFileToBlob(L"VertexShader.cso", &pBlob));
+    GFX_THROW_INFO(pDevice->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pVertexShader));
+
+    pContext->VSSetShader(pVertexShader.Get(), nullptr, 0u);
+
+    GFX_THROW_INFO_ONLY(pContext->Draw(std::size(vertices), 0u));
 }
 
 
