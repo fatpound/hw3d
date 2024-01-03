@@ -260,12 +260,12 @@ void Graphics::DrawTestTriangle()
     // configure viewport
     D3D11_VIEWPORT vp = {};
 
-    vp.Width = 400;
-    vp.Height = 300;
-    vp.MinDepth = 0;
-    vp.MaxDepth = 1;
-    vp.TopLeftX = 0;
-    vp.TopLeftY = 0;
+    vp.Width = 400.0f;
+    vp.Height = 300.0f;
+    vp.MinDepth = 0.0f;
+    vp.MaxDepth = 1.0f;
+    vp.TopLeftX = 100.0f;
+    vp.TopLeftY = 100.0f;
 
     pContext->RSSetViewports(1u, &vp);
 
