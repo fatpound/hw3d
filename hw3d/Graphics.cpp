@@ -142,7 +142,7 @@ void Graphics::DrawTestTriangle()
 
         Vertex{ -0.3f,  0.3f,   0, 255,   0,   0 },
         Vertex{  0.3f,  0.3f,   0,   0, 255,   0 },
-        Vertex{  0.0f, -1.8f, 255,   0,   0,   0 },
+        Vertex{  0.0f, -0.8f, 255,   0,   0,   0 },
     };
 
     vertices[0].color.g = 255;
@@ -260,12 +260,12 @@ void Graphics::DrawTestTriangle()
     // configure viewport
     D3D11_VIEWPORT vp = {};
 
-    vp.Width = 400.0f;
-    vp.Height = 300.0f;
+    vp.Width = 800.0f;
+    vp.Height = 600.0f;
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
-    vp.TopLeftX = 100.0f;
-    vp.TopLeftY = 100.0f;
+    vp.TopLeftX = 0.0f;
+    vp.TopLeftY = 0.0f;
 
     pContext->RSSetViewports(1u, &vp);
 
