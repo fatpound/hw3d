@@ -115,23 +115,33 @@ void Graphics::DrawTestTriangle()
 {
     struct Vertex
     {
-        float x;
-        float y;
+        struct
+        {
+            float x;
+            float y;
+        }
+        pos;
 
-        unsigned char r;
-        unsigned char g;
-        unsigned char b;
-        unsigned char a;
+        struct
+        {
+            unsigned char r;
+            unsigned char g;
+            unsigned char b;
+            unsigned char a;
+        }
+        color;
     };
 
 
     // create vertex buffer
-    const std::array<Vertex, 3> vertices =
+    std::array<Vertex, 3> vertices =
     {
         Vertex{  0.0f,  0.5f, 255,   0,   0 },
         Vertex{  0.5f, -0.5f,   0, 255,   0 },
         Vertex{ -0.5f, -0.5f,   0,   0, 255 }
     };
+
+    vertices[0].color.g = 255;
 
     D3D11_BUFFER_DESC bd = {};
 
