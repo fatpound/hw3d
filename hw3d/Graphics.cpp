@@ -166,6 +166,13 @@ void Graphics::DrawTestTriangle()
     GFX_THROW_INFO(pDevice->CreateBuffer(&bd, &sd, &pVertexBuffer));
 
 
+    // bind vertex buffer to pipeline
+    const UINT stride = sizeof(Vertex);
+    const UINT offset = 0u;
+
+    pContext->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset);
+
+
     // create index buffer
     const std::array<unsigned short int, 12> indices =
     {
@@ -195,13 +202,6 @@ void Graphics::DrawTestTriangle()
 
     // bind index buffer
     pContext->IASetIndexBuffer(pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u);
-
-
-    // bind vertex buffer to pipeline
-    const UINT stride = sizeof(Vertex);
-    const UINT offset = 0u;
-
-    pContext->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset);
 
 
     // create pixel shader
