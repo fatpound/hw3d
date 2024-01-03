@@ -182,7 +182,7 @@ void Graphics::DrawTestTriangle()
 
     const D3D11_INPUT_ELEMENT_DESC ied[] =
     {
-        { "Position",0,DXGI_FORMAT_R32G32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 }
+        { "Position", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
 
     GFX_THROW_INFO(pDevice->CreateInputLayout(
@@ -203,7 +203,7 @@ void Graphics::DrawTestTriangle()
 
 
     // set primitive topology to triangle list
-    pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+    pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
 
 
     // configure viewport
