@@ -78,7 +78,7 @@ public:
     void EndFrame();
     void ClearBuffer(float red, float green, float blue) noexcept;
 
-    void DrawTestTriangle(float angle);
+    void DrawTestTriangle(float angle, float x, float y);
 
 
 protected:
