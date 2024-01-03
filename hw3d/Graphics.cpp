@@ -142,7 +142,7 @@ void Graphics::DrawTestTriangle(float angle)
 
         Vertex{ -0.3f,  0.3f,   0, 255,   0,   0 },
         Vertex{  0.3f,  0.3f,   0,   0, 255,   0 },
-        Vertex{  0.0f, -0.8f, 255,   0,   0,   0 },
+        Vertex{  0.0f, -1.0f, 255,   0,   0,   0 },
     };
 
     vertices[0].color.g = 255;
