@@ -121,14 +121,11 @@ void Graphics::DrawTestTriangle()
 
 
     // create vertex buffer
-    const std::array<Vertex, 6> vertices =
+    const std::array<Vertex, 3> vertices =
     {
         Vertex{  0.0f,  0.5f },
         Vertex{  0.5f, -0.5f },
-        Vertex{  0.5f, -0.5f },
-        Vertex{ -0.5f, -0.5f },
-        Vertex{ -0.5f, -0.5f },
-        Vertex{  0.0f,  0.5f }
+        Vertex{ -0.5f, -0.5f }
     };
 
     D3D11_BUFFER_DESC bd = {};
@@ -206,7 +203,7 @@ void Graphics::DrawTestTriangle()
 
 
     // set primitive topology to triangle list
-    pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+    pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
 
 
     // configure viewport
