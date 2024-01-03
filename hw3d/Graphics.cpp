@@ -260,8 +260,8 @@ void Graphics::DrawTestTriangle()
     // configure viewport
     D3D11_VIEWPORT vp = {};
 
-    vp.Width = 800;
-    vp.Height = 600;
+    vp.Width = 400;
+    vp.Height = 300;
     vp.MinDepth = 0;
     vp.MaxDepth = 1;
     vp.TopLeftX = 0;
