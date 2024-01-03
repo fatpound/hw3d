@@ -6,7 +6,7 @@ struct VSOut
 
 cbuffer CBuf
 {
-    matrix transform;
+    row_major matrix transform;
 };
 
 VSOut main(float2 pos : POSITION, float3 col : COLOR) // now we dont need to type the semantic here because thats already in the struct
