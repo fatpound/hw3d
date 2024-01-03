@@ -26,7 +26,7 @@ int App::Go()
 
 void App::DoFrame()
 {
-    const float color = std::sin(timer.Peek());
+    const float color = std::abs(std::sin(timer.Peek()));
 
     wnd.Gfx().ClearBuffer(color, color, 1.0f);
     wnd.Gfx().DrawTestTriangle();
