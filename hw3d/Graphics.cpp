@@ -117,16 +117,19 @@ void Graphics::DrawTestTriangle()
     {
         float x;
         float y;
+
+        float r;
+        float g;
+        float b;
     };
 
 
     // create vertex buffer
-    const std::array<Vertex, 4> vertices =
+    const std::array<Vertex, 3> vertices =
     {
-        Vertex{  0.0f,  0.5f },
-        Vertex{  0.5f, -0.5f },
-        Vertex{ -0.5f, -0.5f },
-        Vertex{  0.0f,  0.5f }
+        Vertex{  0.0f,  0.5f, 1.0f, 0.0f, 0.0f },
+        Vertex{  0.5f, -0.5f, 0.0f, 1.0f, 0.0f },
+        Vertex{ -0.5f, -0.5f, 0.0f, 0.0f, 1.0f }
     };
 
     D3D11_BUFFER_DESC bd = {};
@@ -183,7 +186,8 @@ void Graphics::DrawTestTriangle()
 
     const D3D11_INPUT_ELEMENT_DESC ied[] =
     {
-        { "Position", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
+        { "Position", 0, DXGI_FORMAT_R32G32_FLOAT,    0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+        { "Color",    0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 8u, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
 
     GFX_THROW_INFO(pDevice->CreateInputLayout(
@@ -204,7 +208,7 @@ void Graphics::DrawTestTriangle()
 
 
     // set primitive topology to triangle list
-    pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP);
+    pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 
     // configure viewport
