@@ -217,10 +217,8 @@ void Graphics::DrawTestTriangle(float angle)
     const ConstantBuffer cb =
     {
         {
-            dx::XMMatrixMultiply(
-                dx::XMMatrixRotationZ(angle),
-                dx::XMMatrixScaling(3.0f / 4.0f, 1.0f, 1.0f)
-            )
+            dx::XMMatrixRotationZ(angle) *
+            dx::XMMatrixScaling(3.0f / 4.0f, 1.0f, 1.0f)
         }
     };
 
