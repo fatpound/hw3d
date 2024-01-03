@@ -121,11 +121,14 @@ void Graphics::DrawTestTriangle()
 
 
     // create vertex buffer
-    const std::array<Vertex, 3> vertices =
+    const std::array<Vertex, 6> vertices =
     {
-        Vertex{ 0.0f,  0.5f },
-        Vertex{ 0.5f, -0.5f },
-        Vertex{ -0.5f, -0.5f }
+        Vertex{  0.0f,  0.5f },
+        Vertex{  0.5f, -0.5f },
+        Vertex{  0.5f, -0.5f },
+        Vertex{ -0.5f, -0.5f },
+        Vertex{ -0.5f, -0.5f },
+        Vertex{  0.0f,  0.5f }
     };
 
     D3D11_BUFFER_DESC bd = {};
