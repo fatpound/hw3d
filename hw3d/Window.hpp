@@ -32,7 +32,7 @@ public:
     class HrException : public Exception
     {
     public:
-        HrException(int line, const char* file, HRESULT hr) noexcept;
+        HrException(int line, const char* file, HRESULT hresult) noexcept;
 
     public:
         HRESULT GetErrorCode() const noexcept;

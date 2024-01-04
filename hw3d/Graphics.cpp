@@ -316,10 +316,10 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
 
 // HrException
 
-Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
+Graphics::HrException::HrException(int line, const char* file, HRESULT hresult, std::vector<std::string> infoMsgs) noexcept
     :
     Exception(line, file),
-    hresult_(hr)
+    hresult_(hresult)
 {
     for (const auto& m : infoMsgs)
     {
