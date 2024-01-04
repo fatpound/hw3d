@@ -32,8 +32,8 @@ void App::DoFrame()
 
     wnd.Gfx().DrawTestTriangle(
         timer.Peek(),
-         static_cast<float>(wnd.mouse.GetPosX()) / 400.0f - 1.0f,
-        -static_cast<float>(wnd.mouse.GetPosY()) / 300.0f + 1.0f
+         static_cast<float>(wnd.mouse_.GetPosX()) / 400.0f - 1.0f,
+        -static_cast<float>(wnd.mouse_.GetPosY()) / 300.0f + 1.0f
     );
 
     wnd.Gfx().EndFrame();

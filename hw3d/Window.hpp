@@ -18,7 +18,7 @@ public:
     Window& operator = (const Window& src) = delete;
     Window& operator = (Window&& src) = delete;
 
-    Window(int in_width, int in_height, const char* in_name);
+    Window(int width, int height, const char* name);
 
 
 public:
@@ -43,7 +43,7 @@ public:
         const char* GetType() const noexcept override;
 
     private:
-        HRESULT hresult;
+        HRESULT hresult_;
     };
     class NoGfxException : public Exception
     {
@@ -63,8 +63,8 @@ public:
 
 
 public:
-    Keyboard kbd;
-    Mouse mouse;
+    Keyboard kbd_;
+    Mouse mouse_;
 
 
 protected:
@@ -88,10 +88,10 @@ private:
         WindowClass& operator = (WindowClass&& src) = delete;
 
     private:
-        static constexpr const char* wndClassName = "Fat Direct3D Engine Window";
-        static WindowClass wndClass;
+        static constexpr const char* const wndClassName_ = "Fat Direct3D Engine Window";
+        static WindowClass wndClass_;
 
-        HINSTANCE hInst;
+        HINSTANCE hInst_;
     };
 
 
@@ -102,14 +102,14 @@ private:
 
 
 private:
-    HWND hWnd;
+    HWND hWnd_;
 
-    std::unique_ptr<Graphics> pGfx;
+    std::unique_ptr<Graphics> pGfx_;
 
-    int width = 0;
-    int height = 0;
+    int width_ = 0;
+    int height_ = 0;
 };
 
-#define FHWND_EXCEPT(hresult) Window::HrException(__LINE__, __FILE__, hresult)
-#define FHWND_LAST_EXCEPT()   Window::HrException(__LINE__, __FILE__, GetLastError())
-#define FHWND_NOGFX_EXCEPT()  Window::NoGfxException( __LINE__,__FILE__ )
+#define FHWND_EXCEPT(hresult_) Window::HrException(__LINE__, __FILE__, hresult_)
+#define FHWND_LAST_EXCEPT() Window::HrException(__LINE__, __FILE__, GetLastError())
+#define FHWND_NOGFX_EXCEPT() Window::NoGfxException( __LINE__,__FILE__ )

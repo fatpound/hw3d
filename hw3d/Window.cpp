@@ -9,28 +9,28 @@
 
 Window::~Window()
 {
-    DestroyWindow(hWnd);
+    DestroyWindow(hWnd_);
 }
 
-Window::Window(int in_width, int in_height, const char* in_name)
+Window::Window(int width, int height, const char* name)
     :
-    width(in_width),
-    height(in_height)
+    width_(width),
+    height_(height)
 {
     RECT wr;
     wr.left = 100;
-    wr.right = width + wr.left;
+    wr.right = width_ + wr.left;
     wr.top = 100;
-    wr.bottom = height + wr.top;
+    wr.bottom = height_ + wr.top;
 
     if (AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE) == 0)
     {
         throw FHWND_LAST_EXCEPT();
     }
 
-    hWnd = CreateWindow(
+    hWnd_ = CreateWindow(
         WindowClass::GetName(),
-        in_name,
+        name,
         WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
@@ -42,16 +42,16 @@ Window::Window(int in_width, int in_height, const char* in_name)
         this
     );
 
-    if (hWnd == nullptr)
+    if (hWnd_ == nullptr)
     {
         throw FHWND_LAST_EXCEPT();
     }
     else
     {
-        ShowWindow(hWnd, /*SW_SHOW*/ SW_SHOWDEFAULT);
+        ShowWindow(hWnd_, /*SW_SHOW*/ SW_SHOWDEFAULT);
     }
 
-    pGfx = std::make_unique<Graphics>(hWnd);
+    pGfx_ = std::make_unique<Graphics>(hWnd_);
 }
 
 
@@ -75,17 +75,17 @@ std::optional<int> Window::ProcessMessages() noexcept
 
 Graphics& Window::Gfx()
 {
-    if ( pGfx == nullptr)
+    if (pGfx_ == nullptr)
     {
         throw FHWND_NOGFX_EXCEPT();
     }
 
-    return *pGfx;
+    return *pGfx_;
 }
 
 void Window::SetTitle(const std::string& title)
 {
-    if (SetWindowText(hWnd, title.c_str()) == 0)
+    if (SetWindowText(hWnd_, title.c_str()) == 0)
     {
         throw FHWND_LAST_EXCEPT();
     }
@@ -125,25 +125,25 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
         return 0;
 
     case WM_KILLFOCUS:
-        kbd.ClearKeyStateBitset();
+        kbd_.ClearKeyStateBitset();
         break;
 
         /******** KEYBOARD MESSAGES ********/
     case WM_KEYDOWN:
     case WM_SYSKEYDOWN:
-        if ( ! (lParam & 0x40000000) || kbd.AutoRepeatIsEnabled() )
+        if ( ! (lParam & 0x40000000) || kbd_.AutoRepeatIsEnabled() )
         {
-            kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
+            kbd_.OnKeyPressed(static_cast<unsigned char>(wParam));
         }
         break;
 
     case WM_KEYUP:
     case WM_SYSKEYUP:
-        kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
+        kbd_.OnKeyReleased(static_cast<unsigned char>(wParam));
         break;
 
     case WM_CHAR:
-        kbd.OnChar(static_cast<unsigned char>(wParam));
+        kbd_.OnChar(static_cast<unsigned char>(wParam));
         break;
         /****** END KEYBOARD MESSAGES ******/
 
@@ -153,57 +153,57 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
     {
         const POINTS pt = MAKEPOINTS(lParam);
 
-        if (pt.x >= 0 && pt.x < width && pt.y >= 0 && pt.y < height)
+        if (pt.x >= 0 && pt.x < width_ && pt.y >= 0 && pt.y < height_)
         {
-            mouse.OnMouseMove(pt.x, pt.y);
+            mouse_.OnMouseMove(pt.x, pt.y);
 
-            if ( ! mouse.IsInWindow() )
+            if ( ! mouse_.IsInWindow() )
             {
                 SetCapture(hWnd);
-                mouse.OnMouseEnter();
+                mouse_.OnMouseEnter();
             }
         }
         else
         {
             if (wParam & (MK_LBUTTON | MK_RBUTTON))
             {
-                mouse.OnMouseMove(pt.x, pt.y);
+                mouse_.OnMouseMove(pt.x, pt.y);
             }
             else
             {
                 ReleaseCapture();
-                mouse.OnMouseLeave();
+                mouse_.OnMouseLeave();
             }
         }
     }
     break;
 
     case WM_LBUTTONDOWN:
-        mouse.OnLeftPressed();
+        mouse_.OnLeftPressed();
         break;
 
     case WM_LBUTTONUP:
-        mouse.OnLeftReleased();
+        mouse_.OnLeftReleased();
         break;
 
     case WM_RBUTTONDOWN:
-        mouse.OnRightPressed();
+        mouse_.OnRightPressed();
         break;
 
     case WM_RBUTTONUP:
-        mouse.OnRightReleased();
+        mouse_.OnRightReleased();
         break;
 
     case WM_MBUTTONDOWN:
-        mouse.OnWheelPressed();
+        mouse_.OnWheelPressed();
         break;
 
     case WM_MBUTTONUP:
-        mouse.OnWheelReleased();
+        mouse_.OnWheelReleased();
         break;
 
     case WM_MOUSEWHEEL:
-        mouse.OnWheelDelta(GET_WHEEL_DELTA_WPARAM(wParam));
+        mouse_.OnWheelDelta(GET_WHEEL_DELTA_WPARAM(wParam));
         break;
         /******* END. MOUSE MESSAGES *******/
 
@@ -250,10 +250,10 @@ std::string Window::Exception::TranslateErrorCode(HRESULT hresult) noexcept
 
 // HrException
 
-Window::HrException::HrException(int line, const char* file, HRESULT hr) noexcept
+Window::HrException::HrException(int line, const char* file, HRESULT hresult) noexcept
     :
     Exception(line, file),
-    hresult(hr)
+    hresult_(hresult)
 {
 
 }
@@ -261,12 +261,12 @@ Window::HrException::HrException(int line, const char* file, HRESULT hr) noexcep
 
 HRESULT Window::HrException::GetErrorCode() const noexcept
 {
-    return hresult;
+    return hresult_;
 }
 
 std::string Window::HrException::GetErrorDescription() const noexcept
 {
-    return Exception::TranslateErrorCode(hresult);
+    return Exception::TranslateErrorCode(hresult_);
 }
 
 const char* Window::HrException::what() const noexcept
@@ -300,11 +300,11 @@ const char* Window::NoGfxException::GetType() const noexcept
 
 // WindowClass
 
-Window::WindowClass Window::WindowClass::wndClass;
+Window::WindowClass Window::WindowClass::wndClass_;
 
 Window::WindowClass::WindowClass() noexcept
     :
-    hInst(GetModuleHandle(nullptr))
+    hInst_(GetModuleHandle(nullptr))
 {
     WNDCLASSEX wc = { 0 };
 
@@ -314,27 +314,27 @@ Window::WindowClass::WindowClass() noexcept
     wc.cbClsExtra = 0;
     wc.cbWndExtra = 0;
     wc.hInstance = GetInstance();
-    wc.hIcon = static_cast<HICON>(LoadImage(hInst, MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 32, 32, 0));
+    wc.hIcon = static_cast<HICON>(LoadImage(hInst_, MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 32, 32, 0));
     wc.hCursor = nullptr;
     wc.hbrBackground = nullptr;
     wc.lpszMenuName = nullptr;
     wc.lpszClassName = GetName();
-    wc.hIconSm = static_cast<HICON>(LoadImage(hInst, MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 16, 16, 0));
+    wc.hIconSm = static_cast<HICON>(LoadImage(hInst_, MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 16, 16, 0));
 
     RegisterClassEx(&wc);
 }
 Window::WindowClass::~WindowClass()
 {
-    UnregisterClass(wndClassName, GetInstance());
+    UnregisterClass(wndClassName_, GetInstance());
 }
 
 
 const char* Window::WindowClass::GetName() noexcept
 {
-    return wndClassName;
+    return wndClassName_;
 }
 
 HINSTANCE Window::WindowClass::GetInstance() noexcept
 {
-    return wndClass.hInst;
+    return wndClass_.hInst_;
 }

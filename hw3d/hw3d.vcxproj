@@ -98,6 +98,7 @@
     </Manifest>
     <ResourceCompile>
       <ShowProgress>true</ShowProgress>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
     </ResourceCompile>
     <Xdcmake>
       <SuppressStartupBanner>false</SuppressStartupBanner>
@@ -141,6 +142,7 @@
     </Manifest>
     <ResourceCompile>
       <ShowProgress>true</ShowProgress>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
     </ResourceCompile>
     <Xdcmake>
       <SuppressStartupBanner>false</SuppressStartupBanner>
@@ -182,7 +184,7 @@
       <ShowProgress>true</ShowProgress>
     </ResourceCompile>
     <ResourceCompile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
     </ResourceCompile>
     <Xdcmake>
       <SuppressStartupBanner>false</SuppressStartupBanner>
@@ -226,6 +228,7 @@
     </Manifest>
     <ResourceCompile>
       <ShowProgress>true</ShowProgress>
+      <SuppressStartupBanner>false</SuppressStartupBanner>
     </ResourceCompile>
     <Xdcmake>
       <SuppressStartupBanner>false</SuppressStartupBanner>

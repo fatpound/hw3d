@@ -44,9 +44,9 @@ public:
         const char* GetType() const noexcept override;
 
     private:
-        HRESULT hresult;
+        HRESULT hresult_;
 
-        std::string info;
+        std::string info_;
     };
     class InfoException : public Exception
     {
@@ -60,7 +60,7 @@ public:
         const char* GetType() const noexcept override;
 
     private:
-        std::string info;
+        std::string info_;
     };
     class DeviceRemovedException : public HrException
     {
@@ -70,7 +70,7 @@ public:
         const char* GetType() const noexcept override;
 
     private:
-        std::string reason;
+        std::string reason_;
     };
 
 
@@ -87,11 +87,11 @@ protected:
 private:
 
 #ifndef NDEBUG
-    DxgiInfoManager infoManager;
+    DxgiInfoManager infoManager_;
 #endif
 
-    Microsoft::WRL::ComPtr<ID3D11Device> pDevice = nullptr;
-    Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain = nullptr;
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext = nullptr;
-    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11Device> pDevice_ = nullptr;
+    Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget_ = nullptr;
 };
