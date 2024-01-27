@@ -115,7 +115,7 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
     pContext_->ClearRenderTargetView(pTarget_.Get(), colors.data());
 }
 
-void Graphics::DrawTestTriangle(float angle, float x, float y)
+void Graphics::DrawTestTriangle(float angle, float x, float z)
 {
     struct Vertex
     {
@@ -216,7 +216,7 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
             dx::XMMatrixTranspose(
                 dx::XMMatrixRotationZ(angle) *
                 dx::XMMatrixRotationX(angle) *
-                dx::XMMatrixTranslation(x, y, 4.0f) *
+                dx::XMMatrixTranslation(x, 0.0f, z + 4.0f) *
                 dx::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f)
             )
         }
