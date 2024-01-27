@@ -94,4 +94,5 @@ private:
     Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV_ = nullptr;
 };
