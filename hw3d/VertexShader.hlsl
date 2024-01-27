@@ -13,7 +13,7 @@ VSOut main(float3 pos : POSITION, float3 col : COLOR) // now we dont need to typ
 {
     VSOut vso;
     
-    vso.pos = mul(float4(pos.x, pos.y, pos.z, 1.0f), transform);
+    vso.pos = mul(float4(pos, 1.0f), transform);
     vso.color = col;
     
     return vso;
