@@ -6,6 +6,8 @@
 #include <memory>
 #include <numbers>
 
+namespace dx = DirectX;
+
 App::App()
     :
     wnd(800, 600, "The FatBox")
@@ -24,7 +26,7 @@ App::App()
         ));
     }
 
-    wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, wnd.GetHeight<float>() / wnd.GetWidth<float>(), 0.5f, 40.0f));
+    wnd.Gfx().SetProjection(dx::XMMatrixPerspectiveLH(1.0f, wnd.GetHeight<float>() / wnd.GetWidth<float>(), 0.5f, 40.0f));
 }
 
 App::~App()

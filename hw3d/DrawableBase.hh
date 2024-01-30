@@ -9,15 +9,15 @@ class DrawableBase : public Drawable
 public:
 
 
-public:
-    bool IsStaticInitialized() const noexcept
+protected:
+    static bool IsStaticInitialized() noexcept
     {
         return ! staticBinds_.empty();
     }
 
-    void AddStaticBind(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG)
+    static void AddStaticBind(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG)
     {
-        assert("*Must* use AddIndexBuffer to bind index buffer" && typeid(*bind) != typeid(IndexBuffer));
+        assert("*Must* use AddStaticIndexBuffer to bind index buffer" && typeid(*bind) != typeid(IndexBuffer));
 
         staticBinds_.push_back(std::move(bind));
     }
@@ -46,9 +46,6 @@ public:
 
         assert("Failed to find index buffer in static binds" && pIndexBuffer_ != nullptr);
     }
-
-
-protected:
 
 
 private:

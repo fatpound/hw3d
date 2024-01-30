@@ -19,7 +19,7 @@ protected:
 
 
 private:
-    VertexConstantBuffer<DirectX::XMMATRIX> vcbuf_;
+    static std::unique_ptr<VertexConstantBuffer<DirectX::XMMATRIX>> pVcbuf_;
 
     const Drawable& parent_;
 };

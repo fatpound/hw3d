@@ -26,11 +26,11 @@ public:
 
     virtual void Update(float dt) noexcept = 0;
     void Draw(Graphics& gfx) const noexcept(!IS_DEBUG);
-    void AddBind(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG);
-    void AddIndexBuffer(std::unique_ptr<IndexBuffer> ibuf) noexcept(!IS_DEBUG);
 
 
 protected:
+    void AddBind(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG);
+    void AddIndexBuffer(std::unique_ptr<IndexBuffer> ibuf) noexcept(!IS_DEBUG);
 
 
 private:
