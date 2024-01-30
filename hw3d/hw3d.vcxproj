@@ -255,16 +255,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
+    <ClInclude Include="Bindable.hh" />
     <ClInclude Include="dxerr.h" />
     <ClInclude Include="DxgiInfoManager.hpp" />
     <ClInclude Include="FatException.hpp" />
     <ClInclude Include="FatTimer.hpp" />
     <ClInclude Include="FatWin.hpp" />
     <ClInclude Include="Graphics.hpp" />
+    <ClInclude Include="GraphicsThrowMacros.hh" />
     <ClInclude Include="Keyboard.hpp" />
     <ClInclude Include="Mouse.hpp" />
     <ClInclude Include="Window.hpp" />
     <ClInclude Include="WindowsMessageMap.hpp" />
+    <ClInclude Include="WindowThrowMacros.hh" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc" />

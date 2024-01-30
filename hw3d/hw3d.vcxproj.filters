@@ -19,6 +19,15 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{7cbaf958-3ae7-4523-a33c-3f8af3c2f5cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Macros">
+      <UniqueIdentifier>{3c5bf4f8-2de1-4760-b3fb-83ce787e58ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Bindable">
+      <UniqueIdentifier>{f7cbb982-e5a8-477f-9f96-bc45f44b1fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Drawable">
+      <UniqueIdentifier>{2c1c86e9-078a-4bb4-86ae-22cc057b6c70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -48,11 +57,11 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dxerr.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DxgiInfoManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dxerr.cpp">
+      <Filter>Dxerr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,11 +92,20 @@
     <ClInclude Include="Graphics.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dxerr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DxgiInfoManager.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowThrowMacros.hh">
+      <Filter>Header Files\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsThrowMacros.hh">
+      <Filter>Header Files\Macros</Filter>
+    </ClInclude>
+    <ClInclude Include="Bindable.hh">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="dxerr.h">
+      <Filter>Dxerr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
