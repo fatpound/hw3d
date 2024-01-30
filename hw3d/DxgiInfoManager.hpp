@@ -25,6 +25,9 @@ public:
     void SetNextIndex() noexcept;
 
 
+protected:
+
+
 private:
     Microsoft::WRL::ComPtr<IDXGIInfoQueue> pDxgiInfoQueue = nullptr;
 
