@@ -9,6 +9,7 @@
 
 #include <optional>
 #include <memory>
+#include <concepts>
 
 class Window
 {
@@ -60,13 +61,24 @@ public:
 
     Graphics& Gfx();
 
+    template <typename T> requires std::is_integral_v<T> || std::is_floating_point_v<T>
+    T GetWidth() const
+    {
+        return static_cast<T>(width_);
+    }
+    template <typename T> requires std::is_integral_v<T> || std::is_floating_point_v<T>
+    T GetHeight() const
+    {
+        return static_cast<T>(height_);
+    }
+
     void SetTitle(const std::string& title);
 
 
 public:
     Keyboard kbd_;
     Mouse mouse_;
-
+    
 
 protected:
 

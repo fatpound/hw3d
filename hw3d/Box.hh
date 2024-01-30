@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Drawable.hh"
+#include "DrawableBase.hh"
 
-class Box : public Drawable
+class Box : public DrawableBase<Box>
 {
 public:
     Box(Graphics& gfx, std::mt19937& rng,

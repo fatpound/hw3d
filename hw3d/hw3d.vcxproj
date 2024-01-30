@@ -270,6 +270,7 @@
     <ClInclude Include="Box.hh" />
     <ClInclude Include="ConstantBuffers.hh" />
     <ClInclude Include="Drawable.hh" />
+    <ClInclude Include="DrawableBase.hh" />
     <ClInclude Include="dxerr.h" />
     <ClInclude Include="DxgiInfoManager.hpp" />
     <ClInclude Include="FatException.hpp" />

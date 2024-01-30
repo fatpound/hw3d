@@ -26,7 +26,7 @@ public:
     Graphics& operator = (const Graphics& src) = delete;
     Graphics& operator = (Graphics&& src) = delete;
 
-    Graphics(HWND hWnd);
+    Graphics(HWND hWnd, int width, int height);
 
 
 public:
@@ -104,4 +104,7 @@ private:
     Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget_ = nullptr;
     Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV_ = nullptr;
+
+    const int width_;
+    const int height_;
 };

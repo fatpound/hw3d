@@ -17,7 +17,7 @@ Window::Window(int width, int height, const char* name)
     width_(width),
     height_(height)
 {
-    RECT wr;
+    RECT wr = {};
     wr.left = 100;
     wr.right = width_ + wr.left;
     wr.top = 100;
@@ -51,7 +51,7 @@ Window::Window(int width, int height, const char* name)
         ShowWindow(hWnd_, /*SW_SHOW*/ SW_SHOWDEFAULT);
     }
 
-    pGfx_ = std::make_unique<Graphics>(hWnd_);
+    pGfx_ = std::make_unique<Graphics>(hWnd_, width_, height_);
 }
 
 

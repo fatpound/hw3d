@@ -19,7 +19,10 @@ namespace dx = DirectX;
 
 // Graphics
 
-Graphics::Graphics(HWND hWnd)
+Graphics::Graphics(HWND hWnd, int width, int height)
+    :
+    width_(width),
+    height_(height)
 {
     DXGI_SWAP_CHAIN_DESC scd = {};
     scd.BufferDesc.Width = 0; // these two zeroes mean go find out yourself from the hWnd
@@ -79,10 +82,10 @@ Graphics::Graphics(HWND hWnd)
     pContext_->OMSetDepthStencilState(pDSState.Get(), 1u);
 
     wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
-
+    
     D3D11_TEXTURE2D_DESC descDepth = {};
-    descDepth.Width = 800u;
-    descDepth.Height = 600u;
+    descDepth.Width = static_cast<UINT>(width_);
+    descDepth.Height = static_cast<UINT>(height_);
     descDepth.MipLevels = 1u;
     descDepth.ArraySize = 1u;
     descDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -103,8 +106,8 @@ Graphics::Graphics(HWND hWnd)
     pContext_->OMSetRenderTargets(1u, pTarget_.GetAddressOf(), pDSV_.Get());
 
     D3D11_VIEWPORT vp = {};
-    vp.Width = 800.0f;
-    vp.Height = 600.0f;
+    vp.Width = static_cast<FLOAT>(width_);
+    vp.Height = static_cast<FLOAT>(height_);
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
     vp.TopLeftX = 0.0f;

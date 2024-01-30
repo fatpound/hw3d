@@ -13,6 +13,11 @@ void Drawable::Draw(Graphics& gfx) const noexcept(!IS_DEBUG)
         b->Bind(gfx);
     }
 
+    for (auto& b : GetStaticBinds())
+    {
+        b->Bind(gfx);
+    }
+
     gfx.DrawIndexed(pIndexBuffer_->GetCount());
 }
 
@@ -23,7 +28,7 @@ void Drawable::AddBind(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG)
     binds_.push_back(std::move(bind));
 }
 
-void Drawable::AddIndexBuffer(std::unique_ptr<IndexBuffer> ibuf) noexcept
+void Drawable::AddIndexBuffer(std::unique_ptr<IndexBuffer> ibuf) noexcept(!IS_DEBUG)
 {
     assert("Attempting to add index buffer a second time" && pIndexBuffer_ == nullptr);
 
