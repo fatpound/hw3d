@@ -95,14 +95,14 @@ Box::Box(Graphics& gfx,
     AddBind(std::make_unique<TransformCbuf>(gfx, *this));
 }
 
-void Box::Update(float dt) noexcept
+void Box::Update(float deltaTime) noexcept
 {
-    roll_  += droll_  * dt;
-    pitch_ += dpitch_ * dt;
-    yaw_   += dyaw_   * dt;
-    theta_ += dtheta_ * dt;
-    phi_   += dphi_   * dt;
-    chi_   += dchi_   * dt;
+    roll_  += droll_  * deltaTime;
+    pitch_ += dpitch_ * deltaTime;
+    yaw_   += dyaw_   * deltaTime;
+    theta_ += dtheta_ * deltaTime;
+    phi_   += dphi_   * deltaTime;
+    chi_   += dchi_   * deltaTime;
 }
 
 DirectX::XMMATRIX Box::GetTransformXM() const noexcept

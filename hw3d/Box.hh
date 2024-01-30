@@ -15,7 +15,7 @@ public:
 public:
     DirectX::XMMATRIX GetTransformXM() const noexcept override;
 
-    void Update(float dt) noexcept override;
+    void Update(float deltaTime) noexcept override;
 
 
 private:
