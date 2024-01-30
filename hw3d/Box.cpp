@@ -29,30 +29,18 @@ Box::Box(Graphics& gfx,
             float z;
         }
         pos;
-
-        struct
-        {
-            unsigned char r;
-            unsigned char g;
-            unsigned char b;
-            unsigned char a;
-        }
-        color;
     };
 
     const std::vector<Vertex> vertices =
     {
-        { -1.0f, -1.0f, -1.0f, 255,   0,   0,   0 },
-        {  1.0f, -1.0f, -1.0f,   0, 255,   0,   0 },
-
-        { -1.0f,  1.0f, -1.0f,   0,   0, 255,   0 },
-        {  1.0f,  1.0f, -1.0f, 255, 255,   0,   0 },
-
-        { -1.0f, -1.0f,  1.0f, 255,   0, 255,   0 },
-        {  1.0f, -1.0f,  1.0f,   0, 255, 255,   0 },
-
-        { -1.0f,  1.0f,  1.0f,   0,   0,   0,   0 },
-        {  1.0f,  1.0f,  1.0f, 255, 255, 255,   0 }
+        { -1.0f, -1.0f, -1.0f },
+        {  1.0f, -1.0f, -1.0f },
+        { -1.0f,  1.0f, -1.0f },
+        {  1.0f,  1.0f, -1.0f },
+        { -1.0f, -1.0f,  1.0f },
+        {  1.0f, -1.0f,  1.0f },
+        { -1.0f,  1.0f,  1.0f },
+        {  1.0f,  1.0f,  1.0f }
     };
 
     AddBind(std::make_unique<VertexBuffer>(gfx, vertices));
@@ -101,7 +89,6 @@ Box::Box(Graphics& gfx,
     const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
     {
         { "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-        { "Color",    0, DXGI_FORMAT_R8G8B8A8_UNORM,  0, 12u, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
     AddBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
     AddBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
