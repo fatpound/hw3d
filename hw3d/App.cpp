@@ -14,11 +14,11 @@ App::App()
 {
     std::mt19937 rng(std::random_device{}());
     std::uniform_real_distribution<float> adist(0.0f, std::numbers::pi_v<float> * 2.0f);
-    std::uniform_real_distribution<float> ddist(0.0f, std::numbers::pi_v<float> * 2.0f);
-    std::uniform_real_distribution<float> odist(0.0f, std::numbers::pi_v<float> * 0.3f);
+    std::uniform_real_distribution<float> ddist(0.0f, std::numbers::pi_v<float> * 1.0f);
+    std::uniform_real_distribution<float> odist(0.0f, std::numbers::pi_v<float> * 0.08f);
     std::uniform_real_distribution<float> rdist(6.0f, 20.0f);
 
-    for (auto i = 0; i < 80; i++)
+    for (auto i = 0; i < 180; i++)
     {
         boxes.push_back(std::make_unique<Box>(
             wnd.Gfx(), rng, adist,
@@ -29,7 +29,7 @@ App::App()
     wnd.Gfx().SetProjection(dx::XMMatrixPerspectiveLH(1.0f, wnd.GetHeight<float>() / wnd.GetWidth<float>(), 0.5f, 40.0f));
 }
 
-App::~App()
+App::~App() noexcept
 {
 
 }
@@ -56,7 +56,7 @@ void App::DoFrame()
 {
     auto dt = timer.Mark();
 
-    wnd.Gfx().ClearBuffer(0.07f, 0.0f, 0.12f);
+    wnd.Gfx().ClearBuffer(0.0f, 0.0f, 0.0f);
 
     for (auto& b : boxes)
     {

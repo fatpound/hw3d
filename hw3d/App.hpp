@@ -9,7 +9,7 @@ class App
 {
 public:
 	App();
-    ~App();
+    ~App() noexcept;
     App(const App& src) = delete;
     App(App&& src) = delete;
     App& operator = (const App& src) = delete;
