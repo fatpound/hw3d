@@ -28,8 +28,10 @@ private:
 
 
 private:
-    std::vector<std::unique_ptr<class Box>> boxes;
+    std::vector<std::unique_ptr<class Drawable>> drawables_;
 
-	Window wnd;
-	FatTimer timer;
+	Window wnd_;
+	FatTimer timer_;
+
+    static constexpr size_t drawable_count_ = 180u;
 };

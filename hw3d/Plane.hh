@@ -16,6 +16,7 @@ public:
         assert(divisions_y >= 1);
 
         namespace dx = DirectX;
+        namespace fm = fatpound::math;
 
         constexpr float width = 2.0f;
         constexpr float height = 2.0f;
@@ -45,7 +46,7 @@ public:
         }
 
         std::vector<unsigned short int> indices;
-        indices.reserve(sq(divisions_x * divisions_y) * 6);
+        indices.reserve(fm::Square(divisions_x * divisions_y) * 6);
 
         {
             const auto vxy2i = [nVertices_x](size_t x, size_t y)
