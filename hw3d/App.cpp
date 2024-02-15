@@ -3,6 +3,7 @@
 #include "Box.hpp"
 #include "Pyramid.hpp"
 #include "Melon.hpp"
+#include "Sheet.hpp"
 #include "Surface.hpp"
 #include "GDIPlusManager.hpp"
 
@@ -17,7 +18,7 @@ GDIPlusManager gdipm;
 
 App::App()
     :
-    wnd_(800, 600, "The FatBox")
+    wnd_(1366, 768, "The FatBox")
 {
     class Factory
     {
@@ -52,6 +53,12 @@ App::App()
                     odist_, rdist_, longdist_, latdist_
                 );
 
+            case 3:
+                return std::make_unique<Sheet>(
+                    gfx_, rng_, adist_, ddist_,
+                    odist_, rdist_
+                );
+
             default:
                 assert(false && "bad drawable type in factory");
                 return {};
@@ -69,7 +76,7 @@ App::App()
         std::uniform_real_distribution<float> bdist_{ 0.4f, 3.0f };
         std::uniform_int_distribution<int> latdist_{ 5, 20 };
         std::uniform_int_distribution<int> longdist_{ 10, 40 };
-        std::uniform_int_distribution<int> typedist_{ 0, 2 };
+        std::uniform_int_distribution<int> typedist_{ 0, 3 };
 
         Graphics& gfx_;
     };
@@ -78,8 +85,6 @@ App::App()
 
     drawables_.reserve(drawable_count_);
     std::generate_n(std::back_inserter(drawables_), drawable_count_, factory);
-
-    const auto s = Surface::FromFile("Images\\kappa50.png");
 
     wnd_.Gfx().SetProjection(dx::XMMatrixPerspectiveLH(1.0f, wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), 0.5f, 40.0f));
 }
@@ -115,7 +120,7 @@ void App::DoFrame()
 
     for (auto& obj : drawables_)
     {
-        obj->Update(dt);
+        obj->Update(wnd_.kbd_.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
         obj->Draw(wnd_.Gfx());
     }
 
