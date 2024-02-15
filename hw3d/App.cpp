@@ -4,6 +4,7 @@
 #include "Pyramid.hpp"
 #include "Melon.hpp"
 #include "Sheet.hpp"
+#include "SkinnedBox.hpp"
 #include "Surface.hpp"
 #include "GDIPlusManager.hpp"
 
@@ -59,6 +60,12 @@ App::App()
                     odist_, rdist_
                 );
 
+            case 4:
+                return std::make_unique<SkinnedBox>(
+                    gfx_, rng_, adist_, ddist_,
+                    odist_, rdist_
+                );
+
             default:
                 assert(false && "bad drawable type in factory");
                 return {};
@@ -76,15 +83,13 @@ App::App()
         std::uniform_real_distribution<float> bdist_{ 0.4f, 3.0f };
         std::uniform_int_distribution<int> latdist_{ 5, 20 };
         std::uniform_int_distribution<int> longdist_{ 10, 40 };
-        std::uniform_int_distribution<int> typedist_{ 0, 3 };
+        std::uniform_int_distribution<int> typedist_{ 0, 4 };
 
         Graphics& gfx_;
     };
 
-    Factory factory(wnd_.Gfx());
-
     drawables_.reserve(drawable_count_);
-    std::generate_n(std::back_inserter(drawables_), drawable_count_, factory);
+    std::generate_n(std::back_inserter(drawables_), drawable_count_, Factory{ wnd_.Gfx() });
 
     wnd_.Gfx().SetProjection(dx::XMMatrixPerspectiveLH(1.0f, wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), 0.5f, 40.0f));
 }
