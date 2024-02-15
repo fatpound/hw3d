@@ -3,6 +3,8 @@
 #include "Box.hpp"
 #include "Pyramid.hpp"
 #include "Melon.hpp"
+#include "Surface.hpp"
+#include "GDIPlusManager.hpp"
 
 #include <cmath>
 
@@ -10,6 +12,8 @@
 #include <numbers>
 
 namespace dx = DirectX;
+
+GDIPlusManager gdipm;
 
 App::App()
     :
@@ -74,6 +78,8 @@ App::App()
 
     drawables_.reserve(drawable_count_);
     std::generate_n(std::back_inserter(drawables_), drawable_count_, factory);
+
+    const auto s = Surface::FromFile("Images\\kappa50.png");
 
     wnd_.Gfx().SetProjection(dx::XMMatrixPerspectiveLH(1.0f, wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), 0.5f, 40.0f));
 }

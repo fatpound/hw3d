@@ -249,6 +249,7 @@
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="FatException.cpp" />
     <ClCompile Include="FatTimer.cpp" />
+    <ClCompile Include="GDIPlusManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
@@ -257,6 +258,7 @@
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Topology.cpp" />
     <ClCompile Include="TransformCBuf.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -281,6 +283,7 @@
     <ClInclude Include="FatMath.hpp" />
     <ClInclude Include="FatTimer.hpp" />
     <ClInclude Include="FatWin.hpp" />
+    <ClInclude Include="GDIPlusManager.hpp" />
     <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="GraphicsThrowMacros.hpp" />
     <ClInclude Include="IndexBuffer.hpp" />
@@ -294,6 +297,7 @@
     <ClInclude Include="Prism.hpp" />
     <ClInclude Include="Pyramid.hpp" />
     <ClInclude Include="Sphere.hpp" />
+    <ClInclude Include="Surface.hpp" />
     <ClInclude Include="Topology.hpp" />
     <ClInclude Include="TransformCBuf.hpp" />
     <ClInclude Include="VertexBuffer.hpp" />
