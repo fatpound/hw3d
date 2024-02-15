@@ -283,7 +283,6 @@
     <ClInclude Include="FatWin.hpp" />
     <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="GraphicsThrowMacros.hh" />
-    <ClInclude Include="GraphicsThrowMacros.hpp" />
     <ClInclude Include="IndexBuffer.hh" />
     <ClInclude Include="IndexedTriangleList.hh" />
     <ClInclude Include="InputLayout.hh" />
@@ -302,7 +301,6 @@
     <ClInclude Include="Window.hpp" />
     <ClInclude Include="WindowsMessageMap.hpp" />
     <ClInclude Include="WindowThrowMacros.hh" />
-    <ClInclude Include="WindowThrowMacros.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc" />
