@@ -1,4 +1,4 @@
-#include "InputLayout.hh"
+#include "InputLayout.hpp"
 #include "GraphicsThrowMacros.hpp"
 
 InputLayout::InputLayout(Graphics& gfx, const std::vector<D3D11_INPUT_ELEMENT_DESC>& layout, ID3DBlob* pVertexShaderBytecode)

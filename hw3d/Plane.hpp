@@ -1,7 +1,7 @@
 #pragma once
 
 #include "FatMath.hpp"
-#include "IndexedTriangleList.hh"
+#include "IndexedTriangleList.hpp"
 
 #include <vector>
 #include <array>

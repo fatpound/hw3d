@@ -1,7 +1,7 @@
-#include "Box.hh"
-#include "BindableBase.hh"
+#include "Box.hpp"
+#include "BindableBase.hpp"
 #include "GraphicsThrowMacros.hpp"
-#include "Cube.hh"
+#include "Cube.hpp"
 
 namespace dx = DirectX;
 
