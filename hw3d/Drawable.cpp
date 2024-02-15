@@ -1,5 +1,5 @@
 #include "Drawable.hh"
-#include "GraphicsThrowMacros.hh"
+#include "GraphicsThrowMacros.hpp"
 #include "IndexBuffer.hh"
 
 #include <cassert>

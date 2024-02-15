@@ -1,5 +1,5 @@
 #include "Graphics.hpp"
-#include "GraphicsThrowMacros.hh"
+#include "GraphicsThrowMacros.hpp"
 
 #include "dxerr.h"
 

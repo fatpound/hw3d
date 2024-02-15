@@ -137,12 +137,6 @@
     <ClInclude Include="DxgiInfoManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WindowThrowMacros.hh">
-      <Filter>Header Files\Macros</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsThrowMacros.hh">
-      <Filter>Header Files\Macros</Filter>
-    </ClInclude>
     <ClInclude Include="Bindable.hh">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>

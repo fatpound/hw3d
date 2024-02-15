@@ -5,7 +5,7 @@
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
 #include "Graphics.hpp"
-#include "WindowThrowMacros.hh"
+#include "WindowThrowMacros.hpp"
 
 #include <optional>
 #include <memory>

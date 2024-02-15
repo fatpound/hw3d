@@ -1,5 +1,5 @@
 #include "IndexBuffer.hh"
-#include "GraphicsThrowMacros.hh"
+#include "GraphicsThrowMacros.hpp"
 
 IndexBuffer::IndexBuffer(Graphics& gfx, const std::vector<unsigned short>& indices)
     :
