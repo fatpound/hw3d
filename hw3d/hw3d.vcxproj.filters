@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Drawable">
       <UniqueIdentifier>{51177490-2b98-4192-a0b6-3844903f8cd7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Geometry">
+      <UniqueIdentifier>{07b9a125-d0e1-4929-9183-39d9e7144795}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -137,74 +140,80 @@
     <ClInclude Include="DxgiInfoManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Bindable.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
     <ClInclude Include="dxerr.h">
       <Filter>Dxerr</Filter>
-    </ClInclude>
-    <ClInclude Include="BindableBase.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="ConstantBuffers.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexBuffer.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="InputLayout.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="PixelShader.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="Topology.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformCBuf.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBuffer.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexShader.hh">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable.hh">
-      <Filter>Header Files\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.hh">
-      <Filter>Header Files\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawableBase.hh">
-      <Filter>Header Files\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="FatMath.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cube.hh">
+    <ClInclude Include="Melon.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IndexedTriangleList.hh">
+    <ClInclude Include="Pyramid.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Cone.hh">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="BindableBase.hpp">
+      <Filter>Header Files\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="Plane.hh">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Bindable.hpp">
+      <Filter>Header Files\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="Prism.hh">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="GraphicsThrowMacros.hpp">
+      <Filter>Header Files\Macros</Filter>
     </ClInclude>
-    <ClInclude Include="Sphere.hh">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="WindowThrowMacros.hpp">
+      <Filter>Header Files\Macros</Filter>
     </ClInclude>
-    <ClInclude Include="Melon.hh">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Cone.hpp">
+      <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Pyramid.hh">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Cube.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexedTriangleList.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Prism.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.hpp">
+      <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffers.hpp">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableBase.hpp">
+      <Filter>Header Files\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.hpp">
+      <Filter>Header Files\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformCBuf.hpp">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShader.hpp">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.hpp">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.hpp">
+      <Filter>Header Files\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLayout.hpp">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.hpp">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.hpp">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Topology.hpp">
+      <Filter>Header Files\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
