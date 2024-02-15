@@ -267,14 +267,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
-    <ClInclude Include="Bindable.hh" />
-    <ClInclude Include="BindableBase.hh" />
-    <ClInclude Include="Box.hh" />
-    <ClInclude Include="Cone.hh" />
-    <ClInclude Include="ConstantBuffers.hh" />
-    <ClInclude Include="Cube.hh" />
-    <ClInclude Include="Drawable.hh" />
-    <ClInclude Include="DrawableBase.hh" />
+    <ClInclude Include="Bindable.hpp" />
+    <ClInclude Include="BindableBase.hpp" />
+    <ClInclude Include="Box.hpp" />
+    <ClInclude Include="Cone.hpp" />
+    <ClInclude Include="ConstantBuffers.hpp" />
+    <ClInclude Include="Cube.hpp" />
+    <ClInclude Include="Drawable.hpp" />
+    <ClInclude Include="DrawableBase.hpp" />
     <ClInclude Include="dxerr.h" />
     <ClInclude Include="DxgiInfoManager.hpp" />
     <ClInclude Include="FatException.hpp" />
@@ -282,25 +282,25 @@
     <ClInclude Include="FatTimer.hpp" />
     <ClInclude Include="FatWin.hpp" />
     <ClInclude Include="Graphics.hpp" />
-    <ClInclude Include="GraphicsThrowMacros.hh" />
-    <ClInclude Include="IndexBuffer.hh" />
-    <ClInclude Include="IndexedTriangleList.hh" />
-    <ClInclude Include="InputLayout.hh" />
+    <ClInclude Include="GraphicsThrowMacros.hpp" />
+    <ClInclude Include="IndexBuffer.hpp" />
+    <ClInclude Include="IndexedTriangleList.hpp" />
+    <ClInclude Include="InputLayout.hpp" />
     <ClInclude Include="Keyboard.hpp" />
-    <ClInclude Include="Melon.hh" />
+    <ClInclude Include="Melon.hpp" />
     <ClInclude Include="Mouse.hpp" />
-    <ClInclude Include="PixelShader.hh" />
-    <ClInclude Include="Plane.hh" />
-    <ClInclude Include="Prism.hh" />
-    <ClInclude Include="Pyramid.hh" />
-    <ClInclude Include="Sphere.hh" />
-    <ClInclude Include="Topology.hh" />
-    <ClInclude Include="TransformCBuf.hh" />
-    <ClInclude Include="VertexBuffer.hh" />
-    <ClInclude Include="VertexShader.hh" />
+    <ClInclude Include="PixelShader.hpp" />
+    <ClInclude Include="Plane.hpp" />
+    <ClInclude Include="Prism.hpp" />
+    <ClInclude Include="Pyramid.hpp" />
+    <ClInclude Include="Sphere.hpp" />
+    <ClInclude Include="Topology.hpp" />
+    <ClInclude Include="TransformCBuf.hpp" />
+    <ClInclude Include="VertexBuffer.hpp" />
+    <ClInclude Include="VertexShader.hpp" />
     <ClInclude Include="Window.hpp" />
     <ClInclude Include="WindowsMessageMap.hpp" />
-    <ClInclude Include="WindowThrowMacros.hh" />
+    <ClInclude Include="WindowThrowMacros.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc" />

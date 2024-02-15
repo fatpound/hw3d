@@ -1,6 +1,6 @@
-#include "Drawable.hh"
+#include "Drawable.hpp"
 #include "GraphicsThrowMacros.hpp"
-#include "IndexBuffer.hh"
+#include "IndexBuffer.hpp"
 
 #include <cassert>
 
