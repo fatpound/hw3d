@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ConstantBuffers.hpp"
-#include "Drawable.hpp"
+#include "ConstantBuffers.hh"
+#include "Drawable.hh"
 
 #include <DirectXMath.h>
 

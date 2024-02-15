@@ -1,7 +1,7 @@
-#include "Pyramid.hpp"
-#include "BindableBase.hpp"
+#include "Pyramid.hh"
+#include "BindableBase.hh"
 #include "GraphicsThrowMacros.hpp"
-#include "Cone.hpp"
+#include "Cone.hh"
 
 namespace dx = DirectX;
 

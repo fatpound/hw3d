@@ -1,8 +1,8 @@
 #include "App.hpp"
 #include "FatMath.hpp"
-#include "Box.hpp"
-#include "Pyramid.hpp"
-#include "Melon.hpp"
+#include "Box.hh"
+#include "Pyramid.hh"
+#include "Melon.hh"
 
 #include <cmath>
 

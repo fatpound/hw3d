@@ -1,4 +1,4 @@
-#include "VertexShader.hpp"
+#include "VertexShader.hh"
 #include "GraphicsThrowMacros.hpp"
 
 VertexShader::VertexShader(Graphics& gfx, const std::wstring& path)

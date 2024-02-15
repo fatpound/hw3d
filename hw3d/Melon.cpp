@@ -1,7 +1,7 @@
-#include "Melon.hpp"
-#include "BindableBase.hpp"
+#include "Melon.hh"
+#include "BindableBase.hh"
 #include "GraphicsThrowMacros.hpp"
-#include "Sphere.hpp"
+#include "Sphere.hh"
 
 namespace dx = DirectX;
 

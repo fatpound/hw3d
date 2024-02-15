@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DrawableBase.hpp"
+#include "DrawableBase.hh"
 
 class Pyramid : public DrawableBase<Pyramid>
 {

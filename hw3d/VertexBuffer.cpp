@@ -1,4 +1,4 @@
-#include "VertexBuffer.hpp"
+#include "VertexBuffer.hh"
 
 void VertexBuffer::Bind(Graphics& gfx) noexcept
 {

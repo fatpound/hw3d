@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bindable.hpp"
+#include "Bindable.hh"
 #include "GraphicsThrowMacros.hpp"
 
 template <typename C>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IndexedTriangleList.hpp"
+#include "IndexedTriangleList.hh"
 
 #include <DirectXMath.h>
 

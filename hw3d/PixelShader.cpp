@@ -1,4 +1,4 @@
-#include "PixelShader.hpp"
+#include "PixelShader.hh"
 #include "GraphicsThrowMacros.hpp"
 
 PixelShader::PixelShader(Graphics& gfx, const std::wstring& path)

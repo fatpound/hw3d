@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DrawableBase.hpp"
+#include "DrawableBase.hh"
 
 class Box : public DrawableBase<Box>
 {
