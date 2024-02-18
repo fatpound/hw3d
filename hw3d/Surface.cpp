@@ -2,8 +2,6 @@
 
 #include "Surface.hpp"
 
-#include <algorithm>
-
 namespace Gdiplus
 {
     using std::min;
@@ -13,82 +11,47 @@ namespace Gdiplus
 #include <gdiplus.h>
 
 #include <sstream>
+#include <algorithm>
 
-#pragma comment( lib, "gdiplus" )
+#pragma comment(lib, "gdiplus")
 
 Surface::Surface(unsigned int width, unsigned int height) noexcept
     :
-    pBuffer(std::make_unique<Color[]>(width* height)),
-    width(width),
-    height(height)
-{}
-
-Surface& Surface::operator=(Surface&& donor) noexcept
+    pBuffer_(std::make_unique<Color[]>(width* height)),
+    width_(width),
+    height_(height)
 {
-    width = donor.width;
-    height = donor.height;
-    pBuffer = std::move(donor.pBuffer);
-    donor.pBuffer = nullptr;
-    return *this;
+
 }
-
-
 Surface::Surface(Surface&& source) noexcept
     :
-    pBuffer(std::move(source.pBuffer)),
-    width(source.width),
-    height(source.height)
-{}
+    pBuffer_(std::move(source.pBuffer_)),
+    width_(source.width_),
+    height_(source.height_)
+{
 
+}
+Surface::Surface(unsigned int width, unsigned int height, std::unique_ptr<Color[]> pBufferParam) noexcept
+    :
+    width_(width),
+    height_(height),
+    pBuffer_(std::move(pBufferParam))
+{
+
+}
 Surface::~Surface()
-{}
-
-void Surface::Clear(Color fillValue) noexcept
 {
-    memset(pBuffer.get(), fillValue.dword, width * height * sizeof(Color));
+
 }
 
-void Surface::PutPixel(unsigned int x, unsigned int y, Color c) noexcept(!IS_DEBUG)
+Surface& Surface::operator = (Surface&& donor) noexcept
 {
-    assert(x >= 0);
-    assert(y >= 0);
-    assert(x < width);
-    assert(y < height);
-    pBuffer[y * width + x] = c;
-}
+    width_ = donor.width_;
+    height_ = donor.height_;
+    pBuffer_ = std::move(donor.pBuffer_);
+    donor.pBuffer_ = nullptr;
 
-Surface::Color Surface::GetPixel(unsigned int x, unsigned int y) const noexcept(!IS_DEBUG)
-{
-    assert(x >= 0);
-    assert(y >= 0);
-    assert(x < width);
-    assert(y < height);
-    return pBuffer[y * width + x];
-}
-
-unsigned int Surface::GetWidth() const noexcept
-{
-    return width;
-}
-
-unsigned int Surface::GetHeight() const noexcept
-{
-    return height;
-}
-
-Surface::Color* Surface::GetBufferPtr() noexcept
-{
-    return pBuffer.get();
-}
-
-const Surface::Color* Surface::GetBufferPtr() const noexcept
-{
-    return pBuffer.get();
-}
-
-const Surface::Color* Surface::GetBufferPtrConst() const noexcept
-{
-    return pBuffer.get();
+    return *this;
 }
 
 Surface Surface::FromFile(const std::string& name)
@@ -129,6 +92,28 @@ Surface Surface::FromFile(const std::string& name)
     return Surface(width, height, std::move(pBuffer));
 }
 
+const Surface::Color* Surface::GetBufferPtr() const noexcept
+{
+    return pBuffer_.get();
+}
+const Surface::Color* Surface::GetBufferPtrConst() const noexcept
+{
+    return pBuffer_.get();
+}
+Surface::Color* Surface::GetBufferPtr() noexcept
+{
+    return pBuffer_.get();
+}
+Surface::Color Surface::GetPixel(unsigned int x, unsigned int y) const noexcept(!IS_DEBUG)
+{
+    assert(x >= 0);
+    assert(y >= 0);
+    assert(x < width_);
+    assert(y < height_);
+
+    return pBuffer_[y * width_ + x];
+}
+
 void Surface::Save(const std::string& filename) const
 {
     auto GetEncoderClsid = [&filename](const WCHAR* format, CLSID* pClsid) -> void
@@ -166,7 +151,7 @@ void Surface::Save(const std::string& filename) const
                 }
             }
 
-            free(pImageCodecInfo);
+            std::free(pImageCodecInfo);
             std::stringstream ss;
             ss << "Saving surface to [" << filename <<
                 "]: failed to get encoder; failed to find matching encoder.";
@@ -181,7 +166,7 @@ void Surface::Save(const std::string& filename) const
     wchar_t wideName[512];
     mbstowcs_s(nullptr, wideName, filename.c_str(), _TRUNCATE);
 
-    Gdiplus::Bitmap bitmap(width, height, width * sizeof(Color), PixelFormat32bppARGB, (BYTE*)pBuffer.get());
+    Gdiplus::Bitmap bitmap(width_, height_, width_ * sizeof(Color), PixelFormat32bppARGB, (BYTE*)pBuffer_.get());
     if (bitmap.Save(wideName, &bmpID, nullptr) != Gdiplus::Status::Ok)
     {
         std::stringstream ss;
@@ -189,44 +174,62 @@ void Surface::Save(const std::string& filename) const
         throw Exception(__LINE__, __FILE__, ss.str());
     }
 }
-
 void Surface::Copy(const Surface& src) noexcept(!IS_DEBUG)
 {
-    assert(width == src.width);
-    assert(height == src.height);
-    memcpy(pBuffer.get(), src.pBuffer.get(), width * height * sizeof(Color));
+    assert(width_ == src.width_);
+    assert(height_ == src.height_);
+
+    std::memcpy(pBuffer_.get(), src.pBuffer_.get(), width_ * height_ * sizeof(Color));
+}
+void Surface::Clear(Color fillValue) noexcept
+{
+    std::memset(pBuffer_.get(), fillValue.dword, width_ * height_ * sizeof(Color));
+}
+void Surface::PutPixel(unsigned int x, unsigned int y, Color c) noexcept(!IS_DEBUG)
+{
+    assert(x >= 0);
+    assert(y >= 0);
+    assert(x < width_);
+    assert(y < height_);
+
+    pBuffer_[y * width_ + x] = c;
 }
 
-Surface::Surface(unsigned int width, unsigned int height, std::unique_ptr<Color[]> pBufferParam) noexcept
-    :
-    width(width),
-    height(height),
-    pBuffer(std::move(pBufferParam))
-{}
+unsigned int Surface::GetWidth() const noexcept
+{
+    return width_;
+}
+unsigned int Surface::GetHeight() const noexcept
+{
+    return height_;
+}
 
 
-// surface exception stuff
 Surface::Exception::Exception(int line, const char* file, std::string note) noexcept
     :
     FatException(line, file),
-    note(std::move(note))
-{}
-
-const char* Surface::Exception::what() const noexcept
+    note_(std::move(note))
 {
-    std::ostringstream oss;
-    oss << FatException::what() << std::endl
-        << "[Note] " << GetNote();
-    whatBuffer = oss.str();
-    return whatBuffer.c_str();
-}
 
-const char* Surface::Exception::GetType() const noexcept
-{
-    return "Chili Graphics Exception";
 }
 
 const std::string& Surface::Exception::GetNote() const noexcept
 {
-    return note;
+    return note_;
+}
+
+const char* Surface::Exception::what() const noexcept
+{
+    std::ostringstream oss;
+
+    oss << FatException::what() << std::endl
+        << "[Note] " << GetNote();
+
+    whatBuffer = oss.str();
+
+    return whatBuffer.c_str();
+}
+const char* Surface::Exception::GetType() const noexcept
+{
+    return "Fat Graphics Exception";
 }
