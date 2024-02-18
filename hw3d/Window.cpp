@@ -1,16 +1,12 @@
 #include "Window.hpp"
 #include "resource.h"
+#include "imgui/imgui_impl_win32.h"
 
 #include <sstream>
 
 // #include "WindowsMessageMap.hpp"
 
 // Window
-
-Window::~Window()
-{
-    DestroyWindow(hWnd_);
-}
 
 Window::Window(int width, int height, const char* name)
     :
@@ -51,9 +47,15 @@ Window::Window(int width, int height, const char* name)
         ShowWindow(hWnd_, /*SW_SHOW*/ SW_SHOWDEFAULT);
     }
 
+    ImGui_ImplWin32_Init(hWnd_);
+
     pGfx_ = std::make_unique<Graphics>(hWnd_, width_, height_);
 }
-
+Window::~Window()
+{
+    ImGui_ImplWin32_Shutdown();
+    DestroyWindow(hWnd_);
+}
 
 std::optional<int> Window::ProcessMessages() noexcept
 {
@@ -112,11 +114,15 @@ LRESULT CALLBACK Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPAR
 
     return pWnd->HandleMsg(hWnd, msg, wParam, lParam);
 }
-
 LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
     // static WindowsMessageMap map;
     // OutputDebugString( map( msg, wParam, lParam ).c_str() );
+
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+    {
+        return true;
+    }
 
     switch (msg)
     {
@@ -258,7 +264,6 @@ Window::HrException::HrException(int line, const char* file, HRESULT hresult) no
 
 }
 
-
 HRESULT Window::HrException::GetErrorCode() const noexcept
 {
     return hresult_;
@@ -283,7 +288,6 @@ const char* Window::HrException::what() const noexcept
 
     return whatBuffer.c_str();
 }
-
 const char* Window::HrException::GetType() const noexcept
 {
     return "Fat Window Exception";
@@ -329,12 +333,12 @@ Window::WindowClass::~WindowClass()
 }
 
 
-const char* Window::WindowClass::GetName() noexcept
-{
-    return wndClassName_;
-}
-
 HINSTANCE Window::WindowClass::GetInstance() noexcept
 {
     return wndClass_.hInst_;
+}
+
+const char* Window::WindowClass::GetName() noexcept
+{
+    return wndClassName_;
 }

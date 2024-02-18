@@ -2,6 +2,7 @@
 
 #include "Window.hpp"
 #include "FatTimer.hpp"
+#include "ImguiManager.hpp"
 
 using fatpound::time::FatTimer;
 
@@ -9,11 +10,11 @@ class App
 {
 public:
 	App();
-    ~App() noexcept;
     App(const App& src) = delete;
     App(App&& src) = delete;
     App& operator = (const App& src) = delete;
     App& operator = (App&& src) = delete;
+    ~App() noexcept;
 
 
 public:
@@ -30,6 +31,7 @@ private:
 private:
     std::vector<std::unique_ptr<class Drawable>> drawables_;
 
+    ImguiManager imgui;
 	Window wnd_;
 	FatTimer timer_;
 

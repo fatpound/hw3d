@@ -3,6 +3,8 @@
 
 #include "dxerr.h"
 
+#include "imgui/imgui_impl_dx11.h"
+
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 
@@ -114,6 +116,9 @@ Graphics::Graphics(HWND hWnd, int width, int height)
     vp.TopLeftY = 0.0f;
 
     pContext_->RSSetViewports(1u, &vp);
+
+    // init imgui d3d impl
+    ImGui_ImplDX11_Init(pDevice_.Get(), pContext_.Get());
 }
 
 
@@ -245,6 +250,10 @@ Graphics::InfoException::InfoException(int line, const char* file, std::vector<s
     }
 }
 
+std::string Graphics::InfoException::GetErrorInfo() const noexcept
+{
+    return info_;
+}
 
 const char* Graphics::InfoException::what() const noexcept
 {
@@ -262,11 +271,6 @@ const char* Graphics::InfoException::what() const noexcept
 const char* Graphics::InfoException::GetType() const noexcept
 {
     return "Fat Graphics Info Exception";
-}
-
-std::string Graphics::InfoException::GetErrorInfo() const noexcept
-{
-    return info_;
 }
 
 

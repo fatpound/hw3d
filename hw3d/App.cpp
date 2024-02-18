@@ -8,6 +8,10 @@
 #include "Surface.hpp"
 #include "GDIPlusManager.hpp"
 
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_win32.h"
+#include "imgui/imgui_impl_dx11.h"
+
 #include <cmath>
 
 #include <memory>
@@ -128,6 +132,22 @@ void App::DoFrame()
         obj->Update(wnd_.kbd_.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
         obj->Draw(wnd_.Gfx());
     }
+
+    // imgui stuff
+    ImGui_ImplDX11_NewFrame();
+    ImGui_ImplWin32_NewFrame();
+
+    ImGui::NewFrame();
+
+    static bool show_demo_window = true;
+
+    if (show_demo_window)
+    {
+        ImGui::ShowDemoWindow(&show_demo_window);
+    }
+
+    ImGui::Render();
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
     wnd_.Gfx().EndFrame();
 }

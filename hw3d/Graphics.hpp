@@ -20,13 +20,14 @@ class Graphics
 
 public:
     Graphics() = delete;
-    ~Graphics() = default;
+
+    Graphics(HWND hWnd, int width, int height);
+
     Graphics(const Graphics& src) = delete;
     Graphics(Graphics&& src) = delete;
     Graphics& operator = (const Graphics& src) = delete;
     Graphics& operator = (Graphics&& src) = delete;
-
-    Graphics(HWND hWnd, int width, int height);
+    ~Graphics() = default;
 
 
 public:
