@@ -14,8 +14,8 @@ namespace fatpound::math
     constexpr T twoPi = 2.0f * std::numbers::pi_v<T>;
 
     template <typename T>
-    concept Number = std::is_integral_v<T> || std::is_floating_point_v<T>;
-
+    concept Number = std::integral<T> || std::floating_point<T>;
+    
     template <typename T>
     inline auto Square(const T& x)
     {

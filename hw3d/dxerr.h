@@ -12,7 +12,9 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
+
 #include "FatWin.hpp"
+
 #include <sal.h>
 
 #ifdef __cplusplus

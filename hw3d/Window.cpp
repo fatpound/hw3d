@@ -8,10 +8,7 @@
 
 // Window
 
-Window::Window(int width, int height, const char* name)
-    :
-    width_(width),
-    height_(height)
+Window::Window(const char* window_title)
 {
     RECT wr = {};
     wr.left = 100;
@@ -26,7 +23,7 @@ Window::Window(int width, int height, const char* name)
 
     hWnd_ = CreateWindow(
         WindowClass::GetName(),
-        name,
+        window_title,
         WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
@@ -49,7 +46,7 @@ Window::Window(int width, int height, const char* name)
 
     ImGui_ImplWin32_Init(hWnd_);
 
-    pGfx_ = std::make_unique<Graphics>(hWnd_, width_, height_);
+    pGfx_ = std::make_unique<Graphics>(hWnd_);
 }
 Window::~Window()
 {

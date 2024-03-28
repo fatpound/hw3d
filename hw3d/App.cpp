@@ -23,9 +23,9 @@ GDIPlusManager gdipm;
 
 App::App()
     :
-    wnd_(1366, 768, "The FatBox")
+    wnd_("The FatBox")
 {
-    class Factory
+    class Factory final
     {
     public:
         Factory(Graphics& gfx)
@@ -80,11 +80,13 @@ App::App()
 
     private:
         std::mt19937 rng_{ std::random_device{}() };
+
         std::uniform_real_distribution<float> adist_{ 0.0f, std::numbers::pi_v<float> * 2.0f };
         std::uniform_real_distribution<float> ddist_{ 0.0f, std::numbers::pi_v<float> * 0.5f };
         std::uniform_real_distribution<float> odist_{ 0.0f, std::numbers::pi_v<float> * 0.08f };
         std::uniform_real_distribution<float> rdist_{ 6.0f, 20.0f };
         std::uniform_real_distribution<float> bdist_{ 0.4f, 3.0f };
+
         std::uniform_int_distribution<int> latdist_{ 5, 20 };
         std::uniform_int_distribution<int> longdist_{ 10, 40 };
         std::uniform_int_distribution<int> typedist_{ 0, 4 };
@@ -117,11 +119,11 @@ int App::Go()
             return *errorCode;
         }
 
-        DoFrame();
+        DoFrame_();
     }
 }
 
-void App::DoFrame()
+void App::DoFrame_()
 {
     auto dt = timer_.Mark();
 

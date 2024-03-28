@@ -14,15 +14,14 @@
 #include <memory>
 #include <random>
 
-class Graphics
+class Graphics final
 {
     friend class Bindable;
 
 public:
+    Graphics(HWND hWnd);
+
     Graphics() = delete;
-
-    Graphics(HWND hWnd, int width, int height);
-
     Graphics(const Graphics& src) = delete;
     Graphics(Graphics&& src) = delete;
     Graphics& operator = (const Graphics& src) = delete;
@@ -50,6 +49,8 @@ public:
         const char* what() const noexcept override;
         const char* GetType() const noexcept override;
 
+    protected:
+
     private:
         HRESULT hresult_;
 
@@ -66,6 +67,8 @@ public:
         const char* what() const noexcept override;
         const char* GetType() const noexcept override;
 
+    protected:
+
     private:
         std::string info_;
     };
@@ -75,6 +78,8 @@ public:
 
     public:
         const char* GetType() const noexcept override;
+
+    protected:
 
     private:
         std::string reason_;
@@ -90,6 +95,11 @@ public:
     void SetProjection(DirectX::FXMMATRIX projection) noexcept;
 
 
+public:
+    static constexpr int ScreenWidth = 1366;
+    static constexpr int ScreenHeight = 768;
+
+
 protected:
 
 
@@ -100,12 +110,9 @@ private:
     DxgiInfoManager infoManager_;
 #endif
 
-    Microsoft::WRL::ComPtr<ID3D11Device> pDevice_ = nullptr;
-    Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain_ = nullptr;
-    Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext_ = nullptr;
-    Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget_ = nullptr;
-    Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV_ = nullptr;
-
-    const int width_;
-    const int height_;
+    Microsoft::WRL::ComPtr<ID3D11Device>                pDevice_    = nullptr;
+    Microsoft::WRL::ComPtr<IDXGISwapChain>              pSwapChain_ = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11DeviceContext>         pContext_   = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11RenderTargetView>      pTarget_    = nullptr;
+    Microsoft::WRL::ComPtr<ID3D11DepthStencilView>      pDSV_       = nullptr;
 };

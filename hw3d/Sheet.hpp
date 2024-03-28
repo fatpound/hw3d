@@ -11,10 +11,14 @@ public:
         std::uniform_real_distribution<float>& odist,
         std::uniform_real_distribution<float>& rdist);
 
+
 public:
     DirectX::XMMATRIX GetTransformXM() const noexcept override;
 
     void Update(float dt) noexcept override;
+
+
+protected:
 
 
 private:

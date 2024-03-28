@@ -9,9 +9,6 @@
 class Cube
 {
 public:
-
-
-public:
     template <class V>
     static IndexedTriangleList<V> Make()
     {

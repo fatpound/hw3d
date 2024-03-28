@@ -6,7 +6,7 @@
 
 using fatpound::time::FatTimer;
 
-class App
+class App final
 {
 public:
 	App();
@@ -25,13 +25,13 @@ protected:
 
 
 private:
-	void DoFrame();
+	void DoFrame_();
 
 
 private:
     std::vector<std::unique_ptr<class Drawable>> drawables_;
 
-    ImguiManager imgui;
+    ImguiManager imgui_;
 	Window wnd_;
 	FatTimer timer_;
 

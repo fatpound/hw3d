@@ -8,9 +8,6 @@
 class Cone
 {
 public:
-
-
-public:
     template <class V>
     static IndexedTriangleList<V> MakeTesselated(int longDiv)
     {

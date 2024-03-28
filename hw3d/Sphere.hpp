@@ -8,9 +8,6 @@
 class Sphere
 {
 public:
-
-
-public:
     template <class V>
     static IndexedTriangleList<V> MakeTesselated(int latDiv, int longDiv)
     {

@@ -21,10 +21,7 @@ namespace dx = DirectX;
 
 // Graphics
 
-Graphics::Graphics(HWND hWnd, int width, int height)
-    :
-    width_(width),
-    height_(height)
+Graphics::Graphics(HWND hWnd)
 {
     DXGI_SWAP_CHAIN_DESC scd = {};
     scd.BufferDesc.Width = 0; // these two zeroes mean go find out yourself from the hWnd
@@ -86,8 +83,8 @@ Graphics::Graphics(HWND hWnd, int width, int height)
     wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
     
     D3D11_TEXTURE2D_DESC descDepth = {};
-    descDepth.Width = static_cast<UINT>(width_);
-    descDepth.Height = static_cast<UINT>(height_);
+    descDepth.Width = static_cast<UINT>(ScreenWidth);
+    descDepth.Height = static_cast<UINT>(ScreenHeight);
     descDepth.MipLevels = 1u;
     descDepth.ArraySize = 1u;
     descDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -108,8 +105,8 @@ Graphics::Graphics(HWND hWnd, int width, int height)
     pContext_->OMSetRenderTargets(1u, pTarget_.GetAddressOf(), pDSV_.Get());
 
     D3D11_VIEWPORT vp = {};
-    vp.Width = static_cast<FLOAT>(width_);
-    vp.Height = static_cast<FLOAT>(height_);
+    vp.Width = static_cast<FLOAT>(ScreenWidth);
+    vp.Height = static_cast<FLOAT>(ScreenHeight);
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
     vp.TopLeftX = 0.0f;
@@ -158,7 +155,7 @@ void Graphics::EndFrame()
 void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 {
     const std::array<float, 4> colors = { red, green, blue, 1.0f };
-
+    
     pContext_->ClearRenderTargetView(pTarget_.Get(), colors.data());
     pContext_->ClearDepthStencilView(pDSV_.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }

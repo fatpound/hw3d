@@ -1,6 +1,7 @@
 #pragma once
 
 #include "FatWin.hpp"
+#include "FatMath.hpp"
 #include "FatException.hpp"
 #include "Keyboard.hpp"
 #include "Mouse.hpp"
@@ -11,16 +12,17 @@
 #include <memory>
 #include <concepts>
 
-class Window
+class Window final
 {
 public:
-    ~Window();
+    Window(const char* window_title);
+
+    Window() = delete;
     Window(const Window& src) = delete;
     Window(Window&& src) = delete;
     Window& operator = (const Window& src) = delete;
     Window& operator = (Window&& src) = delete;
-
-    Window(int width, int height, const char* name);
+    ~Window();
 
 
 public:
@@ -30,6 +32,10 @@ public:
 
     public:
         static std::string TranslateErrorCode(HRESULT hresult) noexcept;
+
+    protected:
+
+    private:
     };
     class HrException : public Exception
     {
@@ -44,6 +50,8 @@ public:
         const char* what() const noexcept override;
         const char* GetType() const noexcept override;
 
+    protected:
+
     private:
         HRESULT hresult_;
     };
@@ -53,6 +61,10 @@ public:
 
     public:
         const char* GetType() const noexcept override;
+
+    protected:
+
+    private:
     };
 
 
@@ -61,13 +73,13 @@ public:
 
     Graphics& Gfx();
 
-    template <typename T> requires std::is_integral_v<T> || std::is_floating_point_v<T>
-    T GetWidth() const
+    template <fatpound::math::Number T>
+    static consteval T GetWidth()
     {
         return static_cast<T>(width_);
     }
-    template <typename T> requires std::is_integral_v<T> || std::is_floating_point_v<T>
-    T GetHeight() const
+    template <fatpound::math::Number T>
+    static consteval T GetHeight()
     {
         return static_cast<T>(height_);
     }
@@ -84,24 +96,25 @@ protected:
 
 
 private:
-    class WindowClass
+    class WindowClass final
     {
     public:
-        static const char* GetName() noexcept;
         static HINSTANCE GetInstance() noexcept;
+
+        static const char* GetName() noexcept;
 
     protected:
 
     private:
         WindowClass() noexcept;
-        ~WindowClass();
         WindowClass(const WindowClass& src) = delete;
         WindowClass(WindowClass&& src) = delete;
         WindowClass& operator = (const WindowClass& src) = delete;
         WindowClass& operator = (WindowClass&& src) = delete;
+        ~WindowClass();
 
     private:
-        static constexpr const char* const wndClassName_ = "Fat Direct3D Engine Window";
+        static constexpr auto wndClassName_ = "Fat Direct3D Engine Window";
         static WindowClass wndClass_;
 
         HINSTANCE hInst_;
@@ -119,6 +132,6 @@ private:
 
     std::unique_ptr<Graphics> pGfx_;
 
-    int width_ = 0;
-    int height_ = 0;
+    static constexpr int width_  = Graphics::ScreenWidth;
+    static constexpr int height_ = Graphics::ScreenHeight;
 };

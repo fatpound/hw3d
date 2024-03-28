@@ -19,6 +19,9 @@ public:
     void Update(float deltaTime) noexcept override;
 
 
+protected:
+
+
 private:
     // positional
     float r_;
