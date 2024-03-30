@@ -155,7 +155,7 @@
     <ClInclude Include="WindowsMessageMap.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FatWin.hpp">
+    <ClInclude Include="FatWin32.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Window.hpp">

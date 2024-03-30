@@ -1,19 +1,22 @@
 #pragma once
 
-#include "FatWin.hpp"
+#include "FatWin32.hpp"
 #include "FatException.hpp"
 
+#include <cassert>
+
 #include <string>
-#include <assert.h>
 #include <memory>
 
 class Surface
 {
 public:
-    class Color
+    class Color final
     {
     public:
-        constexpr Color() noexcept : dword()
+        constexpr Color() noexcept
+            :
+            dword()
         {
 
         }
@@ -48,7 +51,6 @@ public:
 
         }
 
-    public:
         Color& operator = (Color color) noexcept
         {
             dword = color.dword;
@@ -124,10 +126,9 @@ public:
 
 
 public:
-    Surface() = delete;
-
     Surface(unsigned int width, unsigned int height) noexcept;
 
+    Surface() = delete;
     Surface(const Surface& src) = delete;
     Surface(Surface&& source) noexcept;
     Surface& operator = (const Surface& src) = delete;

@@ -1,6 +1,8 @@
-#define FULL_WINTARD
+#define FATPOUND_FULL_WIN_TARGETED
 
 #include "Surface.hpp"
+
+#include <algorithm>
 
 namespace Gdiplus
 {
@@ -11,7 +13,6 @@ namespace Gdiplus
 #include <gdiplus.h>
 
 #include <sstream>
-#include <algorithm>
 
 #pragma comment(lib, "gdiplus")
 
@@ -39,11 +40,6 @@ Surface::Surface(unsigned int width, unsigned int height, std::unique_ptr<Color[
 {
 
 }
-Surface::~Surface()
-{
-
-}
-
 Surface& Surface::operator = (Surface&& donor) noexcept
 {
     width_ = donor.width_;
@@ -52,6 +48,10 @@ Surface& Surface::operator = (Surface&& donor) noexcept
     donor.pBuffer_ = nullptr;
 
     return *this;
+}
+Surface::~Surface()
+{
+
 }
 
 Surface Surface::FromFile(const std::string& name)
@@ -176,7 +176,7 @@ void Surface::Save(const std::string& filename) const
 }
 void Surface::Copy(const Surface& src) noexcept(!IS_DEBUG)
 {
-    assert(width_ == src.width_);
+    assert(width_  == src.width_);
     assert(height_ == src.height_);
 
     std::memcpy(pBuffer_.get(), src.pBuffer_.get(), width_ * height_ * sizeof(Color));
@@ -205,6 +205,8 @@ unsigned int Surface::GetHeight() const noexcept
 }
 
 
+// Exception
+
 Surface::Exception::Exception(int line, const char* file, std::string note) noexcept
     :
     FatException(line, file),
@@ -222,14 +224,14 @@ const char* Surface::Exception::what() const noexcept
 {
     std::ostringstream oss;
 
-    oss << FatException::what() << std::endl
+    oss << FatException::what() << std::endl // check if the what method is correct here
         << "[Note] " << GetNote();
 
-    whatBuffer = oss.str();
+    what_buffer_ = oss.str();
 
-    return whatBuffer.c_str();
+    return what_buffer_.c_str();
 }
 const char* Surface::Exception::GetType() const noexcept
 {
-    return "Fat Graphics Exception";
+    return "Fat Surface Exception";
 }

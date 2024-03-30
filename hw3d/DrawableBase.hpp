@@ -15,20 +15,20 @@ protected:
         return ! staticBinds_.empty();
     }
 
-    static void AddStaticBind(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG)
+    static void AddStaticBind_(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG)
     {
-        assert("*Must* use AddStaticIndexBuffer to bind index buffer" && typeid(*bind) != typeid(IndexBuffer));
+        assert("*Must* use AddStaticIndexBuffer_ to bind index buffer" && typeid(*bind) != typeid(IndexBuffer));
 
         staticBinds_.push_back(std::move(bind));
     }
-    void AddStaticIndexBuffer(std::unique_ptr<IndexBuffer> ibuf) noexcept(!IS_DEBUG)
+    void AddStaticIndexBuffer_(std::unique_ptr<IndexBuffer> ibuf) noexcept(!IS_DEBUG)
     {
         assert("Attempting to add index buffer a second time" && pIndexBuffer_ == nullptr);
 
         pIndexBuffer_ = ibuf.get();
         staticBinds_.push_back(std::move(ibuf));
     }
-    void SetIndexFromStatic() noexcept(!IS_DEBUG)
+    void SetIndexFromStatic_() noexcept(!IS_DEBUG)
     {
         assert("Attempting to add index buffer a second time" && pIndexBuffer_ == nullptr);
 
@@ -49,7 +49,7 @@ protected:
 
 
 private:
-    const std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() const noexcept override
+    const std::vector<std::unique_ptr<Bindable>>& GetStaticBinds_() const noexcept override
     {
         return staticBinds_;
     }

@@ -4,12 +4,10 @@
 #include "FatTimer.hpp"
 #include "ImguiManager.hpp"
 
-using fatpound::time::FatTimer;
-
 class App final
 {
 public:
-	App();
+    App();
     App(const App& src) = delete;
     App(App&& src) = delete;
     App& operator = (const App& src) = delete;
@@ -18,22 +16,22 @@ public:
 
 
 public:
-	int Go();
+    int Go();
 
 
 protected:
 
 
 private:
-	void DoFrame_();
+    void DoFrame_();
 
 
 private:
     std::vector<std::unique_ptr<class Drawable>> drawables_;
 
     ImguiManager imgui_;
-	Window wnd_;
-	FatTimer timer_;
+    Window wnd_;
+    fatpound::time::FatTimer timer_;
 
     static constexpr size_t drawable_count_ = 180u;
 };

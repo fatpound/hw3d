@@ -1,8 +1,6 @@
 #pragma once
 
-#define FULL_WINTARD
-
-#include "FatWin.hpp"
+#include "FatWin32.hpp"
 
 class GDIPlusManager
 {
@@ -20,5 +18,6 @@ protected:
 
 private:
     static ULONG_PTR token_;
+
     static int refCount_;
 };

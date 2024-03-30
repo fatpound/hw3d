@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "../FatWin.hpp"
+#include "../FatWin32.hpp"
 #include "../Graphics.hpp"
 
 #include "imgui.h"

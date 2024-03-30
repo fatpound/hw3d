@@ -4,12 +4,8 @@
 
 namespace fatpound::time
 {
-    class FatTimer
+    class FatTimer final
     {
-    public:
-        FatTimer();
-
-
     public:
         float Mark() noexcept;
         float Peek() const noexcept;
@@ -19,6 +15,6 @@ namespace fatpound::time
 
 
     private:
-        std::chrono::steady_clock::time_point last;
+        std::chrono::steady_clock::time_point last = std::chrono::steady_clock::now();;
     };
 }

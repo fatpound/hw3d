@@ -1,4 +1,5 @@
 #include "App.hpp"
+
 #include "FatMath.hpp"
 #include "Box.hpp"
 #include "Pyramid.hpp"
@@ -104,7 +105,6 @@ App::~App() noexcept
 {
 
 }
-
 
 int App::Go()
 {

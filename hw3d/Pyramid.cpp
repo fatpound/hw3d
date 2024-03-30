@@ -25,9 +25,10 @@ Pyramid::Pyramid(Graphics& gfx,
 {
     if (!IsStaticInitialized())
     {
-        struct Vertex
+        struct Vertex final
         {
             dx::XMFLOAT3 pos;
+
             struct
             {
                 unsigned char r;
@@ -51,12 +52,12 @@ Pyramid::Pyramid(Graphics& gfx,
         // deform mesh linearly
         model.Transform(dx::XMMatrixScaling(1.0f, 1.0f, 0.7f));
 
-        AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices_));
+        AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
         auto pvs = std::make_unique<VertexShader>(gfx, L"VSColorBlend.cso");
         auto pvsbc = pvs->GetBytecode();
-        AddStaticBind(std::move(pvs));
-        AddStaticBind(std::make_unique<PixelShader>(gfx, L"PSColorBlend.cso"));
-        AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices_));
+        AddStaticBind_(std::move(pvs));
+        AddStaticBind_(std::make_unique<PixelShader>(gfx, L"PSColorBlend.cso"));
+        AddStaticIndexBuffer_(std::make_unique<IndexBuffer>(gfx, model.indices_));
 
         const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
         {
@@ -64,12 +65,12 @@ Pyramid::Pyramid(Graphics& gfx,
             { "Color", 0, DXGI_FORMAT_R8G8B8A8_UNORM, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
         };
 
-        AddStaticBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
-        AddStaticBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+        AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
+        AddStaticBind_(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
     }
     else
     {
-        SetIndexFromStatic();
+        SetIndexFromStatic_();
     }
 
     AddBind(std::make_unique<TransformCbuf>(gfx, *this));

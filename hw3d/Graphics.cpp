@@ -48,19 +48,21 @@ Graphics::Graphics(HWND hWnd)
 
     HRESULT hr;
 
-    GFX_THROW_INFO(D3D11CreateDeviceAndSwapChain(
-        nullptr,
-        D3D_DRIVER_TYPE_HARDWARE,
-        nullptr,
-        swapCreateFlags,
-        nullptr,
-        0,
-        D3D11_SDK_VERSION,
-        &scd,
-        &pSwapChain_,
-        &pDevice_,
-        nullptr,
-        &pContext_)
+    GFX_THROW_INFO(
+        D3D11CreateDeviceAndSwapChain(
+            nullptr,
+            D3D_DRIVER_TYPE_HARDWARE,
+            nullptr,
+            swapCreateFlags,
+            nullptr,
+            0,
+            D3D11_SDK_VERSION,
+            &scd,
+            &pSwapChain_,
+            &pDevice_,
+            nullptr,
+            &pContext_
+        )
     );
 
     wrl::ComPtr<ID3D11Resource> pBackBuffer = nullptr;
@@ -118,7 +120,6 @@ Graphics::Graphics(HWND hWnd)
     ImGui_ImplDX11_Init(pDevice_.Get(), pContext_.Get());
 }
 
-
 DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 {
     return projection_;
@@ -160,6 +161,7 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
     pContext_->ClearDepthStencilView(pDSV_.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
 
+
 // HrException
 
 Graphics::HrException::HrException(int line, const char* file, HRESULT hresult, std::vector<std::string> infoMsgs) noexcept
@@ -178,7 +180,6 @@ Graphics::HrException::HrException(int line, const char* file, HRESULT hresult, 
         info_.pop_back(); // '\n'
     }
 }
-
 
 HRESULT Graphics::HrException::GetErrorCode() const noexcept
 {
@@ -219,9 +220,9 @@ const char* Graphics::HrException::what() const noexcept
 
     oss << GetOriginString();
 
-    whatBuffer = oss.str();
+    what_buffer_ = oss.str();
 
-    return whatBuffer.c_str();
+    return what_buffer_.c_str();
 }
 const char* Graphics::HrException::GetType() const noexcept
 {
@@ -261,9 +262,9 @@ const char* Graphics::InfoException::what() const noexcept
 
     oss << GetOriginString();
 
-    whatBuffer = oss.str();
+    what_buffer_ = oss.str();
 
-    return whatBuffer.c_str();
+    return what_buffer_.c_str();
 }
 const char* Graphics::InfoException::GetType() const noexcept
 {

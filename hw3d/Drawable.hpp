@@ -34,7 +34,7 @@ protected:
 
 
 private:
-    virtual const std::vector<std::unique_ptr<Bindable>>& GetStaticBinds() const noexcept = 0;
+    virtual const std::vector<std::unique_ptr<Bindable>>& GetStaticBinds_() const noexcept = 0;
 
 
 private:

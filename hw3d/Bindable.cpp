@@ -1,16 +1,16 @@
 #include "Bindable.hpp"
 
-ID3D11DeviceContext* Bindable::GetContext(Graphics& gfx) noexcept
+ID3D11DeviceContext* Bindable::GetContext_(Graphics& gfx) noexcept
 {
     return gfx.pContext_.Get();
 }
 
-ID3D11Device* Bindable::GetDevice(Graphics& gfx) noexcept
+ID3D11Device* Bindable::GetDevice_(Graphics& gfx) noexcept
 {
     return gfx.pDevice_.Get();
 }
 
-DxgiInfoManager& Bindable::GetInfoManager(Graphics& gfx) noexcept(IS_DEBUG)
+DxgiInfoManager& Bindable::GetInfoManager_(Graphics& gfx) noexcept(IS_DEBUG)
 {
 #ifndef NDEBUG
     return gfx.infoManager_;

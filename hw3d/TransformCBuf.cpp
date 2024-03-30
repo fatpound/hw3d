@@ -12,7 +12,8 @@ TransformCbuf::TransformCbuf(Graphics& gfx, const Drawable& parent)
 
 void TransformCbuf::Bind(Graphics& gfx) noexcept
 {
-    pVcbuf_->Update(gfx,
+    pVcbuf_->Update(
+        gfx,
         DirectX::XMMatrixTranspose(
             parent_.GetTransformXM() *
             gfx.GetProjection()

@@ -5,7 +5,7 @@
 class IndexBuffer : public Bindable
 {
 public:
-    IndexBuffer(Graphics& gfx, const std::vector<unsigned short>& indices);
+    IndexBuffer(Graphics& gfx, const std::vector<unsigned short int>& indices);
 
 
 public:
@@ -17,7 +17,7 @@ public:
 protected:
     Microsoft::WRL::ComPtr<ID3D11Buffer> pIndexBuffer_;
 
-    UINT count;
+    UINT count_;
 
 
 private:

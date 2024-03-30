@@ -2,12 +2,11 @@
 
 // target Windows 7 or later
 #define _WIN32_WINNT 0x0601
+
 #include <sdkddkver.h>
-// The following #defines disable a bunch of unused windows stuff. If you 
-// get weird errors when trying to do some windows stuff, try removing some
-// (or all) of these defines (it will increase build time though).
-#ifndef FULL_WINTARD
-#define WIN32_LEAN_AND_MEAN
+
+#ifndef FATPOUND_FULL_WIN_TARGETED
+#define WIN32_LEAN_AND_MEAN // rarely used things
 #define NOGDICAPMASKS
 #define NOSYSMETRICS
 #define NOMENUS
@@ -17,7 +16,7 @@
 #define OEMRESOURCE
 #define NOATOM
 #define NOCLIPBOARD
-#define NOCOLOR
+// #define NOCOLOR // for D2D11
 #define NOCTLMGR
 #define NODRAWTEXT
 #define NOKERNEL
@@ -40,21 +39,19 @@
 #define NOPROXYSTUB
 #define NOIMAGE
 #define NOTAPE
-#endif
+#endif // FATPOUND_FULL_WIN_TARGETED
+
 
 #define NOMINMAX
-
 #define STRICT
+
+#define _CRTDBG_MAP_ALLOC
 
 #include <Windows.h>
 
 
 #ifndef NDEBUG
-
 #define IS_DEBUG true
-
 #else
-
 #define IS_DEBUG false
-
-#endif
+#endif // NDEBUG

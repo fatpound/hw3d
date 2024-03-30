@@ -1,10 +1,11 @@
 #include "FatException.hpp"
+
 #include <sstream>
 
 FatException::FatException(int line_num, const char* file_name) noexcept
     :
-    linenum(line_num),
-    filename(file_name)
+    line_num_(line_num),
+    file_name_(file_name)
 {
 
 }
@@ -13,14 +14,14 @@ std::string FatException::GetOriginString() const noexcept
 {
     std::ostringstream oss;
 
-    oss << "[File] : " << filename << '\n'
-        << "[Line] : " << linenum;
+    oss << "[File] : " << file_name_ << '\n'
+        << "[Line] : " << line_num_;
 
     return oss.str();
 }
 std::string FatException::GetFileName() const noexcept
 {
-    return filename;
+    return file_name_;
 }
 
 const char* FatException::GetType() const noexcept
@@ -34,12 +35,12 @@ const char* FatException::what() const noexcept
     oss << GetType() << '\n'
         << GetOriginString();
 
-    whatBuffer = oss.str();
+    what_buffer_ = oss.str();
 
-    return whatBuffer.c_str();
+    return what_buffer_.c_str();
 }
 
 int FatException::GetLineNum() const noexcept
 {
-    return linenum;
+    return line_num_;
 }

@@ -22,7 +22,7 @@ public:
         bd.StructureByteStride = sizeof(V);
         D3D11_SUBRESOURCE_DATA sd = {};
         sd.pSysMem = vertices.data();
-        GFX_THROW_INFO(GetDevice(gfx)->CreateBuffer(&bd, &sd, &pVertexBuffer_));
+        GFX_THROW_INFO(GetDevice_(gfx)->CreateBuffer(&bd, &sd, &pVertexBuffer_));
     }
 
 

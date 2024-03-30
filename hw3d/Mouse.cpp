@@ -1,17 +1,17 @@
-#include "FatWin.hpp"
+#include "FatWin32.hpp"
 #include "Mouse.hpp"
 
 std::pair<int, int> Mouse::GetPos() const noexcept
 {
-    return { x, y };
+    return { x_, y_ };
 }
 
 Mouse::Event Mouse::ReadFromBuffer() noexcept
 {
-    if ( buffer.size() > 0u )
+    if ( buffer_.size() > 0u )
     {
-        Mouse::Event e = buffer.front();
-        buffer.pop();
+        Mouse::Event e = buffer_.front();
+        buffer_.pop();
 
         return e;
     }
@@ -21,135 +21,135 @@ Mouse::Event Mouse::ReadFromBuffer() noexcept
 
 int Mouse::GetPosX() const noexcept
 {
-    return x;
+    return x_;
 }
 int Mouse::GetPosY() const noexcept
 {
-    return y;
+    return y_;
 }
 
 bool Mouse::IsInWindow() const noexcept
 {
-    return isInWindow;
+    return isInWindow_;
 }
 bool Mouse::LeftIsPressed() const noexcept
 {
-    return leftIsPressed;
+    return leftIsPressed_;
 }
 bool Mouse::RightIsPressed() const noexcept
 {
-    return rightIsPressed;
+    return rightIsPressed_;
 }
 bool Mouse::WheelIsPressed() const noexcept
 {
-    return wheelIsPressed;
+    return wheelIsPressed_;
 }
 bool Mouse::BufferIsEmpty() const noexcept
 {
-    return buffer.empty();
+    return buffer_.empty();
 }
 
 void Mouse::FlushBuffer() noexcept
 {
-    buffer = std::queue<Event>();
+    buffer_ = std::queue<Event>();
 }
 
-void Mouse::OnMouseMove(int newx, int newy) noexcept
+void Mouse::OnMouseMove_(int x, int y) noexcept
 {
-    x = newx;
-    y = newy;
+    x_ = x;
+    y_ = y;
     
-    buffer.push(Mouse::Event(Mouse::Event::Type::Move, *this));
-    TrimBuffer();
+    buffer_.push(Mouse::Event(Mouse::Event::Type::Move, *this));
+    TrimBuffer_();
 }
-void Mouse::OnMouseEnter() noexcept
+void Mouse::OnMouseEnter_() noexcept
 {
-    isInWindow = true;
+    isInWindow_ = true;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::Enter, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::Enter, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnMouseLeave() noexcept
+void Mouse::OnMouseLeave_() noexcept
 {
-    isInWindow = false;
+    isInWindow_ = false;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::Leave, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::Leave, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnLeftPressed() noexcept
+void Mouse::OnLeftPressed_() noexcept
 {
-    leftIsPressed = true;
+    leftIsPressed_ = true;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::LPress, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::LPress, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnLeftReleased() noexcept
+void Mouse::OnLeftReleased_() noexcept
 {
-    leftIsPressed = false;
+    leftIsPressed_ = false;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::LRelease, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::LRelease, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnRightPressed() noexcept
+void Mouse::OnRightPressed_() noexcept
 {
-    rightIsPressed = true;
+    rightIsPressed_ = true;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::RPress, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::RPress, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnRightReleased() noexcept
+void Mouse::OnRightReleased_() noexcept
 {
-    rightIsPressed = false;
+    rightIsPressed_ = false;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::RRelease, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::RRelease, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnWheelPressed() noexcept
+void Mouse::OnWheelPressed_() noexcept
 {
-    wheelIsPressed = true;
+    wheelIsPressed_ = true;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::WheelPress, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::WheelPress, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnWheelReleased() noexcept
+void Mouse::OnWheelReleased_() noexcept
 {
-    wheelIsPressed = false;
+    wheelIsPressed_ = false;
 
-    buffer.push( Mouse::Event( Mouse::Event::Type::WheelRelease, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::WheelRelease, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnWheelUp() noexcept
+void Mouse::OnWheelUp_() noexcept
 {
-    buffer.push( Mouse::Event( Mouse::Event::Type::WheelUp, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::WheelUp, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnWheelDown() noexcept
+void Mouse::OnWheelDown_() noexcept
 {
-    buffer.push( Mouse::Event( Mouse::Event::Type::WheelDown, *this ) );
-    TrimBuffer();
+    buffer_.push( Mouse::Event( Mouse::Event::Type::WheelDown, *this ) );
+    TrimBuffer_();
 }
-void Mouse::OnWheelDelta(int delta) noexcept
+void Mouse::OnWheelDelta_(int delta) noexcept
 {
-    wheelDeltaCarry += delta;
+    wheelDeltaCarry_ += delta;
 
-    while (wheelDeltaCarry >= WHEEL_DELTA)
+    while (wheelDeltaCarry_ >= WHEEL_DELTA)
     {
-        wheelDeltaCarry -= WHEEL_DELTA;
-        OnWheelUp();
+        wheelDeltaCarry_ -= WHEEL_DELTA;
+        OnWheelUp_();
     }
 
-    while (wheelDeltaCarry <= -WHEEL_DELTA)
+    while (wheelDeltaCarry_ <= -WHEEL_DELTA)
     {
-        wheelDeltaCarry += WHEEL_DELTA;
-        OnWheelDown();
+        wheelDeltaCarry_ += WHEEL_DELTA;
+        OnWheelDown_();
     }
 }
 
-void Mouse::TrimBuffer() noexcept
+void Mouse::TrimBuffer_() noexcept
 {
-    while ( buffer.size() > bufferSize )
+    while ( buffer_.size() > buffer_size_ )
     {
-        buffer.pop();
+        buffer_.pop();
     }
 }
 
@@ -157,60 +157,60 @@ void Mouse::TrimBuffer() noexcept
 
 Mouse::Event::Event() noexcept
     :
-    type(Type::Invalid),
-    leftIsPressed(false),
-    rightIsPressed(false),
-    wheelIsPressed(false),
-    x(0),
-    y(0)
+    type_(Type::Invalid),
+    leftIsPressed_(false),
+    rightIsPressed_(false),
+    wheelIsPressed_(false),
+    x_(0),
+    y_(0)
 {
 
 }
 
 Mouse::Event::Event(Type type, const Mouse& parent) noexcept
     :
-    type(type),
-    leftIsPressed(parent.leftIsPressed),
-    rightIsPressed(parent.rightIsPressed),
-    wheelIsPressed(parent.wheelIsPressed),
-    x(parent.x),
-    y(parent.y)
+    type_(type),
+    leftIsPressed_(parent.leftIsPressed_),
+    rightIsPressed_(parent.rightIsPressed_),
+    wheelIsPressed_(parent.wheelIsPressed_),
+    x_(parent.x_),
+    y_(parent.y_)
 {
 
 }
 
 std::pair<int, int> Mouse::Event::GetPos() const noexcept
 {
-    return { x, y };
+    return { x_, y_ };
 }
 
 Mouse::Event::Type Mouse::Event::GetType() const noexcept
 {
-    return type;
+    return type_;
 }
 
 int Mouse::Event::GetPosX() const noexcept
 {
-    return x;
+    return x_;
 }
 int Mouse::Event::GetPosY() const noexcept
 {
-    return y;
+    return y_;
 }
 
 bool Mouse::Event::IsValid() const noexcept
 {
-    return type != Event::Type::Invalid;
+    return type_ != Event::Type::Invalid;
 }
 bool Mouse::Event::LeftIsPressed() const noexcept
 {
-    return leftIsPressed;
+    return leftIsPressed_;
 }
 bool Mouse::Event::RightIsPressed() const noexcept
 {
-    return rightIsPressed;
+    return rightIsPressed_;
 }
 bool Mouse::Event::WheelIsPressed() const noexcept
 {
-    return wheelIsPressed;
+    return wheelIsPressed_;
 }

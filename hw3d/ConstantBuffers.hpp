@@ -19,7 +19,7 @@ public:
         cbd.ByteWidth = sizeof(C);
         cbd.StructureByteStride = 0u;
 
-        GFX_THROW_INFO(GetDevice(gfx)->CreateBuffer(&cbd, nullptr, &pConstantBuffer_));
+        GFX_THROW_INFO(GetDevice_(gfx)->CreateBuffer(&cbd, nullptr, &pConstantBuffer_));
     }
     ConstantBuffer(Graphics& gfx, const C& consts)
     {
@@ -36,7 +36,7 @@ public:
         D3D11_SUBRESOURCE_DATA csd = {};
         csd.pSysMem = &consts;
 
-        GFX_THROW_INFO(GetDevice(gfx)->CreateBuffer(&cbd, &csd, &pConstantBuffer_));
+        GFX_THROW_INFO(GetDevice_(gfx)->CreateBuffer(&cbd, &csd, &pConstantBuffer_));
     }
 
 
@@ -46,7 +46,7 @@ public:
         INFOMAN(gfx);
 
         D3D11_MAPPED_SUBRESOURCE msr;
-        GFX_THROW_INFO(GetContext(gfx)->Map(
+        GFX_THROW_INFO(GetContext_(gfx)->Map(
             pConstantBuffer_.Get(), 0u,
             D3D11_MAP_WRITE_DISCARD, 0u,
             &msr
@@ -54,7 +54,7 @@ public:
 
         std::memcpy(msr.pData, &consts, sizeof(consts));
 
-        GetContext(gfx)->Unmap(pConstantBuffer_.Get(), 0u);
+        GetContext_(gfx)->Unmap(pConstantBuffer_.Get(), 0u);
     }
 
 
@@ -69,14 +69,14 @@ template <typename C>
 class VertexConstantBuffer : public ConstantBuffer<C>
 {
     using ConstantBuffer<C>::pConstantBuffer_;
-    using Bindable::GetContext;
+    using Bindable::GetContext_;
 
 public:
     using ConstantBuffer<C>::ConstantBuffer;
     
     void Bind(Graphics& gfx) noexcept override
     {
-        GetContext(gfx)->VSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
+        GetContext_(gfx)->VSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
     }
 
 
@@ -90,14 +90,14 @@ template <typename C>
 class PixelConstantBuffer : public ConstantBuffer<C>
 {
     using ConstantBuffer<C>::pConstantBuffer_;
-    using Bindable::GetContext;
+    using Bindable::GetContext_;
 
 public:
     using ConstantBuffer<C>::ConstantBuffer;
 
     void Bind(Graphics& gfx) noexcept override
     {
-        GetContext(gfx)->PSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
+        GetContext_(gfx)->PSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
     }
 
 

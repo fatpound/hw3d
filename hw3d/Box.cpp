@@ -26,23 +26,23 @@ Box::Box(Graphics& gfx,
 {
     if (! IsStaticInitialized())
     {
-        struct Vertex
+        struct Vertex final
         {
             dx::XMFLOAT3 pos;
         };
         
         auto model = Cube::Make<Vertex>();
 
-        AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices_));
+        AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
 
         auto pvs = std::make_unique<VertexShader>(gfx, L"VSColorIndex.cso");
         auto pvsbc = pvs->GetBytecode();
-        AddStaticBind(std::move(pvs));
-        AddStaticBind(std::make_unique<PixelShader>(gfx, L"PSColorIndex.cso"));
+        AddStaticBind_(std::move(pvs));
+        AddStaticBind_(std::make_unique<PixelShader>(gfx, L"PSColorIndex.cso"));
 
-        AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices_));
+        AddStaticIndexBuffer_(std::make_unique<IndexBuffer>(gfx, model.indices_));
 
-        struct PixelShaderConstants
+        struct PixelShaderConstants final
         {
             struct
             {
@@ -68,17 +68,17 @@ Box::Box(Graphics& gfx,
             }
         };
 
-        AddStaticBind(std::make_unique<PixelConstantBuffer<PixelShaderConstants>>(gfx, cb2));
+        AddStaticBind_(std::make_unique<PixelConstantBuffer<PixelShaderConstants>>(gfx, cb2));
         const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
         {
             { "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 }
         };
-        AddStaticBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
-        AddStaticBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+        AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
+        AddStaticBind_(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
     }
     else
     {
-        SetIndexFromStatic();
+        SetIndexFromStatic_();
     }
     
     AddBind(std::make_unique<TransformCbuf>(gfx, *this));

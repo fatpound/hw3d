@@ -1,11 +1,11 @@
 #pragma once
 
-#include "FatWin.hpp"
+#include "FatWin32.hpp"
 
 #include <string>
 #include <unordered_map>
 
-class WindowsMessageMap
+class WindowsMessageMap final
 {
 public:
     WindowsMessageMap() noexcept;
@@ -19,5 +19,5 @@ protected:
 
 
 private:
-    std::unordered_map<DWORD, std::string> map;
+    std::unordered_map<DWORD, std::string> map_;
 };

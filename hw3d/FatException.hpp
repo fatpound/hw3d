@@ -20,11 +20,11 @@ public:
 
 
 protected:
-    mutable std::string whatBuffer;
+    mutable std::string what_buffer_;
 
 
 private:
-    std::string filename;
+    std::string file_name_;
 
-    int linenum;
+    int line_num_;
 };

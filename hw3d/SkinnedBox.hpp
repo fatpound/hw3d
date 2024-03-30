@@ -5,7 +5,8 @@
 class SkinnedBox : public DrawableBase<SkinnedBox>
 {
 public:
-    SkinnedBox(Graphics& gfx, std::mt19937& rng,
+    SkinnedBox(Graphics& gfx,
+        std::mt19937& rng,
         std::uniform_real_distribution<float>& adist,
         std::uniform_real_distribution<float>& ddist,
         std::uniform_real_distribution<float>& odist,
@@ -18,21 +19,24 @@ public:
     void Update(float dt) noexcept override;
 
 
+protected:
+
+
 private:
     // positional
-    float r;
-    float roll = 0.0f;
-    float pitch = 0.0f;
-    float yaw = 0.0f;
-    float theta;
-    float phi;
-    float chi;
+    float r_;
+    float roll_ = 0.0f;
+    float pitch_ = 0.0f;
+    float yaw_ = 0.0f;
+    float theta_;
+    float phi_;
+    float chi_;
 
     // speed (delta/s)
-    float droll;
-    float dpitch;
-    float dyaw;
-    float dtheta;
-    float dphi;
-    float dchi;
+    float droll_;
+    float dpitch_;
+    float dyaw_;
+    float dtheta_;
+    float dphi_;
+    float dchi_;
 };

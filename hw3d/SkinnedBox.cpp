@@ -14,20 +14,20 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
     std::uniform_real_distribution<float>& odist,
     std::uniform_real_distribution<float>& rdist)
     :
-    r(rdist(rng)),
-    droll(ddist(rng)),
-    dpitch(ddist(rng)),
-    dyaw(ddist(rng)),
-    dphi(odist(rng)),
-    dtheta(odist(rng)),
-    dchi(odist(rng)),
-    chi(adist(rng)),
-    theta(adist(rng)),
-    phi(adist(rng))
+    r_(rdist(rng)),
+    droll_(ddist(rng)),
+    dpitch_(ddist(rng)),
+    dyaw_(ddist(rng)),
+    dphi_(odist(rng)),
+    dtheta_(odist(rng)),
+    dchi_(odist(rng)),
+    chi_(adist(rng)),
+    theta_(adist(rng)),
+    phi_(adist(rng))
 {
     if (!IsStaticInitialized())
     {
-        struct Vertex
+        struct Vertex final
         {
             dx::XMFLOAT3 pos;
 
@@ -41,14 +41,14 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
 
         const auto model = Cube::MakeSkinned<Vertex>();
 
-        AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices_));
-        AddStaticBind(std::make_unique<Texture>(gfx, Surface::FromFile("Images\\cube.png")));
+        AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
+        AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Images\\cube.png")));
 
         auto pvs = std::make_unique<VertexShader>(gfx, L"VSTexture.cso");
         auto pvsbc = pvs->GetBytecode();
-        AddStaticBind(std::move(pvs));
-        AddStaticBind(std::make_unique<PixelShader>(gfx, L"PSTexture.cso"));
-        AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices_));
+        AddStaticBind_(std::move(pvs));
+        AddStaticBind_(std::make_unique<PixelShader>(gfx, L"PSTexture.cso"));
+        AddStaticIndexBuffer_(std::make_unique<IndexBuffer>(gfx, model.indices_));
 
         const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
         {
@@ -56,12 +56,12 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
             { "TexCoord",0,DXGI_FORMAT_R32G32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 }
         };
 
-        AddStaticBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
-        AddStaticBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+        AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
+        AddStaticBind_(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
     }
     else
     {
-        SetIndexFromStatic();
+        SetIndexFromStatic_();
     }
 
     AddBind(std::make_unique<TransformCbuf>(gfx, *this));
@@ -69,18 +69,18 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
 
 void SkinnedBox::Update(float dt) noexcept
 {
-    roll += droll * dt;
-    pitch += dpitch * dt;
-    yaw += dyaw * dt;
-    theta += dtheta * dt;
-    phi += dphi * dt;
-    chi += dchi * dt;
+    roll_  += droll_  * dt;
+    pitch_ += dpitch_ * dt;
+    yaw_   += dyaw_   * dt;
+    theta_ += dtheta_ * dt;
+    phi_   += dphi_   * dt;
+    chi_   += dchi_   * dt;
 }
 
 DirectX::XMMATRIX SkinnedBox::GetTransformXM() const noexcept
 {
-    return dx::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
-        dx::XMMatrixTranslation(r, 0.0f, 0.0f) *
-        dx::XMMatrixRotationRollPitchYaw(theta, phi, chi) *
+    return dx::XMMatrixRotationRollPitchYaw(pitch_, yaw_, roll_) *
+        dx::XMMatrixTranslation(r_, 0.0f, 0.0f) *
+        dx::XMMatrixRotationRollPitchYaw(theta_, phi_, chi_) *
         dx::XMMatrixTranslation(0.0f, 0.0f, 20.0f);
 }

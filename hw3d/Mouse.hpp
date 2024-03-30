@@ -2,21 +2,21 @@
 
 #include <queue>
 
-class Mouse
+class Mouse final
 {
     friend class Window;
 
 public:
     Mouse() = default;
-    ~Mouse() = default;
     Mouse(const Mouse& src) = delete;
     Mouse(Mouse&& src) = delete;
     Mouse& operator = (const Mouse& src) = delete;
     Mouse& operator = (Mouse&& src) = delete;
+    ~Mouse() = default;
 
 
 public:
-    class Event
+    class Event final
     {
     public:
         enum class Type
@@ -56,14 +56,14 @@ public:
     protected:
 
     private:
-        Type type;
+        Type type_;
 
-        int x;
-        int y;
+        int x_;
+        int y_;
 
-        bool leftIsPressed;
-        bool rightIsPressed;
-        bool wheelIsPressed;
+        bool leftIsPressed_;
+        bool rightIsPressed_;
+        bool wheelIsPressed_;
     };
 
 
@@ -88,33 +88,33 @@ protected:
 
 
 private:
-    void OnMouseMove(int newx, int newy) noexcept;
-    void OnMouseEnter() noexcept;
-    void OnMouseLeave() noexcept;
-    void OnLeftPressed() noexcept;
-    void OnLeftReleased() noexcept;
-    void OnRightPressed() noexcept;
-    void OnRightReleased() noexcept;
-    void OnWheelPressed() noexcept;
-    void OnWheelReleased() noexcept;
-    void OnWheelUp() noexcept;
-    void OnWheelDown() noexcept;
-    void OnWheelDelta(int delta) noexcept;
+    void OnMouseMove_(int x, int y) noexcept;
+    void OnMouseEnter_() noexcept;
+    void OnMouseLeave_() noexcept;
+    void OnLeftPressed_() noexcept;
+    void OnLeftReleased_() noexcept;
+    void OnRightPressed_() noexcept;
+    void OnRightReleased_() noexcept;
+    void OnWheelPressed_() noexcept;
+    void OnWheelReleased_() noexcept;
+    void OnWheelUp_() noexcept;
+    void OnWheelDown_() noexcept;
+    void OnWheelDelta_(int delta) noexcept;
 
-    void TrimBuffer() noexcept;
+    void TrimBuffer_() noexcept;
 
 
 private:
-    static constexpr unsigned int bufferSize = 16u;
+    static constexpr unsigned int buffer_size_ = 16u;
 
-    std::queue<Event> buffer;
+    std::queue<Event> buffer_;
 
-    int x = 0;
-    int y = 0;
-    int wheelDeltaCarry = 0;
+    int x_ = 0;
+    int y_ = 0;
+    int wheelDeltaCarry_ = 0;
 
-    bool isInWindow = false;
-    bool leftIsPressed = false;
-    bool rightIsPressed = false;
-    bool wheelIsPressed = false;
+    bool isInWindow_ = false;
+    bool leftIsPressed_ = false;
+    bool rightIsPressed_ = false;
+    bool wheelIsPressed_ = false;
 };

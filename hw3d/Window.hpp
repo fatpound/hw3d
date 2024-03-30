@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FatWin.hpp"
+#include "FatWin32.hpp"
 #include "FatMath.hpp"
 #include "FatException.hpp"
 #include "Keyboard.hpp"
@@ -9,13 +9,13 @@
 #include "WindowThrowMacros.hpp"
 
 #include <optional>
-#include <memory>
 #include <concepts>
+#include <memory>
 
 class Window final
 {
 public:
-    Window(const char* window_title);
+    Window(const char* const window_title);
 
     Window() = delete;
     Window(const Window& src) = delete;
@@ -96,7 +96,7 @@ protected:
 
 
 private:
-    class WindowClass final
+    class WindowClass_ final
     {
     public:
         static HINSTANCE GetInstance() noexcept;
@@ -106,25 +106,26 @@ private:
     protected:
 
     private:
-        WindowClass() noexcept;
-        WindowClass(const WindowClass& src) = delete;
-        WindowClass(WindowClass&& src) = delete;
-        WindowClass& operator = (const WindowClass& src) = delete;
-        WindowClass& operator = (WindowClass&& src) = delete;
-        ~WindowClass();
+        WindowClass_() noexcept;
+        WindowClass_(const WindowClass_& src) = delete;
+        WindowClass_(WindowClass_&& src) = delete;
+        WindowClass_& operator = (const WindowClass_& src) = delete;
+        WindowClass_& operator = (WindowClass_&& src) = delete;
+        ~WindowClass_();
 
     private:
-        static constexpr auto wndClassName_ = "Fat Direct3D Engine Window";
-        static WindowClass wndClass_;
+        static WindowClass_ wndClass_;
 
         HINSTANCE hInst_;
+
+        static constexpr auto wndClassName_ = "Fat Direct3D Engine Window";
     };
 
 
 private:
-    static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
-    static LRESULT CALLBACK HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
-    LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+    static LRESULT CALLBACK HandleMsgSetup_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+    static LRESULT CALLBACK HandleMsgThunk_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+    LRESULT HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 
 
 private:

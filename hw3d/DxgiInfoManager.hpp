@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FatWin.hpp"
+#include "FatWin32.hpp"
 
 #include <dxgidebug.h>
 #include <wrl.h>
@@ -29,7 +29,7 @@ protected:
 
 
 private:
-    Microsoft::WRL::ComPtr<IDXGIInfoQueue> pDxgiInfoQueue = nullptr;
+    Microsoft::WRL::ComPtr<IDXGIInfoQueue> pDxgiInfoQueue_ = nullptr;
 
     unsigned long long next_error_index_ = 0u;
 };

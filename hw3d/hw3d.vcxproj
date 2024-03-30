@@ -297,7 +297,7 @@
     <ClInclude Include="FatException.hpp" />
     <ClInclude Include="FatMath.hpp" />
     <ClInclude Include="FatTimer.hpp" />
-    <ClInclude Include="FatWin.hpp" />
+    <ClInclude Include="FatWin32.hpp" />
     <ClInclude Include="GDIPlusManager.hpp" />
     <ClInclude Include="Graphics.hpp" />
     <ClInclude Include="GraphicsThrowMacros.hpp" />

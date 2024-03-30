@@ -3,21 +3,21 @@
 #include <bitset>
 #include <queue>
 
-class Keyboard
+class Keyboard final
 {
     friend class Window;
     
 public:
     Keyboard() = default;
-    ~Keyboard() = default;
     Keyboard(const Keyboard& src) = delete;
     Keyboard(Keyboard&& src) = delete;
     Keyboard& operator = (const Keyboard& src) = delete;
     Keyboard& operator = (Keyboard&& src) = delete;
+    ~Keyboard() = default;
 
 
 public:
-    class Event
+    class Event final
     {
     public:
         enum class Type
@@ -30,7 +30,7 @@ public:
     public:
         Event() noexcept;
 
-        Event(Type in_type, unsigned char in_code) noexcept;
+        Event(Type type, unsigned char code) noexcept;
 
         unsigned char GetCode() const noexcept;
 
@@ -41,9 +41,9 @@ public:
     protected:
 
     private:
-        Type type;
+        Type type_;
 
-        unsigned char code;
+        unsigned char code_;
     };
 
 
@@ -70,29 +70,29 @@ protected:
 
 private:
     template <typename T>
-    static void TrimBuffer(std::queue<T>& buffer) noexcept
+    static void TrimBuffer_(std::queue<T>& buffer) noexcept
     {
-        while (buffer.size() > bufferSize)
+        while (buffer.size() > buffer_size_)
         {
             buffer.pop();
         }
     }
 
-    void OnKeyPressed(unsigned char keycode) noexcept;
-    void OnKeyReleased(unsigned char keycode) noexcept;
-    void OnChar(char character) noexcept;
+    void OnKeyPressed_(unsigned char keycode) noexcept;
+    void OnKeyReleased_(unsigned char keycode) noexcept;
+    void OnChar_(char character) noexcept;
 
-    void ClearKeyStateBitset() noexcept;
+    void ClearKeyStateBitset_() noexcept;
 
 
 private:
-    static constexpr unsigned int keyCount = 256u;
-    static constexpr unsigned int bufferSize = 16u;
+    static constexpr unsigned int key_count_ = 256u;
+    static constexpr unsigned int buffer_size_ = 16u;
 
-    std::bitset<keyCount> keystates;
+    std::bitset<key_count_> keystates_;
 
-    std::queue<Event> keybuffer;
-    std::queue<char> charbuffer;
+    std::queue<Event> keybuffer_;
+    std::queue<char> charbuffer_;
 
-    bool autoRepeatEnabled = false;
+    bool autoRepeatEnabled_ = false;
 };

@@ -15,7 +15,7 @@
 
 WindowsMessageMap::WindowsMessageMap() noexcept
     :
-    map({
+    map_({
         REGISTER_MESSAGE(WM_ACTIVATE),
         REGISTER_MESSAGE(WM_ACTIVATEAPP),
         REGISTER_MESSAGE(WM_ASKCBFORMATNAME),
@@ -195,11 +195,11 @@ WindowsMessageMap::WindowsMessageMap() noexcept
 std::string WindowsMessageMap::operator () (DWORD msg, WPARAM wp, LPARAM lp) const noexcept
 {
     constexpr int firstColWidth = 25;
-    const auto i = map.find( msg );
+    const auto i = map_.find( msg );
 
     std::ostringstream oss;
 
-    if (i != map.end())
+    if (i != map_.end())
     {
         oss << std::left << std::setw(firstColWidth) << i->second << std::right;
     }

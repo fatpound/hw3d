@@ -31,32 +31,32 @@ DxgiInfoManager::DxgiInfoManager()
 
     HRESULT hr;
 
-    GFX_THROW_NOINFO(DxgiGetDebugInterface(__uuidof(IDXGIInfoQueue), &pDxgiInfoQueue));
+    GFX_THROW_NOINFO(DxgiGetDebugInterface(__uuidof(IDXGIInfoQueue), &pDxgiInfoQueue_));
 }
 
 
 void DxgiInfoManager::SetNextIndex() noexcept
 {
-    next_error_index_ = pDxgiInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
+    next_error_index_ = pDxgiInfoQueue_->GetNumStoredMessages(DXGI_DEBUG_ALL);
 }
 
 std::vector<std::string> DxgiInfoManager::GetMessages() const
 {
     std::vector<std::string> messages;
 
-    const auto endIndex = pDxgiInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
+    const auto endIndex = pDxgiInfoQueue_->GetNumStoredMessages(DXGI_DEBUG_ALL);
 
-    for (auto i = next_error_index_; i < endIndex; i++)
+    for (auto i = next_error_index_; i < endIndex; ++i)
     {
         HRESULT hr;
         SIZE_T messageLength = 0;
 
-        GFX_THROW_NOINFO(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &messageLength));
+        GFX_THROW_NOINFO(pDxgiInfoQueue_->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &messageLength));
 
         auto msgBytes = std::make_unique<byte[]>(messageLength);
         auto pMessage = reinterpret_cast<DXGI_INFO_QUEUE_MESSAGE*>(msgBytes.get());
 
-        GFX_THROW_NOINFO(pDxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, pMessage, &messageLength));
+        GFX_THROW_NOINFO(pDxgiInfoQueue_->GetMessage(DXGI_DEBUG_ALL, i, pMessage, &messageLength));
 
         messages.emplace_back(pMessage->pDescription);
     }

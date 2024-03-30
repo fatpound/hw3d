@@ -1,3 +1,5 @@
+#define FATPOUND_FULL_WIN_TARGETED
+#include "FatWin32.hpp"
 #include "GDIPlusManager.hpp"
 
 #include <algorithm>
@@ -10,17 +12,19 @@ namespace Gdiplus
 
 #include <gdiplus.h>
 
-ULONG_PTR GDIPlusManager::token_ = 0;
-int GDIPlusManager::refCount_ = 0;
+ULONG_PTR GDIPlusManager::token_    = 0;
+int       GDIPlusManager::refCount_ = 0;
 
 GDIPlusManager::GDIPlusManager()
 {
     if (refCount_ == 0)
     {
         Gdiplus::GdiplusStartupInput input;
-        input.GdiplusVersion = 1;
+
+        input.GdiplusVersion = 1u;
         input.DebugEventCallback = nullptr;
         input.SuppressBackgroundThread = false;
+
         Gdiplus::GdiplusStartup(&token_, &input, nullptr);
     }
 
