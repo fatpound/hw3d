@@ -26,7 +26,7 @@ public:
     Graphics(Graphics&& src) = delete;
     Graphics& operator = (const Graphics& src) = delete;
     Graphics& operator = (Graphics&& src) = delete;
-    ~Graphics() = default;
+    ~Graphics();
 
 
 public:

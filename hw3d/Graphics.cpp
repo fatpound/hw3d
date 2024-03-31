@@ -123,6 +123,10 @@ Graphics::Graphics(HWND hWnd, int width, int height)
     // init imgui d3d impl
     ImGui_ImplDX11_Init(pDevice_.Get(), pContext_.Get());
 }
+Graphics::~Graphics()
+{
+    ImGui_ImplDX11_Shutdown();
+}
 
 dx::XMMATRIX Graphics::GetProjection() const noexcept
 {

@@ -66,7 +66,7 @@ std::optional<int> Window::ProcessMessages() noexcept
     return {};
 }
 
-Graphics& Window::Gfx() noexcept
+Graphics& Window::Gfx()
 {
     if (pGfx_ == nullptr)
     {

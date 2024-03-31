@@ -115,11 +115,13 @@ int App::Go()
     {
         errorCode = Window::ProcessMessages();
 
+        // [[unlikely]]
         if (errorCode)
         {
             return *errorCode;
         }
 
+        // [[unlikely]]
         if (wnd_.kbd_.KeyIsPressed(VK_ESCAPE))
         {
             wnd_.Kill();

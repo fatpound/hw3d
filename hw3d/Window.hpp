@@ -71,7 +71,7 @@ public:
 public:
     static std::optional<int> ProcessMessages() noexcept;
 
-    Graphics& Gfx() noexcept;
+    Graphics& Gfx();
 
     template <fatpound::math::Number T>
     T GetWidth() noexcept
