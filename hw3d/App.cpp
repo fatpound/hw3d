@@ -99,6 +99,7 @@ App::App()
     std::generate_n(std::back_inserter(drawables_), drawable_count_, Factory{ gfx_ });
     
     gfx_.SetProjection(dx::XMMatrixPerspectiveLH(1.0f, Window::GetHeight<float>() / Window::GetWidth<float>(), 0.5f, 40.0f));
+    gfx_.SetCamera(dx::XMMatrixTranslation(0.0f, 0.0f, 20.0f));
 }
 
 App::~App() noexcept

@@ -88,6 +88,7 @@ public:
 
 public:
     DirectX::XMMATRIX GetProjection() const noexcept;
+    DirectX::XMMATRIX GetCamera() const noexcept;
 
     bool IsImguiEnabled() const noexcept;
 
@@ -95,6 +96,7 @@ public:
     void EndFrame();
     void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
     void SetProjection(DirectX::FXMMATRIX projection) noexcept;
+    void SetCamera(DirectX::FXMMATRIX camera) noexcept;
     void EnableImgui() noexcept;
     void DisableImgui() noexcept;
 
@@ -113,6 +115,7 @@ private:
 
 private:
     DirectX::XMMATRIX projection_;
+    DirectX::XMMATRIX camera_;
 
     bool imgui_is_enabled_ = true;
 

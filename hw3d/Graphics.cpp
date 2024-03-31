@@ -121,9 +121,13 @@ Graphics::Graphics(HWND hWnd)
     ImGui_ImplDX11_Init(pDevice_.Get(), pContext_.Get());
 }
 
-DirectX::XMMATRIX Graphics::GetProjection() const noexcept
+dx::XMMATRIX Graphics::GetProjection() const noexcept
 {
     return projection_;
+}
+dx::XMMATRIX Graphics::GetCamera() const noexcept
+{
+    return camera_;
 }
 
 bool Graphics::IsImguiEnabled() const noexcept
@@ -175,6 +179,10 @@ void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
 void Graphics::SetProjection(DirectX::FXMMATRIX projection) noexcept
 {
     projection_ = projection;
+}
+void Graphics::SetCamera(DirectX::FXMMATRIX camera) noexcept
+{
+    camera_ = camera;
 }
 void Graphics::EnableImgui() noexcept
 {
