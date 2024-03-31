@@ -15,7 +15,7 @@
 class Window final
 {
 public:
-    Window(const char* const window_title);
+    Window(const char* const window_title, int width, int height);
 
     Window() = delete;
     Window(const Window& src) = delete;
@@ -74,12 +74,12 @@ public:
     Graphics& Gfx() noexcept;
 
     template <fatpound::math::Number T>
-    static consteval T GetWidth() noexcept
+    T GetWidth() noexcept
     {
         return static_cast<T>(width_);
     }
     template <fatpound::math::Number T>
-    static consteval T GetHeight() noexcept
+    T GetHeight() noexcept
     {
         return static_cast<T>(height_);
     }
@@ -134,6 +134,6 @@ private:
 
     std::unique_ptr<Graphics> pGfx_;
 
-    static constexpr int width_  = Graphics::ScreenWidth;
-    static constexpr int height_ = Graphics::ScreenHeight;
+    const int width_;
+    const int height_;
 };

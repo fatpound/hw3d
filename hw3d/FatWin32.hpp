@@ -8,7 +8,7 @@
 #ifndef FATPOUND_FULL_WIN_TARGETED
 #define WIN32_LEAN_AND_MEAN // rarely used things
 #define NOGDICAPMASKS
-#define NOSYSMETRICS
+// #define NOSYSMETRICS
 #define NOMENUS
 #define NOICONS
 #define NOSYSCOMMANDS

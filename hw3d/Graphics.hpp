@@ -19,7 +19,7 @@ class Graphics final
     friend class Bindable;
 
 public:
-    Graphics(HWND hWnd);
+    Graphics(HWND hWnd, int width, int height);
 
     Graphics() = delete;
     Graphics(const Graphics& src) = delete;
@@ -102,8 +102,8 @@ public:
 
 
 public:
-    static constexpr int ScreenWidth = 1366;
-    static constexpr int ScreenHeight = 768;
+    const int ScreenWidth;
+    const int ScreenHeight;
 
 
 protected:

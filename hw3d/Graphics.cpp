@@ -22,10 +22,13 @@ namespace dx = DirectX;
 
 // Graphics
 
-Graphics::Graphics(HWND hWnd)
+Graphics::Graphics(HWND hWnd, int width, int height)
+    :
+    ScreenWidth(width),
+    ScreenHeight(height)
 {
     DXGI_SWAP_CHAIN_DESC scd = {};
-    scd.BufferDesc.Width = 0;  // these two zeroes mean go find out yourself from the hWnd
+    scd.BufferDesc.Width  = 0; // these two zeroes mean go find out yourself from the hWnd
     scd.BufferDesc.Height = 0; // these two zeroes mean go find out yourself from the hWnd
     scd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
     scd.BufferDesc.RefreshRate.Numerator = 0;
@@ -86,7 +89,7 @@ Graphics::Graphics(HWND hWnd)
     wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
     
     D3D11_TEXTURE2D_DESC descDepth = {};
-    descDepth.Width = static_cast<UINT>(ScreenWidth);
+    descDepth.Width  = static_cast<UINT>(ScreenWidth);
     descDepth.Height = static_cast<UINT>(ScreenHeight);
     descDepth.MipLevels = 1u;
     descDepth.ArraySize = 1u;

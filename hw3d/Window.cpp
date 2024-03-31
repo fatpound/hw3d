@@ -10,27 +10,19 @@
 
 // Window
 
-Window::Window(const char* const window_title)
+Window::Window(const char* const window_title, int width, int height)
+    :
+    width_(width),
+    height_(height)
 {
-    RECT wr = {};
-    wr.left = 100;
-    wr.right = width_ + wr.left;
-    wr.top = 100;
-    wr.bottom = height_ + wr.top;
-
-    if (AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE) == 0)
-    {
-        throw FHWND_LAST_EXCEPT();
-    }
-
     hWnd_ = CreateWindow(
         WindowClass_::GetName(),
         window_title,
-        WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+        WS_POPUP,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
-        wr.right - wr.left,
-        wr.bottom - wr.top,
+        width,
+        height,
         nullptr,
         nullptr,
         WindowClass_::GetInstance(),
@@ -48,7 +40,7 @@ Window::Window(const char* const window_title)
 
     ImGui_ImplWin32_Init(hWnd_);
 
-    pGfx_ = std::make_unique<Graphics>(hWnd_);
+    pGfx_ = std::make_unique<Graphics>(hWnd_, width_, height_);
 }
 Window::~Window()
 {

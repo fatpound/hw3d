@@ -7,15 +7,19 @@ namespace dx = DirectX;
 DirectX::XMMATRIX Camera::GetMatrix() const noexcept
 {
 	const auto& pos = dx::XMVector3Transform(
-		dx::XMVectorSet(0.0f, 0.0f, -r_, 0.0f),
+		dx::XMVectorSet(0.0f, 0.0f, -r_, 0.0f), // setting the camera at a distance of r_
 		dx::XMMatrixRotationRollPitchYaw(phi_, -theta_, 0.0f)
 	);
 
-	return dx::XMMatrixLookAtLH(
-		pos,
-		dx::XMVectorZero(),
-		dx::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f)) *
+	const auto& look =
+		dx::XMMatrixLookAtLH(
+			pos,                // position to go n look at
+			dx::XMVectorZero(), // position to go n look from
+			dx::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f) // y should be pointing towards up
+		) *
 		dx::XMMatrixRotationRollPitchYaw(pitch_, -yaw_, roll_);
+
+	return look;
 }
 
 void Camera::SpawnControlImguiWindow() noexcept
