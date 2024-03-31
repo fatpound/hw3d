@@ -127,7 +127,7 @@ int App::Go()
 
 void App::DoFrame_()
 {
-    auto dt = timer_.Mark();
+    auto dt = timer_.Mark() * simulation_speed_;
 
     if (wnd_.kbd_.KeyIsPressed(VK_SPACE))
     {
@@ -144,8 +144,14 @@ void App::DoFrame_()
         obj->Draw(gfx_);
     }
     
-    if (show_imgui_demo_window_) // will be removed
+    static std::array<char, 1024> buffer;
+
+    // chilling with imgui window to control simulation speed
+    if (ImGui::Begin("Simulation Speed"))
     {
-        ImGui::ShowDemoWindow(&show_imgui_demo_window_);
+        ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
+        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::InputText("Text Input", buffer.data(), buffer.size());
     }
+    ImGui::End();
 }

@@ -35,7 +35,7 @@ private:
 
     fatpound::util::Timer timer_;
 
-    bool show_imgui_demo_window_ = true;
+    float simulation_speed_ = 1.0f;
 
     static constexpr size_t drawable_count_ = 180u;
 };
