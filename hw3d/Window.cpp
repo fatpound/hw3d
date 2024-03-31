@@ -92,6 +92,11 @@ void Window::SetTitle(const std::string& title)
     }
 }
 
+void Window::Kill()
+{
+    PostQuitMessage(0);
+}
+
 LRESULT CALLBACK Window::HandleMsgSetup_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
     if (msg == WM_NCCREATE)

@@ -85,6 +85,7 @@ public:
     }
 
     void SetTitle(const std::string& title);
+    void Kill();
 
 
 public:

@@ -3,6 +3,7 @@
 #include "Window.hpp"
 #include "FatTimer.hpp"
 #include "ImguiManager.hpp"
+#include "Camera.hpp"
 
 class App final
 {
@@ -32,6 +33,7 @@ private:
     ImguiManager imgui_;
     Window wnd_;
     Graphics& gfx_;
+    Camera camera_;
 
     fatpound::util::Timer timer_;
 

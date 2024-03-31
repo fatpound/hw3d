@@ -99,7 +99,6 @@ App::App()
     std::generate_n(std::back_inserter(drawables_), drawable_count_, Factory{ gfx_ });
     
     gfx_.SetProjection(dx::XMMatrixPerspectiveLH(1.0f, Window::GetHeight<float>() / Window::GetWidth<float>(), 0.5f, 40.0f));
-    gfx_.SetCamera(dx::XMMatrixTranslation(0.0f, 0.0f, 20.0f));
 }
 
 App::~App() noexcept
@@ -120,6 +119,13 @@ int App::Go()
             return *errorCode;
         }
 
+        if (wnd_.kbd_.KeyIsPressed(VK_ESCAPE))
+        {
+            wnd_.Kill();
+            
+            return 0;
+        }
+
         gfx_.BeginFrame(0.07f, 0.0f, 0.12f);
         DoFrame_();
         gfx_.EndFrame();
@@ -129,17 +135,23 @@ int App::Go()
 void App::DoFrame_()
 {
     auto dt = timer_.Mark() * simulation_speed_;
+
+    gfx_.SetCamera(camera_.GetMatrix());
     
     for (auto& obj : drawables_)
     {
         obj->Update(wnd_.kbd_.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
         obj->Draw(gfx_);
     }
-    
+
+    camera_.SpawnControlImguiWindow();
+
     if (ImGui::Begin("Simulation Speed"))
     {
         ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        ImGui::Text("Status: %s", wnd_.kbd_.KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
     }
+
     ImGui::End();
 }

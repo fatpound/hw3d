@@ -25,8 +25,8 @@ namespace dx = DirectX;
 Graphics::Graphics(HWND hWnd)
 {
     DXGI_SWAP_CHAIN_DESC scd = {};
-    scd.BufferDesc.Width = 0; // these two zeroes mean go find out yourself from the hWnd
-    scd.BufferDesc.Height = 0;
+    scd.BufferDesc.Width = 0;  // these two zeroes mean go find out yourself from the hWnd
+    scd.BufferDesc.Height = 0; // these two zeroes mean go find out yourself from the hWnd
     scd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
     scd.BufferDesc.RefreshRate.Numerator = 0;
     scd.BufferDesc.RefreshRate.Denominator = 0;
