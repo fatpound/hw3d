@@ -135,14 +135,10 @@ void App::DoFrame_()
         obj->Draw(gfx_);
     }
     
-    static std::array<char, 1024> buffer;
-
-    // chilling with imgui window to control simulation speed
     if (ImGui::Begin("Simulation Speed"))
     {
         ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::InputText("Text Input", buffer.data(), buffer.size());
     }
     ImGui::End();
 }
