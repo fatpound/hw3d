@@ -31,7 +31,11 @@ private:
 
     ImguiManager imgui_;
     Window wnd_;
-    fatpound::time::FatTimer timer_;
+    Graphics& gfx_;
+
+    fatpound::util::Timer timer_;
+
+    bool show_imgui_demo_window_ = true;
 
     static constexpr size_t drawable_count_ = 180u;
 };

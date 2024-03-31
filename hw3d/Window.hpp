@@ -71,15 +71,15 @@ public:
 public:
     static std::optional<int> ProcessMessages() noexcept;
 
-    Graphics& Gfx();
+    Graphics& Gfx() noexcept;
 
     template <fatpound::math::Number T>
-    static consteval T GetWidth()
+    static consteval T GetWidth() noexcept
     {
         return static_cast<T>(width_);
     }
     template <fatpound::math::Number T>
-    static consteval T GetHeight()
+    static consteval T GetHeight() noexcept
     {
         return static_cast<T>(height_);
     }

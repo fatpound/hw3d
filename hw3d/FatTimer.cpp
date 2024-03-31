@@ -1,8 +1,8 @@
 #include "FatTimer.hpp"
 
-namespace fatpound::time
+namespace fatpound::util
 {
-    float FatTimer::Mark() noexcept
+    float Timer::Mark() noexcept
     {
         const auto old = last;
 
@@ -12,7 +12,7 @@ namespace fatpound::time
 
         return frameTime.count();
     }
-    float FatTimer::Peek() const noexcept
+    float Timer::Peek() const noexcept
     {
         return std::chrono::duration<float>(std::chrono::steady_clock::now() - last).count();
     }

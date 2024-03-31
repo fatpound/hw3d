@@ -4,6 +4,7 @@
 #include "dxerr.h"
 
 #include "imgui/imgui_impl_dx11.h"
+#include "imgui/imgui_impl_win32.h"
 
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
@@ -125,16 +126,30 @@ DirectX::XMMATRIX Graphics::GetProjection() const noexcept
     return projection_;
 }
 
-void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
+bool Graphics::IsImguiEnabled() const noexcept
 {
-    GFX_THROW_INFO_ONLY(pContext_->DrawIndexed(count, 0u, 0u));
+    return imgui_is_enabled_;
 }
-void Graphics::SetProjection(DirectX::FXMMATRIX projection) noexcept
+
+void Graphics::BeginFrame(float red, float green, float blue) noexcept
 {
-    projection_ = projection;
+    if (imgui_is_enabled_)
+    {
+        ImGui_ImplDX11_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
+    }
+
+    ClearBuffer_(red, green, blue);
 }
 void Graphics::EndFrame()
 {
+    if (imgui_is_enabled_)
+    {
+        ImGui::Render();
+        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+    }
+
     HRESULT hr;
 
 #ifndef NDEBUG
@@ -153,7 +168,24 @@ void Graphics::EndFrame()
         }
     }
 }
-void Graphics::ClearBuffer(float red, float green, float blue) noexcept
+void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
+{
+    GFX_THROW_INFO_ONLY(pContext_->DrawIndexed(count, 0u, 0u));
+}
+void Graphics::SetProjection(DirectX::FXMMATRIX projection) noexcept
+{
+    projection_ = projection;
+}
+void Graphics::EnableImgui() noexcept
+{
+    imgui_is_enabled_ = true;
+}
+void Graphics::DisableImgui() noexcept
+{
+    imgui_is_enabled_ = false;
+}
+
+void Graphics::ClearBuffer_(float red, float green, float blue) noexcept
 {
     const std::array<float, 4> colors = { red, green, blue, 1.0f };
     

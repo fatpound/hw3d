@@ -2,9 +2,9 @@
 
 #include <chrono>
 
-namespace fatpound::time
+namespace fatpound::util
 {
-    class FatTimer final
+    class Timer final
     {
     public:
         float Mark() noexcept;

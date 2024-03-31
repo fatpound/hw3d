@@ -89,10 +89,14 @@ public:
 public:
     DirectX::XMMATRIX GetProjection() const noexcept;
 
+    bool IsImguiEnabled() const noexcept;
+
+    void BeginFrame(float red, float green, float blue) noexcept;
     void EndFrame();
-    void ClearBuffer(float red, float green, float blue) noexcept;
     void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
     void SetProjection(DirectX::FXMMATRIX projection) noexcept;
+    void EnableImgui() noexcept;
+    void DisableImgui() noexcept;
 
 
 public:
@@ -104,7 +108,13 @@ protected:
 
 
 private:
+    void ClearBuffer_(float red, float green, float blue) noexcept;
+
+
+private:
     DirectX::XMMATRIX projection_;
+
+    bool imgui_is_enabled_ = true;
 
 #ifndef NDEBUG
     DxgiInfoManager infoManager_;
