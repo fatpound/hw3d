@@ -128,15 +128,6 @@ int App::Go()
 void App::DoFrame_()
 {
     auto dt = timer_.Mark() * simulation_speed_;
-
-    if (wnd_.kbd_.KeyIsPressed(VK_SPACE))
-    {
-        gfx_.DisableImgui();
-    }
-    else
-    {
-        gfx_.EnableImgui();
-    }
     
     for (auto& obj : drawables_)
     {

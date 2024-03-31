@@ -123,6 +123,8 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
         return static_cast<LRESULT>(true);
     }
 
+    const auto& imio = ImGui::GetIO();
+
     switch (msg)
     {
     case WM_CLOSE:
@@ -137,6 +139,11 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
     case WM_KEYDOWN:
         [[fallthrough]];
     case WM_SYSKEYDOWN:
+        if (imio.WantCaptureKeyboard)
+        {
+            break;
+        }
+
         if ( ! (lParam & 0x40000000) || kbd_.AutoRepeatIsEnabled() )
         {
             kbd_.OnKeyPressed_(static_cast<unsigned char>(wParam));
@@ -146,10 +153,20 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
     case WM_KEYUP:
         [[fallthrough]];
     case WM_SYSKEYUP:
+        if (imio.WantCaptureKeyboard)
+        {
+            break;
+        }
+
         kbd_.OnKeyReleased_(static_cast<unsigned char>(wParam));
         break;
 
     case WM_CHAR:
+        if (imio.WantCaptureKeyboard)
+        {
+            break;
+        }
+
         kbd_.OnChar_(static_cast<unsigned char>(wParam));
         break;
         /******** END KEYBOARD MESSAGES ********/
@@ -158,6 +175,11 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
         /******** MOUSE MESSAGES ********/
     case WM_MOUSEMOVE:
     {
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         const POINTS pt = MAKEPOINTS(lParam);
 
         if (pt.x >= 0 && pt.x < width_ && pt.y >= 0 && pt.y < height_)
@@ -186,30 +208,67 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
         break;
 
     case WM_LBUTTONDOWN:
+        SetForegroundWindow(hWnd);
+
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         mouse_.OnLeftPressed_();
         break;
 
     case WM_LBUTTONUP:
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         mouse_.OnLeftReleased_();
         break;
 
     case WM_RBUTTONDOWN:
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         mouse_.OnRightPressed_();
         break;
 
     case WM_RBUTTONUP:
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         mouse_.OnRightReleased_();
         break;
 
     case WM_MBUTTONDOWN:
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         mouse_.OnWheelPressed_();
         break;
 
     case WM_MBUTTONUP:
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         mouse_.OnWheelReleased_();
         break;
 
     case WM_MOUSEWHEEL:
+        if (imio.WantCaptureMouse)
+        {
+            break;
+        }
+
         mouse_.OnWheelDelta_(GET_WHEEL_DELTA_WPARAM(wParam));
         break;
         /******** END MOUSE MESSAGES ********/
