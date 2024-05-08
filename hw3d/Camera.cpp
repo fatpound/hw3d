@@ -13,8 +13,8 @@ DirectX::XMMATRIX Camera::GetMatrix() const noexcept
 
 	const auto& look =
 		dx::XMMatrixLookAtLH(
-			pos,                // position to go n look at
-			dx::XMVectorZero(), // position to go n look from
+			pos,                // position to go n look from
+			dx::XMVectorZero(), // position to go n look at
 			dx::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f) // y should be pointing towards up
 		) *
 		dx::XMMatrixRotationRollPitchYaw(pitch_, -yaw_, roll_);
