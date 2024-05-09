@@ -8,6 +8,14 @@
 
 #include <sstream>
 
+#if IN_RELEASE
+#define CLIENT_WIDTH    width_
+#define CLIENT_HEIGHT   height_
+#else
+#define CLIENT_WIDTH    (rect.right - rect.left)
+#define CLIENT_HEIGHT   (rect.bottom - rect.top)
+#endif // IN_RELEASE
+
 // Window
 
 Window::Window(const char* const window_title, int width, int height)
@@ -15,25 +23,53 @@ Window::Window(const char* const window_title, int width, int height)
     width_(width),
     height_(height)
 {
+#if IN_RELEASE
+
     hWnd_ = CreateWindow(
         WindowClass_::GetName(),
         window_title,
         WS_POPUP,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
-        width,
-        height,
+        static_cast<int>(CLIENT_WIDTH),
+        static_cast<int>(CLIENT_HEIGHT),
         nullptr,
         nullptr,
         WindowClass_::GetInstance(),
         this
     );
 
-    if (hWnd_ == nullptr)
+#else
+
+    RECT rect = {};
+    rect.left = 150;
+    rect.right = static_cast<LONG>(width_) + rect.left;
+    rect.top = 150;
+    rect.bottom = static_cast<LONG>(height_) + rect.top;
+
+    AdjustWindowRect(&rect, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
+
+    hWnd_ = CreateWindow(
+        WindowClass_::GetName(),
+        window_title,
+        WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX,
+        rect.left,
+        rect.top,
+        static_cast<int>(CLIENT_WIDTH),
+        static_cast<int>(CLIENT_HEIGHT),
+        nullptr,
+        nullptr,
+        WindowClass_::GetInstance(),
+        this
+    );
+
+#endif // IN_RELEASE
+
+    if (hWnd_ == nullptr) [[unlikely]]
     {
         throw FHWND_LAST_EXCEPT();
     }
-    else
+    else [[likely]]
     {
         ShowWindow(hWnd_, /*SW_SHOW*/ SW_SHOWDEFAULT);
     }
@@ -41,6 +77,13 @@ Window::Window(const char* const window_title, int width, int height)
     ImGui_ImplWin32_Init(hWnd_);
 
     pGfx_ = std::make_unique<Graphics>(hWnd_, width_, height_);
+
+    if (pGfx_ == nullptr) [[unlikely]]
+    {
+        throw FHWND_LAST_EXCEPT();
+    }
+
+    UpdateWindow(hWnd_);
 }
 Window::~Window()
 {

@@ -21,13 +21,21 @@
 #include <numbers>
 #include <random>
 
+#ifdef NDEBUG
+#define SCREEN_WIDTH    GetSystemMetrics(SM_CXSCREEN)
+#define SCREEN_HEIGHT   GetSystemMetrics(SM_CYSCREEN)
+#else
+#define SCREEN_WIDTH    1024
+#define SCREEN_HEIGHT    768
+#endif // NDEBUG
+
 namespace dx = DirectX;
 
 GDIPlusManager gdipm;
 
 App::App()
     :
-    wnd_("The FatBox", GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN)),
+    wnd_("The FatBox", SCREEN_WIDTH, SCREEN_HEIGHT),
     gfx_(wnd_.Gfx())
 {
     class Factory final
@@ -106,7 +114,7 @@ App::App()
     gfx_.SetProjection(
         dx::XMMatrixPerspectiveLH(
             1.0f,
-            wnd_.GetHeight<float>() / wnd_.GetWidth<float>(),
+            wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), // 1 / Aspect Ratio
             0.5f,
             40.0f
         )

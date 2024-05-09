@@ -9,8 +9,11 @@ class Sphere
 {
 public:
     template <class V>
-    static IndexedTriangleList<V> MakeTesselated(int latDiv, int longDiv)
+    static IndexedTriangleList<V> MakeTesselated(int lat_div, int long_div)
     {
+        const unsigned short int latDiv  = static_cast<unsigned short int>(lat_div);
+        const unsigned short int longDiv = static_cast<unsigned short int>(long_div);
+
         assert(latDiv >= 3);
         assert(longDiv >= 3);
 
@@ -47,7 +50,7 @@ public:
         vertices.emplace_back();
         dx::XMStoreFloat3(&vertices.back().pos, dx::XMVectorNegate(base));
 
-        const auto calcIdx = [latDiv, longDiv](unsigned short int iLat, unsigned short int iLong)
+        const auto calcIdx = [latDiv, longDiv](unsigned short int iLat, unsigned short int iLong) -> std::uint16_t
         {
             return iLat * longDiv + iLong;
         };
