@@ -2,14 +2,14 @@
 
 #include "Bindable.hpp"
 
-class Texture : public Bindable
+class Texture final : public Bindable
 {
 public:
     Texture(Graphics& gfx, const class Surface& surface);
 
 
 public:
-    void Bind(Graphics& gfx) noexcept override;
+    virtual void Bind(Graphics& gfx) noexcept override final;
 
 
 protected:

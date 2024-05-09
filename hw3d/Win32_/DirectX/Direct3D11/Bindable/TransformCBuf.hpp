@@ -6,14 +6,14 @@
 
 #include <DirectXMath.h>
 
-class TransformCbuf : public Bindable
+class TransformCbuf final : public Bindable
 {
 public:
     TransformCbuf(Graphics& gfx, const Drawable& parent);
 
 
 public:
-    void Bind(Graphics& gfx) noexcept override;
+    virtual void Bind(Graphics& gfx) noexcept override final;
 
 
 protected:

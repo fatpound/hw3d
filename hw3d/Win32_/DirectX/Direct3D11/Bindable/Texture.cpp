@@ -37,7 +37,6 @@ Texture::Texture(Graphics& gfx, const Surface& surface)
         )
     );
 
-    // creating the resource view on the texture
     D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
     srvDesc.Format = texDesc.Format;
     srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;

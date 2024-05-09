@@ -2,16 +2,18 @@
 
 #include "Bindable.hpp"
 
-class VertexShader : public Bindable
+class VertexShader final : public Bindable
 {
 public:
     VertexShader(Graphics& gfx, const std::wstring& path);
 
 
 public:
-    ID3DBlob* GetBytecode() const noexcept;
+    virtual void Bind(Graphics& gfx) noexcept override final;
 
-    void Bind(Graphics& gfx) noexcept override;
+
+public:
+    ID3DBlob* GetBytecode() const noexcept;
 
 
 protected:

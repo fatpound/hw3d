@@ -4,7 +4,7 @@
 
 #include "Bindable.hpp"
 
-class VertexBuffer : public Bindable
+class VertexBuffer final : public Bindable
 {
 public:
     template <class V>
@@ -21,14 +21,16 @@ public:
         bd.MiscFlags = 0u;
         bd.ByteWidth = UINT(sizeof(V) * vertices.size());
         bd.StructureByteStride = sizeof(V);
+
         D3D11_SUBRESOURCE_DATA sd = {};
         sd.pSysMem = vertices.data();
+
         GFX_THROW_INFO(GetDevice_(gfx)->CreateBuffer(&bd, &sd, &pVertexBuffer_));
     }
 
 
 public:
-    void Bind(Graphics& gfx) noexcept override;
+    virtual void Bind(Graphics& gfx) noexcept override final;
 
 
 protected:

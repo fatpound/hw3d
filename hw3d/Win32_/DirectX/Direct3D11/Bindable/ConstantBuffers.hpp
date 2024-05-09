@@ -12,7 +12,7 @@ public:
     {
         INFOMAN(gfx);
 
-        D3D11_BUFFER_DESC cbd;
+        D3D11_BUFFER_DESC cbd = {};
         cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
         cbd.Usage = D3D11_USAGE_DYNAMIC;
         cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -26,7 +26,7 @@ public:
     {
         INFOMAN(gfx);
 
-        D3D11_BUFFER_DESC cbd;
+        D3D11_BUFFER_DESC cbd = {};
         cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
         cbd.Usage = D3D11_USAGE_DYNAMIC;
         cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
@@ -42,11 +42,12 @@ public:
 
 
 public:
-    void Update(Graphics& gfx, const C& consts)
+    virtual void Update(Graphics& gfx, const C& consts) final
     {
         INFOMAN(gfx);
 
         D3D11_MAPPED_SUBRESOURCE msr;
+
         GFX_THROW_INFO(GetContext_(gfx)->Map(
             pConstantBuffer_.Get(), 0u,
             D3D11_MAP_WRITE_DISCARD, 0u,
@@ -67,7 +68,7 @@ private:
 };
 
 template <typename C>
-class VertexConstantBuffer : public ConstantBuffer<C>
+class VertexConstantBuffer final : public ConstantBuffer<C>
 {
     using ConstantBuffer<C>::pConstantBuffer_;
     using Bindable::GetContext_;
@@ -75,7 +76,7 @@ class VertexConstantBuffer : public ConstantBuffer<C>
 public:
     using ConstantBuffer<C>::ConstantBuffer;
     
-    void Bind(Graphics& gfx) noexcept override
+    virtual void Bind(Graphics& gfx) noexcept override final
     {
         GetContext_(gfx)->VSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
     }
@@ -88,7 +89,7 @@ private:
 };
 
 template <typename C>
-class PixelConstantBuffer : public ConstantBuffer<C>
+class PixelConstantBuffer final : public ConstantBuffer<C>
 {
     using ConstantBuffer<C>::pConstantBuffer_;
     using Bindable::GetContext_;
@@ -96,7 +97,7 @@ class PixelConstantBuffer : public ConstantBuffer<C>
 public:
     using ConstantBuffer<C>::ConstantBuffer;
 
-    void Bind(Graphics& gfx) noexcept override
+    virtual void Bind(Graphics& gfx) noexcept override final
     {
         GetContext_(gfx)->PSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
     }

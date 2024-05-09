@@ -2,16 +2,18 @@
 
 #include "Bindable.hpp"
 
-class IndexBuffer : public Bindable
+class IndexBuffer final : public Bindable
 {
 public:
     IndexBuffer(Graphics& gfx, const std::vector<unsigned short int>& indices);
 
 
 public:
-    UINT GetCount() const noexcept;
+    virtual void Bind(Graphics& gfx) noexcept override final;
 
-    void Bind(Graphics& gfx) noexcept override;
+
+public:
+    UINT GetCount() const noexcept;
 
 
 protected:

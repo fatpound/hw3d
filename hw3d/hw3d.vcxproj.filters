@@ -329,6 +329,7 @@
     <None Include="Win32_\DirectX\Direct3D11\DXErr\DXGetErrorDescription.inl">
       <Filter>Dxerr</Filter>
     </None>
+    <None Include="FatRuleSet.ruleset" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Win32_\DirectX\Direct3D11\Shader\VSColorIndex.hlsl">

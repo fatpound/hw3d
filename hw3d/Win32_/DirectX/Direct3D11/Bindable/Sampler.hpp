@@ -2,14 +2,14 @@
 
 #include "Bindable.hpp"
 
-class Sampler : public Bindable
+class Sampler final : public Bindable
 {
 public:
     Sampler(Graphics& gfx);
 
 
 public:
-    void Bind(Graphics& gfx) noexcept override;
+    virtual void Bind(Graphics& gfx) noexcept override final;
 
 
 protected:
