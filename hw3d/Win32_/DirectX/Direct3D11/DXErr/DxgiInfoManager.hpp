@@ -12,11 +12,11 @@ class DxgiInfoManager
 {
 public:
     DxgiInfoManager();
-    ~DxgiInfoManager() = default;
     DxgiInfoManager(const DxgiInfoManager&) = delete;
-    DxgiInfoManager(DxgiInfoManager&&) = delete;
     DxgiInfoManager& operator = (const DxgiInfoManager&) = delete;
+    DxgiInfoManager(DxgiInfoManager&&) = delete;
     DxgiInfoManager& operator = (DxgiInfoManager&&) = delete;
+    ~DxgiInfoManager() = default;
 
 
 public:

@@ -15,12 +15,6 @@ public:
     class Color final
     {
     public:
-        constexpr Color() noexcept
-            :
-            dword()
-        {
-
-        }
         constexpr Color(const Color& col) noexcept
             :
             dword(col.dword)
@@ -48,6 +42,13 @@ public:
         constexpr Color(Color col, unsigned char x) noexcept
             :
             Color((x << 24u) | col.dword)
+        {
+
+        }
+
+        constexpr Color() noexcept
+            :
+            dword()
         {
 
         }
@@ -131,8 +132,8 @@ public:
 
     Surface() = delete;
     Surface(const Surface& src) = delete;
-    Surface(Surface&& source) noexcept;
     Surface& operator = (const Surface& src) = delete;
+    Surface(Surface&& source) noexcept;
     Surface& operator = (Surface&& donor) noexcept;
     ~Surface();
 

@@ -22,8 +22,8 @@ public:
 
     Window() = delete;
     Window(const Window& src) = delete;
-    Window(Window&& src) = delete;
     Window& operator = (const Window& src) = delete;
+    Window(Window&& src) = delete;
     Window& operator = (Window&& src) = delete;
     ~Window();
 
@@ -112,8 +112,8 @@ private:
     private:
         WindowClass_() noexcept;
         WindowClass_(const WindowClass_& src) = delete;
-        WindowClass_(WindowClass_&& src) = delete;
         WindowClass_& operator = (const WindowClass_& src) = delete;
+        WindowClass_(WindowClass_&& src) = delete;
         WindowClass_& operator = (WindowClass_&& src) = delete;
         ~WindowClass_();
 

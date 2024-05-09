@@ -12,8 +12,8 @@ class App final
 public:
     App();
     App(const App& src) = delete;
-    App(App&& src) = delete;
     App& operator = (const App& src) = delete;
+    App(App&& src) = delete;
     App& operator = (App&& src) = delete;
     ~App() noexcept;
 

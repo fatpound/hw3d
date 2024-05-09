@@ -10,8 +10,8 @@ class Keyboard final
 public:
     Keyboard() = default;
     Keyboard(const Keyboard& src) = delete;
-    Keyboard(Keyboard&& src) = delete;
     Keyboard& operator = (const Keyboard& src) = delete;
+    Keyboard(Keyboard&& src) = delete;
     Keyboard& operator = (Keyboard&& src) = delete;
     ~Keyboard() = default;
 
