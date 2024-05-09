@@ -84,7 +84,7 @@ Box::Box(Graphics& gfx,
         SetIndexFromStatic_();
     }
     
-    AddBind(std::make_unique<TransformCbuf>(gfx, *this));
+    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
 
     // model deformation transform per instance
     dx::XMStoreFloat3x3(&mt_, dx::XMMatrixScaling(1.0f, 1.0f, bdist(rng)));

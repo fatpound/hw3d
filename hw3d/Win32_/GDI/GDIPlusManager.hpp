@@ -2,7 +2,7 @@
 
 #include "../FatWin32_.hpp"
 
-class GDIPlusManager
+class GDIPlusManager final
 {
 public:
     GDIPlusManager();

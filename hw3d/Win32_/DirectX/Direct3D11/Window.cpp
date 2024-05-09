@@ -172,7 +172,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
         return 0;
 
     case WM_KILLFOCUS:
-        kbd_.ClearKeyStateBitset_();
+        kbd.ClearKeyStateBitset_();
         break;
 
         /******** KEYBOARD MESSAGES ********/
@@ -184,9 +184,9 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        if ( ! (lParam & 0x40000000) || kbd_.AutoRepeatIsEnabled() )
+        if ( ! (lParam & 0x40000000) || kbd.AutoRepeatIsEnabled() )
         {
-            kbd_.OnKeyPressed_(static_cast<unsigned char>(wParam));
+            kbd.OnKeyPressed_(static_cast<unsigned char>(wParam));
         }
         break;
 
@@ -198,7 +198,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        kbd_.OnKeyReleased_(static_cast<unsigned char>(wParam));
+        kbd.OnKeyReleased_(static_cast<unsigned char>(wParam));
         break;
 
     case WM_CHAR:
@@ -207,7 +207,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        kbd_.OnChar_(static_cast<unsigned char>(wParam));
+        kbd.OnChar_(static_cast<unsigned char>(wParam));
         break;
         /******** END KEYBOARD MESSAGES ********/
 
@@ -224,24 +224,24 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
 
         if (pt.x >= 0 && pt.x < width_ && pt.y >= 0 && pt.y < height_)
         {
-            mouse_.OnMouseMove_(pt.x, pt.y);
+            mouse.OnMouseMove_(pt.x, pt.y);
 
-            if ( ! mouse_.IsInWindow() )
+            if ( ! mouse.IsInWindow() )
             {
                 SetCapture(hWnd);
-                mouse_.OnMouseEnter_();
+                mouse.OnMouseEnter_();
             }
         }
         else
         {
             if (wParam & (MK_LBUTTON | MK_RBUTTON))
             {
-                mouse_.OnMouseMove_(pt.x, pt.y);
+                mouse.OnMouseMove_(pt.x, pt.y);
             }
             else
             {
                 ReleaseCapture();
-                mouse_.OnMouseLeave_();
+                mouse.OnMouseLeave_();
             }
         }
     }
@@ -255,7 +255,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        mouse_.OnLeftPressed_();
+        mouse.OnLeftPressed_();
         break;
 
     case WM_LBUTTONUP:
@@ -264,7 +264,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        mouse_.OnLeftReleased_();
+        mouse.OnLeftReleased_();
         break;
 
     case WM_RBUTTONDOWN:
@@ -273,7 +273,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        mouse_.OnRightPressed_();
+        mouse.OnRightPressed_();
         break;
 
     case WM_RBUTTONUP:
@@ -282,7 +282,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        mouse_.OnRightReleased_();
+        mouse.OnRightReleased_();
         break;
 
     case WM_MBUTTONDOWN:
@@ -291,7 +291,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        mouse_.OnWheelPressed_();
+        mouse.OnWheelPressed_();
         break;
 
     case WM_MBUTTONUP:
@@ -300,7 +300,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        mouse_.OnWheelReleased_();
+        mouse.OnWheelReleased_();
         break;
 
     case WM_MOUSEWHEEL:
@@ -309,7 +309,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
             break;
         }
 
-        mouse_.OnWheelDelta_(GET_WHEEL_DELTA_WPARAM(wParam));
+        mouse.OnWheelDelta_(GET_WHEEL_DELTA_WPARAM(wParam));
         break;
         /******** END MOUSE MESSAGES ********/
 
@@ -363,16 +363,6 @@ Window::HrException::HrException(int line, const char* file, HRESULT hresult) no
 
 }
 
-HRESULT Window::HrException::GetErrorCode() const noexcept
-{
-    return hresult_;
-}
-
-std::string Window::HrException::GetErrorDescription() const noexcept
-{
-    return Exception::TranslateErrorCode(hresult_);
-}
-
 const char* Window::HrException::what() const noexcept
 {
     std::ostringstream oss;
@@ -390,6 +380,16 @@ const char* Window::HrException::what() const noexcept
 const char* Window::HrException::GetType() const noexcept
 {
     return "Fat Window Exception";
+}
+
+HRESULT Window::HrException::GetErrorCode() const noexcept
+{
+    return hresult_;
+}
+
+std::string Window::HrException::GetErrorDescription() const noexcept
+{
+    return Exception::TranslateErrorCode(hresult_);
 }
 
 

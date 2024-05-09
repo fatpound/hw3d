@@ -84,7 +84,7 @@
     <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\Topology.cpp">
       <Filter>Source Files\Bindable</Filter>
     </ClCompile>
-    <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\TransformCBuf.cpp">
+    <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\TransformCBuf.cpp">
       <Filter>Source Files\Bindable</Filter>
     </ClCompile>
     <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\VertexBuffer.cpp">
@@ -227,7 +227,7 @@
     <ClInclude Include="Game\Object\Base\Sphere.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffers.hpp">
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\ConstantBuffer.hpp">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\DirectX\Direct3D11\Drawable\DrawableBase.hpp">
@@ -236,7 +236,7 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\Drawable\Drawable.hpp">
       <Filter>Header Files\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\TransformCBuf.hpp">
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\TransformCBuf.hpp">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\VertexShader.hpp">
@@ -306,6 +306,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\DirectX\Direct3D11\Camera\Camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\VertexCBuf.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\PixelCBuf.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

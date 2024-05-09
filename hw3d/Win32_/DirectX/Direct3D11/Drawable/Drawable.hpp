@@ -25,12 +25,12 @@ public:
     virtual DirectX::XMMATRIX GetTransformXM() const noexcept = 0;
 
     virtual void Update(float dt) noexcept = 0;
-    void Draw(Graphics& gfx) const noexcept(IN_RELEASE);
+    virtual void Draw(Graphics& gfx) const noexcept(IN_RELEASE) final;
 
 
 protected:
-    void AddBind(std::unique_ptr<Bindable> bind) noexcept(IN_RELEASE);
-    void AddIndexBuffer(std::unique_ptr<IndexBuffer> ibuf) noexcept(IN_RELEASE);
+    virtual void AddBind(std::unique_ptr<Bindable> bind) noexcept(IN_RELEASE) final;
+    virtual void AddIndexBuffer(std::unique_ptr<IndexBuffer> ibuf) noexcept(IN_RELEASE) final;
 
 
 private:
@@ -40,5 +40,5 @@ private:
 private:
     std::vector<std::unique_ptr<Bindable>> binds_;
 
-    const IndexBuffer* pIndexBuffer_ = nullptr;
+    const IndexBuffer* pCIndexBuffer_ = nullptr;
 };

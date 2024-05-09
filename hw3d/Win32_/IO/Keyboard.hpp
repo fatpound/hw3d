@@ -32,6 +32,7 @@ public:
 
         Event(Type type, unsigned char code) noexcept;
 
+    public:
         unsigned char GetCode() const noexcept;
 
         bool IsPress() const noexcept;

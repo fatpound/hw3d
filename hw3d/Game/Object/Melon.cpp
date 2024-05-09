@@ -81,7 +81,7 @@ Melon::Melon(Graphics& gfx,
 
     AddBind(std::make_unique<VertexBuffer>(gfx, model.vertices_));
     AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices_));
-    AddBind(std::make_unique<TransformCbuf>(gfx, *this));
+    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
 }
 
 void Melon::Update(float deltaTime) noexcept

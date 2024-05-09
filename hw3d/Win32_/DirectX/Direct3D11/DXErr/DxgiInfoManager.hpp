@@ -8,7 +8,7 @@
 #include <vector>
 #include <string>
 
-class DxgiInfoManager
+class DxgiInfoManager final
 {
 public:
     DxgiInfoManager();

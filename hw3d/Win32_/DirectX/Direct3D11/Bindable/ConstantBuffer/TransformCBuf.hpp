@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../Drawable/Drawable.hpp"
+#include "../../Drawable/Drawable.hpp"
 
-#include "ConstantBuffers.hpp"
+#include "VertexCBuf.hpp"
 
 #include <DirectXMath.h>
 
-class TransformCbuf final : public Bindable
+class TransformCBuf final : public Bindable
 {
 public:
-    TransformCbuf(Graphics& gfx, const Drawable& parent);
+    TransformCBuf(Graphics& gfx, const Drawable& parent);
 
 
 public:

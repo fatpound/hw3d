@@ -1,6 +1,6 @@
 #include "TransformCbuf.hpp"
 
-TransformCbuf::TransformCbuf(Graphics& gfx, const Drawable& parent)
+TransformCBuf::TransformCBuf(Graphics& gfx, const Drawable& parent)
     :
     parent_(parent)
 {
@@ -10,7 +10,7 @@ TransformCbuf::TransformCbuf(Graphics& gfx, const Drawable& parent)
     }
 }
 
-void TransformCbuf::Bind(Graphics& gfx) noexcept
+void TransformCBuf::Bind(Graphics& gfx) noexcept
 {
     pVcbuf_->Update(
         gfx,
@@ -24,4 +24,4 @@ void TransformCbuf::Bind(Graphics& gfx) noexcept
     pVcbuf_->Bind(gfx);
 }
 
-std::unique_ptr<VertexConstantBuffer<DirectX::XMMATRIX>> TransformCbuf::pVcbuf_;
+std::unique_ptr<VertexConstantBuffer<DirectX::XMMATRIX>> TransformCBuf::pVcbuf_;

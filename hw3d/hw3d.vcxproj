@@ -290,7 +290,7 @@
     <ClCompile Include="Win32_\GDI\Surface.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\Texture.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\Topology.cpp" />
-    <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\TransformCBuf.cpp" />
+    <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\TransformCBuf.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\VertexBuffer.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Bindable\VertexShader.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Window.cpp" />
@@ -302,9 +302,11 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\Bindable.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\BindableBase.hpp" />
     <ClInclude Include="Game\Object\Box.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\PixelCBuf.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\VertexCBuf.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Camera\Camera.hpp" />
     <ClInclude Include="Game\Object\Base\Cone.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffers.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\ConstantBuffer.hpp" />
     <ClInclude Include="Game\Object\Base\Cube.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Drawable\Drawable.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Drawable\DrawableBase.hpp" />
@@ -343,7 +345,7 @@
     <ClInclude Include="Win32_\GDI\Surface.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\Texture.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\Topology.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\TransformCBuf.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\TransformCBuf.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\VertexBuffer.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Bindable\VertexShader.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Window.hpp" />

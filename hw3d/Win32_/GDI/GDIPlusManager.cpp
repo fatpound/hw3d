@@ -14,7 +14,7 @@ namespace Gdiplus
 
 #include <gdiplus.h>
 
-ULONG_PTR GDIPlusManager::token_    = 0;
+ULONG_PTR GDIPlusManager::token_    = 0u;
 int       GDIPlusManager::refCount_ = 0;
 
 GDIPlusManager::GDIPlusManager()

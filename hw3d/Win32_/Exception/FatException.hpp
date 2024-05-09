@@ -10,11 +10,13 @@ public:
 
 
 public:
+    virtual const char* what() const noexcept override;
+    virtual const char* GetType() const noexcept;
+
+
+public:
     std::string GetOriginString() const noexcept;
     std::string GetFileName() const noexcept;
-
-    virtual const char* GetType() const noexcept;
-    virtual const char* what() const noexcept override;
 
     int GetLineNum() const noexcept;
 

@@ -139,7 +139,7 @@ int App::Go()
             return static_cast<int>(*error_code);
         }
 
-        if (wnd_.kbd_.KeyIsPressed(VK_ESCAPE)) [[unlikely]]
+        if (wnd_.kbd.KeyIsPressed(VK_ESCAPE)) [[unlikely]]
         {
             wnd_.Kill();
             
@@ -160,7 +160,7 @@ void App::DoFrame_()
     
     for (auto& obj : drawables_)
     {
-        obj->Update(wnd_.kbd_.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
+        obj->Update(wnd_.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
         obj->Draw(gfx_);
     }
 
@@ -170,7 +170,7 @@ void App::DoFrame_()
     {
         ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::Text("Status: %s", wnd_.kbd_.KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
+        ImGui::Text("Status: %s", wnd_.kbd.KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
     }
 
     ImGui::End();

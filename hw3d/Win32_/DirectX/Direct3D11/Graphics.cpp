@@ -229,6 +229,32 @@ Graphics::HrException::HrException(int line, const char* file, HRESULT hresult, 
     }
 }
 
+const char* Graphics::HrException::what() const noexcept
+{
+    std::ostringstream oss;
+
+    oss << GetType() << '\n'
+        << "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
+        << std::dec << " (" << static_cast<unsigned long>(GetErrorCode()) << ")" << '\n'
+        << "[Error String] " << GetErrorString() << '\n'
+        << "[Description] " << GetErrorDescription() << std::endl;
+
+    if (!info_.empty())
+    {
+        oss << "\n[Error Info]\n" << GetErrorInfo() << '\n' << std::endl;
+    }
+
+    oss << GetOriginString();
+
+    what_buffer_ = oss.str();
+
+    return what_buffer_.c_str();
+}
+const char* Graphics::HrException::GetType() const noexcept
+{
+    return "Fat Graphics Exception";
+}
+
 HRESULT Graphics::HrException::GetErrorCode() const noexcept
 {
     return hresult_;
@@ -251,32 +277,6 @@ std::string Graphics::HrException::GetErrorInfo() const noexcept
     return info_;
 }
 
-const char* Graphics::HrException::what() const noexcept
-{
-    std::ostringstream oss;
-
-    oss << GetType() << '\n'
-        << "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
-        << std::dec << " (" << static_cast<unsigned long>(GetErrorCode()) << ")" << '\n'
-        << "[Error String] " << GetErrorString() << '\n'
-        << "[Description] " << GetErrorDescription() << std::endl;
-
-    if ( ! info_.empty() )
-    {
-        oss << "\n[Error Info]\n" << GetErrorInfo() << '\n' << std::endl;
-    }
-
-    oss << GetOriginString();
-
-    what_buffer_ = oss.str();
-
-    return what_buffer_.c_str();
-}
-const char* Graphics::HrException::GetType() const noexcept
-{
-    return "Fat Graphics Exception";
-}
-
 
 // InfoException
 
@@ -296,11 +296,6 @@ Graphics::InfoException::InfoException(int line, const char* file, std::vector<s
     }
 }
 
-std::string Graphics::InfoException::GetErrorInfo() const noexcept
-{
-    return info_;
-}
-
 const char* Graphics::InfoException::what() const noexcept
 {
     std::ostringstream oss;
@@ -317,6 +312,11 @@ const char* Graphics::InfoException::what() const noexcept
 const char* Graphics::InfoException::GetType() const noexcept
 {
     return "Fat Graphics Info Exception";
+}
+
+std::string Graphics::InfoException::GetErrorInfo() const noexcept
+{
+    return info_;
 }
 
 

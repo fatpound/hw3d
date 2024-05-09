@@ -68,7 +68,7 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
         SetIndexFromStatic_();
     }
 
-    AddBind(std::make_unique<TransformCbuf>(gfx, *this));
+    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
 }
 
 void SkinnedBox::Update(float dt) noexcept

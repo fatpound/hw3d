@@ -40,30 +40,31 @@ public:
 
     private:
     };
-    class HrException : public Exception
+    class HrException final : public Exception
     {
     public:
         HrException(int line, const char* file, HRESULT hresult) noexcept;
+
+    public:
+        virtual const char* what() const noexcept override final;
+        virtual const char* GetType() const noexcept override final;
 
     public:
         HRESULT GetErrorCode() const noexcept;
 
         std::string GetErrorDescription() const noexcept;
 
-        const char* what() const noexcept override;
-        const char* GetType() const noexcept override;
-
     protected:
 
     private:
         HRESULT hresult_;
     };
-    class NoGfxException : public Exception
+    class NoGfxException final : public Exception
     {
         using Exception::Exception;
 
     public:
-        const char* GetType() const noexcept override;
+        virtual const char* GetType() const noexcept override final;
 
     protected:
 
@@ -92,8 +93,8 @@ public:
 
 
 public:
-    Keyboard kbd_;
-    Mouse mouse_;
+    Keyboard kbd;
+    Mouse mouse;
     
 
 protected:
@@ -129,6 +130,9 @@ private:
 private:
     static LRESULT CALLBACK HandleMsgSetup_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
     static LRESULT CALLBACK HandleMsgThunk_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
+
+
+private:
     LRESULT HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 
 

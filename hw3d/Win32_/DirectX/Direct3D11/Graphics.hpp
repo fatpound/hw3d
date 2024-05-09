@@ -36,11 +36,21 @@ public:
     class Exception : public FatException
     {
         using FatException::FatException;
+
+    public:
+     
+    protected:
+
+    private:
     };
     class HrException : public Exception
     {
     public:
         HrException(int line, const char* file, HRESULT hresult, std::vector<std::string> infoMsgs = { }) noexcept;
+
+    public:
+        virtual const char* what() const noexcept override;
+        virtual const char* GetType() const noexcept override;
 
     public:
         HRESULT GetErrorCode() const noexcept;
@@ -49,9 +59,6 @@ public:
         std::string GetErrorDescription() const noexcept;
         std::string GetErrorInfo() const noexcept;
 
-        const char* what() const noexcept override;
-        const char* GetType() const noexcept override;
-
     protected:
 
     private:
@@ -59,28 +66,29 @@ public:
 
         std::string info_;
     };
-    class InfoException : public Exception
+    class InfoException final : public Exception
     {
     public:
         InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept;
 
     public:
-        std::string GetErrorInfo() const noexcept;
+        virtual const char* what() const noexcept override final;
+        virtual const char* GetType() const noexcept override final;
 
-        const char* what() const noexcept override;
-        const char* GetType() const noexcept override;
+    public:
+        std::string GetErrorInfo() const noexcept;
 
     protected:
 
     private:
         std::string info_;
     };
-    class DeviceRemovedException : public HrException
+    class DeviceRemovedException final : public HrException
     {
         using HrException::HrException;
 
     public:
-        const char* GetType() const noexcept override;
+        virtual const char* GetType() const noexcept override final;
 
     protected:
 
