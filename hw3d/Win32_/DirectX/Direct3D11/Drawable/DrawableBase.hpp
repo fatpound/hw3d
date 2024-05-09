@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Drawable.hpp"
-#include "IndexBuffer.hpp"
+
+#include "../Bindable/IndexBuffer.hpp"
 
 template <class T>
 class DrawableBase : public Drawable

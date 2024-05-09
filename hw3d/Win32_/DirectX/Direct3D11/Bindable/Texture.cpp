@@ -1,6 +1,8 @@
 #include "Texture.hpp"
-#include "Surface.hpp"
-#include "GraphicsThrowMacros.hpp"
+
+#include "../../../GDI/Surface.hpp"
+
+#include "../Macro/GraphicsThrowMacros.hpp"
 
 namespace wrl = Microsoft::WRL;
 

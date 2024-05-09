@@ -1,7 +1,7 @@
 #pragma once
 
-#include "FatMath.hpp"
-#include "IndexedTriangleList.hpp"
+#include "../../../Math/FatMath.hpp"
+#include "../../../Math/IndexedTriangleList.hpp"
 
 #include <DirectXMath.h>
 

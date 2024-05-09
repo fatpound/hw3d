@@ -2,6 +2,8 @@
 
 #include <DirectXMath.h>
 
+#include <cassert>
+
 #include <vector>
 
 template <class T>

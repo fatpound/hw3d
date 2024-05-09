@@ -1,16 +1,19 @@
 #include "App.hpp"
 
-#include "FatWin32_.hpp"
-#include "FatMath.hpp"
-#include "Box.hpp"
-#include "Pyramid.hpp"
-#include "Melon.hpp"
-#include "Sheet.hpp"
-#include "SkinnedBox.hpp"
-#include "Surface.hpp"
-#include "GDIPlusManager.hpp"
+#include "../Math/FatMath.hpp"
 
-#include "imgui/imgui.h"
+#include "../Win32_/FatWin32_.hpp"
+
+#include "../Win32_/GDI/Surface.hpp"
+#include "../Win32_/GDI/GDIPlusManager.hpp"
+
+#include "../imgui/imgui.h"
+
+#include "Object/Box.hpp"
+#include "Object/Melon.hpp"
+#include "Object/Pyramid.hpp"
+#include "Object/Sheet.hpp"
+#include "Object/SkinnedBox.hpp"
 
 #include <cmath>
 

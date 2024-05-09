@@ -1,10 +1,14 @@
 #include "Sheet.hpp"
-#include "BindableBase.hpp"
-#include "GraphicsThrowMacros.hpp"
-#include "Plane.hpp"
-#include "Surface.hpp"
-#include "Texture.hpp"
-#include "Sampler.hpp"
+
+#include "../../Win32_/DirectX/Direct3D11/Bindable/BindableBase.hpp"
+#include "../../Win32_/DirectX/Direct3D11/Bindable/Texture.hpp"
+#include "../../Win32_/DirectX/Direct3D11/Bindable/Sampler.hpp"
+
+#include "../../Win32_/DirectX/Direct3D11/Macro/GraphicsThrowMacros.hpp"
+
+#include "../../Win32_/GDI/Surface.hpp"
+
+#include "Base/Plane.hpp"
 
 namespace dx = DirectX;
 
@@ -46,7 +50,7 @@ Sheet::Sheet(Graphics& gfx,
         model.vertices_[2].tex = { 0.0f,1.0f };
         model.vertices_[3].tex = { 1.0f,1.0f };
 
-        AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Images\\kappa50.png")));
+        AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\kappa50.png")));
 
         AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
 

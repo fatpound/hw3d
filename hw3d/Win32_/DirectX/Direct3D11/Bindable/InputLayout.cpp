@@ -1,5 +1,6 @@
 #include "InputLayout.hpp"
-#include "GraphicsThrowMacros.hpp"
+
+#include "../Macro/GraphicsThrowMacros.hpp"
 
 InputLayout::InputLayout(Graphics& gfx,
     const std::vector<D3D11_INPUT_ELEMENT_DESC>& layout,

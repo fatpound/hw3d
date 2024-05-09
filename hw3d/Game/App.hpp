@@ -1,9 +1,11 @@
 #pragma once
 
-#include "Window.hpp"
-#include "FatTimer.hpp"
-#include "ImguiManager.hpp"
-#include "Camera.hpp"
+#include "../Util/FatTimer.hpp"
+#include "../Util/ImguiManager.hpp"
+
+#include "../Win32_/DirectX/Direct3D11/Camera/Camera.hpp"
+
+#include "../Win32_/DirectX/Direct3D11/Window.hpp"
 
 class App final
 {

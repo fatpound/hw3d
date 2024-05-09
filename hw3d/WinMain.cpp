@@ -1,4 +1,6 @@
-#include "App.hpp"
+#include "Win32_/FatWin32_.hpp"
+
+#include "Game/App.hpp"
 
 int CALLBACK WinMain([[maybe_unused]] _In_ HINSTANCE hInstance, [[maybe_unused]] _In_opt_ HINSTANCE hPrevInstance, [[maybe_unused]] _In_ LPSTR lpCmdLine, [[maybe_unused]] _In_ int nShowCmd)
 {

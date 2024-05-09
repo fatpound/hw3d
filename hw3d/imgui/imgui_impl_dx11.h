@@ -10,8 +10,9 @@
 
 #pragma once
 
-#include "../FatWin32.hpp"
-#include "../Graphics.hpp"
+#include "../Win32_/FatWin32_.hpp"
+
+#include "../Win32_/DirectX/Direct3D11/Graphics.hpp"
 
 #include "imgui.h"
 

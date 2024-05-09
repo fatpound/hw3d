@@ -188,7 +188,7 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\DXErr\dxerr.h">
       <Filter>Dxerr</Filter>
     </ClInclude>
-    <ClInclude Include="Util\FatMath.hpp">
+    <ClInclude Include="Math\FatMath.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\Melon.hpp">
@@ -215,7 +215,7 @@
     <ClInclude Include="Game\Object\Base\Cube.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Util\IndexedTriangleList.hpp">
+    <ClInclude Include="Math\IndexedTriangleList.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\Base\Plane.hpp">

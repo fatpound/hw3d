@@ -1,12 +1,12 @@
 #include "Window.hpp"
 
-#include "resource.h"
+#include "../../../Resource/resource.h"
 
-#include "imgui/imgui_impl_win32.h"
+#include "../../../imgui/imgui_impl_win32.h"
+
+#include "Macro/WindowThrowMacros.hpp"
 
 #include <sstream>
-
-// #include "WindowsMessageMap.hpp"
 
 // Window
 

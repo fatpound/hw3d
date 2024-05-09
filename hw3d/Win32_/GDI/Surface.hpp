@@ -1,7 +1,8 @@
 #pragma once
 
-#include "FatWin32_.hpp"
-#include "FatException.hpp"
+#include "../FatWin32_.hpp"
+
+#include "../Exception/FatException.hpp"
 
 #include <cassert>
 

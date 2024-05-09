@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DrawableBase.hpp"
+#include "../../Win32_/DirectX/Direct3D11/Drawable/DrawableBase.hpp"
 
 class Box : public DrawableBase<Box>
 {

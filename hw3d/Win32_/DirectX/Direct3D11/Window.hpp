@@ -1,12 +1,15 @@
 #pragma once
 
-#include "FatWin32_.hpp"
-#include "FatMath.hpp"
-#include "FatException.hpp"
-#include "Keyboard.hpp"
-#include "Mouse.hpp"
+#include "../../FatWin32_.hpp"
+
+#include "../../Exception/FatException.hpp"
+
+#include "../../IO/Keyboard.hpp"
+#include "../../IO/Mouse.hpp"
+
+#include "../../../Math/FatMath.hpp"
+
 #include "Graphics.hpp"
-#include "WindowThrowMacros.hpp"
 
 #include <optional>
 #include <concepts>

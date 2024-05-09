@@ -1,4 +1,5 @@
-#include "FatWin32_.hpp"
+#include "../FatWin32_.hpp"
+
 #include "Mouse.hpp"
 
 std::pair<int, int> Mouse::GetPos() const noexcept

@@ -1,7 +1,8 @@
 #pragma once
 
+#include "../Macro/GraphicsThrowMacros.hpp"
+
 #include "Bindable.hpp"
-#include "GraphicsThrowMacros.hpp"
 
 class VertexBuffer : public Bindable
 {

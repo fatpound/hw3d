@@ -1,9 +1,13 @@
 #include "SkinnedBox.hpp"
-#include "BindableBase.hpp"
-#include "GraphicsThrowMacros.hpp"
-#include "Cube.hpp"
-#include "Surface.hpp"
-#include "Texture.hpp"
+
+#include "../../Win32_/DirectX/Direct3D11/Bindable/BindableBase.hpp"
+#include "../../Win32_/DirectX/Direct3D11/Bindable/Texture.hpp"
+
+#include "../../Win32_/DirectX/Direct3D11/Macro/GraphicsThrowMacros.hpp"
+
+#include "../../Win32_/GDI/Surface.hpp"
+
+#include "Base/Cube.hpp"
 
 namespace dx = DirectX;
 
@@ -42,7 +46,7 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
         const auto model = Cube::MakeSkinned<Vertex>();
 
         AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
-        AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Images\\cube.png")));
+        AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\cube.png")));
 
         auto pvs = std::make_unique<VertexShader>(gfx, L"VSTexture.cso");
         auto pvsbc = pvs->GetBytecode();

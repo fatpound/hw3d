@@ -1,6 +1,10 @@
 #include "DxgiInfoManager.hpp"
-#include "Window.hpp"
-#include "Graphics.hpp"
+
+#include "../Window.hpp"
+#include "../Graphics.hpp"
+
+#include "../Macro/GraphicsThrowMacros.hpp"
+#include "../Macro/WindowThrowMacros.hpp"
 
 #include <memory>
 

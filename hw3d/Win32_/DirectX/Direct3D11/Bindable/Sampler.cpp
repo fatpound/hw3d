@@ -1,5 +1,6 @@
 #include "Sampler.hpp"
-#include "GraphicsThrowMacros.hpp"
+
+#include "../Macro/GraphicsThrowMacros.hpp"
 
 Sampler::Sampler(Graphics& gfx)
 {

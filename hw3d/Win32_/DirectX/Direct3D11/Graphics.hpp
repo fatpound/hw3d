@@ -1,8 +1,10 @@
 #pragma once
 
-#include "FatWin32_.hpp"
-#include "FatException.hpp"
-#include "DxgiInfoManager.hpp"
+#include "../../FatWin32_.hpp"
+
+#include "../../Exception/FatException.hpp"
+
+#include "DXErr/DxgiInfoManager.hpp"
 
 #include <d3d11.h>
 #include <d3dcompiler.h>
