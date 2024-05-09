@@ -7,7 +7,7 @@
 
 #include <initializer_list>
 
-class Cube
+class Cube final
 {
 public:
     template <class V>

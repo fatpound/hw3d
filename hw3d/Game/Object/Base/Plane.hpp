@@ -6,7 +6,7 @@
 #include <vector>
 #include <array>
 
-class Plane
+class Plane final
 {
 public:
     template <class V>

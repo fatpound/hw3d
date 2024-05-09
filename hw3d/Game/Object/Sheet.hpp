@@ -2,7 +2,7 @@
 
 #include "../../Win32_/DirectX/Direct3D11/Drawable/DrawableBase.hpp"
 
-class Sheet : public DrawableBase<Sheet>
+class Sheet final : public DrawableBase<Sheet>
 {
 public:
     Sheet(Graphics& gfx,

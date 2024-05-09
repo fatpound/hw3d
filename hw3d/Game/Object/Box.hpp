@@ -2,7 +2,7 @@
 
 #include "../../Win32_/DirectX/Direct3D11/Drawable/DrawableBase.hpp"
 
-class Box : public DrawableBase<Box>
+class Box final : public DrawableBase<Box>
 {
 public:
     Box(Graphics& gfx,

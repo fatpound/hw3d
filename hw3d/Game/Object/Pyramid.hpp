@@ -2,7 +2,7 @@
 
 #include "../../Win32_/DirectX/Direct3D11/Drawable/DrawableBase.hpp"
 
-class Pyramid : public DrawableBase<Pyramid>
+class Pyramid final : public DrawableBase<Pyramid>
 {
 public:
     Pyramid(Graphics& gfx,

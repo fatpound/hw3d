@@ -5,7 +5,7 @@
 
 #include <DirectXMath.h>
 
-class Cone
+class Cone final
 {
 public:
     template <class V>

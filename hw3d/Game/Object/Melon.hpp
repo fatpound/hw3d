@@ -2,7 +2,7 @@
 
 #include "../../Win32_/DirectX/Direct3D11/Drawable/DrawableBase.hpp"
 
-class Melon : public DrawableBase<Melon>
+class Melon final : public DrawableBase<Melon>
 {
 public:
     Melon(Graphics& gfx,

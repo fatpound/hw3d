@@ -2,7 +2,7 @@
 
 #include "../../Win32_/DirectX/Direct3D11/Drawable/DrawableBase.hpp"
 
-class SkinnedBox : public DrawableBase<SkinnedBox>
+class SkinnedBox final : public DrawableBase<SkinnedBox>
 {
 public:
     SkinnedBox(Graphics& gfx,

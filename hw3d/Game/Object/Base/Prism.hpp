@@ -5,7 +5,7 @@
 
 #include <DirectXMath.h>
 
-class Prism
+class Prism final
 {
 public:
     template <class V>

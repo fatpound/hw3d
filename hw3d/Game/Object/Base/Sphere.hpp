@@ -5,7 +5,7 @@
 
 #include <DirectXMath.h>
 
-class Sphere
+class Sphere final
 {
 public:
     template <class V>
