@@ -99,8 +99,8 @@ App::App()
         Graphics& gfx_;
     };
     
-    drawables_.reserve(drawable_count_);
-    std::generate_n(std::back_inserter(drawables_), drawable_count_, Factory{ gfx_ });
+    drawables_.reserve(App::drawable_count_);
+    std::generate_n(std::back_inserter(drawables_), App::drawable_count_, Factory{ gfx_ });
     
     gfx_.SetProjection(dx::XMMatrixPerspectiveLH(1.0f, wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), 0.5f, 40.0f));
 }
