@@ -72,7 +72,7 @@ public:
 
 
 public:
-    static std::optional<int> ProcessMessages() noexcept;
+    static std::optional<WPARAM> ProcessMessages() noexcept;
 
     Graphics& Gfx();
 
@@ -122,7 +122,7 @@ private:
 
         HINSTANCE hInst_;
 
-        static constexpr auto wndClassName_ = "Fat Direct3D Engine Window";
+        static constexpr auto wndClassName_ = "FatPound Direct3D11 Engine Window";
     };
 
 

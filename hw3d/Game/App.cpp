@@ -100,9 +100,17 @@ App::App()
     };
     
     drawables_.reserve(App::drawable_count_);
+
     std::generate_n(std::back_inserter(drawables_), App::drawable_count_, Factory{ gfx_ });
     
-    gfx_.SetProjection(dx::XMMatrixPerspectiveLH(1.0f, wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), 0.5f, 40.0f));
+    gfx_.SetProjection(
+        dx::XMMatrixPerspectiveLH(
+            1.0f,
+            wnd_.GetHeight<float>() / wnd_.GetWidth<float>(),
+            0.5f,
+            40.0f
+        )
+    );
 }
 
 App::~App() noexcept
@@ -112,27 +120,25 @@ App::~App() noexcept
 
 int App::Go()
 {
-    std::optional<int> errorCode;
+    std::optional<WPARAM> error_code;
 
     while (true)
     {
-        errorCode = Window::ProcessMessages();
+        error_code = Window::ProcessMessages();
 
-        // [[unlikely]]
-        if (errorCode)
+        if (error_code) [[unlikely]]
         {
-            return *errorCode;
+            return static_cast<int>(*error_code);
         }
 
-        // [[unlikely]]
-        if (wnd_.kbd_.KeyIsPressed(VK_ESCAPE))
+        if (wnd_.kbd_.KeyIsPressed(VK_ESCAPE)) [[unlikely]]
         {
             wnd_.Kill();
             
             return 0;
         }
 
-        gfx_.BeginFrame(0.07f, 0.0f, 0.12f);
+        gfx_.BeginFrame();
         DoFrame_();
         gfx_.EndFrame();
     }
@@ -151,8 +157,8 @@ void App::DoFrame_()
     }
 
     camera_.SpawnControlImguiWindow();
-
-    if (ImGui::Begin("Simulation Speed"))
+    
+    if (ImGui::Begin("Simulation Speed")) [[likely]]
     {
         ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);

@@ -94,11 +94,13 @@ public:
 
     bool IsImguiEnabled() const noexcept;
 
-    void BeginFrame(float red, float green, float blue) noexcept;
+    void BeginFrame() noexcept;
     void EndFrame();
-    void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
+    void DrawIndexed(UINT count) noexcept(IN_RELEASE);
+
     void SetProjection(DirectX::FXMMATRIX projection) noexcept;
     void SetCamera(DirectX::FXMMATRIX camera) noexcept;
+
     void EnableImgui() noexcept;
     void DisableImgui() noexcept;
 

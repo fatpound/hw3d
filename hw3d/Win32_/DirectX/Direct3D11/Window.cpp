@@ -48,7 +48,7 @@ Window::~Window()
     DestroyWindow(hWnd_);
 }
 
-std::optional<int> Window::ProcessMessages() noexcept
+std::optional<WPARAM> Window::ProcessMessages() noexcept
 {
     MSG msg;
 
@@ -56,7 +56,7 @@ std::optional<int> Window::ProcessMessages() noexcept
     {
         if (msg.message == WM_QUIT)
         {
-            return static_cast<int>(msg.wParam);
+            return msg.wParam;
         }
         
         TranslateMessage(&msg);

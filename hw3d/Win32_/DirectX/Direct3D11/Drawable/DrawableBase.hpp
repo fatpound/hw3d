@@ -16,20 +16,20 @@ protected:
         return ! staticBinds_.empty();
     }
 
-    static void AddStaticBind_(std::unique_ptr<Bindable> bind) noexcept(!IS_DEBUG)
+    static void AddStaticBind_(std::unique_ptr<Bindable> bind) noexcept(IN_RELEASE)
     {
         assert("*Must* use AddStaticIndexBuffer_ to bind index buffer" && typeid(*bind) != typeid(IndexBuffer));
 
         staticBinds_.push_back(std::move(bind));
     }
-    void AddStaticIndexBuffer_(std::unique_ptr<IndexBuffer> ibuf) noexcept(!IS_DEBUG)
+    void AddStaticIndexBuffer_(std::unique_ptr<IndexBuffer> ibuf) noexcept(IN_RELEASE)
     {
         assert("Attempting to add index buffer a second time" && pIndexBuffer_ == nullptr);
 
         pIndexBuffer_ = ibuf.get();
         staticBinds_.push_back(std::move(ibuf));
     }
-    void SetIndexFromStatic_() noexcept(!IS_DEBUG)
+    void SetIndexFromStatic_() noexcept(IN_RELEASE)
     {
         assert("Attempting to add index buffer a second time" && pIndexBuffer_ == nullptr);
 

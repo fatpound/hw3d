@@ -16,7 +16,7 @@
 #define OEMRESOURCE
 #define NOATOM
 #define NOCLIPBOARD
-// #define NOCOLOR // for D2D11
+// #define NOCOLOR
 #define NOCTLMGR
 #define NODRAWTEXT
 #define NOKERNEL
@@ -39,7 +39,7 @@
 #define NOPROXYSTUB
 #define NOIMAGE
 #define NOTAPE
-#endif // FATPOUND_FULL_WIN_TARGETED
+#endif
 
 
 #define NOMINMAX
@@ -49,9 +49,10 @@
 
 #include <Windows.h>
 
-
-#ifndef NDEBUG
-#define IS_DEBUG true
+#ifdef NDEBUG
+#define IN_RELEASE true
+#define IN_DEBUG false
 #else
-#define IS_DEBUG false
+#define IN_DEBUG true
+#define IN_RELEASE false
 #endif // NDEBUG

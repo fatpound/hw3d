@@ -143,12 +143,12 @@ public:
     const Color* GetBufferPtr() const noexcept;
     const Color* GetBufferPtrConst() const noexcept;
     Color* GetBufferPtr() noexcept;
-    Color GetPixel(unsigned int x, unsigned int y) const noexcept(!IS_DEBUG);
+    Color GetPixel(unsigned int x, unsigned int y) const noexcept(IN_RELEASE);
 
     void Clear(Color fillValue) noexcept;
-    void PutPixel(unsigned int x, unsigned int y, Color c) noexcept(!IS_DEBUG);
+    void PutPixel(unsigned int x, unsigned int y, Color c) noexcept(IN_RELEASE);
     void Save(const std::string& filename) const;
-    void Copy(const Surface& src) noexcept(!IS_DEBUG);
+    void Copy(const Surface& src) noexcept(IN_RELEASE);
 
     unsigned int GetWidth() const noexcept;
     unsigned int GetHeight() const noexcept;

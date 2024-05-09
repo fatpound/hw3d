@@ -143,7 +143,7 @@ bool Graphics::IsImguiEnabled() const noexcept
     return imgui_is_enabled_;
 }
 
-void Graphics::BeginFrame(float red, float green, float blue) noexcept
+void Graphics::BeginFrame() noexcept
 {
     if (imgui_is_enabled_)
     {
@@ -152,7 +152,7 @@ void Graphics::BeginFrame(float red, float green, float blue) noexcept
         ImGui::NewFrame();
     }
 
-    ClearBuffer_(red, green, blue);
+    ClearBuffer_(0.07f, 0.0f, 0.12f);
 }
 void Graphics::EndFrame()
 {
@@ -180,7 +180,7 @@ void Graphics::EndFrame()
         }
     }
 }
-void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
+void Graphics::DrawIndexed(UINT count) noexcept(IN_RELEASE)
 {
     GFX_THROW_INFO_ONLY(pContext_->DrawIndexed(count, 0u, 0u));
 }
