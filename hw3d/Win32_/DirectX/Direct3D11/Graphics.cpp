@@ -129,11 +129,11 @@ Graphics::~Graphics()
     ImGui_ImplDX11_Shutdown();
 }
 
-dx::XMMATRIX Graphics::GetProjection() const noexcept
+dx::XMMATRIX Graphics::GetProjectionXM() const noexcept
 {
     return projection_;
 }
-dx::XMMATRIX Graphics::GetCamera() const noexcept
+dx::XMMATRIX Graphics::GetCameraXM() const noexcept
 {
     return camera_;
 }

@@ -89,8 +89,8 @@ public:
 
 
 public:
-    DirectX::XMMATRIX GetProjection() const noexcept;
-    DirectX::XMMATRIX GetCamera() const noexcept;
+    DirectX::XMMATRIX GetProjectionXM() const noexcept;
+    DirectX::XMMATRIX GetCameraXM() const noexcept;
 
     bool IsImguiEnabled() const noexcept;
 

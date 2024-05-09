@@ -16,8 +16,8 @@ void TransformCbuf::Bind(Graphics& gfx) noexcept
         gfx,
         DirectX::XMMatrixTranspose(
             parent_.GetTransformXM() *
-            gfx.GetCamera() *
-            gfx.GetProjection()
+            gfx.GetCameraXM() *
+            gfx.GetProjectionXM()
         )
     );
 
