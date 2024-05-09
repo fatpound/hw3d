@@ -69,7 +69,7 @@ Pyramid::Pyramid(Graphics& gfx,
         };
 
         AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
-        AddStaticBind_(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+        AddStaticBind_(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
     }
     else
     {

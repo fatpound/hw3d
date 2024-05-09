@@ -5,7 +5,7 @@
 class Topology : public Bindable
 {
 public:
-    Topology(Graphics& gfx, D3D11_PRIMITIVE_TOPOLOGY type);
+    Topology(D3D11_PRIMITIVE_TOPOLOGY type);
 
 
 public:

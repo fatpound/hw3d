@@ -67,7 +67,7 @@ Melon::Melon(Graphics& gfx,
             { "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 }
         };
         AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
-        AddStaticBind_(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+        AddStaticBind_(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
     }
 
     struct Vertex final
