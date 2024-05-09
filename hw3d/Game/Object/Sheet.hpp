@@ -14,9 +14,9 @@ public:
 
 
 public:
-    DirectX::XMMATRIX GetTransformXM() const noexcept override;
+    virtual DirectX::XMMATRIX GetTransformXM() const noexcept override final;
 
-    void Update(float dt) noexcept override;
+    virtual void Update(float dt) noexcept override final;
 
 
 protected:
