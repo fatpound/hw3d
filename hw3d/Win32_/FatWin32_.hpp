@@ -45,7 +45,9 @@
 #define NOMINMAX
 #define STRICT
 
+#ifdef FATPOUND_SUBSYSTEM_CONSOLE
 #define _CRTDBG_MAP_ALLOC
+#endif // FATPOUND_SUBSYSTEM_CONSOLE
 
 #include <Windows.h>
 
