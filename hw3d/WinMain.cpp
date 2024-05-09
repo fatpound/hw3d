@@ -16,7 +16,7 @@ int CALLBACK WinMain([[maybe_unused]] _In_ HINSTANCE hInstance, [[maybe_unused]]
     }
     catch (...)
     {
-        MessageBox(nullptr, "No Details Available", "Standard Exception", MB_OK | MB_ICONERROR);
+        MessageBox(nullptr, "No Details Available", "Non-Standard Exception", MB_OK | MB_ICONERROR);
     }
 
     return -1;
