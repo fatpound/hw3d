@@ -30,7 +30,7 @@ Texture::Texture(Graphics& gfx, const Surface& surface)
     wrl::ComPtr<ID3D11Texture2D> pTexture;
     
     GFX_THROW_INFO(
-        GetDevice_(gfx)->CreateTexture2D(
+        Bindable::GetDevice_(gfx)->CreateTexture2D(
             &texDesc,
             &sd,
             &pTexture
@@ -44,7 +44,7 @@ Texture::Texture(Graphics& gfx, const Surface& surface)
     srvDesc.Texture2D.MipLevels = 1;
 
     GFX_THROW_INFO(
-        GetDevice_(gfx)->CreateShaderResourceView(
+        Bindable::GetDevice_(gfx)->CreateShaderResourceView(
             pTexture.Get(),
             &srvDesc,
             &pTextureView_
@@ -54,5 +54,5 @@ Texture::Texture(Graphics& gfx, const Surface& surface)
 
 void Texture::Bind(Graphics& gfx) noexcept
 {
-    GetContext_(gfx)->PSSetShaderResources(0u, 1u, pTextureView_.GetAddressOf());
+    Bindable::GetContext_(gfx)->PSSetShaderResources(0u, 1u, pTextureView_.GetAddressOf());
 }

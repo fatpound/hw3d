@@ -8,7 +8,7 @@ VertexShader::VertexShader(Graphics& gfx, const std::wstring& path)
 
     GFX_THROW_INFO(D3DReadFileToBlob(path.c_str(), &pBytecodeBlob_));
     GFX_THROW_INFO(
-        GetDevice_(gfx)->CreateVertexShader(
+        Bindable::GetDevice_(gfx)->CreateVertexShader(
             pBytecodeBlob_->GetBufferPointer(),
             pBytecodeBlob_->GetBufferSize(),
             nullptr,
@@ -19,7 +19,7 @@ VertexShader::VertexShader(Graphics& gfx, const std::wstring& path)
 
 void VertexShader::Bind(Graphics& gfx) noexcept
 {
-    GetContext_(gfx)->VSSetShader(pVertexShader_.Get(), nullptr, 0u);
+    Bindable::GetContext_(gfx)->VSSetShader(pVertexShader_.Get(), nullptr, 0u);
 }
 
 ID3DBlob* VertexShader::GetBytecode() const noexcept

@@ -26,7 +26,7 @@ Pyramid::Pyramid(Graphics& gfx,
     theta_(adist(rng)),
     phi_(adist(rng))
 {
-    if (!IsStaticInitialized())
+    if (!IsStaticInitialized_())
     {
         struct Vertex final
         {
@@ -76,7 +76,7 @@ Pyramid::Pyramid(Graphics& gfx,
         SetIndexFromStatic_();
     }
 
-    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
+    AddBind_(std::make_unique<TransformCBuf>(gfx, *this));
 }
 
 void Pyramid::Update(float deltaTime) noexcept

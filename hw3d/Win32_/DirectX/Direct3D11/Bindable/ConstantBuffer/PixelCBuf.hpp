@@ -5,15 +5,12 @@
 template <typename C>
 class PixelConstantBuffer final : public ConstantBuffer<C>
 {
-    using ConstantBuffer<C>::pConstantBuffer_;
-    using Bindable::GetContext_;
-
-public:
     using ConstantBuffer<C>::ConstantBuffer;
 
+public:
     virtual void Bind(Graphics& gfx) noexcept override final
     {
-        GetContext_(gfx)->PSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
+        Bindable::GetContext_(gfx)->PSSetConstantBuffers(0u, 1u, this->pConstantBuffer_.GetAddressOf());
     }
 
 

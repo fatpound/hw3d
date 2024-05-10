@@ -27,7 +27,7 @@ Box::Box(Graphics& gfx,
     theta_(adist(rng)),
     phi_(adist(rng))
 {
-    if (! IsStaticInitialized())
+    if (! IsStaticInitialized_())
     {
         struct Vertex final
         {
@@ -84,7 +84,7 @@ Box::Box(Graphics& gfx,
         SetIndexFromStatic_();
     }
     
-    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
+    AddBind_(std::make_unique<TransformCBuf>(gfx, *this));
 
     // model deformation transform per instance
     dx::XMStoreFloat3x3(&mt_, dx::XMMatrixScaling(1.0f, 1.0f, bdist(rng)));

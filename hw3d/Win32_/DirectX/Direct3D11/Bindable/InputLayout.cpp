@@ -7,7 +7,7 @@ InputLayout::InputLayout(Graphics& gfx, const std::vector<D3D11_INPUT_ELEMENT_DE
     INFOMAN(gfx);
 
     GFX_THROW_INFO(
-        GetDevice_(gfx)->CreateInputLayout(
+        Bindable::GetDevice_(gfx)->CreateInputLayout(
             layout.data(),
             static_cast<UINT>(layout.size()),
             pVertexShaderBytecode->GetBufferPointer(),
@@ -19,5 +19,5 @@ InputLayout::InputLayout(Graphics& gfx, const std::vector<D3D11_INPUT_ELEMENT_DE
 
 void InputLayout::Bind(Graphics& gfx) noexcept
 {
-    GetContext_(gfx)->IASetInputLayout(pInputLayout_.Get());
+    Bindable::GetContext_(gfx)->IASetInputLayout(pInputLayout_.Get());
 }

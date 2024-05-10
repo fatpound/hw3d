@@ -5,15 +5,13 @@
 template <typename C>
 class VertexConstantBuffer final : public ConstantBuffer<C>
 {
-    using ConstantBuffer<C>::pConstantBuffer_;
-    using Bindable::GetContext_;
+    using ConstantBuffer<C>::ConstantBuffer;
 
 public:
-    using ConstantBuffer<C>::ConstantBuffer;
 
     virtual void Bind(Graphics& gfx) noexcept override final
     {
-        GetContext_(gfx)->VSSetConstantBuffers(0u, 1u, pConstantBuffer_.GetAddressOf());
+        Bindable::GetContext_(gfx)->VSSetConstantBuffers(0u, 1u, this->pConstantBuffer_.GetAddressOf());
     }
 
 

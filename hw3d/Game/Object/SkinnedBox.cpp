@@ -29,7 +29,7 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
     theta_(adist(rng)),
     phi_(adist(rng))
 {
-    if (!IsStaticInitialized())
+    if (!IsStaticInitialized_())
     {
         struct Vertex final
         {
@@ -68,7 +68,7 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
         SetIndexFromStatic_();
     }
 
-    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
+    AddBind_(std::make_unique<TransformCBuf>(gfx, *this));
 }
 
 void SkinnedBox::Update(float dt) noexcept

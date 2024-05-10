@@ -30,7 +30,7 @@ Sheet::Sheet(Graphics& gfx,
     theta_(adist(rng)),
     phi_(adist(rng))
 {
-    if (!IsStaticInitialized())
+    if (!IsStaticInitialized_())
     {
         struct Vertex final
         {
@@ -78,7 +78,7 @@ Sheet::Sheet(Graphics& gfx,
         SetIndexFromStatic_();
     }
 
-    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
+    AddBind_(std::make_unique<TransformCBuf>(gfx, *this));
 }
 
 void Sheet::Update(float dt) noexcept

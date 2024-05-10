@@ -19,12 +19,12 @@ IndexBuffer::IndexBuffer(Graphics& gfx, const std::vector<unsigned short int>& i
     D3D11_SUBRESOURCE_DATA isd = {};
     isd.pSysMem = indices.data();
 
-    GFX_THROW_INFO(GetDevice_(gfx)->CreateBuffer(&ibd, &isd, &pIndexBuffer_));
+    GFX_THROW_INFO(Bindable::GetDevice_(gfx)->CreateBuffer(&ibd, &isd, &pIndexBuffer_));
 }
 
 void IndexBuffer::Bind(Graphics& gfx) noexcept
 {
-    GetContext_(gfx)->IASetIndexBuffer(pIndexBuffer_.Get(), DXGI_FORMAT_R16_UINT, 0u);
+    Bindable::GetContext_(gfx)->IASetIndexBuffer(pIndexBuffer_.Get(), DXGI_FORMAT_R16_UINT, 0u);
 }
 
 UINT IndexBuffer::GetCount() const noexcept

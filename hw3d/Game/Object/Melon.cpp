@@ -28,7 +28,7 @@ Melon::Melon(Graphics& gfx,
     theta_(adist(rng)),
     phi_(adist(rng))
 {
-    if (!IsStaticInitialized())
+    if (!IsStaticInitialized_())
     {
         auto pvs = std::make_unique<VertexShader>(gfx, L"VSColorIndex.cso");
         auto pvsbc = pvs->GetBytecode();
@@ -79,9 +79,9 @@ Melon::Melon(Graphics& gfx,
 
     model.Transform(dx::XMMatrixScaling(1.0f, 1.0f, 1.2f)); // deforming a little bit
 
-    AddBind(std::make_unique<VertexBuffer>(gfx, model.vertices_));
-    AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices_));
-    AddBind(std::make_unique<TransformCBuf>(gfx, *this));
+    AddBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
+    AddIndexBuffer_(std::make_unique<IndexBuffer>(gfx, model.indices_));
+    AddBind_(std::make_unique<TransformCBuf>(gfx, *this));
 }
 
 void Melon::Update(float deltaTime) noexcept

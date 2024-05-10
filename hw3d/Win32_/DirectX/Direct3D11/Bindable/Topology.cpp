@@ -9,5 +9,5 @@ Topology::Topology(D3D11_PRIMITIVE_TOPOLOGY type)
 
 void Topology::Bind(Graphics& gfx) noexcept
 {
-    GetContext_(gfx)->IASetPrimitiveTopology(type_);
+    Bindable::GetContext_(gfx)->IASetPrimitiveTopology(type_);
 }
