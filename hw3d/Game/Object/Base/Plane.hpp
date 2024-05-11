@@ -49,14 +49,14 @@ public:
         indices.reserve(fm::Square(divisions_x * divisions_y) * 6);
 
         {
-            const auto vxy2i = [nVertices_x](size_t x, size_t y)
+            const auto vxy2i = [nVertices_x](std::size_t x, std::size_t y)
             {
                 return static_cast<unsigned short int>(y * nVertices_x + x);
             };
 
-            for (size_t y = 0; y < divisions_y; y++)
+            for (std::size_t y = 0; y < divisions_y; y++)
             {
-                for (size_t x = 0; x < divisions_x; x++)
+                for (std::size_t x = 0; x < divisions_x; x++)
                 {
                     const std::array<unsigned short int, 4> indexArray = { vxy2i(x,y),vxy2i(x + 1,y),vxy2i(x,y + 1),vxy2i(x + 1,y + 1) };
 

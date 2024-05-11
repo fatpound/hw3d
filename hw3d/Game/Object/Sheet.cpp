@@ -30,7 +30,7 @@ Sheet::Sheet(Graphics& gfx,
     theta_(adist(rng)),
     phi_(adist(rng))
 {
-    if (!IsStaticInitialized_())
+    if (!DrawableBase::IsStaticInitialized_())
     {
         struct Vertex final
         {
@@ -50,17 +50,15 @@ Sheet::Sheet(Graphics& gfx,
         model.vertices_[2].tex = { 0.0f,1.0f };
         model.vertices_[3].tex = { 1.0f,1.0f };
 
-        AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\kappa50.png")));
-
-        AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
-
-        AddStaticBind_(std::make_unique<Sampler>(gfx));
+        DrawableBase::AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\kappa50.png")));
+        DrawableBase::AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
+        DrawableBase::AddStaticBind_(std::make_unique<Sampler>(gfx));
 
         auto pvs = std::make_unique<VertexShader>(gfx, L"VSTexture.cso");
         auto pvsbc = pvs->GetBytecode();
-        AddStaticBind_(std::move(pvs));
 
-        AddStaticBind_(std::make_unique<PixelShader>(gfx, L"PSTexture.cso"));
+        DrawableBase::AddStaticBind_(std::move(pvs));
+        DrawableBase::AddStaticBind_(std::make_unique<PixelShader>(gfx, L"PSTexture.cso"));
 
         AddStaticIndexBuffer_(std::make_unique<IndexBuffer>(gfx, model.indices_));
 
@@ -69,9 +67,9 @@ Sheet::Sheet(Graphics& gfx,
             { "Position", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
             { "TexCoord", 0, DXGI_FORMAT_R32G32_FLOAT,    0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
         };
-        AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
 
-        AddStaticBind_(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+        DrawableBase::AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
+        DrawableBase::AddStaticBind_(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
     }
     else
     {

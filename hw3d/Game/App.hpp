@@ -41,5 +41,5 @@ private:
 
     float simulation_speed_ = 1.0f;
 
-    static constexpr size_t drawable_count_ = 180u;
+    static constexpr std::size_t drawable_count_ = 180u;
 };

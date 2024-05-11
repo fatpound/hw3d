@@ -29,7 +29,7 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
     theta_(adist(rng)),
     phi_(adist(rng))
 {
-    if (!IsStaticInitialized_())
+    if (!DrawableBase::IsStaticInitialized_())
     {
         struct Vertex final
         {
@@ -45,13 +45,15 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
 
         const auto model = Cube::MakeSkinned<Vertex>();
 
-        AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
-        AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\cube.png")));
+        DrawableBase::AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
+        DrawableBase::AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\cube.png")));
 
         auto pvs = std::make_unique<VertexShader>(gfx, L"VSTexture.cso");
         auto pvsbc = pvs->GetBytecode();
-        AddStaticBind_(std::move(pvs));
-        AddStaticBind_(std::make_unique<PixelShader>(gfx, L"PSTexture.cso"));
+
+        DrawableBase::AddStaticBind_(std::move(pvs));
+        DrawableBase::AddStaticBind_(std::make_unique<PixelShader>(gfx, L"PSTexture.cso"));
+
         AddStaticIndexBuffer_(std::make_unique<IndexBuffer>(gfx, model.indices_));
 
         const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
@@ -60,8 +62,8 @@ SkinnedBox::SkinnedBox(Graphics& gfx,
             { "TexCoord",0,DXGI_FORMAT_R32G32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 }
         };
 
-        AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
-        AddStaticBind_(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+        DrawableBase::AddStaticBind_(std::make_unique<InputLayout>(gfx, ied, pvsbc));
+        DrawableBase::AddStaticBind_(std::make_unique<Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
     }
     else
     {
