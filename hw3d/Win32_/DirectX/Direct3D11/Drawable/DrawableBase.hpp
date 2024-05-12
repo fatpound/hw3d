@@ -55,7 +55,7 @@ protected:
 
 
 private:
-    virtual auto GetStaticBinds_() const noexcept -> const std::vector<std::unique_ptr<Bindable>>& override final
+    virtual auto GetStaticBinds_() const noexcept -> const std::vector<std::unique_ptr<Bindable>>& override /* final */
     {
         return static_binds_;
     }
