@@ -192,7 +192,7 @@ WindowsMessageMap::WindowsMessageMap() noexcept
 
 }
 
-std::string WindowsMessageMap::operator () (DWORD msg, WPARAM wp, LPARAM lp) const noexcept
+auto WindowsMessageMap::operator () (DWORD msg, WPARAM wp, LPARAM lp) const noexcept -> std::string
 {
     constexpr int firstColWidth = 25;
     const auto i = map_.find( msg );

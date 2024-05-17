@@ -41,7 +41,7 @@ public:
         Event(Type type, const Mouse& parent) noexcept;
 
     public:
-        std::pair<int, int> GetPos() const noexcept;
+        auto GetPos() const noexcept -> std::pair<int, int>;
 
         Type GetType() const noexcept;
 
@@ -68,7 +68,7 @@ public:
 
 
 public:
-    std::pair<int, int> GetPos() const noexcept;
+    auto GetPos() const noexcept -> std::pair<int, int>;
 
     Event ReadFromBuffer() noexcept;
 
@@ -105,8 +105,6 @@ private:
 
 
 private:
-    static constexpr unsigned int buffer_size_ = 16u;
-
     std::queue<Event> buffer_;
 
     int x_ = 0;
@@ -117,4 +115,6 @@ private:
     bool leftIsPressed_ = false;
     bool rightIsPressed_ = false;
     bool wheelIsPressed_ = false;
+
+    static constexpr unsigned int buffer_size_ = 16u;
 };

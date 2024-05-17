@@ -12,7 +12,7 @@ public:
 
     
 public:
-    std::string operator () (DWORD msg, WPARAM wp, LPARAM lp) const noexcept;
+    auto operator () (DWORD msg, WPARAM wp, LPARAM lp) const noexcept -> std::string;
 
 
 protected:

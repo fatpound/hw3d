@@ -16,7 +16,7 @@ public:
 
 
 public:
-    virtual DirectX::XMMATRIX GetTransformXM() const noexcept override final;
+    virtual auto GetTransformXM() const noexcept -> DirectX::XMMATRIX override final;
 
     virtual void Update(float deltaTime) noexcept override final;
 

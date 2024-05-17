@@ -91,7 +91,7 @@ Window::~Window()
     DestroyWindow(hWnd_);
 }
 
-std::optional<WPARAM> Window::ProcessMessages() noexcept
+auto Window::ProcessMessages() noexcept -> std::optional<WPARAM>
 {
     MSG msg;
 
@@ -153,6 +153,7 @@ LRESULT CALLBACK Window::HandleMsgThunk_(HWND hWnd, UINT msg, WPARAM wParam, LPA
 
     return pWnd->HandleMsg_(hWnd, msg, wParam, lParam);
 }
+
 LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
     // static WindowsMessageMap map;
@@ -323,7 +324,7 @@ LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) no
 
 // Exception
 
-std::string Window::Exception::TranslateErrorCode(HRESULT hresult) noexcept
+auto Window::Exception::TranslateErrorCode(HRESULT hresult) noexcept -> std::string
 {
     char* pMsgBuf = nullptr;
 
@@ -387,7 +388,7 @@ HRESULT Window::HrException::GetErrorCode() const noexcept
     return hresult_;
 }
 
-std::string Window::HrException::GetErrorDescription() const noexcept
+auto Window::HrException::GetErrorDescription() const noexcept -> std::string
 {
     return Exception::TranslateErrorCode(hresult_);
 }
@@ -430,7 +431,6 @@ Window::WindowClass_::~WindowClass_()
 {
     UnregisterClass(wndClassName_, GetInstance());
 }
-
 
 HINSTANCE Window::WindowClass_::GetInstance() noexcept
 {

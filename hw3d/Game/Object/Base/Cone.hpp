@@ -60,10 +60,11 @@ public:
 
         return IndexedTriangleList<V>{std::move(vertices), std::move(indices)};
     }
+
     template <class V>
     static IndexedTriangleList<V> Make()
     {
-        return MakeTesselated<V>(24);
+        return Cone::MakeTesselated<V>(24);
     }
 
 

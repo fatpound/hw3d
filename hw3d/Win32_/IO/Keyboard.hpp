@@ -79,6 +79,8 @@ private:
         }
     }
 
+
+private:
     void OnKeyPressed_(unsigned char keycode) noexcept;
     void OnKeyReleased_(unsigned char keycode) noexcept;
     void OnChar_(char character) noexcept;
@@ -88,7 +90,6 @@ private:
 
 private:
     static constexpr unsigned int key_count_ = 256u;
-    static constexpr unsigned int buffer_size_ = 16u;
 
     std::bitset<key_count_> keystates_;
 
@@ -96,4 +97,6 @@ private:
     std::queue<char> charbuffer_;
 
     bool autoRepeatEnabled_ = false;
+
+    static constexpr unsigned int buffer_size_ = 16u;
 };

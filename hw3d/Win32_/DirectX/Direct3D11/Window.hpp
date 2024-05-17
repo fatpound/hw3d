@@ -34,7 +34,7 @@ public:
         using FatException::FatException;
 
     public:
-        static std::string TranslateErrorCode(HRESULT hresult) noexcept;
+        static auto TranslateErrorCode(HRESULT hresult) noexcept -> std::string;
 
     protected:
 
@@ -52,7 +52,7 @@ public:
     public:
         HRESULT GetErrorCode() const noexcept;
 
-        std::string GetErrorDescription() const noexcept;
+        auto GetErrorDescription() const noexcept -> std::string;
 
     protected:
 
@@ -73,20 +73,23 @@ public:
 
 
 public:
-    static std::optional<WPARAM> ProcessMessages() noexcept;
+    static auto ProcessMessages() noexcept -> std::optional<WPARAM>;
+
+
+public:
+    template <fatpound::math::Number N>
+    N GetWidth() noexcept
+    {
+        return static_cast<N>(width_);
+    }
+
+    template <fatpound::math::Number N>
+    N GetHeight() noexcept
+    {
+        return static_cast<N>(height_);
+    }
 
     Graphics& Gfx();
-
-    template <fatpound::math::Number T>
-    T GetWidth() noexcept
-    {
-        return static_cast<T>(width_);
-    }
-    template <fatpound::math::Number T>
-    T GetHeight() noexcept
-    {
-        return static_cast<T>(height_);
-    }
 
     void SetTitle(const std::string& title);
     void Kill();

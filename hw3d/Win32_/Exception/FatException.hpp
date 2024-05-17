@@ -15,8 +15,8 @@ public:
 
 
 public:
-    std::string GetOriginString() const noexcept;
-    std::string GetFileName() const noexcept;
+    auto GetOriginString() const noexcept -> std::string;
+    auto GetFileName()     const noexcept -> std::string;
 
     int GetLineNum() const noexcept;
 

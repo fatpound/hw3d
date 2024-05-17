@@ -129,11 +129,11 @@ Graphics::~Graphics()
     ImGui_ImplDX11_Shutdown();
 }
 
-dx::XMMATRIX Graphics::GetProjectionXM() const noexcept
+auto Graphics::GetProjectionXM() const noexcept -> dx::XMMATRIX
 {
     return projection_;
 }
-dx::XMMATRIX Graphics::GetCameraXM() const noexcept
+auto Graphics::GetCameraXM() const noexcept -> dx::XMMATRIX
 {
     return camera_;
 }
@@ -260,11 +260,11 @@ HRESULT Graphics::HrException::GetErrorCode() const noexcept
     return hresult_;
 }
 
-std::string Graphics::HrException::GetErrorString() const noexcept
+auto Graphics::HrException::GetErrorString() const noexcept -> std::string
 {
     return DXGetErrorString(hresult_);
 }
-std::string Graphics::HrException::GetErrorDescription() const noexcept
+auto Graphics::HrException::GetErrorDescription() const noexcept -> std::string
 {
     std::array<char, 512> buffer;
 
@@ -272,7 +272,7 @@ std::string Graphics::HrException::GetErrorDescription() const noexcept
 
     return buffer.data();
 }
-std::string Graphics::HrException::GetErrorInfo() const noexcept
+auto Graphics::HrException::GetErrorInfo() const noexcept -> std::string
 {
     return info_;
 }
@@ -314,7 +314,7 @@ const char* Graphics::InfoException::GetType() const noexcept
     return "Fat Graphics Info Exception";
 }
 
-std::string Graphics::InfoException::GetErrorInfo() const noexcept
+auto Graphics::InfoException::GetErrorInfo() const noexcept -> std::string
 {
     return info_;
 }

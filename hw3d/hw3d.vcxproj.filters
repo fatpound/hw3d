@@ -63,7 +63,7 @@
     <ClCompile Include="Game\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Util\FatTimer.cpp">
+    <ClCompile Include="Util\FatAutoTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Win32_\DirectX\Direct3D11\Graphics.cpp">
@@ -176,7 +176,7 @@
     <ClInclude Include="Game\App.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Util\FatTimer.hpp">
+    <ClInclude Include="Util\FatAutoTimer.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\DirectX\Direct3D11\Graphics.hpp">

@@ -215,7 +215,7 @@ Surface::Exception::Exception(int line, const char* file, std::string note) noex
 
 }
 
-const std::string& Surface::Exception::GetNote() const noexcept
+auto Surface::Exception::GetNote() const noexcept -> const std::string&
 {
     return note_;
 }

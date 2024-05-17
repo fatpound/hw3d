@@ -115,7 +115,7 @@ public:
         Exception(int line, const char* file, std::string note) noexcept;
 
     public:
-        const std::string& GetNote() const noexcept;
+        auto GetNote() const noexcept -> const std::string&;
 
         const char* what() const noexcept override;
         const char* GetType() const noexcept override;

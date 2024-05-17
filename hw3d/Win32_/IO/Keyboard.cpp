@@ -1,16 +1,16 @@
 #include "Keyboard.hpp"
 
-Keyboard::Event Keyboard::ReadKeyFromBuffer() noexcept
+auto Keyboard::ReadKeyFromBuffer() noexcept -> Event
 {
     if (keybuffer_.size() > 0u)
     {
-        Keyboard::Event e = keybuffer_.front();
+        Event e = keybuffer_.front();
         keybuffer_.pop();
 
         return e;
     }
 
-    return Keyboard::Event();
+    return {};
 }
 
 char Keyboard::ReadCharFromBuffer() noexcept

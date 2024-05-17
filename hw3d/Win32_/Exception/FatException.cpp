@@ -26,7 +26,7 @@ const char* FatException::GetType() const noexcept
     return "Fat Exception";
 }
 
-std::string FatException::GetOriginString() const noexcept
+auto FatException::GetOriginString() const noexcept -> std::string
 {
     std::ostringstream oss;
 
@@ -35,7 +35,7 @@ std::string FatException::GetOriginString() const noexcept
 
     return oss.str();
 }
-std::string FatException::GetFileName() const noexcept
+auto FatException::GetFileName() const noexcept -> std::string
 {
     return file_name_;
 }
