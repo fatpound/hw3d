@@ -22,7 +22,7 @@ public:
 
 
 public:
-    virtual DirectX::XMMATRIX GetTransformXM() const noexcept = 0;
+    virtual auto GetTransformXM() const noexcept -> DirectX::XMMATRIX = 0;
 
     virtual void Update(float dt) noexcept = 0;
 

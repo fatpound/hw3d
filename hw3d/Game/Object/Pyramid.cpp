@@ -91,7 +91,7 @@ void Pyramid::Update(float deltaTime) noexcept
     chi_   += dchi_   * deltaTime;
 }
 
-DirectX::XMMATRIX Pyramid::GetTransformXM() const noexcept
+auto Pyramid::GetTransformXM() const noexcept -> dx::XMMATRIX
 {
     return dx::XMMatrixRotationRollPitchYaw(pitch_, yaw_, roll_) *
         dx::XMMatrixTranslation(r_, 0.0f, 0.0f) *

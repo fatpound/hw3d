@@ -20,7 +20,7 @@ public:
 
 
 public:
-    std::vector<std::string> GetMessages() const;
+    auto GetMessages() const -> std::vector<std::string>;
 
     void SetNextIndex() noexcept;
 

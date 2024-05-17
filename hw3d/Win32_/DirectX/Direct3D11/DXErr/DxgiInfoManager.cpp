@@ -44,7 +44,7 @@ void DxgiInfoManager::SetNextIndex() noexcept
     next_error_index_ = pDxgiInfoQueue_->GetNumStoredMessages(DXGI_DEBUG_ALL);
 }
 
-std::vector<std::string> DxgiInfoManager::GetMessages() const
+auto DxgiInfoManager::GetMessages() const -> std::vector<std::string>
 {
     std::vector<std::string> messages;
 

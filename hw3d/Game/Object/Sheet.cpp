@@ -89,7 +89,7 @@ void Sheet::Update(float dt) noexcept
     chi_   += dchi_   * dt;
 }
 
-DirectX::XMMATRIX Sheet::GetTransformXM() const noexcept
+auto Sheet::GetTransformXM() const noexcept -> dx::XMMATRIX
 {
     return dx::XMMatrixRotationRollPitchYaw(pitch_, yaw_, roll_) *
         dx::XMMatrixTranslation(r_, 0.0f, 0.0f) *

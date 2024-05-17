@@ -39,6 +39,7 @@ public:
             }
         };
     }
+
     template <class V>
     static IndexedTriangleList<V> MakeSkinned()
     {

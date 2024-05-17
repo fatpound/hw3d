@@ -49,15 +49,15 @@ public:
         HrException(int line, const char* file, HRESULT hresult, std::vector<std::string> infoMsgs = { }) noexcept;
 
     public:
-        virtual const char* what() const noexcept override;
+        virtual const char* what()    const noexcept override;
         virtual const char* GetType() const noexcept override;
 
     public:
         HRESULT GetErrorCode() const noexcept;
 
-        std::string GetErrorString() const noexcept;
-        std::string GetErrorDescription() const noexcept;
-        std::string GetErrorInfo() const noexcept;
+        auto GetErrorString()      const noexcept -> std::string;
+        auto GetErrorDescription() const noexcept -> std::string;
+        auto GetErrorInfo()        const noexcept -> std::string;
 
     protected:
 
@@ -76,7 +76,7 @@ public:
         virtual const char* GetType() const noexcept override final;
 
     public:
-        std::string GetErrorInfo() const noexcept;
+        auto GetErrorInfo() const noexcept -> std::string;
 
     protected:
 
@@ -98,8 +98,8 @@ public:
 
 
 public:
-    DirectX::XMMATRIX GetProjectionXM() const noexcept;
-    DirectX::XMMATRIX GetCameraXM() const noexcept;
+    auto GetProjectionXM() const noexcept -> DirectX::XMMATRIX;
+    auto GetCameraXM()     const noexcept -> DirectX::XMMATRIX;
 
     bool IsImguiEnabled() const noexcept;
 

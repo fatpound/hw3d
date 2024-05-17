@@ -103,7 +103,7 @@ void Box::Update(float deltaTime) noexcept
     chi_   += dchi_   * deltaTime;
 }
 
-DirectX::XMMATRIX Box::GetTransformXM() const noexcept
+auto Box::GetTransformXM() const noexcept -> dx::XMMATRIX
 {
     return dx::XMLoadFloat3x3(&mt_) *
         dx::XMMatrixRotationRollPitchYaw(pitch_, yaw_, roll_) *

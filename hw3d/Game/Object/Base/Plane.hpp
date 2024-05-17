@@ -72,10 +72,11 @@ public:
 
         return IndexedTriangleList<V>{std::move(vertices),std::move(indices)};
     }
+
     template <class V>
     static IndexedTriangleList<V> Make()
     {
-        return MakeTesselated<V>(1, 1);
+        return Plane::MakeTesselated<V>(1, 1);
     }
 
 

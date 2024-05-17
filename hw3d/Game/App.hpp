@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Util/FatTimer.hpp"
+#include "../Util/FatAutoTimer.hpp"
 #include "../Util/ImguiManager.hpp"
 
 #include "../Win32_/DirectX/Direct3D11/Camera/Camera.hpp"
@@ -37,7 +37,7 @@ private:
     Graphics& gfx_;
     Camera camera_;
 
-    fatpound::util::Timer timer_;
+    fatpound::util::AutoTimer timer_;
 
     float simulation_speed_ = 1.0f;
 

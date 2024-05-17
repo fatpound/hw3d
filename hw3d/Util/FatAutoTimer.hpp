@@ -4,7 +4,7 @@
 
 namespace fatpound::util
 {
-    class Timer final
+    class AutoTimer final
     {
     public:
         float Mark() noexcept;

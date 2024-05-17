@@ -269,7 +269,7 @@
     <ClCompile Include="Win32_\DirectX\Direct3D11\DXErr\dxerr.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\DXErr\DxgiInfoManager.cpp" />
     <ClCompile Include="Win32_\Exception\FatException.cpp" />
-    <ClCompile Include="Util\FatTimer.cpp" />
+    <ClCompile Include="Util\FatAutoTimer.cpp" />
     <ClCompile Include="Win32_\GDI\GDIPlusManager.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Graphics.cpp" />
     <ClCompile Include="Util\ImguiManager.cpp" />
@@ -316,7 +316,7 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\DXErr\DxgiInfoManager.hpp" />
     <ClInclude Include="Win32_\Exception\FatException.hpp" />
     <ClInclude Include="Math\FatMath.hpp" />
-    <ClInclude Include="Util\FatTimer.hpp" />
+    <ClInclude Include="Util\FatAutoTimer.hpp" />
     <ClInclude Include="Win32_\FatWin32_.hpp" />
     <ClInclude Include="Win32_\GDI\GDIPlusManager.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Graphics.hpp" />

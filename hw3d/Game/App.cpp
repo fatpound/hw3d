@@ -49,7 +49,7 @@ App::App()
         }
     
     public:
-        std::unique_ptr<Drawable> operator () ()
+        auto operator () () -> std::unique_ptr<Drawable>
         {
             switch (typedist_(rng_))
             {
@@ -154,13 +154,13 @@ int App::Go()
 
 void App::DoFrame_()
 {
-    auto dt = timer_.Mark() * simulation_speed_;
+    const auto& delta_time = timer_.Mark() * simulation_speed_;
 
     gfx_.SetCamera(camera_.GetMatrix());
     
     for (auto& obj : drawables_)
     {
-        obj->Update(wnd_.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : dt);
+        obj->Update(wnd_.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : delta_time);
         obj->Draw(gfx_);
     }
 

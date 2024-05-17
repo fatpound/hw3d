@@ -2,12 +2,12 @@
 
 #include "Mouse.hpp"
 
-std::pair<int, int> Mouse::GetPos() const noexcept
+auto Mouse::GetPos() const noexcept -> std::pair<int, int>
 {
     return { x_, y_ };
 }
 
-Mouse::Event Mouse::ReadFromBuffer() noexcept
+auto Mouse::ReadFromBuffer() noexcept -> Event
 {
     if ( buffer_.size() > 0u )
     {
@@ -180,12 +180,12 @@ Mouse::Event::Event(Type type, const Mouse& parent) noexcept
 
 }
 
-std::pair<int, int> Mouse::Event::GetPos() const noexcept
+auto Mouse::Event::GetPos() const noexcept -> std::pair<int, int>
 {
     return { x_, y_ };
 }
 
-Mouse::Event::Type Mouse::Event::GetType() const noexcept
+auto Mouse::Event::GetType() const noexcept -> Type
 {
     return type_;
 }

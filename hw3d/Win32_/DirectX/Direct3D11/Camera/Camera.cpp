@@ -4,7 +4,7 @@
 
 namespace dx = DirectX;
 
-dx::XMMATRIX Camera::GetMatrix() const noexcept
+auto Camera::GetMatrix() const noexcept -> dx::XMMATRIX
 {
 	const auto& pos = dx::XMVector3Transform(
 		dx::XMVectorSet(0.0f, 0.0f, -r_, 0.0f), // setting the camera at a distance of r_
