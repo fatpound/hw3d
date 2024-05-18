@@ -50,7 +50,7 @@ Sheet::Sheet(Graphics& gfx,
         model.vertices_[2].tex = { 0.0f,1.0f };
         model.vertices_[3].tex = { 1.0f,1.0f };
 
-        DrawableBase::AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\kappa50.png")));
+        DrawableBase::AddStaticBind_(std::make_unique<Texture>(gfx, Surface::FromFile("Resource\\Image\\fatpound.png")));
         DrawableBase::AddStaticBind_(std::make_unique<VertexBuffer>(gfx, model.vertices_));
         DrawableBase::AddStaticBind_(std::make_unique<Sampler>(gfx));
 
