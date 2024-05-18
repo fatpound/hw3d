@@ -92,7 +92,7 @@ App::App()
     protected:
     
     private:
-        std::mt19937 rng_{ std::random_device{}() };
+        std::minstd_rand rng_{ std::random_device{}() };
     
         std::uniform_real_distribution<float> adist_{ 0.0f, std::numbers::pi_v<float> * 2.0f };
         std::uniform_real_distribution<float> ddist_{ 0.0f, std::numbers::pi_v<float> * 0.5f };
