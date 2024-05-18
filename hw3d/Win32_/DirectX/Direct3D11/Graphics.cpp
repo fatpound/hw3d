@@ -184,11 +184,11 @@ void Graphics::DrawIndexed(UINT count) noexcept(IN_RELEASE)
 {
     GFX_THROW_INFO_ONLY(pContext_->DrawIndexed(count, 0u, 0u));
 }
-void Graphics::SetProjection(DirectX::FXMMATRIX projection) noexcept
+void Graphics::SetProjection(DirectX::XMMATRIX projection) noexcept
 {
     projection_ = projection;
 }
-void Graphics::SetCamera(DirectX::FXMMATRIX camera) noexcept
+void Graphics::SetCamera(DirectX::XMMATRIX camera) noexcept
 {
     camera_ = camera;
 }

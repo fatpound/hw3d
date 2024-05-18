@@ -107,8 +107,8 @@ public:
     void EndFrame();
     void DrawIndexed(UINT count) noexcept(IN_RELEASE);
 
-    void SetProjection(DirectX::FXMMATRIX projection) noexcept;
-    void SetCamera(DirectX::FXMMATRIX camera) noexcept;
+    void SetProjection(DirectX::XMMATRIX projection) noexcept;
+    void SetCamera(DirectX::XMMATRIX camera) noexcept;
 
     void EnableImgui() noexcept;
     void DisableImgui() noexcept;

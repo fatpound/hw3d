@@ -33,6 +33,7 @@ private:
     std::vector<std::unique_ptr<class Drawable>> drawables_;
 
     ImguiManager imgui_;
+
     Window wnd_;
     Graphics& gfx_;
     Camera camera_;

@@ -336,6 +336,7 @@
       <Filter>Dxerr</Filter>
     </None>
     <None Include="FatRules.ruleset" />
+    <None Include="hw3d.cd" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Win32_\DirectX\Direct3D11\Shader\VSColorIndex.hlsl">

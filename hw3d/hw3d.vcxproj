@@ -362,6 +362,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="FatRules.ruleset" />
+    <None Include="hw3d.cd" />
     <None Include="Win32_\DirectX\Direct3D11\DXErr\DXGetErrorDescription.inl" />
     <None Include="Win32_\DirectX\Direct3D11\DXErr\DXGetErrorString.inl" />
     <None Include="Win32_\DirectX\Direct3D11\DXErr\DXTrace.inl" />
