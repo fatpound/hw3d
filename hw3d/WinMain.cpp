@@ -10,9 +10,9 @@ int CALLBACK WinMain(
 {
     try
     {
-        return App{}.Go();
+        return fatpound::hw3d::App{}.Go();
     }
-    catch (const FatException& ex)
+    catch (const fatpound::util::FatException& ex)
     {
         MessageBox(nullptr, ex.what(), ex.GetType(), MB_OK | MB_ICONERROR);
     }

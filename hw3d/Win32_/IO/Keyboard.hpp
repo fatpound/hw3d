@@ -3,100 +3,108 @@
 #include <bitset>
 #include <queue>
 
-class Keyboard final
+namespace fatpound::win32::d3d11
 {
-    friend class Window;
-    
-public:
-    Keyboard() = default;
-    Keyboard(const Keyboard& src) = delete;
-    Keyboard& operator = (const Keyboard& src) = delete;
-    Keyboard(Keyboard&& src) = delete;
-    Keyboard& operator = (Keyboard&& src) = delete;
-    ~Keyboard() = default;
+    class Window;
+}
 
-
-public:
-    class Event final
+namespace fatpound::win32::io
+{
+    class Keyboard final
     {
+        friend class ::fatpound::win32::d3d11::Window;
+
     public:
-        enum class Type
+        Keyboard() = default;
+        Keyboard(const Keyboard& src) = delete;
+        Keyboard& operator = (const Keyboard& src) = delete;
+        Keyboard(Keyboard&& src) = delete;
+        Keyboard& operator = (Keyboard&& src) = delete;
+        ~Keyboard() = default;
+
+
+    public:
+        class Event final
         {
-            Press,
-            Release,
-            Invalid
+        public:
+            enum class Type
+            {
+                Press,
+                Release,
+                Invalid
+            };
+
+        public:
+            Event() noexcept;
+
+            Event(Type type, unsigned char code) noexcept;
+
+        public:
+            unsigned char GetCode() const noexcept;
+
+            bool IsPress() const noexcept;
+            bool IsRelease() const noexcept;
+            bool IsInvalid() const noexcept;
+
+        protected:
+
+        private:
+            Type type_;
+
+            unsigned char code_;
         };
 
-    public:
-        Event() noexcept;
-
-        Event(Type type, unsigned char code) noexcept;
 
     public:
-        unsigned char GetCode() const noexcept;
+        Event ReadKeyFromBuffer() noexcept;
 
-        bool IsPress() const noexcept;
-        bool IsRelease() const noexcept;
-        bool IsInvalid() const noexcept;
+        char ReadCharFromBuffer() noexcept;
+
+        bool AutoRepeatIsEnabled() const noexcept;
+        bool CharBufferIsEmpty() const noexcept;
+        bool KeyBufferIsEmpty() const noexcept;
+        bool KeyIsPressed(unsigned char keycode) const noexcept;
+
+        void FlushKeyBuffer() noexcept;
+        void FlushCharBuffer() noexcept;
+        void FlushBuffers() noexcept;
+
+        void EnableAutoRepeat() noexcept;
+        void DisableAutoRepeat() noexcept;
+
 
     protected:
 
+
     private:
-        Type type_;
-
-        unsigned char code_;
-    };
-
-
-public:
-    Event ReadKeyFromBuffer() noexcept;
-
-    char ReadCharFromBuffer() noexcept;
-
-    bool AutoRepeatIsEnabled() const noexcept;
-    bool CharBufferIsEmpty() const noexcept;
-    bool KeyBufferIsEmpty() const noexcept;
-    bool KeyIsPressed(unsigned char keycode) const noexcept;
-
-    void FlushKeyBuffer() noexcept;
-    void FlushCharBuffer() noexcept;
-    void FlushBuffers() noexcept;
-
-    void EnableAutoRepeat() noexcept;
-    void DisableAutoRepeat() noexcept;
-
-
-protected:
-
-
-private:
-    template <typename T>
-    static void TrimBuffer_(std::queue<T>& buffer) noexcept
-    {
-        while (buffer.size() > buffer_size_)
+        template <typename T>
+        static void TrimBuffer_(std::queue<T>& buffer) noexcept
         {
-            buffer.pop();
+            while (buffer.size() > buffer_size_)
+            {
+                buffer.pop();
+            }
         }
-    }
 
 
-private:
-    void OnKeyPressed_(unsigned char keycode) noexcept;
-    void OnKeyReleased_(unsigned char keycode) noexcept;
-    void OnChar_(char character) noexcept;
+    private:
+        void OnKeyPressed_(unsigned char keycode) noexcept;
+        void OnKeyReleased_(unsigned char keycode) noexcept;
+        void OnChar_(char character) noexcept;
 
-    void ClearKeyStateBitset_() noexcept;
+        void ClearKeyStateBitset_() noexcept;
 
 
-private:
-    static constexpr unsigned int key_count_ = 256u;
+    private:
+        static constexpr unsigned int key_count_ = 256u;
 
-    std::bitset<key_count_> keystates_;
+        std::bitset<key_count_> keystates_;
 
-    std::queue<Event> keybuffer_;
-    std::queue<char> charbuffer_;
+        std::queue<Event> keybuffer_;
+        std::queue<char> charbuffer_;
 
-    bool autoRepeatEnabled_ = false;
+        bool autoRepeatEnabled_ = false;
 
-    static constexpr unsigned int buffer_size_ = 16u;
-};
+        static constexpr unsigned int buffer_size_ = 16u;
+    };
+}

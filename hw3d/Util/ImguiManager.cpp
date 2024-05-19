@@ -2,15 +2,18 @@
 
 #include "../imgui/imgui.h"
 
-ImguiManager::ImguiManager()
+namespace fatpound::util
 {
-    IMGUI_CHECKVERSION();
+    ImguiManager::ImguiManager()
+    {
+        IMGUI_CHECKVERSION();
 
-    ImGui::CreateContext();
-    ImGui::StyleColorsDark();
-}
+        ImGui::CreateContext();
+        ImGui::StyleColorsDark();
+    }
 
-ImguiManager::~ImguiManager()
-{
-    ImGui::DestroyContext();
+    ImguiManager::~ImguiManager()
+    {
+        ImGui::DestroyContext();
+    }
 }

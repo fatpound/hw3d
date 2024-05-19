@@ -4,8 +4,8 @@
 
 #include "../Win32_/FatWin32_.hpp"
 
-#include "../Win32_/GDI/Surface.hpp"
-#include "../Win32_/GDI/GDIPlusManager.hpp"
+#include "../Win32_/GDI_Plus/Surface.hpp"
+#include "../Win32_/GDI_Plus/Manager.hpp"
 
 #include "../imgui/imgui.h"
 
@@ -31,147 +31,150 @@
 
 namespace dx = DirectX;
 
-GDIPlusManager gdipm;
+fatpound::win32::gdiplus::Manager gdipm;
 
-App::App()
-    :
-    wnd_("The FatBox", SCREEN_WIDTH, SCREEN_HEIGHT),
-    gfx_(wnd_.Gfx())
+namespace fatpound::hw3d
 {
-    class Factory final
+    App::App()
+        :
+        wnd_("The FatBox", SCREEN_WIDTH, SCREEN_HEIGHT),
+        gfx_(wnd_.Gfx())
     {
-    public:
-        Factory(Graphics& gfx)
-            :
-            gfx_(gfx)
+        class Factory final
         {
-    
-        }
-    
-    public:
-        auto operator () () -> std::unique_ptr<Drawable>
-        {
-            switch (typedist_(rng_))
+        public:
+            Factory(::fatpound::win32::d3d11::Graphics& gfx)
+                :
+                gfx_(gfx)
             {
-            case 0:
-                return std::make_unique<Pyramid>(
-                    gfx_, rng_, adist_, ddist_,
-                    odist_, rdist_
-                );
-    
-            case 1:
-                return std::make_unique<Box>(
-                    gfx_, rng_, adist_, ddist_,
-                    odist_, rdist_, bdist_
-                );
-    
-            case 2:
-                return std::make_unique<Melon>(
-                    gfx_, rng_, adist_, ddist_,
-                    odist_, rdist_, longdist_, latdist_
-                );
-    
-            case 3:
-                return std::make_unique<Sheet>(
-                    gfx_, rng_, adist_, ddist_,
-                    odist_, rdist_
-                );
-    
-            case 4:
-                return std::make_unique<SkinnedBox>(
-                    gfx_, rng_, adist_, ddist_,
-                    odist_, rdist_
-                );
-    
-            default:
-                assert(false && "bad drawable type in factory");
-                return {};
+
             }
-        }
-    
-    protected:
-    
-    private:
-        std::minstd_rand rng_{ std::random_device{}() };
-    
-        std::uniform_real_distribution<float> adist_{ 0.0f, std::numbers::pi_v<float> * 2.0f };
-        std::uniform_real_distribution<float> ddist_{ 0.0f, std::numbers::pi_v<float> * 0.5f };
-        std::uniform_real_distribution<float> odist_{ 0.0f, std::numbers::pi_v<float> * 0.08f };
-        std::uniform_real_distribution<float> rdist_{ 6.0f, 20.0f };
-        std::uniform_real_distribution<float> bdist_{ 0.4f, 3.0f };
-    
-        std::uniform_int_distribution<int> latdist_{ 5, 20 };
-        std::uniform_int_distribution<int> longdist_{ 10, 40 };
-        std::uniform_int_distribution<int> typedist_{ 0, 4 };
-    
-        Graphics& gfx_;
-    };
-    
-    drawables_.reserve(App::drawable_count_);
 
-    std::generate_n(std::back_inserter(drawables_), App::drawable_count_, Factory{ gfx_ });
-    
-    gfx_.SetProjection(
-        dx::XMMatrixPerspectiveLH(
-            1.0f,
-            wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), // 1 / Aspect Ratio
-            0.5f,
-            40.0f
-        )
-    );
-}
+        public:
+            auto operator () () -> std::unique_ptr<NAMESPACE_VISUAL::Drawable>
+            {
+                switch (typedist_(rng_))
+                {
+                case 0:
+                    return std::make_unique<obj::Pyramid>(
+                        gfx_, rng_, adist_, ddist_,
+                        odist_, rdist_
+                    );
 
-App::~App() noexcept
-{
+                case 1:
+                    return std::make_unique<obj::Box>(
+                        gfx_, rng_, adist_, ddist_,
+                        odist_, rdist_, bdist_
+                    );
 
-}
+                case 2:
+                    return std::make_unique<obj::Melon>(
+                        gfx_, rng_, adist_, ddist_,
+                        odist_, rdist_, longdist_, latdist_
+                    );
 
-int App::Go()
-{
-    std::optional<WPARAM> error_code;
+                case 3:
+                    return std::make_unique<obj::Sheet>(
+                        gfx_, rng_, adist_, ddist_,
+                        odist_, rdist_
+                    );
 
-    while (true)
+                case 4:
+                    return std::make_unique<obj::SkinnedBox>(
+                        gfx_, rng_, adist_, ddist_,
+                        odist_, rdist_
+                    );
+
+                default:
+                    assert(false && "bad drawable type in factory");
+                    return {};
+                }
+            }
+
+        protected:
+
+        private:
+            std::minstd_rand rng_{ std::random_device{}() };
+
+            std::uniform_real_distribution<float> adist_{ 0.0f, std::numbers::pi_v<float> * 2.0f };
+            std::uniform_real_distribution<float> ddist_{ 0.0f, std::numbers::pi_v<float> * 0.5f };
+            std::uniform_real_distribution<float> odist_{ 0.0f, std::numbers::pi_v<float> * 0.08f };
+            std::uniform_real_distribution<float> rdist_{ 6.0f, 20.0f };
+            std::uniform_real_distribution<float> bdist_{ 0.4f, 3.0f };
+
+            std::uniform_int_distribution<int> latdist_{ 5, 20 };
+            std::uniform_int_distribution<int> longdist_{ 10, 40 };
+            std::uniform_int_distribution<int> typedist_{ 0, 4 };
+
+            NAMESPACE_D3D11::Graphics& gfx_;
+        };
+
+        drawables_.reserve(App::drawable_count_);
+
+        std::generate_n(std::back_inserter(drawables_), App::drawable_count_, Factory{ gfx_ });
+
+        gfx_.SetProjection(
+            dx::XMMatrixPerspectiveLH(
+                1.0f,
+                wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), // 1 / Aspect Ratio
+                0.5f,
+                40.0f
+            )
+        );
+    }
+
+    App::~App() noexcept
     {
-        error_code = Window::ProcessMessages();
 
-        if (error_code) [[unlikely]]
+    }
+
+    int App::Go()
+    {
+        std::optional<WPARAM> error_code;
+
+        while (true)
         {
-            return static_cast<int>(*error_code);
-        }
+            error_code = NAMESPACE_D3D11::Window::ProcessMessages();
 
-        if (wnd_.kbd.KeyIsPressed(VK_ESCAPE)) [[unlikely]]
+            if (error_code) [[unlikely]]
+            {
+                return static_cast<int>(*error_code);
+            }
+
+            if (wnd_.kbd.KeyIsPressed(VK_ESCAPE)) [[unlikely]]
+            {
+                wnd_.Kill();
+
+                return 0;
+            }
+
+            gfx_.BeginFrame();
+            DoFrame_();
+            gfx_.EndFrame();
+        }
+    }
+
+    void App::DoFrame_()
+    {
+        const auto& delta_time = timer_.Mark() * simulation_speed_;
+
+        gfx_.SetCamera(camera_.GetMatrix());
+
+        for (auto& obj : drawables_)
         {
-            wnd_.Kill();
-            
-            return 0;
+            obj->Update(wnd_.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : delta_time);
+            obj->Draw(gfx_);
         }
 
-        gfx_.BeginFrame();
-        DoFrame_();
-        gfx_.EndFrame();
+        camera_.SpawnControlImguiWindow();
+
+        if (ImGui::Begin("Simulation Speed")) [[likely]]
+        {
+            ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+            ImGui::Text("Status: %s", wnd_.kbd.KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
+        }
+
+        ImGui::End();
     }
-}
-
-void App::DoFrame_()
-{
-    const auto& delta_time = timer_.Mark() * simulation_speed_;
-
-    gfx_.SetCamera(camera_.GetMatrix());
-    
-    for (auto& obj : drawables_)
-    {
-        obj->Update(wnd_.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : delta_time);
-        obj->Draw(gfx_);
-    }
-
-    camera_.SpawnControlImguiWindow();
-    
-    if (ImGui::Begin("Simulation Speed")) [[likely]]
-    {
-        ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        ImGui::Text("Status: %s", wnd_.kbd.KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
-    }
-
-    ImGui::End();
 }

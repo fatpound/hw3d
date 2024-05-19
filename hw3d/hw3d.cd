@@ -1,173 +1,146 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access" MembersFormat="NameAndType">
-  <Class Name="Bindable">
+  <Class Name="fatpound::win32::d3d11::Bindable">
     <Position X="10" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAQAgAAAAAAAAAAABAAAgAAABAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\Bindable.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Drawable">
+  <Class Name="fatpound::win32::d3d11::Drawable">
     <Position X="1.25" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAAAgAABAAABAAAAAQACAAAgAAwAAAAAAI=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Drawable\Drawable.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="DrawableBase&lt;C&gt;">
+  <Class Name="fatpound::win32::d3d11::DrawableBase&lt;C&gt;">
     <Position X="1" Y="9.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgBRAAAAAAAIAAQAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Drawable\DrawableBase.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="IndexBuffer">
+  <Class Name="fatpound::win32::d3d11::IndexBuffer">
     <Position X="5.75" Y="4" Width="3" />
     <TypeIdentifier>
       <HashCode>gAQAgAAAAAAAAAAABAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\IndexBuffer.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VertexBuffer">
+  <Class Name="fatpound::win32::d3d11::VertexBuffer">
     <Position X="9" Y="4" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\VertexBuffer.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PixelShader">
+  <Class Name="fatpound::win32::d3d11::PixelShader">
     <Position X="18.25" Y="4.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AABAgAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\PixelShader.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VertexShader">
+  <Class Name="fatpound::win32::d3d11::VertexShader">
     <Position X="22" Y="4.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAMAgAAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\VertexShader.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="InputLayout">
+  <Class Name="fatpound::win32::d3d11::InputLayout">
     <Position X="7.75" Y="7.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\InputLayout.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="PixelConstantBuffer&lt;C&gt;">
+  <Class Name="fatpound::win32::d3d11::PixelConstantBuffer&lt;C&gt;">
     <Position X="27" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\PixelCBuf.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sampler">
-    <Position X="15.5" Y="9.75" Width="3" />
-    <InheritanceLine Type="Bindable" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="11.5" Y="2.632" />
-        <Point X="11.5" Y="3.007" />
-        <Point X="14.87" Y="3.007" />
-        <Point X="14.87" Y="10.375" />
-        <Point X="15.5" Y="10.375" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="fatpound::win32::d3d11::Sampler">
+    <Position X="13.75" Y="5.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\Sampler.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Texture">
-    <Position X="15.5" Y="7.25" Width="3.75" />
-    <InheritanceLine Type="Bindable" ManuallyRouted="true" FixedToPoint="true">
-      <Path>
-        <Point X="11.5" Y="2.632" />
-        <Point X="11.5" Y="3.007" />
-        <Point X="14.88" Y="3.007" />
-        <Point X="14.88" Y="8.5" />
-        <Point X="15.5" Y="8.5" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="fatpound::win32::d3d11::Texture">
+    <Position X="15.25" Y="7.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAABAIAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\Texture.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Topology">
-    <Position X="8.25" Y="9.5" Width="2.75" />
-    <InheritanceLine Type="Bindable" FixedToPoint="true">
-      <Path>
-        <Point X="11.5" Y="2.632" />
-        <Point X="11.5" Y="3.625" />
-        <Point X="12.25" Y="3.625" />
-        <Point X="12.25" Y="10.375" />
-        <Point X="11" Y="10.375" />
-      </Path>
-    </InheritanceLine>
+  <Class Name="fatpound::win32::d3d11::Topology">
+    <Position X="8.25" Y="10" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\Topology.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="TransformCBuf">
+  <Class Name="fatpound::win32::d3d11::TransformCBuf">
     <Position X="24.25" Y="11.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAABAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\TransformCBuf.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="VertexConstantBuffer&lt;C&gt;">
+  <Class Name="fatpound::win32::d3d11::VertexConstantBuffer&lt;C&gt;">
     <Position X="29.5" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\VertexCBuf.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ConstantBuffer&lt;C&gt;">
+  <Class Name="fatpound::win32::d3d11::ConstantBuffer&lt;C&gt;">
     <Position X="27.75" Y="0.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAQAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\ConstantBuffer.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Box">
+  <Class Name="fatpound::hw3d::obj::Box">
     <Position X="0.75" Y="19.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>IAwAAQAAAAgCAIAAAAAAAIAAABIAAEAECAAQCEAAEAA=</HashCode>
       <FileName>Game\Object\Box.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Melon">
+  <Class Name="fatpound::hw3d::obj::Melon">
     <Position X="3.25" Y="19.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>IAwAAQAAAAgCAIAAAAAAAIAAABAAAEAEAAAYCEAAEAA=</HashCode>
       <FileName>Game\Object\Melon.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Pyramid">
+  <Class Name="fatpound::hw3d::obj::Pyramid">
     <Position X="10.75" Y="19.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>IAwAAQAAAAgCAIAAIAAAAIAAABAAAEAEAAAQCEAAEAA=</HashCode>
       <FileName>Game\Object\Pyramid.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sheet">
+  <Class Name="fatpound::hw3d::obj::Sheet">
     <Position X="5.75" Y="19.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>IAwAAQAAAAgCAIEAAAAAAIAAABAAAEAEAAAQCEAAEAA=</HashCode>
       <FileName>Game\Object\Sheet.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SkinnedBox">
+  <Class Name="fatpound::hw3d::obj::SkinnedBox">
     <Position X="8.25" Y="19.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>IAwAAQBAAAgCAIAAAAAAAIAAABAAAEAEAAAQCEAAEAA=</HashCode>
       <FileName>Game\Object\SkinnedBox.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Cone" Collapsed="true">
+  <Class Name="fatpound::hw3d::obj::base::Cone" Collapsed="true">
     <Position X="10.75" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
@@ -181,14 +154,14 @@
       <FileName>Game\Object\Base\Cube.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Plane" Collapsed="true">
+  <Class Name="fatpound::hw3d::obj::base::Plane" Collapsed="true">
     <Position X="5.75" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
       <FileName>Game\Object\Base\Plane.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Sphere" Collapsed="true">
+  <Class Name="fatpound::hw3d::obj::base::Sphere" Collapsed="true">
     <Position X="3.25" Y="17.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>

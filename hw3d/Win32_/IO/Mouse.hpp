@@ -2,119 +2,127 @@
 
 #include <queue>
 
-class Mouse final
+namespace fatpound::win32::d3d11
 {
-    friend class Window;
+    class Window;
+}
 
-public:
-    Mouse() = default;
-    Mouse(const Mouse& src) = delete;
-    Mouse& operator = (const Mouse& src) = delete;
-    Mouse(Mouse&& src) = delete;
-    Mouse& operator = (Mouse&& src) = delete;
-    ~Mouse() = default;
-
-
-public:
-    class Event final
+namespace fatpound::win32::io
+{
+    class Mouse final
     {
+        friend class ::fatpound::win32::d3d11::Window;
+
     public:
-        enum class Type
+        Mouse() = default;
+        Mouse(const Mouse& src) = delete;
+        Mouse& operator = (const Mouse& src) = delete;
+        Mouse(Mouse&& src) = delete;
+        Mouse& operator = (Mouse&& src) = delete;
+        ~Mouse() = default;
+
+
+    public:
+        class Event final
         {
-            LPress,
-            LRelease,
-            RPress,
-            RRelease,
-            WheelPress,
-            WheelRelease,
-            WheelUp,
-            WheelDown,
-            Enter,
-            Move,
-            Leave,
-            Invalid
+        public:
+            enum class Type
+            {
+                LPress,
+                LRelease,
+                RPress,
+                RRelease,
+                WheelPress,
+                WheelRelease,
+                WheelUp,
+                WheelDown,
+                Enter,
+                Move,
+                Leave,
+                Invalid
+            };
+
+        public:
+            Event() noexcept;
+
+            Event(Type type, const Mouse& parent) noexcept;
+
+        public:
+            auto GetPos() const noexcept -> std::pair<int, int>;
+
+            Type GetType() const noexcept;
+
+            int GetPosX() const noexcept;
+            int GetPosY() const noexcept;
+
+            bool IsValid() const noexcept;
+            bool LeftIsPressed() const noexcept;
+            bool RightIsPressed() const noexcept;
+            bool WheelIsPressed() const noexcept;
+
+        protected:
+
+        private:
+            Type type_;
+
+            int x_;
+            int y_;
+
+            bool leftIsPressed_;
+            bool rightIsPressed_;
+            bool wheelIsPressed_;
         };
 
-    public:
-        Event() noexcept;
-
-        Event(Type type, const Mouse& parent) noexcept;
 
     public:
         auto GetPos() const noexcept -> std::pair<int, int>;
 
-        Type GetType() const noexcept;
+        Event ReadFromBuffer() noexcept;
 
         int GetPosX() const noexcept;
         int GetPosY() const noexcept;
 
-        bool IsValid() const noexcept;
+        bool IsInWindow() const noexcept;
         bool LeftIsPressed() const noexcept;
         bool RightIsPressed() const noexcept;
         bool WheelIsPressed() const noexcept;
+        bool BufferIsEmpty() const noexcept;
+
+        void FlushBuffer() noexcept;
+
 
     protected:
 
+
     private:
-        Type type_;
+        void OnMouseMove_(int x, int y) noexcept;
+        void OnMouseEnter_() noexcept;
+        void OnMouseLeave_() noexcept;
+        void OnLeftPressed_() noexcept;
+        void OnLeftReleased_() noexcept;
+        void OnRightPressed_() noexcept;
+        void OnRightReleased_() noexcept;
+        void OnWheelPressed_() noexcept;
+        void OnWheelReleased_() noexcept;
+        void OnWheelUp_() noexcept;
+        void OnWheelDown_() noexcept;
+        void OnWheelDelta_(int delta) noexcept;
 
-        int x_;
-        int y_;
+        void TrimBuffer_() noexcept;
 
-        bool leftIsPressed_;
-        bool rightIsPressed_;
-        bool wheelIsPressed_;
+
+    private:
+        std::queue<Event> buffer_;
+
+        int x_ = 0;
+        int y_ = 0;
+        int wheelDeltaCarry_ = 0;
+
+        bool isInWindow_ = false;
+        bool leftIsPressed_ = false;
+        bool rightIsPressed_ = false;
+        bool wheelIsPressed_ = false;
+
+        static constexpr unsigned int buffer_size_ = 16u;
     };
-
-
-public:
-    auto GetPos() const noexcept -> std::pair<int, int>;
-
-    Event ReadFromBuffer() noexcept;
-
-    int GetPosX() const noexcept;
-    int GetPosY() const noexcept;
-
-    bool IsInWindow() const noexcept;
-    bool LeftIsPressed() const noexcept;
-    bool RightIsPressed() const noexcept;
-    bool WheelIsPressed() const noexcept;
-    bool BufferIsEmpty() const noexcept;
-
-    void FlushBuffer() noexcept;
-
-
-protected:
-
-
-private:
-    void OnMouseMove_(int x, int y) noexcept;
-    void OnMouseEnter_() noexcept;
-    void OnMouseLeave_() noexcept;
-    void OnLeftPressed_() noexcept;
-    void OnLeftReleased_() noexcept;
-    void OnRightPressed_() noexcept;
-    void OnRightReleased_() noexcept;
-    void OnWheelPressed_() noexcept;
-    void OnWheelReleased_() noexcept;
-    void OnWheelUp_() noexcept;
-    void OnWheelDown_() noexcept;
-    void OnWheelDelta_(int delta) noexcept;
-
-    void TrimBuffer_() noexcept;
-
-
-private:
-    std::queue<Event> buffer_;
-
-    int x_ = 0;
-    int y_ = 0;
-    int wheelDeltaCarry_ = 0;
-
-    bool isInWindow_ = false;
-    bool leftIsPressed_ = false;
-    bool rightIsPressed_ = false;
-    bool wheelIsPressed_ = false;
-
-    static constexpr unsigned int buffer_size_ = 16u;
-};
+}

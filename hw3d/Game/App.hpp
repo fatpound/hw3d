@@ -1,46 +1,54 @@
 #pragma once
 
-#include "../Util/FatAutoTimer.hpp"
+#include "../Util/AutoTimer.hpp"
 #include "../Util/ImguiManager.hpp"
 
-#include "../Win32_/DirectX/Direct3D11/Camera/Camera.hpp"
+#include "../Win32_/DirectX/Camera/Camera.hpp"
 
 #include "../Win32_/DirectX/Direct3D11/Window.hpp"
 
-class App final
+namespace fatpound::win32::d3d11::visual
 {
-public:
-    App();
-    App(const App& src) = delete;
-    App& operator = (const App& src) = delete;
-    App(App&& src) = delete;
-    App& operator = (App&& src) = delete;
-    ~App() noexcept;
+    class Drawable;
+}
+
+namespace fatpound::hw3d
+{
+    class App final
+    {
+    public:
+        App();
+        App(const App& src) = delete;
+        App& operator = (const App& src) = delete;
+        App(App&& src) = delete;
+        App& operator = (App&& src) = delete;
+        ~App() noexcept;
 
 
-public:
-    int Go();
+    public:
+        int Go();
 
 
-protected:
+    protected:
 
 
-private:
-    void DoFrame_();
+    private:
+        void DoFrame_();
 
 
-private:
-    std::vector<std::unique_ptr<class Drawable>> drawables_;
+    private:
+        std::vector<std::unique_ptr<NAMESPACE_VISUAL::Drawable>> drawables_;
 
-    ImguiManager imgui_;
+        NAMESPACE_UTIL::AutoTimer timer_;
+        NAMESPACE_UTIL::ImguiManager imgui_;
 
-    Window wnd_;
-    Graphics& gfx_;
-    Camera camera_;
+        NAMESPACE_D3D11::Window wnd_;
+        NAMESPACE_D3D11::Graphics& gfx_;
 
-    fatpound::util::AutoTimer timer_;
+        NAMESPACE_DIRECTX::Camera camera_;
 
-    float simulation_speed_ = 1.0f;
+        float simulation_speed_ = 1.0f;
 
-    static constexpr std::size_t drawable_count_ = 180u;
-};
+        static constexpr std::size_t drawable_count_ = 180u;
+    };
+}
