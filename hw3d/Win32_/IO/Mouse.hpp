@@ -23,6 +23,14 @@ namespace fatpound::win32::io
 
 
     public:
+        struct RawDelta final
+        {
+            int x;
+            int y;
+        };
+
+
+    public:
         class Event final
         {
         public:
@@ -68,25 +76,28 @@ namespace fatpound::win32::io
             int x_;
             int y_;
 
-            bool leftIsPressed_;
-            bool rightIsPressed_;
-            bool wheelIsPressed_;
+            bool left_is_pressed_;
+            bool right_is_pressed_;
+            bool wheel_is_pressed_;
         };
 
 
     public:
         auto GetPos() const noexcept -> std::pair<int, int>;
 
+        auto ReadRawDelta() noexcept -> std::optional<RawDelta>;
+
         Event ReadFromBuffer() noexcept;
 
         int GetPosX() const noexcept;
         int GetPosY() const noexcept;
 
+        bool EventBufferIsEmpty() const noexcept;
         bool IsInWindow() const noexcept;
-        bool LeftIsPressed() const noexcept;
+
+        bool  LeftIsPressed() const noexcept;
         bool RightIsPressed() const noexcept;
         bool WheelIsPressed() const noexcept;
-        bool BufferIsEmpty() const noexcept;
 
         void FlushBuffer() noexcept;
 
@@ -98,6 +109,9 @@ namespace fatpound::win32::io
         void OnMouseMove_(int x, int y) noexcept;
         void OnMouseEnter_() noexcept;
         void OnMouseLeave_() noexcept;
+
+        void OnRawDelta_(int dx, int dy) noexcept;
+
         void OnLeftPressed_() noexcept;
         void OnLeftReleased_() noexcept;
         void OnRightPressed_() noexcept;
@@ -109,19 +123,22 @@ namespace fatpound::win32::io
         void OnWheelDelta_(int delta) noexcept;
 
         void TrimBuffer_() noexcept;
+        void TrimRawInputBuffer_() noexcept;
 
 
     private:
-        std::queue<Event> buffer_;
+        std::queue<Event> event_buffer_;
+        std::queue<RawDelta> raw_delta_buffer_;
 
         int x_ = 0;
         int y_ = 0;
-        int wheelDeltaCarry_ = 0;
+        int wheel_delta_carry_ = 0;
 
-        bool isInWindow_ = false;
-        bool leftIsPressed_ = false;
-        bool rightIsPressed_ = false;
-        bool wheelIsPressed_ = false;
+        bool is_in_window_ = false;
+
+        bool  left_is_pressed_ = false;
+        bool right_is_pressed_ = false;
+        bool wheel_is_pressed_ = false;
 
         static constexpr unsigned int buffer_size_ = 16u;
     };
