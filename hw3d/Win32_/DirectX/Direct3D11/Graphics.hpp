@@ -53,7 +53,7 @@ namespace fatpound::win32::d3d11
         class HrException : public Exception
         {
         public:
-            HrException(int line, const char* file, HRESULT hresult, std::vector<std::string> infoMsgs = { }) noexcept;
+            HrException(int line, const char* file, HRESULT hresult, std::vector<std::string> infoMsgs = {}) noexcept;
 
         public:
             virtual const char* what()    const noexcept override;

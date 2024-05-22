@@ -31,16 +31,16 @@ namespace fatpound::win32::d3d11::visual
 
         virtual void Update(float dt) noexcept = 0;
 
-        virtual void Draw(Graphics& gfx) const noexcept(IN_RELEASE)final;
+        virtual void Draw(Graphics& gfx) const noexcept(IN_RELEASE) final;
 
 
     protected:
-        virtual void AddBind_(std::unique_ptr<NAMESPACE_PIPELINE::Bindable> bind) noexcept(IN_RELEASE)final;
-        virtual void AddIndexBuffer_(std::unique_ptr<NAMESPACE_PIPELINE::IndexBuffer> idxbuf) noexcept(IN_RELEASE)final;
+        virtual void AddBind_(std::unique_ptr<NAMESPACE_PIPELINE::Bindable> bind) noexcept(IN_RELEASE) final;
+        virtual void AddIndexBuffer_(std::unique_ptr<NAMESPACE_PIPELINE::IndexBuffer> idxbuf) noexcept(IN_RELEASE) final;
 
 
     private:
-        virtual auto GetStaticBinds_() const noexcept -> const std::vector<std::unique_ptr<NAMESPACE_PIPELINE::Bindable>> & = 0;
+        virtual auto GetStaticBinds_() const noexcept -> const std::vector<std::unique_ptr<NAMESPACE_PIPELINE::Bindable>>& = 0;
 
 
     private:

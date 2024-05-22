@@ -22,7 +22,7 @@ namespace fatpound::win32::dxgi
 
 
     public:
-        auto GetMessages() const->std::vector<std::string>;
+        auto GetMessages() const -> std::vector<std::string>;
 
         void SetNextIndex() noexcept;
 
@@ -33,6 +33,6 @@ namespace fatpound::win32::dxgi
     private:
         Microsoft::WRL::ComPtr<IDXGIInfoQueue> pDxgiInfoQueue_ = nullptr;
 
-        unsigned long long next_error_index_ = 0u;
+        unsigned long long int next_error_index_ = 0u;
     };
 }
