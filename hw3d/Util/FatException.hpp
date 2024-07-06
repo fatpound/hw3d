@@ -16,7 +16,7 @@ namespace fatpound::util
 
         FatException(FatException&& src) = default;
         FatException& operator = (FatException&& src) = default;
-        virtual ~FatException() = default;
+        virtual ~FatException() noexcept = default;
 
 
     public:

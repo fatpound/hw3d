@@ -17,9 +17,10 @@ namespace fatpound::win32::io
         Mouse() = default;
         Mouse(const Mouse& src) = delete;
         Mouse& operator = (const Mouse& src) = delete;
+
         Mouse(Mouse&& src) = delete;
         Mouse& operator = (Mouse&& src) = delete;
-        ~Mouse() = default;
+        ~Mouse() noexcept = default;
 
 
     public:

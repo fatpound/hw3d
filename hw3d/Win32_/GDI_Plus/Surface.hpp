@@ -9,6 +9,8 @@
 #include <string>
 #include <memory>
 
+// TODO: Clean the SURFACE!!!
+
 namespace fatpound::win32::gdiplus
 {
     class Surface

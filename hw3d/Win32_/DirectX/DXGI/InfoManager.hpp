@@ -16,9 +16,10 @@ namespace fatpound::win32::dxgi
         InfoManager();
         InfoManager(const InfoManager&) = delete;
         InfoManager& operator = (const InfoManager&) = delete;
+
         InfoManager(InfoManager&&) = delete;
         InfoManager& operator = (InfoManager&&) = delete;
-        ~InfoManager() = default;
+        ~InfoManager() noexcept = default;
 
 
     public:

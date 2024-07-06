@@ -10,9 +10,10 @@ namespace fatpound::win32::gdiplus
         Manager();
         Manager(const Manager& src) = delete;
         Manager& operator = (const Manager& src) = delete;
+
         Manager(Manager&& src) = delete;
         Manager& operator = (Manager&& src) = delete;
-        ~Manager();
+        ~Manager() noexcept;
 
 
     protected:

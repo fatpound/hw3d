@@ -8,9 +8,10 @@ namespace fatpound::util
         ImguiManager();
         ImguiManager(const ImguiManager& src) = delete;
         ImguiManager& operator = (const ImguiManager& src) = delete;
+
         ImguiManager(ImguiManager&& src) = delete;
         ImguiManager& operator = (ImguiManager&& src) = delete;
-        ~ImguiManager();
+        ~ImguiManager() noexcept;
 
 
     protected:

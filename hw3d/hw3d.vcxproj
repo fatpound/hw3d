@@ -292,7 +292,7 @@
     <ClCompile Include="Win32_\GDI_Plus\Surface.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\Texture.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\Topology.cpp" />
-    <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\TransformCBuf.cpp" />
+    <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\TransformCBuf.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\VertexBuffer.cpp" />
     <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\VertexShader.cpp" />
     <ClCompile Include="Win32_\Window.cpp" />
@@ -304,11 +304,11 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Bindable.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\BindableBase.hpp" />
     <ClInclude Include="Game\Object\Box.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\PixelCBuf.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\VertexCBuf.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\PixelCBuf.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\VertexCBuf.hpp" />
     <ClInclude Include="Util\Camera\Camera.hpp" />
     <ClInclude Include="Game\Object\Base\Cone.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\ConstantBuffer.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\ConstantBuffer.hpp" />
     <ClInclude Include="Game\Object\Base\Cube.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Visual\Drawable.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Visual\DrawableBase.hpp" />
@@ -348,7 +348,7 @@
     <ClInclude Include="Win32_\GDI_Plus\Surface.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Texture.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Topology.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\TransformCBuf.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\TransformCBuf.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\VertexBuffer.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\VertexShader.hpp" />
     <ClInclude Include="Win32_\Window.hpp" />

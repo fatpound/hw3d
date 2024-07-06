@@ -7,6 +7,6 @@
 #include "PixelShader.hpp"
 #include "VertexShader.hpp"
 
-#include "ConstantBuffer/PixelCBuf.hpp"
-#include "ConstantBuffer/VertexCBuf.hpp"
-#include "ConstantBuffer/TransformCBuf.hpp"
+#include "Resource/PixelCBuf.hpp"
+#include "Resource/VertexCBuf.hpp"
+#include "Resource/TransformCBuf.hpp"

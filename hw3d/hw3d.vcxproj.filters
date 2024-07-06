@@ -84,7 +84,7 @@
     <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\Topology.cpp">
       <Filter>Source Files\Bindable</Filter>
     </ClCompile>
-    <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\TransformCBuf.cpp">
+    <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\TransformCBuf.cpp">
       <Filter>Source Files\Bindable</Filter>
     </ClCompile>
     <ClCompile Include="Win32_\DirectX\Direct3D11\Pipeline\VertexBuffer.cpp">
@@ -227,7 +227,7 @@
     <ClInclude Include="Game\Object\Base\Sphere.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\ConstantBuffer.hpp">
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\ConstantBuffer.hpp">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\DirectX\Direct3D11\Visual\DrawableBase.hpp">
@@ -236,7 +236,7 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\Visual\Drawable.hpp">
       <Filter>Header Files\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\TransformCBuf.hpp">
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\TransformCBuf.hpp">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\VertexShader.hpp">
@@ -308,10 +308,10 @@
     <ClInclude Include="Util\Camera\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\VertexCBuf.hpp">
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\VertexCBuf.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\PixelCBuf.hpp">
+    <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Resource\PixelCBuf.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\FatWin32_Namespaces.hpp">
