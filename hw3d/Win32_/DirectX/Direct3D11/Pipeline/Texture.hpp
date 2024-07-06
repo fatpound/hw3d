@@ -9,7 +9,7 @@ namespace fatpound::win32::gdiplus
 
 namespace fatpound::win32::d3d11::pipeline
 {
-    class Texture : public Bindable
+    class Texture final : public Bindable
     {
     public:
         Texture(Graphics& gfx, const ::fatpound::win32::gdiplus::Surface& surface);

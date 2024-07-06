@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Direct3D11/Graphics.hpp"
+#include "../../Win32_/DirectX/Direct3D11/Graphics.hpp"
 
-namespace fatpound::win32::directx
+namespace fatpound::util
 {
     class Camera final
     {

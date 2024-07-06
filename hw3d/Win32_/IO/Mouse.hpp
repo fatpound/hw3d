@@ -2,7 +2,7 @@
 
 #include <queue>
 
-namespace fatpound::win32::d3d11
+namespace fatpound::win32
 {
     class Window;
 }
@@ -11,7 +11,7 @@ namespace fatpound::win32::io
 {
     class Mouse final
     {
-        friend class ::fatpound::win32::d3d11::Window;
+        friend ::fatpound::win32::Window;
 
     public:
         Mouse() = default;

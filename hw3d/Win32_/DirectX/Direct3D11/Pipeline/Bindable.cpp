@@ -12,7 +12,7 @@ namespace fatpound::win32::d3d11::pipeline
         return gfx.pDevice_.Get();
     }
 
-    ::fatpound::win32::dxgi::InfoManager& Bindable::GetInfoManager_([[maybe_unused]] Graphics& gfx) noexcept(IN_DEBUG)
+    NAMESPACE_DXGI::InfoManager& Bindable::GetInfoManager_([[maybe_unused]] Graphics& gfx) noexcept(IN_DEBUG)
     {
 #ifndef NDEBUG
         return gfx.infoManager_;

@@ -4,7 +4,7 @@
 
 namespace fatpound::hw3d::obj
 {
-    class Box final : public ::fatpound::win32::d3d11::visual::DrawableBase<Box>
+    class Box final : public NAMESPACE_VISUAL::DrawableBase<Box>
     {
     public:
         Box(::fatpound::win32::d3d11::Graphics& gfx,

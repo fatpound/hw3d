@@ -1,10 +1,10 @@
 #include "Camera.hpp"
 
-#include "../../../imgui/imgui.h"
+#include "../../imgui/imgui.h"
 
 namespace dx = DirectX;
 
-namespace fatpound::win32::directx
+namespace fatpound::util
 {
 	auto Camera::GetMatrix() const noexcept -> dx::XMMATRIX
 	{

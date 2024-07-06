@@ -48,7 +48,7 @@
     <ClCompile Include="Win32_\MessageMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Win32_\DirectX\Direct3D11\Window.cpp">
+    <ClCompile Include="Win32_\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Util\FatException.cpp">
@@ -150,7 +150,7 @@
     <ClCompile Include="Util\ImguiManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Win32_\DirectX\Camera\Camera.cpp">
+    <ClCompile Include="Util\Camera\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -161,7 +161,7 @@
     <ClInclude Include="Win32_\FatWin32_.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Window.hpp">
+    <ClInclude Include="Win32_\Window.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Util\FatException.hpp">
@@ -305,7 +305,7 @@
     <ClInclude Include="Util\ImguiManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Camera\Camera.hpp">
+    <ClInclude Include="Util\Camera\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\ConstantBuffer\VertexCBuf.hpp">

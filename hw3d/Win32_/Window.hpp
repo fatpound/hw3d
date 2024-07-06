@@ -1,33 +1,39 @@
 #pragma once
 
-#include "../../FatWin32_.hpp"
+#include "FatWin32_.hpp"
 
-#include "../../../Util/FatException.hpp"
+#include "../Math/FatMath.hpp"
 
-#include "../../IO/Keyboard.hpp"
-#include "../../IO/Mouse.hpp"
+#include "../Util/FatException.hpp"
 
-#include "../../../Math/FatMath.hpp"
-
-#include "Graphics.hpp"
+#include "IO/Keyboard.hpp"
+#include "IO/Mouse.hpp"
 
 #include <optional>
 #include <memory>
 
-
-namespace fatpound::win32::d3d11
+namespace fatpound::win32
 {
     class Window final
     {
     public:
-        Window(const char* const window_title, int width, int height);
+        struct ClientSizeInfo final
+        {
+            int width;
+            int height;
+        };
+
+
+    public:
+        Window(const char* const title, const ClientSizeInfo& dimensions);
 
         Window() = delete;
         Window(const Window& src) = delete;
         Window& operator = (const Window& src) = delete;
+
         Window(Window&& src) = delete;
         Window& operator = (Window&& src) = delete;
-        ~Window();
+        ~Window() noexcept;
 
 
     public:
@@ -80,18 +86,18 @@ namespace fatpound::win32::d3d11
 
     public:
         template <NAMESPACE_MATH::Number N>
-        N GetWidth() noexcept
+        auto GetClientWidth() noexcept -> N
         {
-            return static_cast<N>(width_);
+            return static_cast<N>(client_size_.width);
         }
 
         template <NAMESPACE_MATH::Number N>
-        N GetHeight() noexcept
+        auto GetClientHeight() noexcept -> N
         {
-            return static_cast<N>(height_);
+            return static_cast<N>(client_size_.height);
         }
 
-        Graphics& Gfx();
+        auto GetHwnd() const noexcept -> HWND;
 
         void SetTitle(const std::string& title);
         void Kill();
@@ -111,7 +117,7 @@ namespace fatpound::win32::d3d11
         public:
             static HINSTANCE GetInstance() noexcept;
 
-            static const char* GetName() noexcept;
+            static const char* const GetName() noexcept;
 
         protected:
 
@@ -144,9 +150,8 @@ namespace fatpound::win32::d3d11
     private:
         HWND hWnd_;
 
-        std::unique_ptr<Graphics> pGfx_;
+        const ClientSizeInfo client_size_;
 
-        const int width_;
-        const int height_;
+        static constexpr bool cursor_enabled_ = true;
     };
 }

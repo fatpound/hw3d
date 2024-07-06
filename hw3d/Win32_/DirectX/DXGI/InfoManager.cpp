@@ -1,6 +1,7 @@
 #include "InfoManager.hpp"
 
-#include "../Direct3D11/Window.hpp"
+#include "../../Window.hpp"
+
 #include "../Direct3D11/Graphics.hpp"
 
 #include "../Direct3D11/Macro/GraphicsThrowMacros.hpp"

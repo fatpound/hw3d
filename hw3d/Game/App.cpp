@@ -1,8 +1,8 @@
 #include "App.hpp"
 
-#include "../Math/FatMath.hpp"
-
 #include "../Win32_/FatWin32_.hpp"
+
+#include "../Math/FatMath.hpp"
 
 #include "../Win32_/GDI_Plus/Surface.hpp"
 #include "../Win32_/GDI_Plus/Manager.hpp"
@@ -37,13 +37,13 @@ namespace fatpound::hw3d
 {
     App::App()
         :
-        wnd_("The FatBox", SCREEN_WIDTH, SCREEN_HEIGHT),
-        gfx_(wnd_.Gfx())
+        wnd_("The FatBox", NAMESPACE_WIN32::Window::ClientSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
+        gfx_(wnd_.GetHwnd(), NAMESPACE_D3D11::Graphics::SizeInfo{ wnd_.GetClientWidth<int>(), wnd_.GetClientHeight<int>() }) // they are the same as SCREEN_ MACROS
     {
         class Factory final
         {
         public:
-            Factory(::fatpound::win32::d3d11::Graphics& gfx)
+            Factory(NAMESPACE_D3D11::Graphics& gfx)
                 :
                 gfx_(gfx)
             {
@@ -116,7 +116,7 @@ namespace fatpound::hw3d
         gfx_.SetProjection(
             dx::XMMatrixPerspectiveLH(
                 1.0f,
-                wnd_.GetHeight<float>() / wnd_.GetWidth<float>(), // 1 / Aspect Ratio
+                wnd_.GetClientHeight<float>() / wnd_.GetClientWidth<float>(), // 1 / Aspect Ratio
                 0.5f,
                 40.0f
             )
@@ -134,7 +134,7 @@ namespace fatpound::hw3d
 
         while (true)
         {
-            error_code = NAMESPACE_D3D11::Window::ProcessMessages();
+            error_code = NAMESPACE_WIN32::Window::ProcessMessages();
 
             if (error_code) [[unlikely]]
             {

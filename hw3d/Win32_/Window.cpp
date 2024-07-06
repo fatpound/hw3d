@@ -1,91 +1,80 @@
 #include "Window.hpp"
 
-#include "../../../Resource/resource.h"
+#include "../Resource/resource.h"
 
-#include "../../../imgui/imgui_impl_win32.h"
+#include "../imgui/imgui_impl_win32.h"
 
-#include "Macro/WindowThrowMacros.hpp"
+#include "DirectX/Direct3D11/Macro/WindowThrowMacros.hpp"
 
 #include <sstream>
 
+#define WINDOW_RECT_WIDTH       rect.right  - rect.left
+#define WINDOW_RECT_HEIGHT      rect.bottom - rect.top
+
+#define CLIENT_WIDTH            client_size_.width
+#define CLIENT_HEIGHT           client_size_.height
+
 #if IN_RELEASE
-#define CLIENT_WIDTH    width_
-#define CLIENT_HEIGHT   height_
+
+#define WINDOW_WIDTH            CLIENT_WIDTH
+#define WINDOW_HEIGHT           CLIENT_HEIGHT
+#define WINDOW_STYLE            WS_POPUP
+#define WINDOW_POSITION_X       CW_USEDEFAULT
+#define WINDOW_POSITION_Y       CW_USEDEFAULT
+
 #else
-#define CLIENT_WIDTH    (rect.right - rect.left)
-#define CLIENT_HEIGHT   (rect.bottom - rect.top)
+
+#define WINDOW_WIDTH            WINDOW_RECT_WIDTH
+#define WINDOW_HEIGHT           WINDOW_RECT_HEIGHT
+#define WINDOW_STYLE            WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX
+#define WINDOW_POSITION_X       rect.left
+#define WINDOW_POSITION_Y       rect.top
+
 #endif // IN_RELEASE
 
-namespace fatpound::win32::d3d11
+namespace fatpound::win32
 {
     // Window
 
-    Window::Window(const char* const window_title, int width, int height)
+    Window::Window(const char* const title, const ClientSizeInfo& dimensions)
         :
-        width_(width),
-        height_(height)
+        client_size_{ dimensions }
     {
-#if IN_RELEASE
-
-        hWnd_ = CreateWindow(
-            WindowClass_::GetName(),
-            window_title,
-            WS_POPUP,
-            CW_USEDEFAULT,
-            CW_USEDEFAULT,
-            static_cast<int>(CLIENT_WIDTH),
-            static_cast<int>(CLIENT_HEIGHT),
-            nullptr,
-            nullptr,
-            WindowClass_::GetInstance(),
-            this
-        );
-
-#else
+#if IN_DEBUG
 
         RECT rect = {};
         rect.left = 150;
-        rect.right = static_cast<LONG>(width_) + rect.left;
+        rect.right = CLIENT_WIDTH + rect.left;
         rect.top = 150;
-        rect.bottom = static_cast<LONG>(height_) + rect.top;
+        rect.bottom = CLIENT_HEIGHT + rect.top;
 
         AdjustWindowRect(&rect, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
 
+#endif // IN_DEBUG
+
         hWnd_ = CreateWindow(
             WindowClass_::GetName(),
-            window_title,
-            WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX,
-            rect.left,
-            rect.top,
-            static_cast<int>(CLIENT_WIDTH),
-            static_cast<int>(CLIENT_HEIGHT),
+            title,
+            WINDOW_STYLE,
+            WINDOW_POSITION_X,
+            WINDOW_POSITION_Y,
+            WINDOW_WIDTH,
+            WINDOW_HEIGHT,
             nullptr,
             nullptr,
             WindowClass_::GetInstance(),
             this
         );
 
-#endif // IN_RELEASE
-
         if (hWnd_ == nullptr) [[unlikely]]
         {
-            throw FHWND_LAST_EXCEPT();
+            throw std::runtime_error("Error occured when creating HWND!");
         }
-        else [[likely]]
-        {
-            ShowWindow(hWnd_, /*SW_SHOW*/ SW_SHOWDEFAULT);
-        }
+
+        ShowWindow(hWnd_, /*SW_SHOW*/ SW_SHOWDEFAULT);
+        UpdateWindow(hWnd_);
 
         ImGui_ImplWin32_Init(hWnd_);
-
-        pGfx_ = std::make_unique<Graphics>(hWnd_, width_, height_);
-
-        if (pGfx_ == nullptr) [[unlikely]]
-        {
-            throw FHWND_LAST_EXCEPT();
-        }
-
-        UpdateWindow(hWnd_);
     }
     Window::~Window()
     {
@@ -109,17 +98,12 @@ namespace fatpound::win32::d3d11
             DispatchMessage(&msg);
         }
 
-        return {};
+        return std::nullopt;
     }
 
-    Graphics& Window::Gfx()
+    auto Window::GetHwnd() const noexcept -> HWND
     {
-        if (pGfx_ == nullptr)
-        {
-            throw FHWND_NOGFX_EXCEPT();
-        }
-
-        return *pGfx_;
+        return hWnd_;
     }
 
     void Window::SetTitle(const std::string& title)
@@ -226,7 +210,7 @@ namespace fatpound::win32::d3d11
 
             const POINTS pt = MAKEPOINTS(lParam);
 
-            if (pt.x >= 0 && pt.x < width_ && pt.y >= 0 && pt.y < height_)
+            if (pt.x >= 0 && pt.x < client_size_.width && pt.y >= 0 && pt.y < client_size_.height)
             {
                 mouse.OnMouseMove_(pt.x, pt.y);
 
@@ -440,7 +424,7 @@ namespace fatpound::win32::d3d11
         return wndClass_.hInst_;
     }
 
-    const char* Window::WindowClass_::GetName() noexcept
+    const char* const Window::WindowClass_::GetName() noexcept
     {
         return wndClassName_;
     }

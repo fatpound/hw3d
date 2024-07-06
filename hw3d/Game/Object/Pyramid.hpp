@@ -4,7 +4,7 @@
 
 namespace fatpound::hw3d::obj
 {
-    class Pyramid final : public ::fatpound::win32::d3d11::visual::DrawableBase<Pyramid>
+    class Pyramid final : public NAMESPACE_VISUAL::DrawableBase<Pyramid>
     {
     public:
         Pyramid(::fatpound::win32::d3d11::Graphics& gfx,

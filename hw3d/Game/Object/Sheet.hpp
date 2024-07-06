@@ -4,7 +4,7 @@
 
 namespace fatpound::hw3d::obj
 {
-    class Sheet final : public ::fatpound::win32::d3d11::visual::DrawableBase<Sheet>
+    class Sheet final : public NAMESPACE_VISUAL::DrawableBase<Sheet>
     {
     public:
         Sheet(::fatpound::win32::d3d11::Graphics& gfx,

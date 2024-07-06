@@ -3,7 +3,7 @@
 #include <bitset>
 #include <queue>
 
-namespace fatpound::win32::d3d11
+namespace fatpound::win32
 {
     class Window;
 }
@@ -12,7 +12,7 @@ namespace fatpound::win32::io
 {
     class Keyboard final
     {
-        friend class ::fatpound::win32::d3d11::Window;
+        friend ::fatpound::win32::Window;
 
     public:
         Keyboard() = default;

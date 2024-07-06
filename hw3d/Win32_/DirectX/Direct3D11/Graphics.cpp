@@ -22,10 +22,10 @@ namespace fatpound::win32::d3d11
 {
     // Graphics
 
-    Graphics::Graphics(HWND hWnd, int width, int height)
+    Graphics::Graphics(HWND hWnd, const SizeInfo& dimensions)
         :
-        ScreenWidth(width),
-        ScreenHeight(height)
+        width_(dimensions.width),
+        height_(dimensions.height)
     {
         DXGI_SWAP_CHAIN_DESC scd = {};
         scd.BufferDesc.Width = 0; // these two zeroes mean go find out yourself from the hWnd
@@ -92,8 +92,8 @@ namespace fatpound::win32::d3d11
         wrl::ComPtr<ID3D11Texture2D> pDepthStencil;
 
         D3D11_TEXTURE2D_DESC descDepth = {};
-        descDepth.Width = static_cast<UINT>(ScreenWidth);
-        descDepth.Height = static_cast<UINT>(ScreenHeight);
+        descDepth.Width = static_cast<UINT>(width_);
+        descDepth.Height = static_cast<UINT>(height_);
         descDepth.MipLevels = 1u;
         descDepth.ArraySize = 1u;
         descDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -114,8 +114,8 @@ namespace fatpound::win32::d3d11
         pContext_->OMSetRenderTargets(1u, pTarget_.GetAddressOf(), pDSV_.Get());
 
         D3D11_VIEWPORT vp = {};
-        vp.Width = static_cast<FLOAT>(ScreenWidth);
-        vp.Height = static_cast<FLOAT>(ScreenHeight);
+        vp.Width = static_cast<FLOAT>(width_);
+        vp.Height = static_cast<FLOAT>(height_);
         vp.MinDepth = 0.0f;
         vp.MaxDepth = 1.0f;
         vp.TopLeftX = 0.0f;

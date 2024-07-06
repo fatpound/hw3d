@@ -4,7 +4,7 @@
 
 namespace fatpound::hw3d::obj
 {
-    class Melon final : public ::fatpound::win32::d3d11::visual::DrawableBase<Melon>
+    class Melon final : public NAMESPACE_VISUAL::DrawableBase<Melon>
     {
     public:
         Melon(::fatpound::win32::d3d11::Graphics& gfx,

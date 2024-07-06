@@ -26,14 +26,23 @@ namespace fatpound::win32::d3d11
 
     class Graphics final
     {
-        friend class pipeline::Bindable;
+        friend pipeline::Bindable;
 
     public:
-        Graphics(HWND hWnd, int width, int height);
+        struct SizeInfo final
+        {
+            int width;
+            int height;
+        };
+
+
+    public:
+        Graphics(HWND hWnd, const SizeInfo& dimensions);
 
         Graphics() = delete;
         Graphics(const Graphics& src) = delete;
         Graphics& operator = (const Graphics& src) = delete;
+
         Graphics(Graphics&& src) = delete;
         Graphics& operator = (Graphics&& src) = delete;
         ~Graphics();
@@ -121,11 +130,6 @@ namespace fatpound::win32::d3d11
         void DisableImgui() noexcept;
 
 
-    public:
-        const int ScreenWidth;
-        const int ScreenHeight;
-
-
     protected:
 
 
@@ -143,10 +147,13 @@ namespace fatpound::win32::d3d11
         NAMESPACE_DXGI::InfoManager infoManager_;
 #endif
 
-        Microsoft::WRL::ComPtr<ID3D11Device>                pDevice_ = nullptr;
+        Microsoft::WRL::ComPtr<ID3D11Device>                pDevice_    = nullptr;
         Microsoft::WRL::ComPtr<IDXGISwapChain>              pSwapChain_ = nullptr;
-        Microsoft::WRL::ComPtr<ID3D11DeviceContext>         pContext_ = nullptr;
-        Microsoft::WRL::ComPtr<ID3D11RenderTargetView>      pTarget_ = nullptr;
-        Microsoft::WRL::ComPtr<ID3D11DepthStencilView>      pDSV_ = nullptr;
+        Microsoft::WRL::ComPtr<ID3D11DeviceContext>         pContext_   = nullptr;
+        Microsoft::WRL::ComPtr<ID3D11RenderTargetView>      pTarget_    = nullptr;
+        Microsoft::WRL::ComPtr<ID3D11DepthStencilView>      pDSV_       = nullptr;
+
+        const std::size_t width_;
+        const std::size_t height_;
     };
 }

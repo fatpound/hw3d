@@ -4,7 +4,7 @@
 
 namespace fatpound::hw3d::obj
 {
-    class SkinnedBox final : public ::fatpound::win32::d3d11::visual::DrawableBase<SkinnedBox>
+    class SkinnedBox final : public NAMESPACE_VISUAL::DrawableBase<SkinnedBox>
     {
     public:
         SkinnedBox(::fatpound::win32::d3d11::Graphics& gfx,
