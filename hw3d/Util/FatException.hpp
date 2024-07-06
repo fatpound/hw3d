@@ -10,6 +10,14 @@ namespace fatpound::util
     public:
         FatException(int line_num, const char* file_name) noexcept;
 
+        FatException() = delete;
+        FatException(const FatException& src) = default;
+        FatException& operator = (const FatException& src) = default;
+
+        FatException(FatException&& src) = default;
+        FatException& operator = (FatException&& src) = default;
+        virtual ~FatException() = default;
+
 
     public:
         virtual const char* what() const noexcept override;
