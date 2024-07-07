@@ -4,7 +4,7 @@
 #include "../../Win32_/DirectX/Direct3D11/Pipeline/Texture.hpp"
 #include "../../Win32_/DirectX/Direct3D11/Pipeline/Sampler.hpp"
 
-#include "../../Win32_/DirectX/Direct3D11/Macro/GraphicsThrowMacros.hpp"
+#include "../../Win32_/DirectX/Direct3D11/GraphicsThrowMacros.hpp"
 
 #include "../../Win32_/GDI_Plus/Surface.hpp"
 

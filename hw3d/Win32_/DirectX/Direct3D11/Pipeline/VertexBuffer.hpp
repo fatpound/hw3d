@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Macro/GraphicsThrowMacros.hpp"
+#include "../GraphicsThrowMacros.hpp"
 
 #include "Bindable.hpp"
 

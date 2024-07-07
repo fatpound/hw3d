@@ -203,10 +203,10 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\Bindable.hpp">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Macro\GraphicsThrowMacros.hpp">
+    <ClInclude Include="Win32_\DirectX\Direct3D11\GraphicsThrowMacros.hpp">
       <Filter>Header Files\Macros</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Macro\WindowThrowMacros.hpp">
+    <ClInclude Include="Win32_\WindowThrowMacros.hpp">
       <Filter>Header Files\Macros</Filter>
     </ClInclude>
     <ClInclude Include="Game\Object\Base\Cone.hpp">

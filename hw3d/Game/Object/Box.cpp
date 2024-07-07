@@ -2,7 +2,7 @@
 
 #include "../../Win32_/DirectX/Direct3D11/Pipeline/BindableBase.hpp"
 
-#include "../../Win32_/DirectX/Direct3D11/Macro/GraphicsThrowMacros.hpp"
+#include "../../Win32_/DirectX/Direct3D11/GraphicsThrowMacros.hpp"
 
 #include "Base/Cube.hpp"
 

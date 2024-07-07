@@ -321,7 +321,7 @@
     <ClInclude Include="Win32_\FatWin32_Namespaces.hpp" />
     <ClInclude Include="Win32_\GDI_Plus\Manager.hpp" />
     <ClInclude Include="Win32_\DirectX\Direct3D11\Graphics.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Macro\GraphicsThrowMacros.hpp" />
+    <ClInclude Include="Win32_\DirectX\Direct3D11\GraphicsThrowMacros.hpp" />
     <ClInclude Include="Util\ImguiManager.hpp" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -353,7 +353,7 @@
     <ClInclude Include="Win32_\DirectX\Direct3D11\Pipeline\VertexShader.hpp" />
     <ClInclude Include="Win32_\Window.hpp" />
     <ClInclude Include="Win32_\MessageMap.hpp" />
-    <ClInclude Include="Win32_\DirectX\Direct3D11\Macro\WindowThrowMacros.hpp" />
+    <ClInclude Include="Win32_\WindowThrowMacros.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\hw3d.rc" />
