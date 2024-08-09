@@ -1,7 +1,5 @@
 #include "PixelShader.hpp"
 
-#include "../GraphicsThrowMacros.hpp"
-
 #include <d3dcompiler.h>
 
 namespace fatpound::win32::d3d11::pipeline

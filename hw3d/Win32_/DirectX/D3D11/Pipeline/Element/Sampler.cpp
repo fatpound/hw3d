@@ -1,7 +1,5 @@
 #include "Sampler.hpp"
 
-#include "../GraphicsThrowMacros.hpp"
-
 namespace fatpound::win32::d3d11::pipeline
 {
     Sampler::Sampler(Graphics& gfx)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bindable.hpp"
+#include "../Bindable.hpp"
 
 namespace fatpound::win32::d3d11::pipeline
 {

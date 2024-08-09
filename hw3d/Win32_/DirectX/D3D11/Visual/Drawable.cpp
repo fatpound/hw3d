@@ -1,6 +1,6 @@
 #include "Drawable.hpp"
 
-#include "../Pipeline/IndexBuffer.hpp"
+#include "../Pipeline/Element/IndexBuffer.hpp"
 
 #include <cassert>
 

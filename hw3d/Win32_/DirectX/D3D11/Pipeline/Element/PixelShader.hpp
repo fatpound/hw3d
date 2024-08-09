@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bindable.hpp"
+#include "../Bindable.hpp"
 
 #include <string>
 

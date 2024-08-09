@@ -2,7 +2,7 @@
 
 #include "Drawable.hpp"
 
-#include "../Pipeline/IndexBuffer.hpp"
+#include "../Pipeline/Element/IndexBuffer.hpp"
 
 namespace fatpound::win32::d3d11::visual
 {

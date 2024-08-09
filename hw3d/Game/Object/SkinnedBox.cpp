@@ -1,7 +1,8 @@
 #include "SkinnedBox.hpp"
 
 #include "../../Win32_/DirectX/D3D11/Pipeline/BindableBase.hpp"
-#include "../../Win32_/DirectX/D3D11/Pipeline/Texture.hpp"
+
+#include "../../Win32_/DirectX/D3D11/Pipeline/Element/Texture.hpp"
 
 #include "../../Win32_/DirectX/D3D11/GraphicsThrowMacros.hpp"
 

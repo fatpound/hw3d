@@ -1,7 +1,5 @@
 #include "IndexBuffer.hpp"
 
-#include "../GraphicsThrowMacros.hpp"
-
 namespace fatpound::win32::d3d11::pipeline
 {
     IndexBuffer::IndexBuffer(Graphics& gfx, const std::vector<unsigned short int>& indices)

@@ -1,7 +1,5 @@
 #include "InputLayout.hpp"
 
-#include "../GraphicsThrowMacros.hpp"
-
 namespace fatpound::win32::d3d11::pipeline
 {
     InputLayout::InputLayout(Graphics& gfx, const std::vector<D3D11_INPUT_ELEMENT_DESC>& layout, ID3DBlob* pVertexShaderBytecode)
