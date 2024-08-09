@@ -1,6 +1,6 @@
 #include "Sampler.hpp"
 
-#include "../Macro/GraphicsThrowMacros.hpp"
+#include "../GraphicsThrowMacros.hpp"
 
 namespace fatpound::win32::d3d11::pipeline
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 #include "../Math/FatMath.hpp"
 
@@ -8,6 +8,8 @@
 
 #include "IO/Keyboard.hpp"
 #include "IO/Mouse.hpp"
+
+#include "WindowThrowMacros.hpp"
 
 #include <optional>
 #include <memory>

@@ -4,8 +4,6 @@
 
 #include "../imgui/imgui_impl_win32.h"
 
-#include "DirectX/Direct3D11/Macro/WindowThrowMacros.hpp"
-
 #include <sstream>
 
 #define WINDOW_RECT_WIDTH       rect.right  - rect.left

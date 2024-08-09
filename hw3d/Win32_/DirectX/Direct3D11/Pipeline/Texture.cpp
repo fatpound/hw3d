@@ -2,7 +2,7 @@
 
 #include "../../../GDI_Plus/Surface.hpp"
 
-#include "../Macro/GraphicsThrowMacros.hpp"
+#include "../GraphicsThrowMacros.hpp"
 
 namespace wrl = Microsoft::WRL;
 

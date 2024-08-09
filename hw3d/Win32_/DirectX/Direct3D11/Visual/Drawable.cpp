@@ -2,8 +2,6 @@
 
 #include "../Pipeline/IndexBuffer.hpp"
 
-#include "../Macro/GraphicsThrowMacros.hpp"
-
 #include <cassert>
 
 #include <typeinfo>

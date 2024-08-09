@@ -4,9 +4,6 @@
 
 #include "../Direct3D11/Graphics.hpp"
 
-#include "../Direct3D11/Macro/GraphicsThrowMacros.hpp"
-#include "../Direct3D11/Macro/WindowThrowMacros.hpp"
-
 #include <memory>
 
 #pragma comment(lib, "dxguid")

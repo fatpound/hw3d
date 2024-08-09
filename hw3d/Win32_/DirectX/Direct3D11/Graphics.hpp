@@ -1,10 +1,12 @@
 #pragma once
 
-#include "../../FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 #include "../../../Util/FatException.hpp"
 
 #include "../DXGI/InfoManager.hpp"
+
+#include "GraphicsThrowMacros.hpp"
 
 #include <DirectXMath.h>
 

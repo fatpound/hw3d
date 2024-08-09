@@ -1,5 +1,3 @@
-#include "Win32_/FatWin32_.hpp"
-
 #include "Game/App.hpp"
 
 int CALLBACK WinMain(

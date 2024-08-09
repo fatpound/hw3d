@@ -1,6 +1,6 @@
 #include "PixelShader.hpp"
 
-#include "../Macro/GraphicsThrowMacros.hpp"
+#include "../GraphicsThrowMacros.hpp"
 
 #include <d3dcompiler.h>
 
