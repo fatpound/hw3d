@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "../../FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 #include <sal.h>
 

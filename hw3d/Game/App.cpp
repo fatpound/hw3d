@@ -1,8 +1,8 @@
 #include "App.hpp"
 
-#include "../Win32_/FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
-#include "../Math/FatMath.hpp"
+#include "../Math/Math.hpp"
 
 #include "../Win32_/GDI_Plus/Surface.hpp"
 #include "../Win32_/GDI_Plus/Manager.hpp"

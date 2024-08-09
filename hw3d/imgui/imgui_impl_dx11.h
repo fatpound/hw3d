@@ -10,7 +10,7 @@
 
 #pragma once
 
-#include "../Win32_/FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 #include "../Win32_/DirectX/D3D11/Graphics.hpp"
 

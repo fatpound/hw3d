@@ -2,7 +2,7 @@
 
 #include <FatWin32_.hpp>
 
-#include "../Math/FatMath.hpp"
+#include "../Math/Math.hpp"
 
 #include "../Util/FatException.hpp"
 

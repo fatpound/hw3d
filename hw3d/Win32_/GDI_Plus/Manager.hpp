@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 namespace fatpound::win32::gdiplus
 {

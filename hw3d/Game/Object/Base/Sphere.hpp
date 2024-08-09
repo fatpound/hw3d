@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Math/FatMath.hpp"
+#include "../../../Math/Math.hpp"
 #include "../../../Math/IndexedTriangleList.hpp"
 
 #include <DirectXMath.h>

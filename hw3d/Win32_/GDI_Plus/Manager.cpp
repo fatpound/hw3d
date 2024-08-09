@@ -1,6 +1,6 @@
 #define FATPOUND_FULL_WIN_TARGETED
 
-#include "../FatWin32_.hpp"
+#include <FatWin32_.hpp>
 
 #include "Manager.hpp"
 
