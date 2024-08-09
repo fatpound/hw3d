@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Win32_/DirectX/Direct3D11/Visual/DrawableBase.hpp"
+#include "../../Win32_/DirectX/D3D11/Visual/DrawableBase.hpp"
 
 namespace fatpound::hw3d::obj
 {

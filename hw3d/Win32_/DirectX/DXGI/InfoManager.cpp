@@ -2,7 +2,7 @@
 
 #include "../../Window.hpp"
 
-#include "../Direct3D11/Graphics.hpp"
+#include "../D3D11/Graphics.hpp"
 
 #include <memory>
 

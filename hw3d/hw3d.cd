@@ -4,105 +4,105 @@
     <Position X="10" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAQAgAAAAAAAAAAABAAAgAAABAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\Bindable.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\Bindable.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::Drawable">
     <Position X="1.25" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>IAQAAAAAAAAAAgAABAAABAAAAAQACAAAgAAwAAAAAAI=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Drawable\Drawable.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Drawable\Drawable.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::DrawableBase&lt;C&gt;">
     <Position X="1" Y="9.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAgBRAAAAAAAIAAQAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Drawable\DrawableBase.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Drawable\DrawableBase.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::IndexBuffer">
     <Position X="5.75" Y="4" Width="3" />
     <TypeIdentifier>
       <HashCode>gAQAgAAAAAAAAAAABAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\IndexBuffer.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\IndexBuffer.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::VertexBuffer">
     <Position X="9" Y="4" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAgAAAACAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\VertexBuffer.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\VertexBuffer.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::PixelShader">
     <Position X="18.25" Y="4.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AABAgAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\PixelShader.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\PixelShader.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::VertexShader">
     <Position X="22" Y="4.25" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAMAgAAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\VertexShader.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\VertexShader.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::InputLayout">
     <Position X="7.75" Y="7.25" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\InputLayout.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\InputLayout.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::PixelConstantBuffer&lt;C&gt;">
     <Position X="27" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\PixelCBuf.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\ConstantBuffer\PixelCBuf.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::Sampler">
     <Position X="13.75" Y="5.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\Sampler.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\Sampler.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::Texture">
     <Position X="15.25" Y="7.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAABAIAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\Texture.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\Texture.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::Topology">
     <Position X="8.25" Y="10" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAACAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\Topology.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\Topology.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::TransformCBuf">
     <Position X="24.25" Y="11.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAABAAAACAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\TransformCBuf.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\ConstantBuffer\TransformCBuf.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::VertexConstantBuffer&lt;C&gt;">
     <Position X="29.5" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\VertexCBuf.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\ConstantBuffer\VertexCBuf.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::win32::d3d11::ConstantBuffer&lt;C&gt;">
     <Position X="27.75" Y="0.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAQAAAABAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Win32_\DirectX\Direct3D11\Bindable\ConstantBuffer\ConstantBuffer.hpp</FileName>
+      <FileName>Win32_\DirectX\D3D11\Bindable\ConstantBuffer\ConstantBuffer.hpp</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="fatpound::hw3d::obj::Box">

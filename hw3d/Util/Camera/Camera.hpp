@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Win32_/DirectX/Direct3D11/Graphics.hpp"
+#include "../../Win32_/DirectX/D3D11/Graphics.hpp"
 
 namespace fatpound::util
 {

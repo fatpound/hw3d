@@ -136,7 +136,7 @@ namespace fatpound::win32
 
             HINSTANCE hInst_;
 
-            static constexpr auto wndClassName_ = "FatPound Direct3D11 Engine Window";
+            static constexpr auto wndClassName_ = "FatPound D3D11 Engine Window";
         };
 
 
