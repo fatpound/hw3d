@@ -30,6 +30,8 @@
 
 #endif // IN_RELEASE
 
+extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
 namespace fatpound::win32
 {
     // Window
@@ -138,7 +140,7 @@ namespace fatpound::win32
 
         return pWnd->HandleMsg_(hWnd, msg, wParam, lParam);
     }
-
+    
     LRESULT Window::HandleMsg_(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
     {
         // static MessageMap map;

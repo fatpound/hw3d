@@ -270,6 +270,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game\App.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Bindable.cpp" />
     <ClCompile Include="Game\Object\Box.cpp" />
     <ClCompile Include="Util\Camera\Camera.cpp" />
