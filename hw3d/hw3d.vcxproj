@@ -71,19 +71,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <CodeAnalysisRuleSet>..\..\FatModules\FatModules\FatRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
     <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <CodeAnalysisRuleSet>..\..\FatModules\FatModules\FatRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
     <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <CodeAnalysisRuleSet>..\..\FatModules\FatModules\FatRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
     <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <CodeAnalysisRuleSet>..\..\FatModules\FatModules\FatRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
     <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

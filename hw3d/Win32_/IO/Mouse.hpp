@@ -2,6 +2,8 @@
 
 #include <queue>
 
+#include <optional>
+
 namespace fatpound::win32
 {
     class Window;
