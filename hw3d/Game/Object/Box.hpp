@@ -1,19 +1,26 @@
 #pragma once
 
-#include "../../Win32_/DirectX/D3D11/Visual/DrawableBase.hpp"
+#include <FatNamespaces.hpp>
+
+#include "../../Win32_/DirectX/D3D11/Graphics.hpp"
+
+#include "../../Util/ViewXM.hpp"
+
+#include <random>
 
 namespace fatpound::hw3d::obj
 {
-    class Box final : public NAMESPACE_VISUAL::DrawableBase<Box>
+    class Box final : public FATSPACE_VISUAL::DrawableBase<Box>
     {
     public:
-        Box(::fatpound::win32::d3d11::Graphics& gfx,
+        Box(ID3D11Device* const pDevice,
             std::minstd_rand& rng,
             std::uniform_real_distribution<float>& adist,
             std::uniform_real_distribution<float>& ddist,
             std::uniform_real_distribution<float>& odist,
             std::uniform_real_distribution<float>& rdist,
-            std::uniform_real_distribution<float>& bdist);
+            std::uniform_real_distribution<float>& bdist,
+            FATSPACE_UTIL::ViewXM& viewXM);
 
 
     public:

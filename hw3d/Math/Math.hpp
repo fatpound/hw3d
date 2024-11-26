@@ -1,5 +1,12 @@
 #pragma once
 
+#include "Multiplicable.hpp"
+#include "IndexedTriangleList.hpp"
+
+#include "Number_Set/Number_Set.hpp"
+
+#include <DirectXMath.h>
+
 #include <cmath>
 #include <cassert>
 
@@ -16,8 +23,8 @@ namespace fatpound::math
     template <typename T>
     concept Number = std::integral<T> || std::floating_point<T>;
     
-    template <typename T>
-    inline auto Square(const T& x)
+    template <SelfMultiplicable T>
+    inline constexpr auto Square(const T& x) noexcept(SelfMultiplicable_Noexcept<T>)
     {
         return x * x;
     }
@@ -44,4 +51,9 @@ namespace fatpound::math
     {
         return deg * std::numbers::pi_v<T> / static_cast<T>(180.0);
     }
+
+    auto GetDifferenceVector(const ::DirectX::XMVECTOR pos1_vec, const ::DirectX::XMVECTOR pos2_vec) noexcept -> ::DirectX::XMVECTOR;
+
+    auto GetDistanceBetweenXMF2(const ::DirectX::XMFLOAT2& pos1, const ::DirectX::XMFLOAT2& pos2) noexcept -> float;
+    auto GetDistanceBetweenXMF3(const ::DirectX::XMFLOAT3& pos1, const ::DirectX::XMFLOAT3& pos2) noexcept -> float;
 }

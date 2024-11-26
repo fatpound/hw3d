@@ -1,18 +1,14 @@
 #include "Texture.hpp"
 
-#include "../../../../GDI_Plus/Surface.hpp"
-
 namespace wrl = Microsoft::WRL;
 
-namespace fatpound::win32::d3d11::pipeline
+namespace fatpound::win32::d3d11::pipeline::element
 {
-    Texture::Texture(Graphics& gfx, const ::fatpound::win32::gdiplus::Surface& surface)
+    Texture::Texture(ID3D11Device* const pDevice, const FATSPACE_UTIL::Surface& surface)
     {
-        INFOMAN(gfx);
-
         D3D11_TEXTURE2D_DESC texDesc = {};
-        texDesc.Width = surface.GetWidth();
-        texDesc.Height = surface.GetHeight();
+        texDesc.Width = surface.GetWidth<UINT>();
+        texDesc.Height = surface.GetHeight<UINT>();
         texDesc.MipLevels = 1;
         texDesc.ArraySize = 1;
         texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
@@ -24,36 +20,24 @@ namespace fatpound::win32::d3d11::pipeline
         texDesc.MiscFlags = 0;
 
         D3D11_SUBRESOURCE_DATA sd = {};
-        sd.pSysMem = surface.GetBufferPtr();
-        sd.SysMemPitch = surface.GetWidth() * sizeof(::fatpound::win32::gdiplus::Surface::Color);
+        sd.pSysMem = const_cast<FATSPACE_UTIL::Surface&>(surface);
+        sd.SysMemPitch = surface.GetWidth<UINT>() * sizeof(FATSPACE_UTIL::Color);
 
         wrl::ComPtr<ID3D11Texture2D> pTexture;
 
-        GFX_THROW_INFO(
-            Bindable::GetDevice_(gfx)->CreateTexture2D(
-                &texDesc,
-                &sd,
-                &pTexture
-            )
-        );
+        pDevice->CreateTexture2D(&texDesc, &sd, &pTexture);
 
-        D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
+        D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc{};
         srvDesc.Format = texDesc.Format;
         srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
         srvDesc.Texture2D.MostDetailedMip = 0;
         srvDesc.Texture2D.MipLevels = 1;
 
-        GFX_THROW_INFO(
-            Bindable::GetDevice_(gfx)->CreateShaderResourceView(
-                pTexture.Get(),
-                &srvDesc,
-                &pTextureView_
-            )
-        );
+        pDevice->CreateShaderResourceView(pTexture.Get(), &srvDesc, &pTextureView_);
     }
 
-    void Texture::Bind(Graphics& gfx) noexcept
+    void Texture::Bind(ID3D11DeviceContext* const pImmediateContext) noexcept
     {
-        Bindable::GetContext_(gfx)->PSSetShaderResources(0u, 1u, pTextureView_.GetAddressOf());
+        pImmediateContext->PSSetShaderResources(0u, 1u, pTextureView_.GetAddressOf());
     }
 }

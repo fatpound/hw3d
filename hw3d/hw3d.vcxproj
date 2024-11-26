@@ -30,27 +30,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -72,32 +72,31 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>false</UseStructuredOutput>
+    <UseStructuredOutput>true</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>false</UseStructuredOutput>
+    <UseStructuredOutput>true</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>false</UseStructuredOutput>
+    <UseStructuredOutput>true</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>false</UseStructuredOutput>
+    <UseStructuredOutput>true</UseStructuredOutput>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions);IN_DEBUG=true;IN_RELEASE=false</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <FloatingPointModel>Precise</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -105,6 +104,10 @@
       <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
+      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -131,18 +134,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions);;IN_DEBUG=false;IN_RELEASE=true</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>All</AssemblerOutput>
       <SuppressStartupBanner>false</SuppressStartupBanner>
@@ -150,6 +151,11 @@
       <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
+      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -178,16 +184,15 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions);IN_DEBUG=true;IN_RELEASE=false</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <FloatingPointModel>Precise</FloatingPointModel>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
@@ -195,6 +200,10 @@
       <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
+      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -223,18 +232,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>EnableAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);;IN_DEBUG=false;IN_RELEASE=true</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
       <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>All</AssemblerOutput>
       <SuppressStartupBanner>false</SuppressStartupBanner>
@@ -242,6 +249,11 @@
       <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
+      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -269,18 +281,28 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Concurrency\TaskQueue.cpp" />
     <ClCompile Include="Game\App.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Bindable.cpp" />
+    <ClCompile Include="IO\Keyboard.cpp" />
+    <ClCompile Include="IO\Mouse.cpp" />
+    <ClCompile Include="Math\Math.cpp" />
+    <ClCompile Include="Util\Gfx\Gfx.cpp" />
+    <ClCompile Include="Util\Surface.cpp" />
+    <ClCompile Include="Util\ViewXM.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Core\Device.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Factory\DepthStencilView.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Factory\RasterizerState.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Factory\RenderTargetView.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Factory\SamplerState.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Factory\ShaderResourceView.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Factory\SwapChain.cpp" />
+    <ClCompile Include="Win32_\DirectX\D3D11\Factory\Texture2D.cpp" />
     <ClCompile Include="Game\Object\Box.cpp" />
-    <ClCompile Include="Util\Camera\Camera.cpp" />
+    <ClCompile Include="Util\Camera.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Visual\Drawable.cpp" />
-    <ClCompile Include="Win32_\DirectX\DXErr\dxerr.cpp" />
-    <ClCompile Include="Win32_\DirectX\DXGI\InfoManager.cpp" />
-    <ClCompile Include="Util\FatException.cpp" />
-    <ClCompile Include="Util\AutoTimer.cpp" />
+    <ClCompile Include="Util\Time\AutoTimer.cpp" />
     <ClCompile Include="Win32_\GDI_Plus\Manager.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Graphics.cpp" />
     <ClCompile Include="Util\ImguiManager.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -290,48 +312,76 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\IndexBuffer.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\InputLayout.cpp" />
-    <ClCompile Include="Win32_\IO\Keyboard.cpp" />
     <ClCompile Include="Game\Object\Melon.cpp" />
-    <ClCompile Include="Win32_\IO\Mouse.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\PixelShader.cpp" />
     <ClCompile Include="Game\Object\Pyramid.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Sampler.cpp" />
     <ClCompile Include="Game\Object\Sheet.cpp" />
     <ClCompile Include="Game\Object\SkinnedBox.cpp" />
-    <ClCompile Include="Win32_\GDI_Plus\Surface.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Texture.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Topology.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Resource\TransformCBuf.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexBuffer.cpp" />
     <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexShader.cpp" />
-    <ClCompile Include="Win32_\Window.cpp" />
     <ClCompile Include="Win32_\MessageMap.cpp" />
-    <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="Win32_\WindowEx.cpp" />
+    <ClCompile Include="Win32_\WndClassEx.cpp" />
+    <ClCompile Include="wWinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Concurrency\Concurrency.hpp" />
+    <ClInclude Include="Concurrency\TaskQueue.hpp" />
     <ClInclude Include="Game\App.hpp" />
+    <ClInclude Include="IO\IO.hpp" />
+    <ClInclude Include="IO\Keyboard.hpp" />
+    <ClInclude Include="IO\KeyEvent.hpp" />
+    <ClInclude Include="IO\Mouse.hpp" />
+    <ClInclude Include="IO\MouseEvent.hpp" />
+    <ClInclude Include="Math\Multiplicable.hpp" />
+    <ClInclude Include="Math\Number_Set\Number_Set.hpp" />
+    <ClInclude Include="Math\Number_Set\Rational.hpp" />
+    <ClInclude Include="Memory\Memory.hpp" />
+    <ClInclude Include="Util\Color.hpp" />
+    <ClInclude Include="Util\Gfx\FullScreenQuad.hpp" />
+    <ClInclude Include="Util\Gfx\Gfx.hpp" />
+    <ClInclude Include="Util\ScreenSizeInfo.hpp" />
+    <ClInclude Include="Util\Surface.hpp" />
+    <ClInclude Include="Util\Time\Time.hpp" />
+    <ClInclude Include="Util\Util.hpp" />
+    <ClInclude Include="Util\ViewXM.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Core\Core.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Core\Device.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\D3D11.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\DepthStencilView.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\Factory.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\RasterizerState.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\RenderTargetView.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\SamplerState.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\ShaderResourceView.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\SwapChain.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Factory\Texture2D.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Graphics.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\GraphicsResourcePack.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Bindable.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\BindableBase.hpp" />
     <ClInclude Include="Game\Object\Box.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\PixelCBuf.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\VertexCBuf.hpp" />
-    <ClInclude Include="Util\Camera\Camera.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Pipeline.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\PixelCBuffer.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\VertexCBuffer.hpp" />
+    <ClInclude Include="Util\Camera.hpp" />
     <ClInclude Include="Game\Object\Base\Cone.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\ConstantBuffer.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\CBuffer.hpp" />
     <ClInclude Include="Game\Object\Base\Cube.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\StaticBindableVec.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Visual\Drawable.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Visual\DrawableBase.hpp" />
-    <ClInclude Include="Win32_\DirectX\DXErr\dxerr.h" />
-    <ClInclude Include="Win32_\DirectX\DXGI\InfoManager.hpp" />
-    <ClInclude Include="Util\FatException.hpp" />
     <ClInclude Include="Math\Math.hpp" />
-    <ClInclude Include="Util\AutoTimer.hpp" />
-    <ClInclude Include="Win32_\FatWin32_.hpp" />
-    <ClInclude Include="Win32_\FatWin32_Namespaces.hpp" />
+    <ClInclude Include="Util\Time\AutoTimer.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Visual\Visual.hpp" />
+    <ClInclude Include="Win32_\DirectX\DirectX.hpp" />
+    <ClInclude Include="Win32_\FatWin32.hpp" />
+    <ClInclude Include="Win32_\FatNamespaces.hpp" />
     <ClInclude Include="Win32_\FatWin32_Settings.hpp" />
+    <ClInclude Include="Win32_\GDI_Plus\GDI_Plus.hpp" />
     <ClInclude Include="Win32_\GDI_Plus\Manager.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Graphics.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\GraphicsThrowMacros.hpp" />
     <ClInclude Include="Util\ImguiManager.hpp" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
@@ -344,9 +394,7 @@
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\IndexBuffer.hpp" />
     <ClInclude Include="Math\IndexedTriangleList.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\InputLayout.hpp" />
-    <ClInclude Include="Win32_\IO\Keyboard.hpp" />
     <ClInclude Include="Game\Object\Melon.hpp" />
-    <ClInclude Include="Win32_\IO\Mouse.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\PixelShader.hpp" />
     <ClInclude Include="Game\Object\Base\Plane.hpp" />
     <ClInclude Include="Game\Object\Base\Prism.hpp" />
@@ -355,15 +403,16 @@
     <ClInclude Include="Game\Object\Sheet.hpp" />
     <ClInclude Include="Game\Object\SkinnedBox.hpp" />
     <ClInclude Include="Game\Object\Base\Sphere.hpp" />
-    <ClInclude Include="Win32_\GDI_Plus\Surface.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Texture.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Topology.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\TransformCBuf.hpp" />
+    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\TransformCBuffer.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexBuffer.hpp" />
     <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexShader.hpp" />
-    <ClInclude Include="Win32_\Window.hpp" />
+    <ClInclude Include="Win32_\IWindow.hpp" />
     <ClInclude Include="Win32_\MessageMap.hpp" />
-    <ClInclude Include="Win32_\WindowThrowMacros.hpp" />
+    <ClInclude Include="Win32_\Win32.hpp" />
+    <ClInclude Include="Win32_\WindowEx.hpp" />
+    <ClInclude Include="Win32_\WndClassEx.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\hw3d.rc" />
@@ -374,9 +423,6 @@
   <ItemGroup>
     <None Include="FatRules.ruleset" />
     <None Include="hw3d.cd" />
-    <None Include="Win32_\DirectX\DXErr\DXGetErrorDescription.inl" />
-    <None Include="Win32_\DirectX\DXErr\DXGetErrorString.inl" />
-    <None Include="Win32_\DirectX\DXErr\DXTrace.inl" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Win32_\DirectX\D3D11\Shader\PSColorBlend.hlsl">

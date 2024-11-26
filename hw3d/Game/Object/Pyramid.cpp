@@ -1,9 +1,5 @@
 #include "Pyramid.hpp"
 
-#include "../../Win32_/DirectX/D3D11/Pipeline/BindableBase.hpp"
-
-#include "../../Win32_/DirectX/D3D11/GraphicsThrowMacros.hpp"
-
 #include "Base/Cone.hpp"
 
 namespace dx = DirectX;
@@ -12,12 +8,13 @@ using namespace fatpound::win32::d3d11;
 
 namespace fatpound::hw3d::obj
 {
-    Pyramid::Pyramid(Graphics& gfx,
+    Pyramid::Pyramid(ID3D11Device* const pDevice,
         std::minstd_rand& rng,
         std::uniform_real_distribution<float>& adist,
         std::uniform_real_distribution<float>& ddist,
         std::uniform_real_distribution<float>& odist,
-        std::uniform_real_distribution<float>& rdist)
+        std::uniform_real_distribution<float>& rdist,
+        FATSPACE_UTIL::ViewXM& viewXM)
         :
         r_(rdist(rng)),
         droll_(ddist(rng)),
@@ -30,7 +27,7 @@ namespace fatpound::hw3d::obj
         theta_(adist(rng)),
         phi_(adist(rng))
     {
-        if (!DrawableBase::IsStaticInitialized_())
+        if (not DrawableBase::IsStaticInitialized_())
         {
             struct Vertex final
             {
@@ -59,14 +56,14 @@ namespace fatpound::hw3d::obj
             // deform mesh linearly
             model.Transform(dx::XMMatrixScaling(1.0f, 1.0f, 0.7f));
 
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::VertexBuffer>(gfx, model.vertices_));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::VertexBuffer>(pDevice, model.vertices_));
 
-            auto pvs = std::make_unique<NAMESPACE_PIPELINE::VertexShader>(gfx, L"VSColorBlend.cso");
+            auto pvs = std::make_unique<FATSPACE_PIPELINE_ELEMENT::VertexShader>(pDevice, L"VSColorBlend.cso");
             auto pvsbc = pvs->GetBytecode();
 
             DrawableBase::AddStaticBind_(std::move(pvs));
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::PixelShader>(gfx, L"PSColorBlend.cso"));
-            AddStaticIndexBuffer_(std::make_unique<NAMESPACE_PIPELINE::IndexBuffer>(gfx, model.indices_));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::PixelShader>(pDevice, L"PSColorBlend.cso"));
+            AddStaticIndexBuffer_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::IndexBuffer>(pDevice, model.indices_));
 
             const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
             {
@@ -74,15 +71,15 @@ namespace fatpound::hw3d::obj
                 { "Color",    0, DXGI_FORMAT_R8G8B8A8_UNORM,  0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
             };
 
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::InputLayout>(gfx, ied, pvsbc));
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::InputLayout>(pDevice, ied, pvsbc));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
         }
         else
         {
             SetIndexFromStatic_();
         }
 
-        AddBind_(std::make_unique<NAMESPACE_PIPELINE::TransformCBuf>(gfx, *this));
+        AddBind_(std::make_unique<FATSPACE_PIPELINE_RESOURCE::TransformCBuffer<Pyramid>>(pDevice, *this, viewXM));
     }
 
     void Pyramid::Update(float deltaTime) noexcept

@@ -1,11 +1,13 @@
 #pragma once
 
-#include "../Util/AutoTimer.hpp"
+#include <FatNamespaces.hpp>
+
+#include "../Util/Time/Time.hpp"
 #include "../Util/ImguiManager.hpp"
 
-#include "../Util/Camera/Camera.hpp"
+#include "../Util/Camera.hpp"
 
-#include "../Win32_/Window.hpp"
+#include "../Win32_/WindowEx.hpp"
 
 namespace fatpound::win32::d3d11::visual
 {
@@ -16,41 +18,50 @@ namespace fatpound::hw3d
 {
     class App final
     {
+        static constexpr std::size_t DrawableCount = 200u;
+
     public:
         App();
         App(const App& src) = delete;
-        App& operator = (const App& src) = delete;
-
         App(App&& src) = delete;
-        App& operator = (App&& src) = delete;
-        ~App() noexcept;
+
+        auto operator = (const App& src) -> App& = delete;
+        auto operator = (App&& src)      -> App& = delete;
+        ~App() noexcept = default;
 
 
     public:
-        int Go();
+        auto IsRunning() const -> bool;
+        auto IsOver()    const -> bool;
+
+        void Go();
 
 
     protected:
 
 
     private:
+        void Init_();
+
         void DoFrame_();
 
 
     private:
-        NAMESPACE_UTIL::ImguiManager imgui_;
+        inline static std::size_t s_game_id_{};
 
-        NAMESPACE_WIN32::Window wnd_;
-        
-        NAMESPACE_D3D11::Graphics gfx_;
 
-        NAMESPACE_UTIL::Camera camera_;
-        NAMESPACE_UTIL::AutoTimer timer_;
+    private:
+        FATSPACE_UTIL::ImguiManager m_imgui_;
 
-        std::vector<std::unique_ptr<NAMESPACE_VISUAL::Drawable>> drawables_;
+        FATSPACE_WIN32::WindowEx m_wnd_;
+        FATSPACE_D3D11::Graphics<> m_gfx_;
 
-        float simulation_speed_ = 1.0f;
+        FATSPACE_UTIL::ViewXM m_viewXM_;
+        FATSPACE_UTIL::Camera m_camera_;
+        FATSPACE_UTIL_TIME::AutoTimer m_timer_;
 
-        static constexpr std::size_t drawable_count_ = 180u;
+        std::vector<std::unique_ptr<FATSPACE_VISUAL::Drawable>> m_drawables_;
+
+        float m_simulation_speed_ = 1.0f;
     };
 }

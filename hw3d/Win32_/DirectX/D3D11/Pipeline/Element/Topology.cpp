@@ -1,16 +1,16 @@
 #include "Topology.hpp"
 
-namespace fatpound::win32::d3d11::pipeline
+namespace fatpound::win32::d3d11::pipeline::element
 {
-    Topology::Topology(D3D11_PRIMITIVE_TOPOLOGY type)
+    Topology::Topology(const D3D11_PRIMITIVE_TOPOLOGY type) noexcept
         :
-        type_(type)
+        m_type_(type)
     {
 
     }
 
-    void Topology::Bind(Graphics& gfx) noexcept
+    void Topology::Bind(ID3D11DeviceContext* const pImmediateContext)
     {
-        Bindable::GetContext_(gfx)->IASetPrimitiveTopology(type_);
+        pImmediateContext->IASetPrimitiveTopology(m_type_);
     }
 }

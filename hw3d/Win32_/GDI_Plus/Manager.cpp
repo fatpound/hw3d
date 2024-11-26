@@ -1,47 +1,32 @@
 #define FATPOUND_FULL_WIN_TARGETED
 
-#include <FatWin32_.hpp>
-
 #include "Manager.hpp"
 
-#include <algorithm>
-
-namespace Gdiplus
-{
-    using std::min;
-    using std::max;
-}
-
 #include <gdiplus.h>
+#include <string>
+#pragma comment(lib, "gdiplus")
 
-namespace fatpound::win32::gdiplus
+namespace fatpound::win32::gdi_plus
 {
     Manager::Manager()
     {
-        if (refCount_ == 0)
+        if (s_ref_count_ == 0)
         {
             ::Gdiplus::GdiplusStartupInput input;
 
-            input.GdiplusVersion = 1u;
-            input.DebugEventCallback = nullptr;
-            input.SuppressBackgroundThread = false;
-
-            ::Gdiplus::GdiplusStartup(&token_, &input, nullptr);
+            ::Gdiplus::GdiplusStartup(&s_gdiPlus_token_, &input, nullptr);
         }
 
-        ++refCount_;
+        ++s_ref_count_;
     }
 
     Manager::~Manager()
     {
-        --refCount_;
+        --s_ref_count_;
 
-        if (refCount_ == 0)
+        if (s_ref_count_ == 0)
         {
-            ::Gdiplus::GdiplusShutdown(token_);
+            ::Gdiplus::GdiplusShutdown(s_gdiPlus_token_);
         }
     }
-
-    ULONG_PTR Manager::token_    = 0u;
-    int       Manager::refCount_ = 0;
 }

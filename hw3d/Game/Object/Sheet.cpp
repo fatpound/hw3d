@@ -1,14 +1,5 @@
 #include "Sheet.hpp"
 
-#include "../../Win32_/DirectX/D3D11/Pipeline/BindableBase.hpp"
-
-#include "../../Win32_/DirectX/D3D11/Pipeline/Element/Texture.hpp"
-#include "../../Win32_/DirectX/D3D11/Pipeline/Element/Sampler.hpp"
-
-#include "../../Win32_/DirectX/D3D11/GraphicsThrowMacros.hpp"
-
-#include "../../Win32_/GDI_Plus/Surface.hpp"
-
 #include "Base/Plane.hpp"
 
 namespace dx = DirectX;
@@ -17,12 +8,13 @@ using namespace fatpound::win32::d3d11;
 
 namespace fatpound::hw3d::obj
 {
-    Sheet::Sheet(Graphics& gfx,
+    Sheet::Sheet(ID3D11Device* const pDevice,
         std::minstd_rand& rng,
         std::uniform_real_distribution<float>& adist,
         std::uniform_real_distribution<float>& ddist,
         std::uniform_real_distribution<float>& odist,
-        std::uniform_real_distribution<float>& rdist)
+        std::uniform_real_distribution<float>& rdist,
+        FATSPACE_UTIL::ViewXM& viewXM)
         :
         r_(rdist(rng)),
         droll_(ddist(rng)),
@@ -35,7 +27,7 @@ namespace fatpound::hw3d::obj
         theta_(adist(rng)),
         phi_(adist(rng))
     {
-        if (!DrawableBase::IsStaticInitialized_())
+        if (not DrawableBase::IsStaticInitialized_())
         {
             struct Vertex final
             {
@@ -55,17 +47,17 @@ namespace fatpound::hw3d::obj
             model.vertices_[2].tex = { 0.0f,1.0f };
             model.vertices_[3].tex = { 1.0f,1.0f };
 
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::Texture>(gfx, ::fatpound::win32::gdiplus::Surface::FromFile("Resource\\Image\\fatpound.png")));
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::VertexBuffer>(gfx, model.vertices_));
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::Sampler>(gfx));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::Texture>(pDevice, FATSPACE_UTIL::Surface(L"Resource\\Image\\cube.png")));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::VertexBuffer>(pDevice, model.vertices_));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::Sampler>(pDevice));
 
-            auto pvs = std::make_unique<NAMESPACE_PIPELINE::VertexShader>(gfx, L"VSTexture.cso");
+            auto pvs = std::make_unique<FATSPACE_PIPELINE_ELEMENT::VertexShader>(pDevice, L"VSTexture.cso");
             auto pvsbc = pvs->GetBytecode();
 
             DrawableBase::AddStaticBind_(std::move(pvs));
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::PixelShader>(gfx, L"PSTexture.cso"));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::PixelShader>(pDevice, L"PSTexture.cso"));
 
-            AddStaticIndexBuffer_(std::make_unique<NAMESPACE_PIPELINE::IndexBuffer>(gfx, model.indices_));
+            AddStaticIndexBuffer_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::IndexBuffer>(pDevice, model.indices_));
 
             const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
             {
@@ -73,15 +65,15 @@ namespace fatpound::hw3d::obj
                 { "TexCoord", 0, DXGI_FORMAT_R32G32_FLOAT,    0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
             };
 
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::InputLayout>(gfx, ied, pvsbc));
-            DrawableBase::AddStaticBind_(std::make_unique<NAMESPACE_PIPELINE::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::InputLayout>(pDevice, ied, pvsbc));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
         }
         else
         {
             SetIndexFromStatic_();
         }
 
-        AddBind_(std::make_unique<NAMESPACE_PIPELINE::TransformCBuf>(gfx, *this));
+        AddBind_(std::make_unique<FATSPACE_PIPELINE_RESOURCE::TransformCBuffer<Sheet>>(pDevice, *this, viewXM));
     }
 
     void Sheet::Update(float dt) noexcept

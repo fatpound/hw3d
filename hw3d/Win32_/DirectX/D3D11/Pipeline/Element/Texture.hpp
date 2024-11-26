@@ -2,21 +2,18 @@
 
 #include "../Bindable.hpp"
 
-namespace fatpound::win32::gdiplus
-{
-    class Surface;
-}
+#include "../Util/Surface.hpp"
 
-namespace fatpound::win32::d3d11::pipeline
+namespace fatpound::win32::d3d11::pipeline::element
 {
     class Texture final : public Bindable
     {
     public:
-        Texture(Graphics& gfx, const ::fatpound::win32::gdiplus::Surface& surface);
+        Texture(ID3D11Device* const pDevice, const FATSPACE_UTIL::Surface& surface);
 
 
     public:
-        virtual void Bind(Graphics& gfx) noexcept override final;
+        virtual void Bind(ID3D11DeviceContext* const pImmediateContext) noexcept override final;
 
 
     protected:

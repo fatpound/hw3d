@@ -1,72 +1,57 @@
 #pragma once
 
-#include "Drawable.hpp"
+#include "../Pipeline/StaticBindableVec.hpp"
 
-#include "../Pipeline/Element/IndexBuffer.hpp"
+#include "Drawable.hpp"
 
 namespace fatpound::win32::d3d11::visual
 {
-    template <class C>
-    class DrawableBase : public Drawable
+    template <typename T>
+    class DrawableBase : public Drawable, public FATSPACE_PIPELINE::StaticBindableVec<DrawableBase<T>>
     {
-        using Drawable::Drawable;
-
     public:
+        explicit DrawableBase() = default;
+        explicit DrawableBase(const DrawableBase& src) = delete;
+        explicit DrawableBase(DrawableBase&& src) = delete;
+
+        auto operator = (const DrawableBase& src) -> DrawableBase& = delete;
+        auto operator = (DrawableBase&& src)      -> DrawableBase& = delete;
+        virtual ~DrawableBase() noexcept = default;
 
 
     protected:
-        static bool IsStaticInitialized_() noexcept
+        virtual void AddStaticIndexBuffer_(std::unique_ptr<FATSPACE_PIPELINE_ELEMENT::IndexBuffer> idxbuf) noexcept(IN_RELEASE) final
         {
-            return !static_binds_.empty();
+            assert("Attempting to add index buffer a second time" && m_pCIndexBuffer_ == nullptr);
+
+            m_pCIndexBuffer_ = idxbuf.get();
+
+            this->s_static_binds_.push_back(std::move(idxbuf));
         }
-
-        static void AddStaticBind_(std::unique_ptr<NAMESPACE_PIPELINE::Bindable> bind) noexcept(IN_RELEASE)
+        virtual void SetIndexFromStatic_() noexcept(IN_RELEASE) final
         {
-            assert("*Must* use AddStaticIndexBuffer_ to bind index buffer" && typeid(*bind) != typeid(NAMESPACE_PIPELINE::IndexBuffer));
+            assert("Attempting to add index buffer a second time" && m_pCIndexBuffer_ == nullptr);
 
-            static_binds_.push_back(std::move(bind));
-        }
-
-
-    protected:
-        virtual void AddStaticIndexBuffer_(std::unique_ptr<NAMESPACE_PIPELINE::IndexBuffer> ibuf) noexcept(IN_RELEASE)final
-        {
-            assert("Attempting to add index buffer a second time" && pCIndexBuffer_ == nullptr);
-
-            pCIndexBuffer_ = ibuf.get();
-            static_binds_.push_back(std::move(ibuf));
-        }
-        virtual void SetIndexFromStatic_() noexcept(IN_RELEASE)final
-        {
-            assert("Attempting to add index buffer a second time" && pCIndexBuffer_ == nullptr);
-
-            for (const auto& b : static_binds_)
+            for (const auto& b : this->s_static_binds_)
             {
-                const auto ptr = dynamic_cast<NAMESPACE_PIPELINE::IndexBuffer*>(b.get());
+                const auto ptr = dynamic_cast<FATSPACE_PIPELINE_ELEMENT::IndexBuffer*>(b.get());
 
-                if (ptr != nullptr)
+                if (ptr not_eq nullptr)
                 {
-                    pCIndexBuffer_ = ptr;
+                    m_pCIndexBuffer_ = ptr;
 
                     return;
                 }
             }
 
-            assert("Failed to find index buffer in static binds" && pCIndexBuffer_ != nullptr);
+            assert("Failed to find index buffer in static binds" && m_pCIndexBuffer_ not_eq nullptr);
         }
 
 
     private:
-        virtual auto GetStaticBinds_() const noexcept -> const std::vector<std::unique_ptr<NAMESPACE_PIPELINE::Bindable>> & override /* final */
+        virtual auto GetStaticBinds_() const noexcept(IN_RELEASE) -> const bind_vec_t& override
         {
-            return static_binds_;
+            return this->s_static_binds_;
         }
-
-
-    private:
-        static std::vector<std::unique_ptr<NAMESPACE_PIPELINE::Bindable>> static_binds_;
     };
-
-    template <class C>
-    std::vector<std::unique_ptr<NAMESPACE_PIPELINE::Bindable>> DrawableBase<C>::static_binds_;
 }

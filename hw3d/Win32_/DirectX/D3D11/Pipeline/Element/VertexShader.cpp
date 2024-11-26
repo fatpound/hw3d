@@ -2,30 +2,27 @@
 
 #include <d3dcompiler.h>
 
-namespace fatpound::win32::d3d11::pipeline
+namespace fatpound::win32::d3d11::pipeline::element
 {
-    VertexShader::VertexShader(Graphics& gfx, const std::wstring& path)
+    VertexShader::VertexShader(ID3D11Device* const pDevice, const std::wstring& path)
     {
-        INFOMAN(gfx);
+        ::D3DReadFileToBlob(path.c_str(), &m_pBytecodeBlob_);
 
-        GFX_THROW_INFO(D3DReadFileToBlob(path.c_str(), &pBytecodeBlob_));
-        GFX_THROW_INFO(
-            Bindable::GetDevice_(gfx)->CreateVertexShader(
-                pBytecodeBlob_->GetBufferPointer(),
-                pBytecodeBlob_->GetBufferSize(),
-                nullptr,
-                &pVertexShader_
-            )
+        pDevice->CreateVertexShader(
+            m_pBytecodeBlob_->GetBufferPointer(),
+            m_pBytecodeBlob_->GetBufferSize(),
+            nullptr,
+            &m_pVertexShader_
         );
     }
 
-    void VertexShader::Bind(Graphics& gfx) noexcept
+    auto VertexShader::GetBytecode() const noexcept -> ID3DBlob*
     {
-        Bindable::GetContext_(gfx)->VSSetShader(pVertexShader_.Get(), nullptr, 0u);
+        return m_pBytecodeBlob_.Get();
     }
 
-    ID3DBlob* VertexShader::GetBytecode() const noexcept
+    void VertexShader::Bind(ID3D11DeviceContext* const pImmediateContext)
     {
-        return pBytecodeBlob_.Get();
+        pImmediateContext->VSSetShader(m_pVertexShader_.Get(), nullptr, 0u);
     }
 }

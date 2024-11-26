@@ -1,6 +1,6 @@
 #include "ImguiManager.hpp"
 
-#include "../imgui/imgui.h"
+#include <imgui.h>
 
 namespace fatpound::util
 {
@@ -11,7 +11,6 @@ namespace fatpound::util
         ImGui::CreateContext();
         ImGui::StyleColorsDark();
     }
-
     ImguiManager::~ImguiManager()
     {
         ImGui::DestroyContext();

@@ -2,27 +2,24 @@
 
 #include <d3dcompiler.h>
 
-namespace fatpound::win32::d3d11::pipeline
+namespace fatpound::win32::d3d11::pipeline::element
 {
-    PixelShader::PixelShader(Graphics& gfx, const std::wstring& path)
+    PixelShader::PixelShader(ID3D11Device* const pDevice, const std::wstring& path)
     {
-        INFOMAN(gfx);
+        ::Microsoft::WRL::ComPtr<ID3DBlob> pBlob;
 
-        Microsoft::WRL::ComPtr<ID3DBlob> pBlob;
+        ::D3DReadFileToBlob(path.c_str(), &pBlob);
 
-        GFX_THROW_INFO(D3DReadFileToBlob(path.c_str(), &pBlob));
-        GFX_THROW_INFO(
-            Bindable::GetDevice_(gfx)->CreatePixelShader(
-                pBlob->GetBufferPointer(),
-                pBlob->GetBufferSize(),
-                nullptr,
-                &pPixelShader_
-            )
+        pDevice->CreatePixelShader(
+            pBlob->GetBufferPointer(),
+            pBlob->GetBufferSize(),
+            nullptr,
+            &m_pPixelShader_
         );
     }
 
-    void PixelShader::Bind(Graphics& gfx) noexcept
+    void PixelShader::Bind(ID3D11DeviceContext* const pImmediateContext)
     {
-        Bindable::GetContext_(gfx)->PSSetShader(pPixelShader_.Get(), nullptr, 0u);
+        pImmediateContext->PSSetShader(m_pPixelShader_.Get(), nullptr, 0u);
     }
 }

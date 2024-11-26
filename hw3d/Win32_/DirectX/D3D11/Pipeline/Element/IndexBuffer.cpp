@@ -1,34 +1,32 @@
 #include "IndexBuffer.hpp"
 
-namespace fatpound::win32::d3d11::pipeline
+namespace fatpound::win32::d3d11::pipeline::element
 {
-    IndexBuffer::IndexBuffer(Graphics& gfx, const std::vector<unsigned short int>& indices)
+    IndexBuffer::IndexBuffer(ID3D11Device* const pDevice, const std::vector<unsigned short int>& indices)
         :
-        count_(static_cast<UINT>(indices.size()))
+        m_count_(static_cast<UINT>(indices.size()))
     {
-        INFOMAN(gfx);
+        D3D11_BUFFER_DESC bd{};
+        bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+        bd.Usage = D3D11_USAGE_DEFAULT;
+        bd.CPUAccessFlags = 0u;
+        bd.MiscFlags = 0u;
+        bd.ByteWidth = m_count_ * sizeof(unsigned short int);
+        bd.StructureByteStride = sizeof(unsigned short int);
 
-        D3D11_BUFFER_DESC ibd = {};
-        ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-        ibd.Usage = D3D11_USAGE_DEFAULT;
-        ibd.CPUAccessFlags = 0u;
-        ibd.MiscFlags = 0u;
-        ibd.ByteWidth = static_cast<UINT>(count_ * sizeof(unsigned short int));
-        ibd.StructureByteStride = sizeof(unsigned short int);
+        D3D11_SUBRESOURCE_DATA sd{};
+        sd.pSysMem = indices.data();
 
-        D3D11_SUBRESOURCE_DATA isd = {};
-        isd.pSysMem = indices.data();
-
-        GFX_THROW_INFO(Bindable::GetDevice_(gfx)->CreateBuffer(&ibd, &isd, &pIndexBuffer_));
+        pDevice->CreateBuffer(&bd, &sd, &m_pIndexBuffer_);
     }
 
-    void IndexBuffer::Bind(Graphics& gfx) noexcept
+    auto IndexBuffer::GetCount() const noexcept -> UINT
     {
-        Bindable::GetContext_(gfx)->IASetIndexBuffer(pIndexBuffer_.Get(), DXGI_FORMAT_R16_UINT, 0u);
+        return m_count_;
     }
 
-    UINT IndexBuffer::GetCount() const noexcept
+    void IndexBuffer::Bind(ID3D11DeviceContext* const pImmediateContext)
     {
-        return count_;
+        pImmediateContext->IASetIndexBuffer(m_pIndexBuffer_.Get(), DXGI_FORMAT_R16_UINT, 0u);
     }
 }

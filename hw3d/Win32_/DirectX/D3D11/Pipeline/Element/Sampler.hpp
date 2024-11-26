@@ -2,20 +2,20 @@
 
 #include "../Bindable.hpp"
 
-namespace fatpound::win32::d3d11::pipeline
+namespace fatpound::win32::d3d11::pipeline::element
 {
     class Sampler final : public Bindable
     {
     public:
-        Sampler(Graphics& gfx);
+        Sampler(ID3D11Device* const pDevice);
 
 
     public:
-        virtual void Bind(Graphics& gfx) noexcept override final;
+        virtual void Bind(ID3D11DeviceContext* const pImmediateContext) noexcept override final;
 
 
     protected:
-        Microsoft::WRL::ComPtr<ID3D11SamplerState> pSampler_;
+        Microsoft::WRL::ComPtr<ID3D11SamplerState> m_pSampler_;
 
 
     private:

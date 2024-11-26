@@ -1,18 +1,25 @@
 #pragma once
 
-#include "../../Win32_/DirectX/D3D11/Visual/DrawableBase.hpp"
+#include <FatNamespaces.hpp>
+
+#include "../../Win32_/DirectX/D3D11/Graphics.hpp"
+
+#include "../../Util/ViewXM.hpp"
+
+#include <random>
 
 namespace fatpound::hw3d::obj
 {
-    class SkinnedBox final : public NAMESPACE_VISUAL::DrawableBase<SkinnedBox>
+    class SkinnedBox final : public FATSPACE_VISUAL::DrawableBase<SkinnedBox>
     {
     public:
-        SkinnedBox(::fatpound::win32::d3d11::Graphics& gfx,
+        SkinnedBox(ID3D11Device* const pDevice,
             std::minstd_rand& rng,
             std::uniform_real_distribution<float>& adist,
             std::uniform_real_distribution<float>& ddist,
             std::uniform_real_distribution<float>& odist,
-            std::uniform_real_distribution<float>& rdist);
+            std::uniform_real_distribution<float>& rdist,
+            FATSPACE_UTIL::ViewXM& viewXM);
 
 
     public:

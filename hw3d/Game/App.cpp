@@ -1,13 +1,12 @@
 #include "App.hpp"
 
-#include <FatWin32_.hpp>
+#include <FatWin32.hpp>
 
 #include "../Math/Math.hpp"
 
-#include "../Win32_/GDI_Plus/Surface.hpp"
 #include "../Win32_/GDI_Plus/Manager.hpp"
 
-#include "../imgui/imgui.h"
+#include <imgui.h>
 
 #include "Object/Box.hpp"
 #include "Object/Melon.hpp"
@@ -21,68 +20,98 @@
 #include <numbers>
 #include <random>
 
-#ifdef NDEBUG
-#define SCREEN_WIDTH    GetSystemMetrics(SM_CXSCREEN)
-#define SCREEN_HEIGHT   GetSystemMetrics(SM_CYSCREEN)
+#if IN_RELEASE
+#define SCREEN_WIDTH    static_cast<UINT>(::GetSystemMetrics(SM_CXSCREEN))
+#define SCREEN_HEIGHT   static_cast<UINT>(::GetSystemMetrics(SM_CYSCREEN))
 #else
-#define SCREEN_WIDTH    1024
-#define SCREEN_HEIGHT    768
-#endif // NDEBUG
+#define SCREEN_WIDTH    1024u
+#define SCREEN_HEIGHT    768u
+#endif // IN_RELEASE
 
 namespace dx = DirectX;
 
-fatpound::win32::gdiplus::Manager gdipm;
+using FATSPACE_UTIL::Color;
+using FATSPACE_UTIL::Surface;
+using FATSPACE_UTIL::ScreenSizeInfo;
 
 namespace fatpound::hw3d
 {
     App::App()
         :
-        wnd_("The FatBox", NAMESPACE_WIN32::Window::ClientSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
-        gfx_(wnd_.GetHwnd(), NAMESPACE_D3D11::Graphics::SizeInfo{ wnd_.GetClientWidth<int>(), wnd_.GetClientHeight<int>() }) // they are the same as SCREEN_ MACROS
+        m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"The FatBox " + std::to_wstring(s_game_id_), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
+        m_gfx_(m_wnd_.GetHandle(), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
+        m_camera_(100.0f, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
+    {
+        
+    }
+
+    auto App::IsRunning() const -> bool
+    {
+        return not IsOver();
+    }
+    auto App::IsOver() const -> bool
+    {
+        return m_wnd_.IsClosing();
+    }
+
+    void App::Go()
+    {
+        Init_();
+
+        while (IsRunning())
+        {
+            m_gfx_.BeginFrame<>();
+            DoFrame_();
+            m_gfx_.EndFrame<>();
+        }
+    }
+
+    void App::Init_()
     {
         class Factory final
         {
         public:
-            Factory(NAMESPACE_D3D11::Graphics& gfx)
+            Factory(ID3D11Device* const pDevice, App& app)
                 :
-                gfx_(gfx)
+                pDevice_(pDevice),
+                app_(app)
             {
 
             }
 
         public:
-            auto operator () () -> std::unique_ptr<NAMESPACE_VISUAL::Drawable>
+            auto operator () () -> std::unique_ptr<FATSPACE_VISUAL::Drawable>
             {
                 switch (typedist_(rng_))
                 {
                 case 0:
                     return std::make_unique<obj::Pyramid>(
-                        gfx_, rng_, adist_, ddist_,
-                        odist_, rdist_
+                        pDevice_, rng_, adist_, ddist_,
+                        odist_, rdist_, app_.m_viewXM_
                     );
 
                 case 1:
                     return std::make_unique<obj::Box>(
-                        gfx_, rng_, adist_, ddist_,
-                        odist_, rdist_, bdist_
+                        pDevice_, rng_, adist_, ddist_,
+                        odist_, rdist_, bdist_, app_.m_viewXM_
                     );
 
                 case 2:
                     return std::make_unique<obj::Melon>(
-                        gfx_, rng_, adist_, ddist_,
-                        odist_, rdist_, longdist_, latdist_
+                        pDevice_, rng_, adist_, ddist_,
+                        odist_, rdist_, longdist_, latdist_, app_.m_viewXM_
                     );
 
                 case 3:
                     return std::make_unique<obj::Sheet>(
-                        gfx_, rng_, adist_, ddist_,
-                        odist_, rdist_
+                        pDevice_, rng_, adist_, ddist_,
+                        odist_, rdist_, app_.m_viewXM_
                     );
 
                 case 4:
                     return std::make_unique<obj::SkinnedBox>(
-                        gfx_, rng_, adist_, ddist_,
-                        odist_, rdist_
+                        pDevice_, rng_, adist_, ddist_,
+                        odist_, rdist_, app_.m_viewXM_
                     );
 
                 default:
@@ -106,75 +135,49 @@ namespace fatpound::hw3d
             std::uniform_int_distribution<int> longdist_{ 10, 40 };
             std::uniform_int_distribution<int> typedist_{ 0, 4 };
 
-            NAMESPACE_D3D11::Graphics& gfx_;
+            ID3D11Device* const pDevice_;
+
+            App& app_;
         };
 
-        drawables_.reserve(App::drawable_count_);
+        m_drawables_.reserve(App::DrawableCount);
 
-        std::generate_n(std::back_inserter(drawables_), App::drawable_count_, Factory{ gfx_ });
+        std::generate_n(std::back_inserter(m_drawables_), App::DrawableCount, Factory{ m_gfx_.GetDevice(), *this});
 
-        gfx_.SetProjection(
+        m_viewXM_.SetProjectionXM(
             dx::XMMatrixPerspectiveLH(
                 1.0f,
-                wnd_.GetClientHeight<float>() / wnd_.GetClientWidth<float>(), // 1 / Aspect Ratio
+                m_wnd_.GetClientHeight<float>() / m_wnd_.GetClientWidth<float>(), // 1 / Aspect Ratio
                 0.5f,
                 40.0f
             )
         );
     }
-
-    App::~App() noexcept
-    {
-
-    }
-
-    int App::Go()
-    {
-        std::optional<WPARAM> error_code;
-
-        while (true)
-        {
-            error_code = NAMESPACE_WIN32::Window::ProcessMessages();
-
-            if (error_code) [[unlikely]]
-            {
-                return static_cast<int>(*error_code);
-            }
-
-            if (wnd_.kbd.KeyIsPressed(VK_ESCAPE)) [[unlikely]]
-            {
-                wnd_.Kill();
-
-                return 0;
-            }
-
-            gfx_.BeginFrame();
-            DoFrame_();
-            gfx_.EndFrame();
-        }
-    }
-
     void App::DoFrame_()
     {
-        const auto& delta_time = timer_.Mark() * simulation_speed_;
+        const auto& delta_time = m_timer_.Mark() * m_simulation_speed_;
 
-        gfx_.SetCamera(camera_.GetMatrix());
+        m_camera_.Update();
 
-        for (auto& obj : drawables_)
+        m_viewXM_.SetCameraXM(m_camera_.GetMatrix());
+
+        auto* const pImmediateContext = m_gfx_.GetImmediateContext();
+
+        for (auto& obj : m_drawables_)
         {
-            obj->Update(wnd_.kbd.KeyIsPressed(VK_SPACE) ? 0.0f : delta_time);
-            obj->Draw(gfx_);
+            obj->Update(m_wnd_.m_pKeyboard->KeyIsPressed(VK_SPACE) ? 0.0f : delta_time);
+            obj->Draw(pImmediateContext);
         }
 
-        camera_.SpawnControlImguiWindow();
+        m_camera_.SpawnControlImguiWindow();
 
-        if (ImGui::Begin("Simulation Speed")) [[likely]]
+        if (::ImGui::Begin("Simulation Speed"))
         {
-            ImGui::SliderFloat("Speed Factor", &simulation_speed_, 0.0f, 5.0f);
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            ImGui::Text("Status: %s", wnd_.kbd.KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
+            ::ImGui::SliderFloat("Speed Factor", &m_simulation_speed_, 0.0f, 5.0f);
+            ::ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ::ImGui::GetIO().Framerate, ::ImGui::GetIO().Framerate);
+            ::ImGui::Text("Status: %s", m_wnd_.m_pKeyboard->KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
         }
 
-        ImGui::End();
+        ::ImGui::End();
     }
 }

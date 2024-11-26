@@ -1,9 +1,9 @@
-#include "MessageMap.hpp"
+#include <MessageMap.hpp>
 
-#include <sstream>
 #include <iomanip>
+#include <sstream>
 
-// secret messages
+// some secret messages
 #define WM_UAHDESTROYWINDOW 0x0090
 #define WM_UAHDRAWMENU 0x0091
 #define WM_UAHDRAWMENUITEM 0x0092
@@ -11,13 +11,16 @@
 #define WM_UAHMEASUREMENUITEM 0x0094
 #define WM_UAHNCPAINTMENUPOPUP 0x0095
 
-#define REGISTER_MESSAGE(msg) { msg, #msg }
+#define WIDEN(x) WIDEN2(x)
+#define WIDEN2(x) (L ## x)
+
+#define REGISTER_MESSAGE(msg) { static_cast<DWORD>(msg), WIDEN(#msg) }
 
 namespace fatpound::win32
 {
-    MessageMap::MessageMap() noexcept
+    MessageMap::MessageMap()
         :
-        map_({
+        m_map_({
             REGISTER_MESSAGE(WM_ACTIVATE),
             REGISTER_MESSAGE(WM_ACTIVATEAPP),
             REGISTER_MESSAGE(WM_ASKCBFORMATNAME),
@@ -194,28 +197,28 @@ namespace fatpound::win32
 
     }
 
-    auto MessageMap::operator () (DWORD msg, WPARAM wp, LPARAM lp) const noexcept -> std::string
+    auto MessageMap::operator () (const DWORD msg, const WPARAM wp, const LPARAM lp) const -> std::wstring
     {
         constexpr int firstColWidth = 25;
-        const auto i = map_.find(msg);
+        const auto i = m_map_.find(msg);
 
-        std::ostringstream oss;
+        std::wostringstream woss;
 
-        if (i != map_.end())
+        if (i not_eq m_map_.end())
         {
-            oss << std::left << std::setw(firstColWidth) << i->second << std::right;
+            woss << std::left << std::setw(firstColWidth) << i->second << std::right;
         }
         else
         {
-            std::ostringstream padss;
+            std::wostringstream wpadss;
 
-            padss << "Unknown message: 0x" << std::hex << msg;
-            oss << std::left << std::setw(firstColWidth) << padss.str() << std::right;
+            wpadss << L"Unknown message: 0x" << std::hex << msg;
+            woss << std::left << std::setw(firstColWidth) << wpadss.str() << std::right;
         }
 
-        oss << "   WP: 0x" << std::hex << std::setfill('0') << std::setw(8) << wp;
-        oss << "   LP: 0x" << std::hex << std::setfill('0') << std::setw(8) << lp << std::endl;
+        woss << L"   WP: 0x" << std::hex << std::setfill(L'0') << std::setw(8) << wp;
+        woss << L"   LP: 0x" << std::hex << std::setfill(L'0') << std::setw(8) << lp << std::endl;
 
-        return oss.str();
+        return woss.str();
     }
 }
