@@ -39,31 +39,16 @@
     <ClCompile Include="wWinMain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Win32_\MessageMap.cpp">
+    <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Time\AutoTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Box.cpp">
+    <ClCompile Include="Object\Box.cpp">
       <Filter>Source Files\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\Melon.cpp">
+    <ClCompile Include="Object\Melon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Object\Pyramid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\GDI_Plus\Manager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\Sheet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Object\SkinnedBox.cpp">
+    <ClCompile Include="Object\Pyramid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
@@ -84,142 +69,46 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="Util\ImguiManager.cpp">
+    <ClCompile Include="ImguiManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Visual\Drawable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\IndexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\InputLayout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\PixelShader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Sampler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Topology.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexShader.cpp">
+    <ClCompile Include="View\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui_tables.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IO\Keyboard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IO\Mouse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\WndClassEx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\WindowEx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Concurrency\TaskQueue.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Math.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Gfx\Gfx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\Surface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\ViewXM.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Core\Device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\DepthStencilView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\RasterizerState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\RenderTargetView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\ShaderResourceView.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\SamplerState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\SwapChain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\Texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Win32_\MessageMap.hpp">
+    <ClInclude Include="App.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\FatWin32.hpp">
+    <ClInclude Include="Object\Melon.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\App.hpp">
+    <ClInclude Include="Object\Pyramid.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Time\AutoTimer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Melon.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Pyramid.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Base\Cone.hpp">
+    <ClInclude Include="Object\Base\Cone.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\Base\Cube.hpp">
+    <ClInclude Include="Object\Base\Cube.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Math\IndexedTriangleList.hpp">
+    <ClInclude Include="IndexedTriangleList.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\Base\Plane.hpp">
+    <ClInclude Include="Object\Base\Plane.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\Base\Prism.hpp">
+    <ClInclude Include="Object\Base\Prism.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\Base\Sphere.hpp">
+    <ClInclude Include="Object\Base\Sphere.hpp">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Object\Box.hpp">
+    <ClInclude Include="Object\Box.hpp">
       <Filter>Header Files\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\GDI_Plus\Manager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\Sheet.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Object\SkinnedBox.hpp">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>Imgui</Filter>
@@ -245,187 +134,13 @@
     <ClInclude Include="imgui\imstb_truetype.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Util\ImguiManager.hpp">
+    <ClInclude Include="ImguiManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Camera.hpp">
+    <ClInclude Include="View\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Win32_\FatNamespaces.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Bindable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\PixelCBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\VertexCBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\CBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Visual\Drawable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Visual\DrawableBase.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Math.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\FatWin32_Settings.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\IndexBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\InputLayout.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\PixelShader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Sampler.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Texture.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Topology.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\TransformCBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexBuffer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexShader.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\IO.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\Keyboard.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\Mouse.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Memory\Memory.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\KeyEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IO\MouseEvent.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\WndClassEx.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\WindowEx.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\IWindow.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Concurrency\TaskQueue.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Concurrency\Concurrency.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Multiplicable.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Number_Set\Number_Set.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Number_Set\Rational.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Time\Time.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Gfx\Gfx.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Gfx\FullScreenQuad.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Surface.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\ScreenSizeInfo.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Color.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\ViewXM.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\Util.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\GDI_Plus\GDI_Plus.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\DirectX.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\D3D11.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\Win32.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Core\Core.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Core\Device.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\GraphicsResourcePack.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\DepthStencilView.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\RasterizerState.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\RenderTargetView.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\ShaderResourceView.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\SamplerState.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\SwapChain.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\Texture2D.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\Factory.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Graphics.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Pipeline.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Visual\Visual.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\StaticBindableVec.hpp">
+    <ClInclude Include="View\View.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -444,11 +159,9 @@
     <None Include="hw3d.cd" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\PSColorBlend.hlsl" />
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\PSColorIndex.hlsl" />
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\PSTexture.hlsl" />
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\VSColorBlend.hlsl" />
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\VSColorIndex.hlsl" />
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\VSTexture.hlsl" />
+    <FxCompile Include="Shader\VSColorBlend.hlsl" />
+    <FxCompile Include="Shader\PSColorBlend.hlsl" />
+    <FxCompile Include="Shader\PSColorIndex.hlsl" />
+    <FxCompile Include="Shader\VSColorIndex.hlsl" />
   </ItemGroup>
 </Project>

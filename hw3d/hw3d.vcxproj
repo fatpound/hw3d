@@ -59,55 +59,53 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\FatLibrary\_props\FatCpp_Debug.props" />
+    <Import Project="..\FatLibrary\_props\FatLibrary.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\FatLibrary\_props\FatCpp_Release.props" />
+    <Import Project="..\FatLibrary\_props\FatLibrary.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\FatLibrary\_props\FatCpp_Debug.props" />
+    <Import Project="..\FatLibrary\_props\FatLibrary.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\FatLibrary\_props\FatCpp_Release.props" />
+    <Import Project="..\FatLibrary\_props\FatLibrary.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>true</UseStructuredOutput>
+    <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>true</UseStructuredOutput>
+    <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>true</UseStructuredOutput>
+    <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <CodeAnalysisRuleSet>FatRules.ruleset</CodeAnalysisRuleSet>
-    <UseStructuredOutput>true</UseStructuredOutput>
+    <UseStructuredOutput>false</UseStructuredOutput>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions);IN_DEBUG=true;IN_RELEASE=false</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
-      <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
-      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
-      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -134,28 +132,18 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions);;IN_DEBUG=false;IN_RELEASE=true</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>All</AssemblerOutput>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
-      <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
-      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
-      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -184,26 +172,16 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions);IN_DEBUG=true;IN_RELEASE=false</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>NoListing</AssemblerOutput>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
-      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
-      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -232,28 +210,18 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>EnableAllWarnings</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);;IN_DEBUG=false;IN_RELEASE=true</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
-      <CallingConvention>Cdecl</CallingConvention>
       <AssemblerOutput>All</AssemblerOutput>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
-      <EnableModules>false</EnableModules>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\Win32_;C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <DiagnosticsFormat>Caret</DiagnosticsFormat>
+      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
-      <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
-      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -281,108 +249,28 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Concurrency\TaskQueue.cpp" />
-    <ClCompile Include="Game\App.cpp" />
+    <ClCompile Include="App.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
-    <ClCompile Include="IO\Keyboard.cpp" />
-    <ClCompile Include="IO\Mouse.cpp" />
-    <ClCompile Include="Math\Math.cpp" />
-    <ClCompile Include="Util\Gfx\Gfx.cpp" />
-    <ClCompile Include="Util\Surface.cpp" />
-    <ClCompile Include="Util\ViewXM.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Core\Device.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\DepthStencilView.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\RasterizerState.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\RenderTargetView.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\SamplerState.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\ShaderResourceView.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\SwapChain.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Factory\Texture2D.cpp" />
-    <ClCompile Include="Game\Object\Box.cpp" />
-    <ClCompile Include="Util\Camera.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Visual\Drawable.cpp" />
-    <ClCompile Include="Util\Time\AutoTimer.cpp" />
-    <ClCompile Include="Win32_\GDI_Plus\Manager.cpp" />
-    <ClCompile Include="Util\ImguiManager.cpp" />
+    <ClCompile Include="Object\Box.cpp" />
+    <ClCompile Include="View\Camera.cpp" />
+    <ClCompile Include="ImguiManager.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\IndexBuffer.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\InputLayout.cpp" />
-    <ClCompile Include="Game\Object\Melon.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\PixelShader.cpp" />
-    <ClCompile Include="Game\Object\Pyramid.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Sampler.cpp" />
-    <ClCompile Include="Game\Object\Sheet.cpp" />
-    <ClCompile Include="Game\Object\SkinnedBox.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Texture.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\Topology.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexBuffer.cpp" />
-    <ClCompile Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexShader.cpp" />
-    <ClCompile Include="Win32_\MessageMap.cpp" />
-    <ClCompile Include="Win32_\WindowEx.cpp" />
-    <ClCompile Include="Win32_\WndClassEx.cpp" />
+    <ClCompile Include="Object\Melon.cpp" />
+    <ClCompile Include="Object\Pyramid.cpp" />
     <ClCompile Include="wWinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Concurrency\Concurrency.hpp" />
-    <ClInclude Include="Concurrency\TaskQueue.hpp" />
-    <ClInclude Include="Game\App.hpp" />
-    <ClInclude Include="IO\IO.hpp" />
-    <ClInclude Include="IO\Keyboard.hpp" />
-    <ClInclude Include="IO\KeyEvent.hpp" />
-    <ClInclude Include="IO\Mouse.hpp" />
-    <ClInclude Include="IO\MouseEvent.hpp" />
-    <ClInclude Include="Math\Multiplicable.hpp" />
-    <ClInclude Include="Math\Number_Set\Number_Set.hpp" />
-    <ClInclude Include="Math\Number_Set\Rational.hpp" />
-    <ClInclude Include="Memory\Memory.hpp" />
-    <ClInclude Include="Util\Color.hpp" />
-    <ClInclude Include="Util\Gfx\FullScreenQuad.hpp" />
-    <ClInclude Include="Util\Gfx\Gfx.hpp" />
-    <ClInclude Include="Util\ScreenSizeInfo.hpp" />
-    <ClInclude Include="Util\Surface.hpp" />
-    <ClInclude Include="Util\Time\Time.hpp" />
-    <ClInclude Include="Util\Util.hpp" />
-    <ClInclude Include="Util\ViewXM.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Core\Core.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Core\Device.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\D3D11.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\DepthStencilView.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\Factory.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\RasterizerState.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\RenderTargetView.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\SamplerState.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\ShaderResourceView.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\SwapChain.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Factory\Texture2D.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Graphics.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\GraphicsResourcePack.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Bindable.hpp" />
-    <ClInclude Include="Game\Object\Box.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Pipeline.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\PixelCBuffer.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\VertexCBuffer.hpp" />
-    <ClInclude Include="Util\Camera.hpp" />
-    <ClInclude Include="Game\Object\Base\Cone.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\CBuffer.hpp" />
-    <ClInclude Include="Game\Object\Base\Cube.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\StaticBindableVec.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Visual\Drawable.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Visual\DrawableBase.hpp" />
-    <ClInclude Include="Math\Math.hpp" />
-    <ClInclude Include="Util\Time\AutoTimer.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Visual\Visual.hpp" />
-    <ClInclude Include="Win32_\DirectX\DirectX.hpp" />
-    <ClInclude Include="Win32_\FatWin32.hpp" />
-    <ClInclude Include="Win32_\FatNamespaces.hpp" />
-    <ClInclude Include="Win32_\FatWin32_Settings.hpp" />
-    <ClInclude Include="Win32_\GDI_Plus\GDI_Plus.hpp" />
-    <ClInclude Include="Win32_\GDI_Plus\Manager.hpp" />
-    <ClInclude Include="Util\ImguiManager.hpp" />
+    <ClInclude Include="App.hpp" />
+    <ClInclude Include="Object\Box.hpp" />
+    <ClInclude Include="View\Camera.hpp" />
+    <ClInclude Include="Object\Base\Cone.hpp" />
+    <ClInclude Include="Object\Base\Cube.hpp" />
+    <ClInclude Include="ImguiManager.hpp" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_dx11.h" />
@@ -391,28 +279,13 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\IndexBuffer.hpp" />
-    <ClInclude Include="Math\IndexedTriangleList.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\InputLayout.hpp" />
-    <ClInclude Include="Game\Object\Melon.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\PixelShader.hpp" />
-    <ClInclude Include="Game\Object\Base\Plane.hpp" />
-    <ClInclude Include="Game\Object\Base\Prism.hpp" />
-    <ClInclude Include="Game\Object\Pyramid.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Sampler.hpp" />
-    <ClInclude Include="Game\Object\Sheet.hpp" />
-    <ClInclude Include="Game\Object\SkinnedBox.hpp" />
-    <ClInclude Include="Game\Object\Base\Sphere.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Texture.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\Topology.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Resource\TransformCBuffer.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexBuffer.hpp" />
-    <ClInclude Include="Win32_\DirectX\D3D11\Pipeline\Element\VertexShader.hpp" />
-    <ClInclude Include="Win32_\IWindow.hpp" />
-    <ClInclude Include="Win32_\MessageMap.hpp" />
-    <ClInclude Include="Win32_\Win32.hpp" />
-    <ClInclude Include="Win32_\WindowEx.hpp" />
-    <ClInclude Include="Win32_\WndClassEx.hpp" />
+    <ClInclude Include="IndexedTriangleList.hpp" />
+    <ClInclude Include="Object\Melon.hpp" />
+    <ClInclude Include="Object\Base\Plane.hpp" />
+    <ClInclude Include="Object\Base\Prism.hpp" />
+    <ClInclude Include="Object\Pyramid.hpp" />
+    <ClInclude Include="Object\Base\Sphere.hpp" />
+    <ClInclude Include="View\View.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\hw3d.rc" />
@@ -425,39 +298,12 @@
     <None Include="hw3d.cd" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\PSColorBlend.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\PSColorIndex.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SuppressStartupBanner>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</SuppressStartupBanner>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</SuppressStartupBanner>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</SuppressStartupBanner>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\PSTexture.hlsl">
+    <ProjectReference Include="..\FatLibrary\FatLibrary.vcxproj">
+      <Project>{1eeae2b9-daa3-45e2-8570-b6ecd8fd9685}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\PSColorBlend.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
@@ -466,44 +312,22 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.1</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.1</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.1</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.1</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\VSColorBlend.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    <FxCompile Include="Shader\PSColorIndex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\VSColorIndex.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</SuppressStartupBanner>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</SuppressStartupBanner>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</SuppressStartupBanner>
-      <SuppressStartupBanner Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</SuppressStartupBanner>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-    </FxCompile>
-    <FxCompile Include="Win32_\DirectX\D3D11\Shader\VSTexture.hlsl">
+    <FxCompile Include="Shader\VSColorBlend.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
@@ -512,10 +336,16 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Shader\VSColorIndex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

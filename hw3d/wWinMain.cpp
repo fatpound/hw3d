@@ -1,4 +1,4 @@
-#include "Game/App.hpp"
+#include "App.hpp"
 
 int CALLBACK wWinMain(
     [[maybe_unused]] _In_     HINSTANCE hInstance,
@@ -8,7 +8,7 @@ int CALLBACK wWinMain(
 {
     try
     {
-        fatpound::hw3d::App{}.Go();
+        hw3d::App{}.Go();
 
         return 0;
     }
