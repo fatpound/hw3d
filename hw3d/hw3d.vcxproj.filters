@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Dxerr">
-      <UniqueIdentifier>{6940395b-a299-4bef-84e0-b39dcd8ef483}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shader">
-      <UniqueIdentifier>{7cbaf958-3ae7-4523-a33c-3f8af3c2f5cf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Macros">
       <UniqueIdentifier>{3c5bf4f8-2de1-4760-b3fb-83ce787e58ef}</UniqueIdentifier>
     </Filter>
