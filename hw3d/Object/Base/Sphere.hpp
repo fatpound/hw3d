@@ -31,13 +31,13 @@ namespace hw3d::obj::base
 
             for (int iLat = 1; iLat < latDiv; iLat++)
             {
-                const auto latBase = dx::XMVector3Transform(base, dx::XMMatrixRotationX(lattitudeAngle * iLat));
+                const auto latBase = dx::XMVector3Transform(base, dx::XMMatrixRotationX(lattitudeAngle * static_cast<float>(iLat)));
 
                 for (int iLong = 0; iLong < longDiv; iLong++)
                 {
                     vertices.emplace_back();
 
-                    const auto v = dx::XMVector3Transform(latBase, dx::XMMatrixRotationZ(longitudeAngle * iLong));
+                    const auto v = dx::XMVector3Transform(latBase, dx::XMMatrixRotationZ(longitudeAngle * static_cast<float>(iLong)));
 
                     dx::XMStoreFloat3(&vertices.back().pos, v);
                 }
@@ -52,10 +52,10 @@ namespace hw3d::obj::base
             vertices.emplace_back();
             dx::XMStoreFloat3(&vertices.back().pos, dx::XMVectorNegate(base));
 
-            const auto calcIdx = [latDiv, longDiv](unsigned short int iLat, unsigned short int iLong) -> std::uint16_t
-                {
-                    return iLat * longDiv + iLong;
-                };
+            const auto calcIdx = [longDiv](unsigned short int iLat, unsigned short int iLong) -> std::uint16_t
+            {
+                return iLat * longDiv + iLong;
+            };
 
             std::vector<unsigned short int> indices;
 

@@ -19,7 +19,7 @@ namespace hw3d::obj::base
             namespace dx = DirectX;
 
             const auto base = dx::XMVectorSet(1.0f, 0.0f, -1.0f, 0.0f);
-            const float longitudeAngle = (std::numbers::pi_v<float> * 2.0f) / longDiv;
+            const float longitudeAngle = (std::numbers::pi_v<float> * 2.0f) / static_cast<float>(longDiv);
 
             // base vertices
             std::vector<V> vertices;
@@ -27,7 +27,7 @@ namespace hw3d::obj::base
             {
                 vertices.emplace_back();
 
-                const auto v = dx::XMVector3Transform(base, dx::XMMatrixRotationZ(longitudeAngle * iLong));
+                const auto v = dx::XMVector3Transform(base, dx::XMMatrixRotationZ(longitudeAngle * static_cast<float>(iLong)));
 
                 dx::XMStoreFloat3(&vertices.back().pos, v);
             }

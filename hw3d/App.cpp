@@ -58,7 +58,7 @@ namespace hw3d
     {
         return not IsOver();
     }
-    auto App::IsOver() const -> bool
+    auto App::IsOver() const noexcept -> bool
     {
         return m_wnd_.IsClosing();
     }
