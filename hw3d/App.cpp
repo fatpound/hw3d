@@ -35,8 +35,6 @@ using FATSPACE_UTIL::Color;
 using FATSPACE_UTIL::Surface;
 using FATSPACE_UTIL::ScreenSizeInfo;
 
-extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
 namespace hw3d
 {
     App::App()
@@ -54,7 +52,7 @@ namespace hw3d
         ::ImGui_ImplDX11_Shutdown();
     }
 
-    auto App::IsRunning() const -> bool
+    auto App::IsRunning() const noexcept -> bool
     {
         return not IsOver();
     }

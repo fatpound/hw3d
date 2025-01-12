@@ -54,7 +54,7 @@ namespace hw3d::obj::base
 
             const auto calcIdx = [longDiv](unsigned short int iLat, unsigned short int iLong) -> std::uint16_t
             {
-                return iLat * longDiv + iLong;
+                return static_cast<std::uint16_t>(iLat * longDiv + iLong);
             };
 
             std::vector<unsigned short int> indices;
@@ -64,20 +64,20 @@ namespace hw3d::obj::base
                 for (unsigned short int iLong = 0; iLong < longDiv - 1; iLong++)
                 {
                     indices.push_back(calcIdx(iLat, iLong));
-                    indices.push_back(calcIdx(iLat + 1, iLong));
-                    indices.push_back(calcIdx(iLat, iLong + 1));
-                    indices.push_back(calcIdx(iLat, iLong + 1));
-                    indices.push_back(calcIdx(iLat + 1, iLong));
-                    indices.push_back(calcIdx(iLat + 1, iLong + 1));
+                    indices.push_back(calcIdx(iLat + 1u, iLong));
+                    indices.push_back(calcIdx(iLat, iLong + 1u));
+                    indices.push_back(calcIdx(iLat, iLong + 1u));
+                    indices.push_back(calcIdx(iLat + 1u, iLong));
+                    indices.push_back(calcIdx(iLat + 1u, iLong + 1u));
                 }
 
                 // wrap band
-                indices.push_back(calcIdx(iLat, longDiv - 1));
-                indices.push_back(calcIdx(iLat + 1, longDiv - 1));
+                indices.push_back(calcIdx(iLat, longDiv - 1u));
+                indices.push_back(calcIdx(iLat + 1u, longDiv - 1u));
                 indices.push_back(calcIdx(iLat, 0));
                 indices.push_back(calcIdx(iLat, 0));
-                indices.push_back(calcIdx(iLat + 1, longDiv - 1));
-                indices.push_back(calcIdx(iLat + 1, 0));
+                indices.push_back(calcIdx(iLat + 1u, longDiv - 1u));
+                indices.push_back(calcIdx(iLat + 1u, 0));
             }
 
             // cap fans
@@ -86,25 +86,25 @@ namespace hw3d::obj::base
                 // north
                 indices.push_back(iNorthPole);
                 indices.push_back(calcIdx(0, iLong));
-                indices.push_back(calcIdx(0, iLong + 1));
+                indices.push_back(calcIdx(0, iLong + 1u));
                 // south
-                indices.push_back(calcIdx(latDiv - 2, iLong + 1));
-                indices.push_back(calcIdx(latDiv - 2, iLong));
+                indices.push_back(calcIdx(latDiv - 2u, iLong + 1u));
+                indices.push_back(calcIdx(latDiv - 2u, iLong));
                 indices.push_back(iSouthPole);
             }
 
             // wrap triangles
             // north
             indices.push_back(iNorthPole);
-            indices.push_back(calcIdx(0, longDiv - 1));
+            indices.push_back(calcIdx(0, longDiv - 1u));
             indices.push_back(calcIdx(0, 0));
 
             // south
-            indices.push_back(calcIdx(latDiv - 2, 0));
-            indices.push_back(calcIdx(latDiv - 2, longDiv - 1));
+            indices.push_back(calcIdx(latDiv - 2u, 0));
+            indices.push_back(calcIdx(latDiv - 2u, longDiv - 1u));
             indices.push_back(iSouthPole);
 
-            return IndexedTriangleList<V>{std::move(vertices), std::move(indices)};
+            return IndexedTriangleList<V>(std::move(vertices), std::move(indices));
         }
 
         template <class V>

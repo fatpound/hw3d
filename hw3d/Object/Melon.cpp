@@ -17,15 +17,15 @@ namespace hw3d::obj
         FATSPACE_UTIL::ViewXM& viewXM)
         :
         r_(rdist(rng)),
+        theta_(adist(rng)),
+        phi_(adist(rng)),
+        chi_(adist(rng)),
         droll_(ddist(rng)),
         dpitch_(ddist(rng)),
         dyaw_(ddist(rng)),
-        dphi_(odist(rng)),
         dtheta_(odist(rng)),
-        dchi_(odist(rng)),
-        chi_(adist(rng)),
-        theta_(adist(rng)),
-        phi_(adist(rng))
+        dphi_(odist(rng)),
+        dchi_(odist(rng))
     {
         if (not DrawableBase::IsStaticInitialized_())
         {

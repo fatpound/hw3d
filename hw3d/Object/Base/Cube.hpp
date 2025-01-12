@@ -30,7 +30,7 @@ namespace hw3d::obj::base
             vertices[6].pos = { -side,  side,  side };
             vertices[7].pos = { side,  side,  side };
 
-            return IndexedTriangleList<V>{
+            return IndexedTriangleList<V>(
                 std::move(vertices),
                 {
                     0,2,1,    2,3,1,
@@ -40,7 +40,7 @@ namespace hw3d::obj::base
                     0,4,2,    2,4,6,
                     0,1,4,    1,5,4
                 }
-            };
+            );
         }
 
         template <class V>

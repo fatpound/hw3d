@@ -8,9 +8,9 @@ namespace hw3d::view
 {
     Camera::Camera(const float max_depth, std::shared_ptr<FATSPACE_IO::Keyboard> pKeyboard, std::shared_ptr<FATSPACE_IO::Mouse> pMouse) noexcept
         :
-        mc_max_depth_{ max_depth },
         mc_pMouse_{ pMouse },
-        mc_pKeyboard_{ pKeyboard }
+        mc_pKeyboard_{ pKeyboard },
+        mc_max_depth_{ max_depth }
     {
 
     }

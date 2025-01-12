@@ -32,7 +32,7 @@ namespace hw3d
 
 
     public:
-        auto IsRunning() const          -> bool;
+        auto IsRunning() const noexcept -> bool;
         auto IsOver()    const noexcept -> bool;
 
         void Go();

@@ -48,7 +48,7 @@ namespace hw3d::obj::base
             for (unsigned short int iLong = 0; iLong < longDiv; iLong++)
             {
                 indices.push_back(iCenter);
-                indices.push_back((iLong + 1) % longDiv);
+                indices.push_back(static_cast<unsigned short int>((iLong + 1u) % longDiv));
                 indices.push_back(iLong);
             }
 
@@ -56,11 +56,11 @@ namespace hw3d::obj::base
             for (unsigned short int iLong = 0; iLong < longDiv; iLong++)
             {
                 indices.push_back(iLong);
-                indices.push_back((iLong + 1) % longDiv);
+                indices.push_back(static_cast<unsigned short int>((iLong + 1) % longDiv));
                 indices.push_back(iTip);
             }
 
-            return IndexedTriangleList<V>{std::move(vertices), std::move(indices)};
+            return IndexedTriangleList<V>(std::move(vertices), std::move(indices));
         }
 
         template <class V>
