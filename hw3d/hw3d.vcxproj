@@ -104,7 +104,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ImguiLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -141,7 +141,7 @@
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ImguiLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -180,7 +180,7 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ImguiLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -219,7 +219,7 @@
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ImguiLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -250,16 +250,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="Object\Box.cpp" />
     <ClCompile Include="View\Camera.cpp" />
     <ClCompile Include="ImguiManager.cpp" />
-    <ClCompile Include="imgui\imgui.cpp" />
-    <ClCompile Include="imgui\imgui_demo.cpp" />
-    <ClCompile Include="imgui\imgui_draw.cpp" />
-    <ClCompile Include="imgui\imgui_impl_dx11.cpp" />
-    <ClCompile Include="imgui\imgui_impl_win32.cpp" />
-    <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Object\Melon.cpp" />
     <ClCompile Include="Object\Pyramid.cpp" />
     <ClCompile Include="wWinMain.cpp" />
@@ -271,14 +264,6 @@
     <ClInclude Include="Object\Base\Cone.hpp" />
     <ClInclude Include="Object\Base\Cube.hpp" />
     <ClInclude Include="ImguiManager.hpp" />
-    <ClInclude Include="imgui\imconfig.h" />
-    <ClInclude Include="imgui\imgui.h" />
-    <ClInclude Include="imgui\imgui_impl_dx11.h" />
-    <ClInclude Include="imgui\imgui_impl_win32.h" />
-    <ClInclude Include="imgui\imgui_internal.h" />
-    <ClInclude Include="imgui\imstb_rectpack.h" />
-    <ClInclude Include="imgui\imstb_textedit.h" />
-    <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="IndexedTriangleList.hpp" />
     <ClInclude Include="Object\Melon.hpp" />
     <ClInclude Include="Object\Base\Plane.hpp" />
@@ -299,6 +284,9 @@
   <ItemGroup>
     <ProjectReference Include="..\FatLibrary\FatLibrary.vcxproj">
       <Project>{1eeae2b9-daa3-45e2-8570-b6ecd8fd9685}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\ImguiLib\ImguiLib.vcxproj">
+      <Project>{a54c4176-d1b5-42b6-8121-b115246c01da}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

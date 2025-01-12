@@ -11,7 +11,7 @@ namespace hw3d
 
         auto operator = (const ImguiManager& src) -> ImguiManager& = delete;
         auto operator = (ImguiManager&& src)      -> ImguiManager& = delete;
-        ~ImguiManager() noexcept;
+        ~ImguiManager() noexcept(false);
 
 
     protected:
