@@ -155,7 +155,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="FatRules.ruleset" />
     <None Include="hw3d.cd" />
   </ItemGroup>
   <ItemGroup>

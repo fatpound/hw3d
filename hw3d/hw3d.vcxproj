@@ -104,7 +104,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -141,7 +141,7 @@
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -180,7 +180,7 @@
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
@@ -219,7 +219,7 @@
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
-      <AdditionalIncludeDirectories>C:\Users\Administrator\source\repos\hw3d\hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hw3d\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <AdditionalOptions>/wd4061 /wd4062 /wd4324 /wd4464 /wd4514 /wd4820 /wd5045 /wd5246 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
@@ -294,7 +294,6 @@
     <Image Include="Resource\fat.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FatRules.ruleset" />
     <None Include="hw3d.cd" />
   </ItemGroup>
   <ItemGroup>
