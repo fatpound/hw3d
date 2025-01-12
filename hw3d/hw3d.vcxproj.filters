@@ -98,6 +98,9 @@
     <ClInclude Include="View\View.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Object.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\hw3d.rc">

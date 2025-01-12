@@ -260,6 +260,7 @@
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="Object\Box.hpp" />
+    <ClInclude Include="Object\Object.hpp" />
     <ClInclude Include="View\Camera.hpp" />
     <ClInclude Include="Object\Base\Cone.hpp" />
     <ClInclude Include="Object\Base\Cube.hpp" />

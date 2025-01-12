@@ -22,6 +22,14 @@ namespace hw3d::obj
             std::uniform_int_distribution<int>& latdist,
             FATSPACE_UTIL::ViewXM& viewXM);
 
+        Melon() = delete;
+        Melon(const Melon& src)     = delete;
+        Melon(Melon&& src) noexcept = delete;
+
+        auto operator = (const Melon& src)     -> Melon& = delete;
+        auto operator = (Melon&& src) noexcept -> Melon& = delete;
+        ~Melon() noexcept = default;
+
 
     public:
         virtual auto GetTransformXM() const noexcept -> DirectX::XMMATRIX override final;

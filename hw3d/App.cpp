@@ -9,11 +9,7 @@
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
 
-#include "Object/Box.hpp"
-#include "Object/Melon.hpp"
-#include "Object/Pyramid.hpp"
-// #include "Object/Sheet.hpp"
-// #include "Object/SkinnedBox.hpp"
+#include "Object/Object.hpp"
 
 #include <cmath>
 
@@ -93,6 +89,14 @@ namespace hw3d
 
             }
 
+            Factory() = delete;
+            Factory(const Factory& src)     = delete;
+            Factory(Factory&& src) noexcept = delete;
+
+            auto operator = (const Factory& src)     -> Factory& = delete;
+            auto operator = (Factory&& src) noexcept -> Factory& = delete;
+            ~Factory() noexcept = default;
+
         public:
             auto operator () () -> std::unique_ptr<FATSPACE_VISUAL::Drawable>
             {
@@ -129,7 +133,7 @@ namespace hw3d
                 //     );
 
                 default:
-                    assert(false && "bad drawable type in factory");
+                    assert(false and "bad drawable type in factory");
                     return {};
                 }
             }

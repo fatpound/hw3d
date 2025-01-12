@@ -20,6 +20,14 @@ namespace hw3d::obj
             std::uniform_real_distribution<float>& rdist,
             FATSPACE_UTIL::ViewXM& viewXM);
 
+        Pyramid() = delete;
+        Pyramid(const Pyramid& src)     = delete;
+        Pyramid(Pyramid&& src) noexcept = delete;
+
+        auto operator = (const Pyramid& src)     -> Pyramid& = delete;
+        auto operator = (Pyramid&& src) noexcept -> Pyramid& = delete;
+        ~Pyramid() noexcept = default;
+
 
     public:
         virtual auto GetTransformXM() const noexcept -> DirectX::XMMATRIX override final;

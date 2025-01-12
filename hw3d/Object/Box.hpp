@@ -21,6 +21,14 @@ namespace hw3d::obj
             std::uniform_real_distribution<float>& bdist,
             FATSPACE_UTIL::ViewXM& viewXM);
 
+        Box() = delete;
+        Box(const Box& src)     = delete;
+        Box(Box&& src) noexcept = delete;
+
+        auto operator = (const Box& src)     -> Box& = delete;
+        auto operator = (Box&& src) noexcept -> Box& = delete;
+        ~Box() noexcept = default;
+
 
     public:
         virtual auto GetTransformXM() const noexcept -> DirectX::XMMATRIX override final;
