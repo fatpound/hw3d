@@ -48,7 +48,7 @@ namespace hw3d
         ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
         ::ImGui_ImplWin32_Init(m_wnd_.GetHandle());
     }
-    App::~App() noexcept
+    App::~App() noexcept(false)
     {
         ::ImGui_ImplWin32_Shutdown();
         ::ImGui_ImplDX11_Shutdown();

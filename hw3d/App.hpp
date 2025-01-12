@@ -28,7 +28,7 @@ namespace hw3d
 
         auto operator = (const App& src) -> App& = delete;
         auto operator = (App&& src)      -> App& = delete;
-        ~App() noexcept;
+        ~App() noexcept(false);
 
 
     public:

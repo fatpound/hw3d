@@ -37,7 +37,7 @@ namespace hw3d::obj::base
                 {
                     vertices.emplace_back();
 
-                    auto v = dx::XMVector3Transform(latBase, dx::XMMatrixRotationZ(longitudeAngle * iLong));
+                    const auto v = dx::XMVector3Transform(latBase, dx::XMMatrixRotationZ(longitudeAngle * iLong));
 
                     dx::XMStoreFloat3(&vertices.back().pos, v);
                 }

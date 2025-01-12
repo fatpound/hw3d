@@ -12,7 +12,7 @@ class IndexedTriangleList
 public:
     IndexedTriangleList() = default;
 
-    IndexedTriangleList(std::vector<T> verts_in, std::vector<unsigned short int> indices_in)
+    IndexedTriangleList(std::vector<T> verts_in, std::vector<unsigned short int> indices_in) noexcept
         :
         vertices_(std::move(verts_in)),
         indices_(std::move(indices_in))
@@ -23,7 +23,7 @@ public:
 
 
 public:
-    void Transform(DirectX::FXMMATRIX matrix)
+    void Transform(DirectX::FXMMATRIX matrix) noexcept
     {
         for (auto& v : vertices_)
         {
