@@ -37,15 +37,10 @@ namespace hw3d
         :
         m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"The FatBox " + std::to_wstring(s_game_id_), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_gfx_(m_wnd_.GetHandle(), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
+        m_imgui_mgr_(m_wnd_.GetHandle(), m_gfx_.GetDevice(), m_gfx_.GetImmediateContext()),
         m_camera_(100.0f, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
-        ::ImGui_ImplWin32_Init(m_wnd_.GetHandle());
-        ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
-    }
-    App::~App() noexcept(false)
-    {
-        ::ImGui_ImplWin32_Shutdown();
-        ::ImGui_ImplDX11_Shutdown();
+        
     }
 
     auto App::IsRunning() const noexcept -> bool
@@ -63,15 +58,11 @@ namespace hw3d
 
         while (IsRunning())
         {
-            ::ImGui_ImplDX11_NewFrame();
-            ::ImGui_ImplWin32_NewFrame();
-            ::ImGui::NewFrame();
-
             m_gfx_.BeginFrame<>();
-            DoFrame_();
 
-            ::ImGui::Render();
-            ::ImGui_ImplDX11_RenderDrawData(::ImGui::GetDrawData());
+            PrepareImgui_();
+            DoFrame_();
+            RenderImgui_();
 
             m_gfx_.EndFrame<>();
         }
@@ -171,6 +162,17 @@ namespace hw3d
                 40.0f
             )
         );
+    }
+    void App::PrepareImgui_() const
+    {
+        ::ImGui_ImplDX11_NewFrame();
+        ::ImGui_ImplWin32_NewFrame();
+        ::ImGui::NewFrame();
+    }
+    void App::RenderImgui_() const
+    {
+        ::ImGui::Render();
+        ::ImGui_ImplDX11_RenderDrawData(::ImGui::GetDrawData());
     }
     void App::DoFrame_()
     {

@@ -28,7 +28,7 @@ namespace hw3d
 
         auto operator = (const App& src) -> App& = delete;
         auto operator = (App&& src)      -> App& = delete;
-        ~App() noexcept(false);
+        ~App() noexcept = default;
 
 
     public:
@@ -43,7 +43,8 @@ namespace hw3d
 
     private:
         void Init_();
-
+        void PrepareImgui_() const;
+        void RenderImgui_() const;
         void DoFrame_();
 
 
@@ -52,10 +53,10 @@ namespace hw3d
 
 
     private:
-        ImguiManager m_imgui_;
-
         FATSPACE_WIN32::WindowEx m_wnd_;
         FATSPACE_D3D11::Graphics<> m_gfx_;
+
+        ImguiManager m_imgui_mgr_;
 
         view::Camera m_camera_;
 
