@@ -39,8 +39,8 @@ namespace hw3d
         m_gfx_(m_wnd_.GetHandle(), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_camera_(100.0f, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
-        ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
         ::ImGui_ImplWin32_Init(m_wnd_.GetHandle());
+        ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
     }
     App::~App() noexcept(false)
     {
