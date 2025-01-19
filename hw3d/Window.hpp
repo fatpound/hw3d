@@ -207,7 +207,7 @@ namespace hw3d
             WindowEx::Process_WM_MOUSEWHEEL_(delta);
         }
 
-        __forceinline void Process_WM_KILLFOCUS_ ()
+        __forceinline void Process_WM_KILLFOCUS_ () noexcept
         {
             WindowEx::Process_WM_KILLFOCUS_();
         }
@@ -246,7 +246,7 @@ namespace hw3d
 
             WindowEx::Process_WM_CHAR_(wParam);
         }
-        __forceinline void Process_WM_SYSCOMMAND_(const WPARAM wParam)
+        __forceinline void Process_WM_SYSCOMMAND_(const WPARAM wParam) noexcept
         {
             WindowEx::Process_WM_SYSCOMMAND_(wParam);
         }

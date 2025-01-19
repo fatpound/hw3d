@@ -11,7 +11,7 @@ namespace hw3d
         ::ImGui::CreateContext();
         ::ImGui::StyleColorsDark();
     }
-    ImguiManager::~ImguiManager()
+    ImguiManager::~ImguiManager() noexcept(false)
     {
         ::ImGui::DestroyContext();
     }

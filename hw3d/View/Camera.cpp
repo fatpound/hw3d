@@ -50,7 +50,7 @@ namespace hw3d::view
         m_roll_  = 0.0f;
     }
 
-    void Camera::SpawnControlImguiWindow() noexcept
+    void Camera::SpawnControlImguiWindow()
     {
         if (::ImGui::Begin("Camera"))
         {

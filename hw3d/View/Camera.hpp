@@ -26,7 +26,7 @@ namespace hw3d::view
         void Update() noexcept;
         void Reset() noexcept;
 
-        void SpawnControlImguiWindow() noexcept;
+        void SpawnControlImguiWindow();
 
 
     protected:
