@@ -37,10 +37,13 @@ namespace hw3d
         :
         m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"The FatBox " + std::to_wstring(s_game_id_), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_gfx_(m_wnd_.GetHandle(), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
-        m_imgui_mgr_(m_wnd_.GetHandle(), m_gfx_.GetDevice(), m_gfx_.GetImmediateContext()),
         m_camera_(100.0f, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
-        
+        ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
+    }
+    App::~App()
+    {
+        ::ImGui_ImplDX11_Shutdown();
     }
 
     auto App::IsRunning() const noexcept -> bool
@@ -177,7 +180,7 @@ namespace hw3d
     void App::DoFrame_()
     {
         m_timer_.Stop();
-        const auto& deltaTime = m_timer_.GetElapsed_s();
+        const auto& deltaTime = m_timer_.GetElapsed_s() * m_simulation_speed_;
         m_timer_.Start();
 
         m_camera_.Update();

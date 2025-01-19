@@ -3,12 +3,12 @@
 #include <FatNamespaces.hpp>
 
 #include <Util/Timer.hpp>
-#include <Win32_/WindowEx.hpp>
 #include <Win32_/D3D11/Graphics.hpp>
 
 #include "View/Camera.hpp"
 
 #include "ImguiManager.hpp"
+#include "Window.hpp"
 
 namespace fatpound::win32::d3d11::visual
 {
@@ -28,7 +28,7 @@ namespace hw3d
 
         auto operator = (const App& src) -> App& = delete;
         auto operator = (App&& src)      -> App& = delete;
-        ~App() noexcept = default;
+        ~App();
 
 
     public:
@@ -53,10 +53,11 @@ namespace hw3d
 
 
     private:
-        FATSPACE_WIN32::WindowEx m_wnd_;
-        FATSPACE_D3D11::Graphics<> m_gfx_;
-
         ImguiManager m_imgui_mgr_;
+
+        Window m_wnd_;
+
+        FATSPACE_D3D11::Graphics<> m_gfx_;
 
         view::Camera m_camera_;
 

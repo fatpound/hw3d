@@ -101,6 +101,9 @@
     <ClInclude Include="Object\Object.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Window.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\hw3d.rc">

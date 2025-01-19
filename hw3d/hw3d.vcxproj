@@ -272,6 +272,7 @@
     <ClInclude Include="Object\Pyramid.hpp" />
     <ClInclude Include="Object\Base\Sphere.hpp" />
     <ClInclude Include="View\View.hpp" />
+    <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\hw3d.rc" />

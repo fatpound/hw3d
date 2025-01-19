@@ -9,9 +9,7 @@ namespace hw3d
     class ImguiManager final
     {
     public:
-        ImguiManager(const HWND hWnd, ID3D11Device* const pDevice, ID3D11DeviceContext* const pImmediateContext);
-
-        ImguiManager() = delete;
+        ImguiManager();
         ImguiManager(const ImguiManager& src) = delete;
         ImguiManager(ImguiManager&& src) = delete;
 
