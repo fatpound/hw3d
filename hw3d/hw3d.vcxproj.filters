@@ -116,12 +116,12 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="hw3d.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <FxCompile Include="Shader\VSColorBlend.hlsl" />
     <FxCompile Include="Shader\PSColorBlend.hlsl" />
     <FxCompile Include="Shader\PSColorIndex.hlsl" />
     <FxCompile Include="Shader\VSColorIndex.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hw3d.cd" />
   </ItemGroup>
 </Project>

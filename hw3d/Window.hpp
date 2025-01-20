@@ -15,16 +15,16 @@ namespace hw3d
     {
     public:
         explicit Window(
-            std::shared_ptr<FATSPACE_WIN32::WndClassEx>             pWndClassEx,
-            const std::wstring                                      title,
-            const FATSPACE_UTIL::ScreenSizeInfo                     clientDimensions,
-            std::shared_ptr<FATSPACE_IO::Mouse>                     pMouse    = std::make_shared<FATSPACE_IO::Mouse>(),
-            std::shared_ptr<FATSPACE_IO::Keyboard>                  pKeyboard = std::make_shared<FATSPACE_IO::Keyboard>(),
-            const std::optional<::DirectX::XMINT2>                  position  = std::nullopt)
+            std::shared_ptr<FATSPACE_WIN32::WndClassEx> pWndClassEx,
+            const std::wstring                          title,
+            const FATSPACE_UTIL::ScreenSizeInfo         clientDimensions,
+            std::shared_ptr<FATSPACE_IO::Mouse>         pMouse    = std::make_shared<FATSPACE_IO::Mouse>(),
+            std::shared_ptr<FATSPACE_IO::Keyboard>      pKeyboard = std::make_shared<FATSPACE_IO::Keyboard>(),
+            const std::optional<::DirectX::XMINT2>      position  = std::nullopt)
             :
             WindowEx(std::move(pWndClassEx), title, clientDimensions, std::move(pMouse), std::move(pKeyboard), position)
         {
-            ::ImGui_ImplWin32_Init(m_hWnd_);
+            static_cast<bool>(::ImGui_ImplWin32_Init(m_hWnd_));
         }
 
         explicit Window() = delete;
