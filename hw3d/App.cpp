@@ -27,8 +27,6 @@
 
 namespace dx = DirectX;
 
-using FATSPACE_UTIL::Color;
-using FATSPACE_UTIL::Surface;
 using FATSPACE_UTIL::ScreenSizeInfo;
 
 namespace hw3d
@@ -37,7 +35,7 @@ namespace hw3d
         :
         m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"The FatBox " + std::to_wstring(s_game_id_), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_gfx_(m_wnd_.GetHandle(), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
-        m_camera_(100.0f, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
+        m_camera_(m_far_z_, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
         ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
     }
@@ -162,7 +160,7 @@ namespace hw3d
                 1.0f,
                 m_wnd_.GetClientHeight<float>() / m_wnd_.GetClientWidth<float>(), // 1 / Aspect Ratio
                 0.5f,
-                40.0f
+                m_far_z_
             )
         );
     }
@@ -172,31 +170,40 @@ namespace hw3d
         ::ImGui_ImplWin32_NewFrame();
         ::ImGui::NewFrame();
     }
-    void App::RenderImgui_() const
+    void App::DrawObjects_()
     {
-        ::ImGui::Render();
-        ::ImGui_ImplDX11_RenderDrawData(::ImGui::GetDrawData());
-    }
-    void App::DoFrame_()
-    {
-        m_timer_.Stop();
-        const auto& deltaTime = m_timer_.GetElapsed_s() * m_simulation_speed_;
-        m_timer_.Start();
-
-        m_camera_.Update();
-
-        m_viewXM_.SetCameraXM(m_camera_.GetMatrix());
-
         auto* const pImmediateContext = m_gfx_.GetImmediateContext();
 
         for (auto& obj : m_drawables_)
         {
-            obj->Update(m_wnd_.m_pKeyboard->KeyIsPressed(VK_SPACE) ? 0.0f : deltaTime);
+            obj->Update(m_wnd_.m_pKeyboard->KeyIsPressed(VK_SPACE) ? 0.0f : m_delta_time_);
             obj->Draw(pImmediateContext);
         }
+    }
+    void App::DrawImguiCamera_()
+    {
+        if (::ImGui::Begin("Camera"))
+        {
+            ::ImGui::Text("Position");
+            ::ImGui::SliderFloat("R",     &m_camera_.m_r_,        0.1f, m_far_z_, "%.1f");
+            ::ImGui::SliderAngle("Theta", &m_camera_.m_theta_, -180.0f, 180.0f);
+            ::ImGui::SliderAngle("Phi",   &m_camera_.m_phi_,    -89.0f,  89.0f);
+                                                                 
+            ::ImGui::Text("Orientation");                        
+            ::ImGui::SliderAngle("Roll",  &m_camera_.m_roll_,  -180.0f, 180.0f);
+            ::ImGui::SliderAngle("Pitch", &m_camera_.m_pitch_, -180.0f, 180.0f);
+            ::ImGui::SliderAngle("Yaw",   &m_camera_.m_yaw_,   -180.0f, 180.0f);
 
-        m_camera_.SpawnControlImguiWindow();
+            if (::ImGui::Button("Reset"))
+            {
+                m_camera_.Reset();
+            }
+        }
 
+        ::ImGui::End();
+    }
+    void App::DrawImguiSimulation_()
+    {
         if (::ImGui::Begin("Simulation Speed"))
         {
             ::ImGui::SliderFloat("Speed Factor", &m_simulation_speed_, 0.0f, 5.0f);
@@ -205,5 +212,23 @@ namespace hw3d
         }
 
         ::ImGui::End();
+    }
+    void App::RenderImgui_() const
+    {
+        ::ImGui::Render();
+        ::ImGui_ImplDX11_RenderDrawData(::ImGui::GetDrawData());
+    }
+
+    void App::DoFrame_()
+    {
+        m_viewXM_.SetCameraXM(m_camera_.GetMatrix());
+
+        m_timer_.Stop();
+        m_delta_time_ = m_timer_.GetElapsed_s() * m_simulation_speed_;
+        m_timer_.Start();
+
+		DrawObjects_();
+        DrawImguiCamera_();
+        DrawImguiSimulation_();
     }
 }

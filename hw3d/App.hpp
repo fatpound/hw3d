@@ -10,11 +10,6 @@
 #include "ImguiManager.hpp"
 #include "Window.hpp"
 
-namespace fatpound::win32::d3d11::visual
-{
-    class Drawable;
-}
-
 namespace hw3d
 {
     class App final
@@ -44,7 +39,11 @@ namespace hw3d
     private:
         void Init_();
         void PrepareImgui_() const;
+        void DrawObjects_();
+        void DrawImguiCamera_();
+        void DrawImguiSimulation_();
         void RenderImgui_() const;
+
         void DoFrame_();
 
 
@@ -59,13 +58,15 @@ namespace hw3d
 
         FATSPACE_D3D11::Graphics<> m_gfx_;
 
+		float m_delta_time_       =   0.0f;
+        float m_simulation_speed_ =   1.0f;
+		const float m_far_z_      = 100.0f; // far clipping plane (const for now)
+
         view::Camera m_camera_;
 
         FATSPACE_UTIL::ViewXM m_viewXM_;
         FATSPACE_UTIL::Timer m_timer_;
 
         std::vector<std::unique_ptr<FATSPACE_VISUAL::Drawable>> m_drawables_;
-
-        float m_simulation_speed_ = 1.0f;
     };
 }

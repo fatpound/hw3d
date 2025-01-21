@@ -4,10 +4,17 @@
 
 #include <Win32_/D3D11/Graphics.hpp>
 
+namespace hw3d
+{
+    class App;
+}
+
 namespace hw3d::view
 {
     class Camera final
     {
+        friend ::hw3d::App;
+
     public:
         explicit Camera(const float max_depth, std::shared_ptr<FATSPACE_IO::Keyboard> pKeyboard, std::shared_ptr<FATSPACE_IO::Mouse> pMouse) noexcept;
 
@@ -23,17 +30,28 @@ namespace hw3d::view
     public:
         auto GetMatrix() const noexcept -> ::DirectX::XMMATRIX;
 
-        void Update() noexcept;
-        void Reset() noexcept;
+        auto GetR    () const noexcept -> float;
+		auto GetTheta() const noexcept -> float;
+		auto GetPhi  () const noexcept -> float;
+		auto GetPitch() const noexcept -> float;
+		auto GetYaw  () const noexcept -> float;
+		auto GetRoll () const noexcept -> float;
 
-        void SpawnControlImguiWindow();
+		void SetR    (const float r)     noexcept;
+		void SetTheta(const float theta) noexcept;
+		void SetPhi  (const float phi)   noexcept;
+		void SetPitch(const float pitch) noexcept;
+		void SetYaw  (const float yaw)   noexcept;
+		void SetRoll (const float roll)  noexcept;
+
+        void Reset() noexcept;
 
 
     protected:
 
 
     private:
-        const std::shared_ptr<FATSPACE_IO::Mouse> mc_pMouse_;
+        const std::shared_ptr<FATSPACE_IO::Mouse>    mc_pMouse_;
         const std::shared_ptr<FATSPACE_IO::Keyboard> mc_pKeyboard_;
 
         const float mc_max_depth_;
