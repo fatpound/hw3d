@@ -50,10 +50,10 @@ namespace hw3d::view
     void Camera::Reset() noexcept
     {
         m_r_     = 20.0f;
-        m_theta_ = 0.0f;
-        m_phi_   = 0.0f;
-        m_pitch_ = 0.0f;
-        m_yaw_   = 0.0f;
-        m_roll_  = 0.0f;
+        m_theta_ =  0.0f;
+        m_phi_   =  0.0f;
+        m_pitch_ =  0.0f;
+        m_yaw_   =  0.0f;
+        m_roll_  =  0.0f;
     }
 }
