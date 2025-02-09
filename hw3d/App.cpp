@@ -151,9 +151,9 @@ namespace hw3d
             App& app_;
         };
 
-        m_drawables_.reserve(App::scx_DrawableCount_);
+        m_drawables_.reserve(scx_DrawableCount_);
 
-        std::generate_n(std::back_inserter(m_drawables_), App::scx_DrawableCount_, Factory{ m_gfx_.GetDevice(), *this});
+        std::generate_n(std::back_inserter(m_drawables_), scx_DrawableCount_, Factory{ m_gfx_.GetDevice(), *this});
 
         m_viewXM_.SetProjectionXM(
             dx::XMMatrixPerspectiveLH(
