@@ -27,14 +27,14 @@
 
 namespace dx = DirectX;
 
-using FATSPACE_UTIL::ScreenSizeInfo;
+using FATSPACE_UTIL_GFX::SizePack;
 
 namespace hw3d
 {
     App::App()
         :
-        m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"The FatBox " + std::to_wstring(s_game_id_), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
-        m_gfx_(m_wnd_.GetHandle(), ScreenSizeInfo{ SCREEN_WIDTH, SCREEN_HEIGHT }),
+        m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"The FatBox " + std::to_wstring(s_game_id_), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
+        m_gfx_(m_wnd_.GetHandle(), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_camera_(m_far_z_, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
         ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
