@@ -281,9 +281,6 @@
     <Image Include="Resource\fat.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FatLibrary\FatLibrary.vcxproj">
-      <Project>{1eeae2b9-daa3-45e2-8570-b6ecd8fd9685}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\ImguiLib\ImguiLib.vcxproj">
       <Project>{a54c4176-d1b5-42b6-8121-b115246c01da}</Project>
     </ProjectReference>
