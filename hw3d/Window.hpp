@@ -35,8 +35,6 @@ namespace hw3d
         auto operator = (Window&& src)      -> Window& = delete;
         virtual ~Window() final
         {
-            m_pImio_ = nullptr;
-
             ::ImGui_ImplWin32_Shutdown();
         }
 
@@ -51,8 +49,6 @@ namespace hw3d
             {
                 return static_cast<LRESULT>(true);
             }
-
-            m_pImio_ = &::ImGui::GetIO();
 
             switch (msg)
             {
@@ -134,9 +130,9 @@ namespace hw3d
 #pragma warning (push)
 #pragma warning (disable : 26434)
     private:
-        __forceinline void Process_WM_MOUSEMOVE_(const WPARAM wParam, const LPARAM lParam)
+        __forceinline void Process_WM_MOUSEMOVE_(const WPARAM& wParam, const LPARAM& lParam)
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -145,7 +141,7 @@ namespace hw3d
         }
         __forceinline void Process_WM_LBUTTONDOWN_()
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -154,7 +150,7 @@ namespace hw3d
         }
         __forceinline void Process_WM_LBUTTONUP_  ()
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -163,7 +159,7 @@ namespace hw3d
         }
         __forceinline void Process_WM_RBUTTONDOWN_()
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -172,7 +168,7 @@ namespace hw3d
         }
         __forceinline void Process_WM_RBUTTONUP_  ()
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -181,7 +177,7 @@ namespace hw3d
         }
         __forceinline void Process_WM_MBUTTONDOWN_()
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -190,16 +186,16 @@ namespace hw3d
         }
         __forceinline void Process_WM_MBUTTONUP_  ()
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
 
             WindowEx::Process_WM_MBUTTONUP_();
         }
-        __forceinline void Process_WM_MOUSEWHEEL_(const int delta)
+        __forceinline void Process_WM_MOUSEWHEEL_(const int& delta)
         {
-            if (m_pImio_->WantCaptureMouse)
+            if (::ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -211,49 +207,45 @@ namespace hw3d
         {
             WindowEx::Process_WM_KILLFOCUS_();
         }
-        __forceinline void Process_WM_KEYDOWN_   (const WPARAM wParam, const LPARAM lParam)
+        __forceinline void Process_WM_KEYDOWN_   (const WPARAM& wParam, const LPARAM& lParam)
         {
-            if (m_pImio_->WantCaptureKeyboard)
+            if (::ImGui::GetIO().WantCaptureKeyboard)
             {
                 return;
             }
 
             Process_WM_SYSKEYDOWN_(wParam, lParam);
         }
-        __forceinline void Process_WM_SYSKEYDOWN_(const WPARAM wParam, const LPARAM lParam)
+        __forceinline void Process_WM_SYSKEYDOWN_(const WPARAM& wParam, const LPARAM& lParam)
         {
             WindowEx::Process_WM_SYSKEYDOWN_(wParam, lParam);
         }
-        __forceinline void Process_WM_KEYUP_     (const WPARAM wParam)
+        __forceinline void Process_WM_KEYUP_     (const WPARAM& wParam)
         {
-            if (m_pImio_->WantCaptureKeyboard)
+            if (::ImGui::GetIO().WantCaptureKeyboard)
             {
                 return;
             }
 
             Process_WM_SYSKEYUP_(wParam);
         }
-        __forceinline void Process_WM_SYSKEYUP_  (const WPARAM wParam)
+        __forceinline void Process_WM_SYSKEYUP_  (const WPARAM& wParam)
         {
             WindowEx::Process_WM_SYSKEYUP_(wParam);
         }
-        __forceinline void Process_WM_CHAR_      (const WPARAM wParam)
+        __forceinline void Process_WM_CHAR_      (const WPARAM& wParam)
         {
-            if (m_pImio_->WantCaptureKeyboard)
+            if (::ImGui::GetIO().WantCaptureKeyboard)
             {
                 return;
             }
 
             WindowEx::Process_WM_CHAR_(wParam);
         }
-        __forceinline void Process_WM_SYSCOMMAND_(const WPARAM wParam) noexcept
+        __forceinline void Process_WM_SYSCOMMAND_(const WPARAM& wParam) noexcept
         {
             WindowEx::Process_WM_SYSCOMMAND_(wParam);
         }
 #pragma warning (pop)
-
-
-    private:
-        const ::ImGuiIO* m_pImio_{};
     };
 }
