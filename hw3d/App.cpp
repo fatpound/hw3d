@@ -82,13 +82,13 @@ namespace hw3d
 
             }
 
-            Factory() = delete;
-            Factory(const Factory& src)     = delete;
-            Factory(Factory&& src) noexcept = delete;
+            Factory()                   = delete;
+            Factory(const Factory&)     = delete;
+            Factory(Factory&&) noexcept = delete;
 
-            auto operator = (const Factory& src)     -> Factory& = delete;
-            auto operator = (Factory&& src) noexcept -> Factory& = delete;
-            ~Factory() noexcept = default;
+            auto operator = (const Factory&)     -> Factory& = delete;
+            auto operator = (Factory&&) noexcept -> Factory& = delete;
+            ~Factory() noexcept                              = default;
 
         public:
             auto operator () () -> std::unique_ptr<FATSPACE_VISUAL::Drawable>
