@@ -28,7 +28,7 @@ namespace hw3d::view
 
 
     public:
-        auto GetMatrix() const noexcept -> ::DirectX::XMMATRIX;
+        auto GetMatrix() const noexcept -> DirectX::XMMATRIX;
 
         auto GetR    () const noexcept -> float;
 		auto GetTheta() const noexcept -> float;
