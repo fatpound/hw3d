@@ -37,7 +37,7 @@ namespace hw3d
 {
     App::App()
         :
-        m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"The FatBox " + std::to_wstring(s_game_id_), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
+        m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"fat hw3d " + std::to_wstring(s_game_id_), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_gfx_(m_wnd_.GetHandle(), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_camera_(m_far_z_, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
