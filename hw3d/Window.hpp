@@ -5,8 +5,11 @@
 
 #include <Win32_/WindowEx.hpp>
 
+#pragma warning (push)
+#pragma warning (disable : FAT_EXTERNAL_WARNINGS)
 #include <imgui.h>
 #include <imgui_impl_win32.h>
+#pragma warning (pop)
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -28,12 +31,12 @@ namespace hw3d
             static_cast<bool>(::ImGui_ImplWin32_Init(m_hWnd_));
         }
 
-        explicit Window()              = delete;
-        explicit Window(const Window&) = delete;
-        explicit Window(Window&&)      = delete;
+        explicit Window()                  = delete;
+        explicit Window(const Window&)     = delete;
+        explicit Window(Window&&) noexcept = delete;
 
-        auto operator = (const Window&) -> Window& = delete;
-        auto operator = (Window&&)      -> Window& = delete;
+        auto operator = (const Window&)     -> Window& = delete;
+        auto operator = (Window&&) noexcept -> Window& = delete;
         virtual ~Window() override final
         {
             ::ImGui_ImplWin32_Shutdown();

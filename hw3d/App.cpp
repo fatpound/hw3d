@@ -1,13 +1,17 @@
 #include "App.hpp"
 
+#include <FatDefines.hpp>
 #include <FatWin32.hpp>
 
 #include <Math/Math.hpp>
 #include <Win32_/GDI_Plus/Manager.hpp>
 
+#pragma warning (push)
+#pragma warning (disable : FAT_EXTERNAL_WARNINGS)
 #include <imgui.h>
 #include <imgui_impl_dx11.h>
 #include <imgui_impl_win32.h>
+#pragma warning (pop)
 
 #include "Object/Object.hpp"
 

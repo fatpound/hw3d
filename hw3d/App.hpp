@@ -18,11 +18,11 @@ namespace hw3d
 
     public:
         App();
-        App(const App& src) = delete;
-        App(App&& src) = delete;
+        App(const App&)     = delete;
+        App(App&&) noexcept = delete;
 
-        auto operator = (const App& src) -> App& = delete;
-        auto operator = (App&& src)      -> App& = delete;
+        auto operator = (const App&)     -> App& = delete;
+        auto operator = (App&&) noexcept -> App& = delete;
         ~App();
 
 

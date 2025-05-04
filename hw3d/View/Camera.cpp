@@ -1,6 +1,11 @@
 #include "Camera.hpp"
 
+#include <FatDefines.hpp>
+
+#pragma warning (push)
+#pragma warning (disable : FAT_EXTERNAL_WARNINGS)
 #include <imgui.h>
+#pragma warning (pop)
 
 namespace dx = DirectX;
 
