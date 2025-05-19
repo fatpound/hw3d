@@ -1,7 +1,7 @@
 #pragma once
 
 #include <FatNamespaces.hpp>
-#include <FatDefines.hpp>
+#include <FatMacros.hpp>
 
 #include <Win32_/WindowEx.hpp>
 

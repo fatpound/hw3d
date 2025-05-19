@@ -1,6 +1,6 @@
 #include "Camera.hpp"
 
-#include <FatDefines.hpp>
+#include <FatMacros.hpp>
 
 #pragma warning (push)
 #pragma warning (disable : FAT_EXTERNAL_WARNINGS)

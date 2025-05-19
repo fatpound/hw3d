@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-#include <FatDefines.hpp>
+#include <FatMacros.hpp>
 #include <FatWin32.hpp>
 
 #include <Math/Math.hpp>
