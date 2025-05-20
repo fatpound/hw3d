@@ -2,7 +2,7 @@
 
 #include <FatNamespaces.hpp>
 
-#include <Util/ViewXM.hpp>
+#include <Utility/ViewXM.hpp>
 #include <Win32_/D3D11/Graphics.hpp>
 
 #include <random>
@@ -20,7 +20,7 @@ namespace hw3d::obj
             std::uniform_real_distribution<float>& rdist,
             std::uniform_int_distribution<int>& longdist,
             std::uniform_int_distribution<int>& latdist,
-            FATSPACE_UTIL::ViewXM& viewXM);
+            FATSPACE_UTILITY::ViewXM& viewXM);
 
         Melon() = delete;
         Melon(const Melon& src)     = delete;

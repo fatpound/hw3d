@@ -2,7 +2,7 @@
 
 #include <FatNamespaces.hpp>
 
-#include <Util/ViewXM.hpp>
+#include <Utility/ViewXM.hpp>
 #include <Win32_/D3D11/Graphics.hpp>
 
 #include <random>
@@ -19,7 +19,7 @@ namespace hw3d::obj
             std::uniform_real_distribution<float>& odist,
             std::uniform_real_distribution<float>& rdist,
             std::uniform_real_distribution<float>& bdist,
-            FATSPACE_UTIL::ViewXM& viewXM);
+            FATSPACE_UTILITY::ViewXM& viewXM);
 
         Box() = delete;
         Box(const Box& src)     = delete;

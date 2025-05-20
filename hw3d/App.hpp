@@ -2,7 +2,7 @@
 
 #include <FatNamespaces.hpp>
 
-#include <Util/Timer.hpp>
+#include <Utility/Timer.hpp>
 #include <Win32_/D3D11/Graphics.hpp>
 
 #include "View/Camera.hpp"
@@ -64,8 +64,8 @@ namespace hw3d
 
         view::Camera m_camera_;
 
-        FATSPACE_UTIL::ViewXM m_viewXM_;
-        FATSPACE_UTIL::Timer m_timer_;
+        FATSPACE_UTILITY::ViewXM m_viewXM_;
+        FATSPACE_UTILITY::Timer m_timer_;
 
         std::vector<std::unique_ptr<FATSPACE_VISUAL::Drawable>> m_drawables_;
     };

@@ -14,7 +14,7 @@ namespace hw3d::obj
         std::uniform_real_distribution<float>& rdist,
         std::uniform_int_distribution<int>& longdist,
         std::uniform_int_distribution<int>& latdist,
-        FATSPACE_UTIL::ViewXM& viewXM)
+        FATSPACE_UTILITY::ViewXM& viewXM)
         :
         r_(rdist(rng)),
         theta_(adist(rng)),
