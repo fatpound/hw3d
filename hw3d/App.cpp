@@ -31,7 +31,7 @@
 
 namespace dx = DirectX;
 
-using FATSPACE_UTIL_GFX::SizePack;
+using FATSPACE_UTILITY_GFX::SizePack;
 
 namespace hw3d
 {
@@ -95,7 +95,7 @@ namespace hw3d
             ~Factory() noexcept                              = default;
 
         public:
-            auto operator () () -> std::unique_ptr<FATSPACE_VISUAL::Drawable>
+            auto operator () () -> std::unique_ptr<fatpound::win32::d3d11::visual::Drawable>
             {
                 switch (typedist_(rng_))
                 {

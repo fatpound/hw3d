@@ -67,6 +67,6 @@ namespace hw3d
         FATSPACE_UTILITY::ViewXM m_viewXM_;
         FATSPACE_UTILITY::Timer m_timer_;
 
-        std::vector<std::unique_ptr<FATSPACE_VISUAL::Drawable>> m_drawables_;
+        std::vector<std::unique_ptr<fatpound::win32::d3d11::visual::Drawable>> m_drawables_;
     };
 }

@@ -9,7 +9,7 @@
 
 namespace hw3d::obj
 {
-    class Melon final : public FATSPACE_VISUAL::DrawableBase<Melon>
+    class Melon final : public fatpound::win32::d3d11::visual::DrawableBase<Melon>
     {
     public:
         Melon(ID3D11Device* const pDevice,
@@ -34,7 +34,7 @@ namespace hw3d::obj
     public:
         virtual auto GetTransformXM() const noexcept -> DirectX::XMMATRIX override final;
 
-        virtual void Update(float deltaTime) noexcept override final;
+        virtual void Update(const float deltaTime) noexcept override final;
 
 
     protected:

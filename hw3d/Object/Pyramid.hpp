@@ -9,7 +9,7 @@
 
 namespace hw3d::obj
 {
-    class Pyramid final : public FATSPACE_VISUAL::DrawableBase<Pyramid>
+    class Pyramid final : public fatpound::win32::d3d11::visual::DrawableBase<Pyramid>
     {
     public:
         Pyramid(ID3D11Device* const pDevice,

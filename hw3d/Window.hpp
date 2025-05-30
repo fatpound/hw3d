@@ -21,7 +21,7 @@ namespace hw3d
         explicit Window(
             std::shared_ptr<FATSPACE_WIN32::WndClassEx> pWndClassEx,
             const std::wstring                          title,
-            const FATSPACE_UTIL_GFX::SizePack           clientDimensions,
+            const FATSPACE_UTILITY_GFX::SizePack        clientDimensions,
             std::shared_ptr<FATSPACE_IO::Mouse>         pMouse            = std::make_shared<FATSPACE_IO::Mouse>(),
             std::shared_ptr<FATSPACE_IO::Keyboard>      pKeyboard         = std::make_shared<FATSPACE_IO::Keyboard>(),
             const std::optional<DirectX::XMINT2>        position          = std::nullopt)

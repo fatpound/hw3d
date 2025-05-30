@@ -29,11 +29,11 @@ namespace hw3d::obj
     {
         if (not DrawableBase::IsStaticInitialized_())
         {
-            auto pvs = std::make_unique<FATSPACE_PIPELINE_ELEMENT::VertexShader>(pDevice, L"VSColorIndex.cso");
+            auto pvs = std::make_unique<fatpound::win32::d3d11::pipeline::VertexShader>(pDevice, L"VSColorIndex.cso");
             auto pvsbc = pvs->GetBytecode();
 
-            DrawableBase::AddStaticBind_(std::move(pvs));
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::PixelShader>(pDevice, L"PSColorIndex.cso"));
+            DrawableBase::AddStaticBind_(std::move<>(pvs));
+            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::PixelShader>(pDevice, L"PSColorIndex.cso"));
 
             struct PixelShaderConstants final
             {
@@ -61,15 +61,15 @@ namespace hw3d::obj
                 }
             };
 
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_RESOURCE::PixelCBuffer<PixelShaderConstants>>(pDevice, cb2));
+            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::PixelCBuffer<PixelShaderConstants>>(pDevice, cb2));
 
             const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
             {
                 { "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 }
             };
 
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::InputLayout>(pDevice, ied, pvsbc));
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::InputLayout>(pDevice, ied, pvsbc));
+            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
         }
 
         struct Vertex final
@@ -81,25 +81,25 @@ namespace hw3d::obj
 
         model.Transform(dx::XMMatrixScaling(1.0f, 1.0f, 1.2f)); // deforming a little bit
 
-        AddBind_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::VertexBuffer>(pDevice, model.vertices_));
-        AddIndexBuffer_(std::make_unique<FATSPACE_PIPELINE_ELEMENT::IndexBuffer>(pDevice, model.indices_));
-        AddBind_(std::make_unique<FATSPACE_PIPELINE_RESOURCE::TransformCBuffer<Melon>>(pDevice, *this, viewXM));
+        AddBind_(std::make_unique<fatpound::win32::d3d11::pipeline::VertexBuffer>(pDevice, model.vertices_));
+        AddIndexBuffer_(std::make_unique<fatpound::win32::d3d11::pipeline::IndexBuffer>(pDevice, model.indices_));
+        AddBind_(std::make_unique<fatpound::win32::d3d11::pipeline::TransformCBuffer<Melon>>(pDevice, *this, viewXM));
     }
 
-    void Melon::Update(float deltaTime) noexcept
+    void Melon::Update(const float deltaTime) noexcept
     {
-        roll_ += droll_ * deltaTime;
+        roll_  += droll_  * deltaTime;
         pitch_ += dpitch_ * deltaTime;
-        yaw_ += dyaw_ * deltaTime;
+        yaw_   += dyaw_   * deltaTime;
         theta_ += dtheta_ * deltaTime;
-        phi_ += dphi_ * deltaTime;
-        chi_ += dchi_ * deltaTime;
+        phi_   += dphi_   * deltaTime;
+        chi_   += dchi_   * deltaTime;
     }
 
     auto Melon::GetTransformXM() const noexcept -> dx::XMMATRIX
     {
-        return dx::XMMatrixRotationRollPitchYaw(pitch_, yaw_, roll_) *
-            dx::XMMatrixTranslation(r_, 0.0f, 0.0f) *
-            dx::XMMatrixRotationRollPitchYaw(theta_, phi_, chi_);
+        return dx::XMMatrixRotationRollPitchYaw(pitch_, yaw_, roll_)
+             * dx::XMMatrixTranslation(r_, 0.0f, 0.0f)
+             * dx::XMMatrixRotationRollPitchYaw(theta_, phi_, chi_);
     }
 }
