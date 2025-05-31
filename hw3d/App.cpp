@@ -231,7 +231,7 @@ namespace hw3d
         m_delta_time_ = m_timer_.GetElapsed_s() * m_simulation_speed_;
         m_timer_.Start();
 
-		DrawObjects_();
+        DrawObjects_();
         DrawImguiCamera_();
         DrawImguiSimulation_();
     }

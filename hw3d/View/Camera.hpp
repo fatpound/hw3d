@@ -31,18 +31,18 @@ namespace hw3d::view
         auto GetMatrix() const noexcept -> DirectX::XMMATRIX;
 
         auto GetR    () const noexcept -> float;
-		auto GetTheta() const noexcept -> float;
-		auto GetPhi  () const noexcept -> float;
-		auto GetPitch() const noexcept -> float;
-		auto GetYaw  () const noexcept -> float;
-		auto GetRoll () const noexcept -> float;
+        auto GetTheta() const noexcept -> float;
+        auto GetPhi  () const noexcept -> float;
+        auto GetPitch() const noexcept -> float;
+        auto GetYaw  () const noexcept -> float;
+        auto GetRoll () const noexcept -> float;
 
-		void SetR    (const float r)     noexcept;
-		void SetTheta(const float theta) noexcept;
-		void SetPhi  (const float phi)   noexcept;
-		void SetPitch(const float pitch) noexcept;
-		void SetYaw  (const float yaw)   noexcept;
-		void SetRoll (const float roll)  noexcept;
+        void SetR    (const float r)     noexcept;
+        void SetTheta(const float theta) noexcept;
+        void SetPhi  (const float phi)   noexcept;
+        void SetPitch(const float pitch) noexcept;
+        void SetYaw  (const float yaw)   noexcept;
+        void SetRoll (const float roll)  noexcept;
 
         void Reset() noexcept;
 

@@ -58,9 +58,9 @@ namespace hw3d
 
         FATSPACE_D3D11::Graphics<> m_gfx_;
 
-		float m_delta_time_       =   0.0f;
+        float m_delta_time_       =   0.0f;
         float m_simulation_speed_ =   1.0f;
-		const float m_far_z_      = 100.0f; // far clipping plane (const for now)
+        const float m_far_z_      = 100.0f; // far clipping plane (const for now)
 
         view::Camera m_camera_;
 
