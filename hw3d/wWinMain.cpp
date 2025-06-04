@@ -1,7 +1,5 @@
 #include "App.hpp"
 
-#include <FatLibrary.hpp>
-
 int CALLBACK wWinMain(
     [[maybe_unused]] _In_     HINSTANCE hInstance,
     [[maybe_unused]] _In_opt_ HINSTANCE hPrevInstance,
