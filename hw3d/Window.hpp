@@ -47,7 +47,7 @@ namespace hw3d
 
 
     private:
-        virtual auto HandleMessage_(const HWND hWnd, const UINT msg, const WPARAM wParam, const LPARAM lParam) -> LRESULT override final
+        virtual auto HandleMsg_(const HWND hWnd, const UINT msg, const WPARAM wParam, const LPARAM lParam) -> LRESULT override final
         {
             if (::ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
             {
