@@ -22,11 +22,11 @@ namespace hw3d::obj
             FATSPACE_UTILITY::ViewXM& viewXM);
 
         Box() = delete;
-        Box(const Box& src)     = delete;
-        Box(Box&& src) noexcept = delete;
+        Box(const Box&)     = delete;
+        Box(Box&&) noexcept = delete;
 
-        auto operator = (const Box& src)     -> Box& = delete;
-        auto operator = (Box&& src) noexcept -> Box& = delete;
+        auto operator = (const Box&)     -> Box& = delete;
+        auto operator = (Box&&) noexcept -> Box& = delete;
         ~Box() noexcept = default;
 
 

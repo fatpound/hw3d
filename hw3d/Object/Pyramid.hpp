@@ -21,11 +21,11 @@ namespace hw3d::obj
             FATSPACE_UTILITY::ViewXM& viewXM);
 
         Pyramid() = delete;
-        Pyramid(const Pyramid& src)     = delete;
-        Pyramid(Pyramid&& src) noexcept = delete;
+        Pyramid(const Pyramid&)     = delete;
+        Pyramid(Pyramid&&) noexcept = delete;
 
-        auto operator = (const Pyramid& src)     -> Pyramid& = delete;
-        auto operator = (Pyramid&& src) noexcept -> Pyramid& = delete;
+        auto operator = (const Pyramid&)     -> Pyramid& = delete;
+        auto operator = (Pyramid&&) noexcept -> Pyramid& = delete;
         ~Pyramid() noexcept = default;
 
 

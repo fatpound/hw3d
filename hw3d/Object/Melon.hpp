@@ -23,11 +23,11 @@ namespace hw3d::obj
             FATSPACE_UTILITY::ViewXM& viewXM);
 
         Melon() = delete;
-        Melon(const Melon& src)     = delete;
-        Melon(Melon&& src) noexcept = delete;
+        Melon(const Melon&)     = delete;
+        Melon(Melon&&) noexcept = delete;
 
-        auto operator = (const Melon& src)     -> Melon& = delete;
-        auto operator = (Melon&& src) noexcept -> Melon& = delete;
+        auto operator = (const Melon&)     -> Melon& = delete;
+        auto operator = (Melon&&) noexcept -> Melon& = delete;
         ~Melon() noexcept = default;
 
 
