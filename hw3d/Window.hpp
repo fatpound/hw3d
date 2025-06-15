@@ -1,12 +1,12 @@
 #pragma once
 
-#include <FatNamespaces.hpp>
-#include <FatMacros.hpp>
+#include <_macros/Compiler.hpp>
+#include <_macros/Namespaces.hpp>
 
 #include <Win32_/WindowEx.hpp>
 
 #pragma warning (push)
-#pragma warning (disable : FAT_EXTERNAL_WARNINGS)
+#pragma warning (disable : FATLIB_EXTERNAL_WARNINGS)
 #include <imgui.h>
 #include <imgui_impl_win32.h>
 #pragma warning (pop)
@@ -134,7 +134,7 @@ namespace hw3d
 #pragma warning (push)
 #pragma warning (disable : 26434)
     private:
-        FAT_FORCEINLINE void Process_WM_MOUSEMOVE_(const WPARAM& wParam, const LPARAM& lParam)
+        FATLIB_FORCEINLINE void Process_WM_MOUSEMOVE_(const WPARAM& wParam, const LPARAM& lParam)
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -143,7 +143,7 @@ namespace hw3d
 
             WindowEx::Process_WM_MOUSEMOVE_(wParam, lParam);
         }
-        FAT_FORCEINLINE void Process_WM_LBUTTONDOWN_()
+        FATLIB_FORCEINLINE void Process_WM_LBUTTONDOWN_()
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -152,7 +152,7 @@ namespace hw3d
 
             WindowEx::Process_WM_LBUTTONDOWN_();
         }
-        FAT_FORCEINLINE void Process_WM_LBUTTONUP_  ()
+        FATLIB_FORCEINLINE void Process_WM_LBUTTONUP_  ()
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -161,7 +161,7 @@ namespace hw3d
 
             WindowEx::Process_WM_LBUTTONUP_();
         }
-        FAT_FORCEINLINE void Process_WM_RBUTTONDOWN_()
+        FATLIB_FORCEINLINE void Process_WM_RBUTTONDOWN_()
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -170,7 +170,7 @@ namespace hw3d
 
             WindowEx::Process_WM_RBUTTONDOWN_();
         }
-        FAT_FORCEINLINE void Process_WM_RBUTTONUP_  ()
+        FATLIB_FORCEINLINE void Process_WM_RBUTTONUP_  ()
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -179,7 +179,7 @@ namespace hw3d
 
             WindowEx::Process_WM_RBUTTONUP_();
         }
-        FAT_FORCEINLINE void Process_WM_MBUTTONDOWN_()
+        FATLIB_FORCEINLINE void Process_WM_MBUTTONDOWN_()
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -188,7 +188,7 @@ namespace hw3d
 
             WindowEx::Process_WM_MBUTTONDOWN_();
         }
-        FAT_FORCEINLINE void Process_WM_MBUTTONUP_  ()
+        FATLIB_FORCEINLINE void Process_WM_MBUTTONUP_  ()
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -197,7 +197,7 @@ namespace hw3d
 
             WindowEx::Process_WM_MBUTTONUP_();
         }
-        FAT_FORCEINLINE void Process_WM_MOUSEWHEEL_(const int& delta)
+        FATLIB_FORCEINLINE void Process_WM_MOUSEWHEEL_(const int& delta)
         {
             if (::ImGui::GetIO().WantCaptureMouse)
             {
@@ -207,11 +207,11 @@ namespace hw3d
             WindowEx::Process_WM_MOUSEWHEEL_(delta);
         }
 
-        FAT_FORCEINLINE void Process_WM_KILLFOCUS_ () noexcept
+        FATLIB_FORCEINLINE void Process_WM_KILLFOCUS_ () noexcept
         {
             WindowEx::Process_WM_KILLFOCUS_();
         }
-        FAT_FORCEINLINE void Process_WM_KEYDOWN_   (const WPARAM& wParam, const LPARAM& lParam)
+        FATLIB_FORCEINLINE void Process_WM_KEYDOWN_   (const WPARAM& wParam, const LPARAM& lParam)
         {
             if (::ImGui::GetIO().WantCaptureKeyboard)
             {
@@ -220,11 +220,11 @@ namespace hw3d
 
             Process_WM_SYSKEYDOWN_(wParam, lParam);
         }
-        FAT_FORCEINLINE void Process_WM_SYSKEYDOWN_(const WPARAM& wParam, const LPARAM& lParam)
+        FATLIB_FORCEINLINE void Process_WM_SYSKEYDOWN_(const WPARAM& wParam, const LPARAM& lParam)
         {
             WindowEx::Process_WM_SYSKEYDOWN_(wParam, lParam);
         }
-        FAT_FORCEINLINE void Process_WM_KEYUP_     (const WPARAM& wParam)
+        FATLIB_FORCEINLINE void Process_WM_KEYUP_     (const WPARAM& wParam)
         {
             if (::ImGui::GetIO().WantCaptureKeyboard)
             {
@@ -233,11 +233,11 @@ namespace hw3d
 
             Process_WM_SYSKEYUP_(wParam);
         }
-        FAT_FORCEINLINE void Process_WM_SYSKEYUP_  (const WPARAM& wParam)
+        FATLIB_FORCEINLINE void Process_WM_SYSKEYUP_  (const WPARAM& wParam)
         {
             WindowEx::Process_WM_SYSKEYUP_(wParam);
         }
-        FAT_FORCEINLINE void Process_WM_CHAR_      (const WPARAM& wParam)
+        FATLIB_FORCEINLINE void Process_WM_CHAR_      (const WPARAM& wParam)
         {
             if (::ImGui::GetIO().WantCaptureKeyboard)
             {
@@ -246,7 +246,7 @@ namespace hw3d
 
             WindowEx::Process_WM_CHAR_(wParam);
         }
-        FAT_FORCEINLINE void Process_WM_SYSCOMMAND_(const WPARAM& wParam) noexcept
+        FATLIB_FORCEINLINE void Process_WM_SYSCOMMAND_(const WPARAM& wParam) noexcept
         {
             WindowEx::Process_WM_SYSCOMMAND_(wParam);
         }

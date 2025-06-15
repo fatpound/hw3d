@@ -1,5 +1,7 @@
 #pragma once
 
+#include <_macros/Namespaces.hpp>
+
 #include <IO/IO.hpp>
 
 #include <Win32_/D3D11/Graphics.hpp>

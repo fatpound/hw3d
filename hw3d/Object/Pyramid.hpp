@@ -1,6 +1,6 @@
 #pragma once
 
-#include <FatNamespaces.hpp>
+#include <_macros/Namespaces.hpp>
 
 #include <Utility/ViewXM.hpp>
 #include <Win32_/D3D11/Graphics.hpp>
