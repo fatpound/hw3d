@@ -1,15 +1,18 @@
 #pragma once
 
-#include <FatNamespaces.hpp>
+#include <_macros/Namespaces.hpp>
 
-#include <Util/ViewXM.hpp>
-#include <Win32_/D3D11/Graphics.hpp>
+#include <Utility/ViewXM.hpp>
+
+#include "DrawableBase.hpp"
+
+#include <DirectXMath.h>
 
 #include <random>
 
 namespace hw3d::obj
 {
-    class Sheet final : public FATSPACE_VISUAL::DrawableBase<Sheet>
+    class Sheet final : public DrawableBase<Sheet>
     {
     public:
         Sheet(ID3D11Device* const pDevice,

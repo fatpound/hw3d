@@ -5,6 +5,7 @@
 #include <Utility/Timer.hpp>
 #include <Win32_/D3D11/Graphics.hpp>
 
+#include "Object/Drawable.hpp"
 #include "View/Camera.hpp"
 
 #include "ImguiManager.hpp"
@@ -67,6 +68,6 @@ namespace hw3d
         FATSPACE_UTILITY::ViewXM m_viewXM_;
         FATSPACE_UTILITY::Timer m_timer_;
 
-        std::vector<std::unique_ptr<fatpound::win32::d3d11::visual::Drawable>> m_drawables_;
+        std::vector<std::unique_ptr<obj::Drawable>> m_drawables_;
     };
 }

@@ -3,13 +3,16 @@
 #include <_macros/Namespaces.hpp>
 
 #include <Utility/ViewXM.hpp>
-#include <Win32_/D3D11/Graphics.hpp>
+
+#include "DrawableBase.hpp"
+
+#include <DirectXMath.h>
 
 #include <random>
 
 namespace hw3d::obj
 {
-    class Box final : public fatpound::win32::d3d11::visual::DrawableBase<Box>
+    class Box final : public DrawableBase<Box>
     {
     public:
         Box(ID3D11Device* const pDevice,

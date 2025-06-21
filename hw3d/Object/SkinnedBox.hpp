@@ -1,15 +1,18 @@
 #pragma once
 
-#include <FatNamespaces.hpp>
+#include <_macros/Namespaces.hpp>
 
-#include <Util/ViewXM.hpp>
-#include <Win32_/D3D11/Graphics.hpp>
+#include <Utility/ViewXM.hpp>
+
+#include "DrawableBase.hpp"
+
+#include <DirectXMath.h>
 
 #include <random>
 
 namespace hw3d::obj
 {
-    class SkinnedBox final : public FATSPACE_VISUAL::DrawableBase<SkinnedBox>
+    class SkinnedBox final : public DrawableBase<SkinnedBox>
     {
     public:
         SkinnedBox(ID3D11Device* const pDevice,

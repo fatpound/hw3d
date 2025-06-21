@@ -83,7 +83,7 @@ namespace hw3d::obj
         }
         else
         {
-            SetIndexFromStatic_();
+            SetIndexBufferFromStatic_();
         }
 
         AddBind_(std::make_unique<fatpound::win32::d3d11::pipeline::TransformCBuffer<Box>>(pDevice, *this, viewXM));

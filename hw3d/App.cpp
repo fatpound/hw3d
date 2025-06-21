@@ -96,7 +96,7 @@ namespace hw3d
             ~Factory() noexcept                              = default;
 
         public:
-            auto operator () () -> std::unique_ptr<fatpound::win32::d3d11::visual::Drawable>
+            auto operator () () -> std::unique_ptr<obj::Drawable>
             {
                 switch (typedist_(rng_))
                 {

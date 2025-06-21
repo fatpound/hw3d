@@ -3,13 +3,14 @@
 #include <_macros/Namespaces.hpp>
 
 #include <Utility/ViewXM.hpp>
-#include <Win32_/D3D11/Graphics.hpp>
+
+#include "DrawableBase.hpp"
 
 #include <random>
 
 namespace hw3d::obj
 {
-    class Pyramid final : public fatpound::win32::d3d11::visual::DrawableBase<Pyramid>
+    class Pyramid final : public DrawableBase<Pyramid>
     {
     public:
         Pyramid(ID3D11Device* const pDevice,
