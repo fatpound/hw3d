@@ -22,12 +22,12 @@
 #include <numbers>
 #include <random>
 
-#if IN_RELEASE
-#define SCREEN_WIDTH    static_cast<UINT>(::GetSystemMetrics(SM_CXSCREEN))
-#define SCREEN_HEIGHT   static_cast<UINT>(::GetSystemMetrics(SM_CYSCREEN))
+#ifdef IN_RELEASE
+    #define SCREEN_WIDTH    static_cast<UINT>(::GetSystemMetrics(SM_CXSCREEN))
+    #define SCREEN_HEIGHT   static_cast<UINT>(::GetSystemMetrics(SM_CYSCREEN))
 #else
-#define SCREEN_WIDTH    1024u
-#define SCREEN_HEIGHT    768u
+    #define SCREEN_WIDTH    1024u
+    #define SCREEN_HEIGHT    768u
 #endif // IN_RELEASE
 
 namespace dx = DirectX;
