@@ -11,7 +11,7 @@ int CALLBACK wWinMain(
     try
     {
         hw3d::App{}.Go();
-
+        
         return 0;
     }
     catch (const std::exception& ex)
