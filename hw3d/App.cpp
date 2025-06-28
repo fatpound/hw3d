@@ -9,9 +9,8 @@
 
 #pragma warning (push)
 #pragma warning (disable : FATLIB_EXTERNAL_WARNINGS)
-#include <imgui.h>
-#include <imgui_impl_dx11.h>
-#include <imgui_impl_win32.h>
+#include <imgui/backends/imgui_impl_dx11.h>
+#include <imgui/backends/imgui_impl_win32.h>
 #pragma warning (pop)
 
 #include "Object/Object.hpp"

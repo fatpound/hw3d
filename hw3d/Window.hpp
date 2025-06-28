@@ -3,12 +3,12 @@
 #include <_macros/Compiler.hpp>
 #include <_macros/Namespaces.hpp>
 
+#include <Win32_/WinAPI.hpp>
 #include <Win32_/WindowEx.hpp>
 
 #pragma warning (push)
 #pragma warning (disable : FATLIB_EXTERNAL_WARNINGS)
-#include <imgui.h>
-#include <imgui_impl_win32.h>
+#include <imgui/backends/imgui_impl_win32.h>
 #pragma warning (pop)
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -26,9 +26,9 @@ namespace hw3d
             std::shared_ptr<FATSPACE_IO::Keyboard>      pKeyboard         = std::make_shared<FATSPACE_IO::Keyboard>(),
             const std::optional<DirectX::XMINT2>        position          = std::nullopt)
             :
-            WindowEx(std::move(pWndClassEx), title, clientDimensions, std::move(pKeyboard), std::move(pMouse), position)
+            WindowEx(std::move<>(pWndClassEx), title, clientDimensions, std::move<>(pKeyboard), std::move<>(pMouse), position)
         {
-            static_cast<bool>(::ImGui_ImplWin32_Init(m_hWnd_));
+            static_cast<void>(::ImGui_ImplWin32_Init(m_hWnd_));
         }
 
         explicit Window()                  = delete;

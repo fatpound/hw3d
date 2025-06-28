@@ -4,7 +4,7 @@
 
 #pragma warning (push)
 #pragma warning (disable : FATLIB_EXTERNAL_WARNINGS)
-#include <imgui.h>
+#include <imgui/imgui.h>
 #pragma warning (pop)
 
 namespace hw3d
