@@ -137,9 +137,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <AssemblerOutput>All</AssemblerOutput>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-      <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>$(SolutionDir)ImguiLib;$(SolutionDir)ImguiLib\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -150,25 +147,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ShowProgress>LinkVerbose</ShowProgress>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
     </Link>
-    <Manifest>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-    </Manifest>
-    <ResourceCompile>
-      <ShowProgress>true</ShowProgress>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-    </ResourceCompile>
-    <Xdcmake>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-    </Xdcmake>
-    <Bscmake>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-    </Bscmake>
-    <FxCompile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-    </FxCompile>
+    <Manifest />
+    <ResourceCompile />
+    <Xdcmake />
+    <Bscmake />
+    <FxCompile />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -215,9 +199,6 @@
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FloatingPointModel>Precise</FloatingPointModel>
-      <AssemblerOutput>All</AssemblerOutput>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-      <UseUnicodeForAssemblerListing>false</UseUnicodeForAssemblerListing>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>$(SolutionDir)ImguiLib;$(SolutionDir)ImguiLib\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -228,25 +209,12 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ShowProgress>LinkVerbose</ShowProgress>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
     </Link>
-    <Manifest>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-    </Manifest>
-    <ResourceCompile>
-      <ShowProgress>true</ShowProgress>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-    </ResourceCompile>
-    <Xdcmake>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-    </Xdcmake>
-    <Bscmake>
-      <SuppressStartupBanner>false</SuppressStartupBanner>
-    </Bscmake>
-    <FxCompile>
-      <SuppressStartupBanner>true</SuppressStartupBanner>
-    </FxCompile>
+    <Manifest />
+    <ResourceCompile />
+    <Xdcmake />
+    <Bscmake />
+    <FxCompile />
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
