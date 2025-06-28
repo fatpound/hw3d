@@ -61,7 +61,7 @@ namespace hw3d
 
         float m_delta_time_       =   0.0f;
         float m_simulation_speed_ =   1.0f;
-        const float m_far_z_      = 100.0f; // far clipping plane (const for now)
+        const float mc_far_z_     = 100.0f; // far clipping plane (const for now)
 
         view::Camera m_camera_;
 

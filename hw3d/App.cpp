@@ -15,6 +15,7 @@
 
 #include "Object/Object.hpp"
 
+#include <cfloat>
 #include <cmath>
 
 #include <memory>
@@ -39,7 +40,7 @@ namespace hw3d
         :
         m_wnd_(std::make_shared<FATSPACE_WIN32::WndClassEx>(L"fat->pound WindowClassEx: " + std::to_wstring(s_game_id_++)), L"fat hw3d " + std::to_wstring(s_game_id_), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_gfx_(m_wnd_.GetHandle(), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
-        m_camera_(m_far_z_, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
+        m_camera_(mc_far_z_, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
         ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
     }
@@ -164,7 +165,7 @@ namespace hw3d
                 1.0f,
                 m_wnd_.GetClientHeight<float>() / m_wnd_.GetClientWidth<float>(), // 1 / Aspect Ratio
                 0.5f,
-                m_far_z_
+                mc_far_z_
             )
         );
     }
@@ -189,14 +190,14 @@ namespace hw3d
         if (::ImGui::Begin("Camera"))
         {
             ::ImGui::Text("Position");
-            ::ImGui::SliderFloat("R",     &m_camera_.m_r_,        0.1f, m_far_z_, "%.1f");
-            ::ImGui::SliderAngle("Theta", &m_camera_.m_theta_, -180.0f, 180.0f);
-            ::ImGui::SliderAngle("Phi",   &m_camera_.m_phi_,    -89.0f,  89.0f);
+            ::ImGui::SliderFloat("R",     &m_camera_.m_r_,     FLT_EPSILON, mc_far_z_, "%.1f");
+            ::ImGui::SliderAngle("Theta", &m_camera_.m_theta_,     -180.0f, 180.0f);
+            ::ImGui::SliderAngle("Phi",   &m_camera_.m_phi_,        -89.0f,  89.0f);
                                                                  
-            ::ImGui::Text("Orientation");                        
-            ::ImGui::SliderAngle("Roll",  &m_camera_.m_roll_,  -180.0f, 180.0f);
-            ::ImGui::SliderAngle("Pitch", &m_camera_.m_pitch_, -180.0f, 180.0f);
-            ::ImGui::SliderAngle("Yaw",   &m_camera_.m_yaw_,   -180.0f, 180.0f);
+            ::ImGui::Text("Orientation");                           
+            ::ImGui::SliderAngle("Roll",  &m_camera_.m_roll_,      -180.0f, 180.0f);
+            ::ImGui::SliderAngle("Pitch", &m_camera_.m_pitch_,     -180.0f, 180.0f);
+            ::ImGui::SliderAngle("Yaw",   &m_camera_.m_yaw_,       -180.0f, 180.0f);
 
             if (::ImGui::Button("Reset"))
             {
@@ -216,6 +217,11 @@ namespace hw3d
         }
 
         ::ImGui::End();
+
+        if (m_camera_.m_r_ <= 0.0f)
+        {
+            m_camera_.m_r_ = FLT_EPSILON;
+        }
     }
     void App::RenderImgui_() const
     {
