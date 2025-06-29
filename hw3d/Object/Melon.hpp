@@ -25,19 +25,19 @@ namespace hw3d::obj
             std::uniform_int_distribution<int>& latdist,
             FATSPACE_UTILITY::ViewXM& viewXM);
 
-        Melon() = delete;
+        Melon()                 = delete;
         Melon(const Melon&)     = delete;
         Melon(Melon&&) noexcept = delete;
 
         auto operator = (const Melon&)     -> Melon& = delete;
         auto operator = (Melon&&) noexcept -> Melon& = delete;
-        ~Melon() noexcept = default;
+        ~Melon() noexcept                            = default;
 
 
     public:
         virtual auto GetTransformXM() const noexcept -> DirectX::XMMATRIX override final;
 
-        virtual void Update(const float deltaTime) noexcept override final;
+        virtual void Update(float deltaTime) noexcept override final;
 
 
     protected:

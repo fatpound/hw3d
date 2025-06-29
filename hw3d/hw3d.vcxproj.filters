@@ -57,6 +57,12 @@
     <ClCompile Include="View\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Object\Sheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\SkinnedBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp">
@@ -110,6 +116,12 @@
     <ClInclude Include="Object\Drawable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Object\Sheet.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\SkinnedBox.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource\hw3d.rc">
@@ -126,6 +138,8 @@
     <FxCompile Include="Shader\PSColorBlend.hlsl" />
     <FxCompile Include="Shader\PSColorIndex.hlsl" />
     <FxCompile Include="Shader\VSColorIndex.hlsl" />
+    <FxCompile Include="Shader\PSTexture.hlsl" />
+    <FxCompile Include="Shader\VSTexture.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="hw3d.cd" />

@@ -49,24 +49,21 @@ namespace hw3d
 
 
     private:
-        inline static std::size_t s_game_id_{};
+        inline static std::size_t                   s_game_id_{};
 
 
     private:
-        ImguiManager m_imgui_mgr_;
+        ImguiManager                                m_imgui_mgr_;
+        Window                                      m_wnd_;
+        FATSPACE_D3D11::Graphics<>                  m_gfx_;
 
-        Window m_wnd_;
+        float                                       m_delta_time_       =   0.0f;
+        float                                       m_simulation_speed_ =   1.0f;
+        const float                                 mc_far_z_           = 100.0f;
 
-        FATSPACE_D3D11::Graphics<> m_gfx_;
-
-        float m_delta_time_       =   0.0f;
-        float m_simulation_speed_ =   1.0f;
-        const float mc_far_z_     = 100.0f; // far clipping plane (const for now)
-
-        view::Camera m_camera_;
-
-        FATSPACE_UTILITY::ViewXM m_viewXM_;
-        FATSPACE_UTILITY::Timer m_timer_;
+        view::Camera                                m_camera_;
+        FATSPACE_UTILITY::ViewXM                    m_viewXM_;
+        FATSPACE_UTILITY::Timer                     m_timer_;
 
         std::vector<std::unique_ptr<obj::Drawable>> m_drawables_;
     };

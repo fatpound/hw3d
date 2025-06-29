@@ -21,7 +21,15 @@ namespace hw3d::obj
             std::uniform_real_distribution<float>& ddist,
             std::uniform_real_distribution<float>& odist,
             std::uniform_real_distribution<float>& rdist,
-            FATSPACE_UTIL::ViewXM& viewXM);
+            FATSPACE_UTILITY::ViewXM& viewXM);
+
+        SkinnedBox()                      = delete;
+        SkinnedBox(const SkinnedBox&)     = delete;
+        SkinnedBox(SkinnedBox&&) noexcept = delete;
+
+        auto operator = (const SkinnedBox&)     -> SkinnedBox& = delete;
+        auto operator = (SkinnedBox&&) noexcept -> SkinnedBox& = delete;
+        ~SkinnedBox() noexcept                                 = default;
 
 
     public:

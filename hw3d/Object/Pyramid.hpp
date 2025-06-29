@@ -21,13 +21,13 @@ namespace hw3d::obj
             std::uniform_real_distribution<float>& rdist,
             FATSPACE_UTILITY::ViewXM& viewXM);
 
-        Pyramid() = delete;
+        Pyramid()                   = delete;
         Pyramid(const Pyramid&)     = delete;
         Pyramid(Pyramid&&) noexcept = delete;
 
         auto operator = (const Pyramid&)     -> Pyramid& = delete;
         auto operator = (Pyramid&&) noexcept -> Pyramid& = delete;
-        ~Pyramid() noexcept = default;
+        ~Pyramid() noexcept                              = default;
 
 
     public:

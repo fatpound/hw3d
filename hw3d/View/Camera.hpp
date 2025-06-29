@@ -15,18 +15,18 @@ namespace hw3d::view
 {
     class Camera final
     {
-        friend ::hw3d::App;
+        friend App;
 
     public:
         explicit Camera(const float max_depth, std::shared_ptr<FATSPACE_IO::Keyboard> pKeyboard, std::shared_ptr<FATSPACE_IO::Mouse> pMouse) noexcept;
 
-        explicit Camera() = delete;
-        explicit Camera(const Camera& src) = delete;
-        explicit Camera(Camera&& src) = delete;
+        explicit Camera()                  = delete;
+        explicit Camera(const Camera&)     = delete;
+        explicit Camera(Camera&&) noexcept = delete;
 
-        auto operator = (const Camera& src) -> Camera& = delete;
-        auto operator = (Camera&& src)      -> Camera& = delete;
-        ~Camera() noexcept = default;
+        auto operator = (const Camera&)     -> Camera& = delete;
+        auto operator = (Camera&&) noexcept -> Camera& = delete;
+        ~Camera() noexcept                             = default;
 
 
     public:

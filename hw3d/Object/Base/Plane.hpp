@@ -48,13 +48,13 @@ namespace hw3d::obj::base
             }
 
             std::vector<unsigned short int> indices;
-            indices.reserve(fm::Square(divisions_x * divisions_y) * 6);
+            indices.reserve(fatpound::math::Square<>(divisions_x * divisions_y) * 6);
 
             {
                 const auto vxy2i = [nVertices_x](std::size_t x, std::size_t y)
-                    {
-                        return static_cast<unsigned short int>(y * nVertices_x + x);
-                    };
+                {
+                    return static_cast<unsigned short int>(y * nVertices_x + x);
+                };
 
                 for (std::size_t y = 0; y < divisions_y; y++)
                 {

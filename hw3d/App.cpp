@@ -118,17 +118,17 @@ namespace hw3d
                         odist_, rdist_, longdist_, latdist_, app_.m_viewXM_
                     );
 
-                // case 3:
-                //     return std::make_unique<obj::Sheet>(
-                //         pDevice_, rng_, adist_, ddist_,
-                //         odist_, rdist_, app_.m_viewXM_
-                //     );
-                // 
-                // case 4:
-                //     return std::make_unique<obj::SkinnedBox>(
-                //         pDevice_, rng_, adist_, ddist_,
-                //         odist_, rdist_, app_.m_viewXM_
-                //     );
+                case 3:
+                    return std::make_unique<obj::Sheet>(
+                        pDevice_, rng_, adist_, ddist_,
+                        odist_, rdist_, app_.m_viewXM_
+                    );
+                
+                case 4:
+                    return std::make_unique<obj::SkinnedBox>(
+                        pDevice_, rng_, adist_, ddist_,
+                        odist_, rdist_, app_.m_viewXM_
+                    );
 
                 default:
                     assert(false and "bad drawable type in factory");
@@ -149,7 +149,7 @@ namespace hw3d
 
             std::uniform_int_distribution<int> latdist_{ 5, 20 };
             std::uniform_int_distribution<int> longdist_{ 10, 40 };
-            std::uniform_int_distribution<int> typedist_{ 0, 2 }; // disabled Sheet and SkinnedBox objects for now
+            std::uniform_int_distribution<int> typedist_{ 0, 4 };
 
             ID3D11Device* const pDevice_;
 

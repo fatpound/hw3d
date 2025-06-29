@@ -84,12 +84,12 @@ namespace hw3d::obj
 
     void Pyramid::Update(float deltaTime) noexcept
     {
-        roll_ += droll_ * deltaTime;
+        roll_  += droll_  * deltaTime;
         pitch_ += dpitch_ * deltaTime;
-        yaw_ += dyaw_ * deltaTime;
+        yaw_   += dyaw_   * deltaTime;
         theta_ += dtheta_ * deltaTime;
-        phi_ += dphi_ * deltaTime;
-        chi_ += dchi_ * deltaTime;
+        phi_   += dphi_   * deltaTime;
+        chi_   += dchi_   * deltaTime;
     }
 
     auto Pyramid::GetTransformXM() const noexcept -> dx::XMMATRIX
