@@ -1,5 +1,7 @@
 # hw3d
 
+This is a follow-up series to Chili's hw3d but it's been completely re-written by me.
+
 ![hw3d](https://github.com/fatpound/hw3d/assets/84704675/ef4585e3-1189-4ceb-9eb5-d37d4d449519)
 
 Class Diagram
