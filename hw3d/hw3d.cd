@@ -82,7 +82,7 @@
       <FileName>IndexedTriangleList.hpp</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="hw3d::ImguiManager">
+  <Class Name="hw3dImGuiManager">
     <Position X="8.25" Y="3" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAIAAIAAAAAAAAAAAAAAgAAAAAAA=</HashCode>

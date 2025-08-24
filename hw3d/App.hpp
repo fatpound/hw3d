@@ -2,8 +2,8 @@
 
 #include <_macros/Namespaces.hpp>
 
-#include <Utility/Timer.hpp>
-#include <Win32_/D3D11/Graphics.hpp>
+#include <Utility/include/Timer.hpp>
+#include <Win32_/D3D11/include/Graphics.hpp>
 
 #include "Object/Drawable.hpp"
 #include "View/Camera.hpp"

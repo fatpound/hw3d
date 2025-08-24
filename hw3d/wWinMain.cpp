@@ -1,6 +1,6 @@
 #include "App.hpp"
 
-#include <Utility/Common.hpp>
+#include <Utility/include/Common.hpp>
 
 int CALLBACK wWinMain(
     [[maybe_unused]] _In_     HINSTANCE hInstance,
@@ -16,11 +16,11 @@ int CALLBACK wWinMain(
     }
     catch (const std::exception& ex)
     {
-        ::MessageBox(nullptr, FATSPACE_UTILITY::To_WString(ex.what()).c_str(), L"Error!", MB_OK | MB_ICONERROR);
+        MessageBox(nullptr, FATSPACE_UTILITY::To_WString(ex.what()).c_str(), L"Error!", MB_OK | MB_ICONERROR);
     }
     catch (...)
     {
-        ::MessageBox(nullptr, L"Non-STD Exception was thrown!", L"Error...", MB_OK | MB_ICONERROR);
+        MessageBox(nullptr, L"Non-STD Exception was thrown!", L"Error...", MB_OK | MB_ICONERROR);
     }
 
     return -1;

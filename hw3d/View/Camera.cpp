@@ -1,9 +1,9 @@
 #include "Camera.hpp"
 
-#include <_macros/Compiler.hpp>
+#include <_misc/FatCodex/Macros/ExternalWarnings_MSVC.hpp>
 
 #pragma warning (push)
-#pragma warning (disable : FATLIB_EXTERNAL_WARNINGS)
+#pragma warning (disable : MSVC_EXWARN_IMGUI)
 #include <imgui/imgui.h>
 #pragma warning (pop)
 

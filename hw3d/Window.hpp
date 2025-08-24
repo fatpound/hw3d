@@ -1,13 +1,13 @@
 #pragma once
 
-#include <_macros/Compiler.hpp>
+#include <_misc/FatCodex/Macros/ExternalWarnings_MSVC.hpp>
 #include <_macros/Namespaces.hpp>
 
-#include <Win32_/WinAPI.hpp>
-#include <Win32_/WindowEx.hpp>
+#include <Win32_/include/FatWin.hpp>
+#include <Win32_/include/WindowEx.hpp>
 
 #pragma warning (push)
-#pragma warning (disable : FATLIB_EXTERNAL_WARNINGS)
+#pragma warning (disable : MSVC_EXWARN_IMGUI)
 #include <imgui/backends/imgui_impl_win32.h>
 #pragma warning (pop)
 
@@ -21,14 +21,14 @@ namespace hw3d
         explicit Window(
             std::shared_ptr<FATSPACE_WIN32::WndClassEx> pWndClassEx,
             const std::wstring                          title,
-            const FATSPACE_UTILITY_GFX::SizePack        clientDimensions,
+            const FATSPACE_UTILITY::SizePack            clientDimensions,
             std::shared_ptr<FATSPACE_IO::Mouse>         pMouse            = std::make_shared<FATSPACE_IO::Mouse>(),
             std::shared_ptr<FATSPACE_IO::Keyboard>      pKeyboard         = std::make_shared<FATSPACE_IO::Keyboard>(),
             const std::optional<DirectX::XMINT2>        position          = std::nullopt)
             :
             WindowEx(std::move<>(pWndClassEx), title, clientDimensions, std::move<>(pKeyboard), std::move<>(pMouse), position)
         {
-            static_cast<void>(::ImGui_ImplWin32_Init(m_hWnd_));
+            static_cast<void>(ImGui_ImplWin32_Init(m_hWnd_));
         }
 
         explicit Window()                  = delete;
@@ -39,7 +39,7 @@ namespace hw3d
         auto operator = (Window&&) noexcept -> Window& = delete;
         virtual ~Window() override final
         {
-            ::ImGui_ImplWin32_Shutdown();
+            ImGui_ImplWin32_Shutdown();
         }
 
 
@@ -49,7 +49,7 @@ namespace hw3d
     private:
         virtual auto HandleMsg_(const HWND hWnd, const UINT msg, const WPARAM wParam, const LPARAM lParam) -> LRESULT override final
         {
-            if (::ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
+            if (ImGui_ImplWin32_WndProcHandler(hWnd, msg, wParam, lParam))
             {
                 return static_cast<LRESULT>(true);
             }
@@ -136,7 +136,7 @@ namespace hw3d
     private:
         FATLIB_FORCEINLINE void Process_WM_MOUSEMOVE_(const WPARAM& wParam, const LPARAM& lParam)
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -145,7 +145,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_LBUTTONDOWN_()
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -154,7 +154,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_LBUTTONUP_  ()
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -163,7 +163,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_RBUTTONDOWN_()
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -172,7 +172,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_RBUTTONUP_  ()
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -181,7 +181,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_MBUTTONDOWN_()
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -190,7 +190,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_MBUTTONUP_  ()
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -199,7 +199,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_MOUSEWHEEL_(const int& delta)
         {
-            if (::ImGui::GetIO().WantCaptureMouse)
+            if (ImGui::GetIO().WantCaptureMouse)
             {
                 return;
             }
@@ -213,7 +213,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_KEYDOWN_   (const WPARAM& wParam, const LPARAM& lParam)
         {
-            if (::ImGui::GetIO().WantCaptureKeyboard)
+            if (ImGui::GetIO().WantCaptureKeyboard)
             {
                 return;
             }
@@ -226,7 +226,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_KEYUP_     (const WPARAM& wParam)
         {
-            if (::ImGui::GetIO().WantCaptureKeyboard)
+            if (ImGui::GetIO().WantCaptureKeyboard)
             {
                 return;
             }
@@ -239,7 +239,7 @@ namespace hw3d
         }
         FATLIB_FORCEINLINE void Process_WM_CHAR_      (const WPARAM& wParam)
         {
-            if (::ImGui::GetIO().WantCaptureKeyboard)
+            if (ImGui::GetIO().WantCaptureKeyboard)
             {
                 return;
             }

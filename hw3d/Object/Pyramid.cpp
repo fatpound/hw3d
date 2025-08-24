@@ -2,6 +2,13 @@
 
 #include "Base/Cone.hpp"
 
+#include <Win32_/D3D11/Core/include/InputLayout.hpp>
+#include <Win32_/D3D11/Core/include/Topology.hpp>
+#include <Win32_/D3D11/Resource/include/PixelCBuffer.hpp>
+#include <Win32_/D3D11/Resource/include/TransformCBuffer.hpp>
+#include <Win32_/D3D11/Shader/include/PixelShader.hpp>
+#include <Win32_/D3D11/Shader/include/VertexShader.hpp>
+
 namespace dx = DirectX;
 
 using namespace fatpound::win32::d3d11;
@@ -56,14 +63,45 @@ namespace hw3d::obj
             // deform mesh linearly
             model.Transform(dx::XMMatrixScaling(1.0f, 1.0f, 0.7f));
 
-            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::VertexBuffer>(pDevice, model.vertices_));
+            using VxBufVal_t = decltype(model.vertices_)::value_type;
 
-            auto pvs = std::make_unique<fatpound::win32::d3d11::pipeline::VertexShader>(pDevice, L"VSColorBlend.cso");
-            auto pvsbc = pvs->GetBytecode();
+            const D3D11_BUFFER_DESC vbd
+            {
+                .ByteWidth           = static_cast<UINT>(sizeof(VxBufVal_t) * model.vertices_.size()),
+                .Usage               = D3D11_USAGE_DEFAULT,
+                .BindFlags           = D3D11_BIND_VERTEX_BUFFER,
+                .CPUAccessFlags      = 0U,
+                .MiscFlags           = 0U,
+                .StructureByteStride = sizeof(VxBufVal_t)
+            };
 
-            DrawableBase::AddStaticBind_(std::move<>(pvs));
-            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::PixelShader>(pDevice, L"PSColorBlend.cso"));
-            AddStaticIndexBuffer_(std::make_unique<fatpound::win32::d3d11::pipeline::IndexBuffer>(pDevice, model.indices_));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::resource::VertexBuffer>(pDevice, vbd, model.vertices_));
+
+
+            Microsoft::WRL::ComPtr<ID3DBlob> pVSBlob;
+
+            if (FAILED(D3DReadFileToBlob(L"VSColorBlend.cso", &pVSBlob)))
+            {
+                throw std::runtime_error("CANNOT read shader file to D3D Blob!");
+            }
+
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::shader::VertexShader>(pDevice, pVSBlob));
+
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::shader::PixelShader>(pDevice, std::wstring{ L"PSColorBlend.cso" }));
+
+            using IdxBufVal_t = decltype(model.indices_)::value_type;
+
+            D3D11_BUFFER_DESC ibd =
+            {
+                .ByteWidth = static_cast<UINT>(model.indices_.size() * sizeof(IdxBufVal_t)),
+                .Usage = D3D11_USAGE_DEFAULT,
+                .BindFlags = D3D11_BIND_INDEX_BUFFER,
+                .CPUAccessFlags = 0u,
+                .MiscFlags = 0u,
+                .StructureByteStride = sizeof(IdxBufVal_t)
+            };
+
+            AddStaticIndexBuffer_(std::make_unique<FATSPACE_D3D11::resource::IndexBuffer>(pDevice, ibd, DXGI_FORMAT_R16_UINT, model.indices_));
 
             const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
             {
@@ -71,15 +109,25 @@ namespace hw3d::obj
                 { "Color",    0, DXGI_FORMAT_R8G8B8A8_UNORM,  0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
             };
 
-            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::InputLayout>(pDevice, ied, pvsbc));
-            DrawableBase::AddStaticBind_(std::make_unique<fatpound::win32::d3d11::pipeline::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::core::InputLayout>(pDevice, ied, pVSBlob));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::core::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
         }
         else
         {
             SetIndexBufferFromStatic_();
         }
 
-        AddBind_(std::make_unique<fatpound::win32::d3d11::pipeline::TransformCBuffer<Pyramid>>(pDevice, *this, viewXM));
+        const D3D11_BUFFER_DESC cbd
+        {
+            .ByteWidth = sizeof(DirectX::XMMATRIX),
+            .Usage = D3D11_USAGE_DYNAMIC,
+            .BindFlags = D3D11_BIND_CONSTANT_BUFFER,
+            .CPUAccessFlags = D3D11_CPU_ACCESS_WRITE,
+            .MiscFlags = 0U,
+            .StructureByteStride = 0U
+        };
+
+        AddBind_(std::make_unique<FATSPACE_D3D11::resource::TransformCBuffer<Pyramid>>(pDevice, cbd, *this, viewXM));
     }
 
     void Pyramid::Update(float deltaTime) noexcept

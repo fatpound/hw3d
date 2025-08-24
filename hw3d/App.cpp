@@ -1,14 +1,14 @@
 #include "App.hpp"
 
-#include <_macros/Compiler.hpp>
+#include <_misc/FatCodex/Macros/ExternalWarnings_MSVC.hpp>
 
-#include <Win32_/WinAPI.hpp>
+#include <Win32_/include/FatWin.hpp>
 
 #include <Math/Math.hpp>
-#include <Win32_/GDI_Plus/Manager.hpp>
+#include <Win32_/GDI_Plus/include/Manager.hpp>
 
 #pragma warning (push)
-#pragma warning (disable : FATLIB_EXTERNAL_WARNINGS)
+#pragma warning (disable : MSVC_EXWARN_IMGUI)
 #include <imgui/backends/imgui_impl_dx11.h>
 #include <imgui/backends/imgui_impl_win32.h>
 #pragma warning (pop)
@@ -32,7 +32,7 @@
 
 namespace dx = DirectX;
 
-using FATSPACE_UTILITY_GFX::SizePack;
+using FATSPACE_UTILITY::SizePack;
 
 namespace hw3d
 {
@@ -42,11 +42,11 @@ namespace hw3d
         m_gfx_(m_wnd_.GetHandle(), SizePack{ SCREEN_WIDTH, SCREEN_HEIGHT }),
         m_camera_(mc_far_z_, m_wnd_.m_pKeyboard, m_wnd_.m_pMouse)
     {
-        ::ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
+        ImGui_ImplDX11_Init(m_gfx_.GetDevice(), m_gfx_.GetImmediateContext());
     }
     App::~App()
     {
-        ::ImGui_ImplDX11_Shutdown();
+        ImGui_ImplDX11_Shutdown();
     }
 
     auto App::IsRunning() const noexcept -> bool
@@ -171,9 +171,9 @@ namespace hw3d
     }
     void App::PrepareImgui_() const
     {
-        ::ImGui_ImplDX11_NewFrame();
-        ::ImGui_ImplWin32_NewFrame();
-        ::ImGui::NewFrame();
+        ImGui_ImplDX11_NewFrame();
+        ImGui_ImplWin32_NewFrame();
+        ImGui::NewFrame();
     }
     void App::DrawObjects_()
     {
@@ -187,36 +187,36 @@ namespace hw3d
     }
     void App::DrawImguiCamera_()
     {
-        if (::ImGui::Begin("Camera"))
+        if (ImGui::Begin("Camera"))
         {
-            ::ImGui::Text("Position");
-            ::ImGui::SliderFloat("R",     &m_camera_.m_r_,     FLT_EPSILON, mc_far_z_, "%.1f");
-            ::ImGui::SliderAngle("Theta", &m_camera_.m_theta_,     -180.0f, 180.0f);
-            ::ImGui::SliderAngle("Phi",   &m_camera_.m_phi_,        -89.0f,  89.0f);
+            ImGui::Text("Position");
+            ImGui::SliderFloat("R",     &m_camera_.m_r_,     FLT_EPSILON, mc_far_z_, "%.1f");
+            ImGui::SliderAngle("Theta", &m_camera_.m_theta_,     -180.0f, 180.0f);
+            ImGui::SliderAngle("Phi",   &m_camera_.m_phi_,        -89.0f,  89.0f);
                                                                  
-            ::ImGui::Text("Orientation");                           
-            ::ImGui::SliderAngle("Roll",  &m_camera_.m_roll_,      -180.0f, 180.0f);
-            ::ImGui::SliderAngle("Pitch", &m_camera_.m_pitch_,     -180.0f, 180.0f);
-            ::ImGui::SliderAngle("Yaw",   &m_camera_.m_yaw_,       -180.0f, 180.0f);
+            ImGui::Text("Orientation");                           
+            ImGui::SliderAngle("Roll",  &m_camera_.m_roll_,      -180.0f, 180.0f);
+            ImGui::SliderAngle("Pitch", &m_camera_.m_pitch_,     -180.0f, 180.0f);
+            ImGui::SliderAngle("Yaw",   &m_camera_.m_yaw_,       -180.0f, 180.0f);
 
-            if (::ImGui::Button("Reset"))
+            if (ImGui::Button("Reset"))
             {
                 m_camera_.Reset();
             }
         }
 
-        ::ImGui::End();
+        ImGui::End();
     }
     void App::DrawImguiSimulation_()
     {
-        if (::ImGui::Begin("Simulation Speed"))
+        if (ImGui::Begin("Simulation Speed"))
         {
-            ::ImGui::SliderFloat("Speed Factor", &m_simulation_speed_, 0.0f, 5.0f);
-            ::ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ::ImGui::GetIO().Framerate, ::ImGui::GetIO().Framerate);
-            ::ImGui::Text("Status: %s", m_wnd_.m_pKeyboard->KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
+            ImGui::SliderFloat("Speed Factor", &m_simulation_speed_, 0.0f, 5.0f);
+            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+            ImGui::Text("Status: %s", m_wnd_.m_pKeyboard->KeyIsPressed(VK_SPACE) ? "PAUSED" : "RUNNING (hold spacebar to pause!)");
         }
 
-        ::ImGui::End();
+        ImGui::End();
 
         if (m_camera_.m_r_ <= 0.0f)
         {
@@ -225,8 +225,8 @@ namespace hw3d
     }
     void App::RenderImgui_() const
     {
-        ::ImGui::Render();
-        ::ImGui_ImplDX11_RenderDrawData(::ImGui::GetDrawData());
+        ImGui::Render();
+        ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
     }
 
     void App::DoFrame_()

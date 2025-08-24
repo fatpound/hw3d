@@ -4,7 +4,7 @@
 
 #include <IO/IO.hpp>
 
-#include <Win32_/D3D11/Graphics.hpp>
+#include <Win32_/D3D11/include/Graphics.hpp>
 
 namespace hw3d
 {
@@ -13,7 +13,7 @@ namespace hw3d
 
 namespace hw3d::view
 {
-    class Camera final
+    class Camera
     {
         friend App;
 

@@ -1,5 +1,16 @@
 #include "Sheet.hpp"
 
+#include <Utility/include/Surface.hpp>
+
+#include <Win32_/D3D11/Core/include/InputLayout.hpp>
+#include <Win32_/D3D11/Core/include/Topology.hpp>
+#include <Win32_/D3D11/Resource/include/Texture2D.hpp>
+#include <Win32_/D3D11/Resource/include/TransformCBuffer.hpp>
+#include <Win32_/D3D11/Resource/include/ShaderResource.hpp>
+#include <Win32_/D3D11/Shader/include/PixelShader.hpp>
+#include <Win32_/D3D11/Shader/include/Sampler.hpp>
+#include <Win32_/D3D11/Shader/include/VertexShader.hpp>
+
 #include "Base/Plane.hpp"
 
 namespace dx = DirectX;
@@ -47,38 +58,38 @@ namespace hw3d::obj
             model.vertices_[2].tex = { 0.0f,1.0f };
             model.vertices_[3].tex = { 1.0f,1.0f };
 
+            auto pSurface = std::make_shared<FATSPACE_UTILITY::Surface>(std::wstring(L"Resource\\Image\\cube.png"));
+
+            const D3D11_TEXTURE2D_DESC tex2dDesc
             {
-                auto pSurface = std::make_shared<FATSPACE_UTILITY::Surface>(std::wstring(L"Resource\\Image\\cube.png"));
+                .Width      = pSurface->GetWidth<UINT>(),
+                .Height     = pSurface->GetHeight<UINT>(),
+                .MipLevels  = 1U,
+                .ArraySize  = 1U,
+                .Format     = DXGI_FORMAT_B8G8R8A8_UNORM,
+                .SampleDesc =
+                            {
+                                .Count   = 1,
+                                .Quality = 0
+                            },
+                .Usage      = D3D11_USAGE_DEFAULT,
+                .BindFlags  = D3D11_BIND_SHADER_RESOURCE
+            };
 
-                const D3D11_TEXTURE2D_DESC tex2dDesc
-                {
-                    .Width      = pSurface->GetWidth<UINT>(),
-                    .Height     = pSurface->GetHeight<UINT>(),
-                    .MipLevels  = 1U,
-                    .ArraySize  = 1U,
-                    .Format     = DXGI_FORMAT_B8G8R8A8_UNORM,
-                    .SampleDesc =
-                                {
-                                    .Count   = 1,
-                                    .Quality = 0
-                                },
-                    .Usage      = D3D11_USAGE_DEFAULT,
-                    .BindFlags  = D3D11_BIND_SHADER_RESOURCE
-                };
+            const D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc
+            {
+                .Format        = tex2dDesc.Format,
+                .ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D,
+                .Texture2D     =
+                               {
+                                   .MostDetailedMip = {},
+                                   .MipLevels       = tex2dDesc.MipLevels
+                               }
+            };
 
-                const D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc
-                {
-                    .Format        = tex2dDesc.Format,
-                    .ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D,
-                    .Texture2D     =
-                                   {
-                                       .MostDetailedMip = {},
-                                       .MipLevels       = tex2dDesc.MipLevels
-                                   }
-                };
+            FATSPACE_D3D11::resource::Texture2D tex2d(pDevice, tex2dDesc, pSurface);
 
-                DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::pipeline::Texture2D>(pDevice, tex2dDesc, srvDesc, pSurface));
-            }
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::resource::ShaderResource>(pDevice, tex2d, srvDesc));
 
             {
                 const D3D11_SAMPLER_DESC sDesc
@@ -95,18 +106,47 @@ namespace hw3d::obj
                     .MaxLOD         = D3D11_FLOAT32_MAX
                 };
 
-                DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::pipeline::Sampler>(pDevice, sDesc));
+                DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::shader::Sampler>(pDevice, sDesc));
             }
 
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::pipeline::VertexBuffer>(pDevice, model.vertices_));
 
-            auto pvs = std::make_unique<FATSPACE_D3D11::pipeline::VertexShader>(pDevice, L"VSTexture.cso");
-            auto pvsbc = pvs->GetBytecode();
+            using VxBufVal_t = decltype(model.vertices_)::value_type;
 
-            DrawableBase::AddStaticBind_(std::move(pvs));
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::pipeline::PixelShader>(pDevice, L"PSTexture.cso"));
+            const D3D11_BUFFER_DESC vbd
+            {
+                .ByteWidth = static_cast<UINT>(sizeof(VxBufVal_t) * model.vertices_.size()),
+                .Usage = D3D11_USAGE_DEFAULT,
+                .BindFlags = D3D11_BIND_VERTEX_BUFFER,
+                .CPUAccessFlags = 0U,
+                .MiscFlags = 0U,
+                .StructureByteStride = sizeof(VxBufVal_t)
+            };
 
-            AddStaticIndexBuffer_(std::make_unique<FATSPACE_D3D11::pipeline::IndexBuffer>(pDevice, model.indices_));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::resource::VertexBuffer>(pDevice, vbd, model.vertices_));
+
+            Microsoft::WRL::ComPtr<ID3DBlob> pVSBlob;
+
+            if (FAILED(D3DReadFileToBlob(L"VSTexture.cso", &pVSBlob)))
+            {
+                throw std::runtime_error("CANNOT read shader file to D3D Blob!");
+            }
+
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::shader::VertexShader>(pDevice, pVSBlob));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::shader::PixelShader>(pDevice, std::wstring{ L"PSTexture.cso" }));
+
+            using IdxBufVal_t = decltype(model.indices_)::value_type;
+
+            D3D11_BUFFER_DESC ibd =
+            {
+                .ByteWidth = static_cast<UINT>(model.indices_.size() * sizeof(IdxBufVal_t)),
+                .Usage = D3D11_USAGE_DEFAULT,
+                .BindFlags = D3D11_BIND_INDEX_BUFFER,
+                .CPUAccessFlags = 0u,
+                .MiscFlags = 0u,
+                .StructureByteStride = sizeof(IdxBufVal_t)
+            };
+
+            AddStaticIndexBuffer_(std::make_unique<FATSPACE_D3D11::resource::IndexBuffer>(pDevice, ibd, DXGI_FORMAT_R16_UINT, model.indices_));
 
             const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
             {
@@ -114,15 +154,25 @@ namespace hw3d::obj
                 { "TexCoord", 0, DXGI_FORMAT_R32G32_FLOAT,    0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
             };
 
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::pipeline::InputLayout>(pDevice, ied, pvsbc));
-            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::pipeline::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::core::InputLayout>(pDevice, ied, pVSBlob));
+            DrawableBase::AddStaticBind_(std::make_unique<FATSPACE_D3D11::core::Topology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
         }
         else
         {
             SetIndexBufferFromStatic_();
         }
 
-        AddBind_(std::make_unique<FATSPACE_D3D11::pipeline::TransformCBuffer<Sheet>>(pDevice, *this, viewXM));
+        const D3D11_BUFFER_DESC cbd
+        {
+            .ByteWidth = sizeof(DirectX::XMMATRIX),
+            .Usage = D3D11_USAGE_DYNAMIC,
+            .BindFlags = D3D11_BIND_CONSTANT_BUFFER,
+            .CPUAccessFlags = D3D11_CPU_ACCESS_WRITE,
+            .MiscFlags = 0U,
+            .StructureByteStride = 0U
+        };
+
+        AddBind_(std::make_unique<FATSPACE_D3D11::resource::TransformCBuffer<Sheet>>(pDevice, cbd, *this, viewXM));
     }
 
     void Sheet::Update(float dt) noexcept

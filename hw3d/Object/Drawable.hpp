@@ -4,12 +4,13 @@
 
 #include <_macros/Namespaces.hpp>
 
-#include <Win32_/WinAPI.hpp>
+#include <Win32_/include/FatWin.hpp>
 #include <d3d11.h>
 
 #include <DirectXMath.h>
 
-#include <Win32_/D3D11/Pipeline/Element/IndexBuffer.hpp>
+#include <Win32_/D3D11/include/Bindable.hpp>
+#include <Win32_/D3D11/Resource/include/IndexBuffer.hpp>
 
 #include <cassert>
 
@@ -24,7 +25,7 @@ namespace hw3d::obj
     class Drawable
     {
     public:
-        using BindablePtr_t = std::unique_ptr<FATSPACE_D3D11::pipeline::Bindable>;
+        using BindablePtr_t = std::unique_ptr<FATSPACE_D3D11::Bindable>;
         using BindableVec_t = std::vector<BindablePtr_t>;
 
 
@@ -60,13 +61,13 @@ namespace hw3d::obj
 
         
     protected:
-        virtual void AddBind_(std::unique_ptr<FATSPACE_D3D11::pipeline::Bindable> bind) final
+        virtual void AddBind_(std::unique_ptr<FATSPACE_D3D11::Bindable> bind) final
         {
-            assert(typeid(*bind) not_eq typeid(FATSPACE_D3D11::pipeline::IndexBuffer));
+            assert(typeid(*bind) not_eq typeid(FATSPACE_D3D11::resource::IndexBuffer));
 
             m_binds_.push_back(std::move<>(bind));
         }
-        virtual void AddIndexBuffer_(std::unique_ptr<FATSPACE_D3D11::pipeline::IndexBuffer> idxbuf) final
+        virtual void AddIndexBuffer_(std::unique_ptr<FATSPACE_D3D11::resource::IndexBuffer> idxbuf) final
         {
             assert(m_pCIndexBuffer_ == nullptr);
 
@@ -77,7 +78,7 @@ namespace hw3d::obj
 
 
     protected:
-        const FATSPACE_D3D11::pipeline::IndexBuffer* m_pCIndexBuffer_{};
+        const FATSPACE_D3D11::resource::IndexBuffer* m_pCIndexBuffer_{};
 
 
     private:
